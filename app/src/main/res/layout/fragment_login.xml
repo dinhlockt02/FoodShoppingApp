@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="xyz.daijoubuteam.foodshoppingapp.authentication.login.LoginViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".authentication.login.LoginFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+        <Button
+            android:id="@+id/move_to_signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Move to Signup"
+            android:onClick="@{() -> viewmodel.onNavigateToSignup()}"/>
+
+    </FrameLayout>
+</layout>
