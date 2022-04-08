@@ -46,7 +46,7 @@
                     android:paddingStart="16dp"
                     android:paddingTop="18dp"
                     android:singleLine="true"
-                    />
+                    android:text="@={viewmodel.email}"/>
                 <EditText
                     android:ellipsize="end"
                     android:hint="@string/password"
@@ -60,7 +60,7 @@
                     android:paddingStart="16dp"
                     android:paddingTop="18dp"
                     android:singleLine="true"
-                    />
+                    android:text="@={viewmodel.password}"/>
                 <TextView
                     android:ellipsize="end"
                     android:id="@+id/forgotPassword"
@@ -89,7 +89,7 @@
                     android:paddingTop="14dp"
                     android:singleLine="true"
                     android:text="@string/btn_sign_in"
-                    android:onClick="@{() -> viewmodel.onNavigateToSignup()}"
+                    android:onClick="@{() -> viewmodel.onLoginWithEmailAndPassword()}"
                     />
                 <TextView android:ellipsize="end" android:id="@+id/txtOR"
                     android:layout_gravity="center_horizontal"
