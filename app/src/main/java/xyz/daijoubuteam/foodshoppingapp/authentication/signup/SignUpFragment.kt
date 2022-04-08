@@ -18,7 +18,10 @@ import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentSignUpBinding
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
-    private lateinit var viewmodel: SignUpViewModel
+    private val viewmodel: SignUpViewModel by lazy {
+        val viewModelFactory = SignUpViewModelFactory()
+        ViewModelProvider(this, viewModelFactory)[SignUpViewModel::class.java]
+    }
 
 
     override fun onCreateView(
@@ -27,8 +30,6 @@ class SignUpFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
-
-        viewmodel = ViewModelProvider(this)[SignUpViewModel::class.java]
 
         binding.viewmodel = viewmodel
         binding.lifecycleOwner = viewLifecycleOwner

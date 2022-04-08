@@ -9,8 +9,9 @@
     <string name="continue_with_google">COUNTINUE WITH GOOGLE</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="sign_up">Sign Up</string>
-    <string name="enter_your_email_and_new_password_for_sign_up_or_already_have_account">Enter your Email and new Password for sign up, or Already have account?</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="by_signing_up_you_agree_to_our_terms_u2028condition_amp_privacy_policy"><![CDATA[By signing up you agree to our Terms  Condition & Privacy Policy]]></string>
+    <string name="enter_your_email_and_new_password_for_sign_up">Enter your Email and new Password for sign up,</string>
+    <string name="or_already_have_account">or Already have account?</string>
 </resources>
