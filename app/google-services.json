@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "746360451616",
+    "project_id": "food-shopping-app-23a32",
+    "storage_bucket": "food-shopping-app-23a32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:746360451616:android:ae7501a2434f22dbad0245",
+        "android_client_info": {
+          "package_name": "xyz.daijoubuteam.foodshoppingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "746360451616-ka2b25fmbbikf3616i5ttgf2a1t9pnb6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjdse3CL8SYb2Ot6E5uuQpYZ7Mr5cYAi8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "746360451616-ka2b25fmbbikf3616i5ttgf2a1t9pnb6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
