@@ -71,4 +71,16 @@ class LoginViewModel: ViewModel() {
         firebaseUser = _loginResult.value?.getOrNull()
         _loginResult.value = null
     }
+
+//    private val _loginWithFacebookEvent = MutableLiveData<Boolean>(false)
+//        val loginWithFacebookEvent: LiveData<Boolean>
+//            get() = _loginWithFacebookEvent
+//
+//    fun onLoginWithFacebookEventTriggered(){
+//        _loginWithGoogleEvent.value = true
+//    }
+//
+//    fun onLoginWithFacebookEventTriggeredComplete(){
+//        _loginWithGoogleEvent.value = false
+//    }
 }

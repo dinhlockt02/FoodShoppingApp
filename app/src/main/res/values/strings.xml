@@ -15,4 +15,10 @@
     <string name="enter_your_email_and_new_password_for_sign_up">Enter your Email and new Password for sign up,</string>
     <string name="or_already_have_account">or Already have account?</string>
     <string name="web_client_id" translatable="false">746360451616-ka2b25fmbbikf3616i5ttgf2a1t9pnb6.apps.googleusercontent.com</string>
+
+    <string name="facebook_app_id">398304498411353</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">6546bf8f661953e6a9cdcaf6692c57c0</string>
+
+
 </resources>

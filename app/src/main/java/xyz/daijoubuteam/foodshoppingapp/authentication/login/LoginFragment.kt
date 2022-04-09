@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.facebook.*
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.gms.auth.api.identity.SignInClient
@@ -31,11 +32,17 @@ import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.authentication.AuthActivity
 import xyz.daijoubuteam.foodshoppingapp.authentication.signup.SignUpFragmentDirections
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentLoginBinding
+import com.facebook.appevents.AppEventsLogger;
+import com.facebook.login.LoginResult
+import com.google.firebase.auth.FacebookAuthProvider
+
 
 class LoginFragment : Fragment() {
 
     private lateinit var oneTapClient: SignInClient
     private lateinit var signInRequest: BeginSignInRequest
+
+    private lateinit var callbackManager: CallbackManager
 
 
     private lateinit var binding: FragmentLoginBinding
@@ -53,6 +60,7 @@ class LoginFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         initOneTapSignIn()
+        initialFacebookLoginButton()
 
         setNavigateToSignUpObserver()
         setLoginResultObserver()
@@ -61,6 +69,31 @@ class LoginFragment : Fragment() {
         autoLogin()
 
         return binding.root
+    }
+
+    private fun initialFacebookLoginButton(){
+        callbackManager = CallbackManager.Factory.create()
+        binding.facebookLoginButton.setPermissions("email", "public_profile")
+        binding.facebookLoginButton.fragment = this
+        binding.facebookLoginButton.registerCallback(callbackManager, object: FacebookCallback<LoginResult>{
+            override fun onCancel() {
+                Log.d("login", "facebook:onCancel")
+            }
+
+            override fun onError(error: FacebookException) {
+                Log.d("login", "facebook:onError", error)
+            }
+
+            override fun onSuccess(result: LoginResult) {
+                handleFacebookAccessToken(result.accessToken)
+            }
+
+        })
+    }
+
+    private fun handleFacebookAccessToken(token: AccessToken){
+        val credential =  FacebookAuthProvider.getCredential(token.token)
+        viewmodel.onLoginWithGoogle(credential)
     }
 
     private fun setNavigateToSignUpObserver() {

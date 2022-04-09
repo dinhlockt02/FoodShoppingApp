@@ -101,43 +101,13 @@
                     android:singleLine="true"
                     android:text="@string/or"
                     />
-                <LinearLayout android:gravity="start"
-                    android:id="@+id/linearGroup119"
+                <com.facebook.login.widget.LoginButton
+                    android:id="@+id/facebook_login_button"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal">
-                    <FrameLayout android:id="@+id/frameRectangle5"
-                        android:layout_height="30dp"
-                        android:layout_marginBottom="8dp"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:layout_width="30dp">
-                        <ImageView android:id="@+id/imageFacebookIcon"
-                            android:layout_gravity="center"
-                            android:layout_height="20dp"
-                            android:layout_marginHorizontal="5dp"
-                            android:layout_marginVertical="5dp"
-                            android:layout_width="20dp"
-                            android:scaleType="fitXY"
-                            />
-                    </FrameLayout>
-                    <TextView android:ellipsize="end"
-                        android:id="@+id/txtContinueWithF"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="14dp"
-                        android:layout_marginEnd="66dp"
-                        android:layout_marginStart="28dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_weight="0.87"
-                        android:layout_width="0dp"
-                        android:singleLine="true"
-                        android:text="@string/continue_with_facebook"
-                        android:textAllCaps="true"
-                        />
-                </LinearLayout>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp" />
                 <LinearLayout android:gravity="start"
                     android:id="@+id/linearLoginWithGoogle"
                     android:layout_height="wrap_content"
