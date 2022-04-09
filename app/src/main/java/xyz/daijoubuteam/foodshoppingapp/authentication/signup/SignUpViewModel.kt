@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
@@ -30,8 +33,8 @@ class SignUpViewModel: ViewModel() {
 
 
 
-    private var _signUpResult =  MutableLiveData<Result<User>?>()
-        val signUpResult: LiveData<Result<User>?>
+    private var _signUpResult =  MutableLiveData<Result<FirebaseUser?>?>()
+        val signUpResult: LiveData<Result<FirebaseUser?>?>
             get() = _signUpResult
     fun onSignUpWithEmailAndPassword(){
         viewModelScope.launch {
@@ -40,6 +43,7 @@ class SignUpViewModel: ViewModel() {
     }
 
     fun onSignUpWithEmailAndPasswordComplete(){
+        Firebase.auth.signOut()
        _signUpResult.value = null
     }
 }

@@ -45,7 +45,6 @@ class LoginFragment : Fragment() {
         viewmodel.loginResult.observe(viewLifecycleOwner, Observer {
             it?.let { result ->
                 if(result.isSuccess){
-                    Toast.makeText(this.requireContext(), "${result.getOrNull()?.toString()}", Toast.LENGTH_LONG).show()
                     viewmodel.onLoginWithEmailAndPasswordComplete()
                     loginSuccessful()
                 }else if (result.isFailure) {
@@ -55,14 +54,21 @@ class LoginFragment : Fragment() {
             }
         })
 
+        autoLogin()
+
         return binding.root
+    }
+
+    private fun autoLogin(){
+        if(viewmodel.firebaseUser != null) {
+            loginSuccessful()
+        }
     }
 
     private fun loginSuccessful() {
         val intent = Intent(activity, MainActivity::class.java)
         val bundle = Bundle()
-        bundle.putParcelable("USER", viewmodel.user)
-        Log.i("home", viewmodel.loginResult?.value?.getOrNull().toString())
+        bundle.putParcelable("USER", viewmodel.firebaseUser)
         intent.putExtras(bundle)
         startActivity(intent)
     }

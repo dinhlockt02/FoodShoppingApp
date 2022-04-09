@@ -4,6 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
@@ -12,8 +15,6 @@ class LoginViewModel: ViewModel() {
 
     private val _navigateToSignUp = MutableLiveData<Boolean>(false)
     private val authRepository = AuthRepository()
-    var user: User? = null
-        get() = field
 
     val navigateToSignUp: LiveData<Boolean>
         get() = _navigateToSignUp
@@ -29,9 +30,11 @@ class LoginViewModel: ViewModel() {
     val email =  MutableLiveData<String>("")
     val password = MutableLiveData<String>("")
 
-    private val _loginResult = MutableLiveData<Result<User?>?>(null)
-        val loginResult: LiveData<Result<User?>?>
+    private val _loginResult = MutableLiveData<Result<FirebaseUser?>?>(null)
+        val loginResult: LiveData<Result<FirebaseUser?>?>
             get() = _loginResult
+
+    var firebaseUser: FirebaseUser? = Firebase.auth.currentUser
 
     fun onLoginWithEmailAndPassword(){
         viewModelScope.launch {
@@ -40,7 +43,7 @@ class LoginViewModel: ViewModel() {
     }
 
     fun onLoginWithEmailAndPasswordComplete(){
-        user = _loginResult.value?.getOrNull()
+        firebaseUser = _loginResult.value?.getOrNull()
         _loginResult.value = null
     }
 }
