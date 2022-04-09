@@ -9,14 +9,11 @@ data class User(
     val uid: String? = null,
     val email: String? = null,
     val name: String? = null,
-    @Exclude
-    val isNew: Boolean? = null
 ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),
         parcel.readString(),
-        parcel.readString(),
-        parcel.readValue(Boolean::class.java.classLoader) as? Boolean
+        parcel.readString()
     ) {
     }
 
@@ -24,7 +21,6 @@ data class User(
         parcel.writeString(uid)
         parcel.writeString(email)
         parcel.writeString(name)
-        parcel.writeValue(isNew)
     }
 
     override fun describeContents(): Int {

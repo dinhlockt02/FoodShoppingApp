@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "746360451616-ret7bjidp4s4um6vtgru803ufjekajqo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "xyz.daijoubuteam.foodshoppingapp",
+            "certificate_hash": "26c11f4b505c072f678c30a42c6f1298c7ba283a"
+          }
+        },
+        {
           "client_id": "746360451616-ka2b25fmbbikf3616i5ttgf2a1t9pnb6.apps.googleusercontent.com",
           "client_type": 3
         }

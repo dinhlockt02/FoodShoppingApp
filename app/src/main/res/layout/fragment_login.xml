@@ -145,7 +145,8 @@
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="24dp"
                     android:layout_width="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:onClick="@{() -> viewmodel.onLoginWithGoogleEventTriggered()}">
                     <FrameLayout
                         android:id="@+id/frameLayoutLogoGoogle"
                         android:layout_height="30dp"

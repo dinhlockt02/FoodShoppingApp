@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthCredential
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
@@ -43,6 +45,29 @@ class LoginViewModel: ViewModel() {
     }
 
     fun onLoginWithEmailAndPasswordComplete(){
+        firebaseUser = _loginResult.value?.getOrNull()
+        _loginResult.value = null
+    }
+
+    private val _loginWithGoogleEvent = MutableLiveData<Boolean>(false)
+        val loginWithGoogleEvent:LiveData<Boolean>
+                get() = _loginWithGoogleEvent
+
+    fun onLoginWithGoogleEventTriggered(){
+        _loginWithGoogleEvent.value = true
+    }
+
+    fun onLoginWithGoogleEventTriggeredComplete(){
+        _loginWithGoogleEvent.value = false
+    }
+
+    fun onLoginWithGoogle(googleAuthCredential: AuthCredential){
+        viewModelScope.launch {
+            _loginResult.value = authRepository.loginWithGoogle(googleAuthCredential)
+        }
+    }
+
+    fun onLoginWithGoogleComplete(){
         firebaseUser = _loginResult.value?.getOrNull()
         _loginResult.value = null
     }
