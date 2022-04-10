@@ -47,12 +47,23 @@ class LoginFragment : Fragment() {
         initialFacebookLoginButton()
 
         setNavigateToSignUpObserver()
+        setNavigateToForgetPasswordObserver()
         setLoginResultObserver()
         setLoginWithGoogleButton()
+
 
         autoLogin()
 
         return binding.root
+    }
+
+    private fun setNavigateToForgetPasswordObserver() {
+        viewmodel.navigateToForgetPassword.observe(viewLifecycleOwner){
+            if(it){
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment())
+                viewmodel.onNavigateToForgetPasswordComplete()
+            }
+        }
     }
 
     private fun setLoginWithGoogleButton() {

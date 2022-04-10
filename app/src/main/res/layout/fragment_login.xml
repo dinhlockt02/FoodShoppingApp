@@ -72,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:singleLine="true"
                     android:text="@string/forgot_password"
-                    />
+                    android:onClick="@{() -> viewmodel.onNavigateToForgetPassword()}"/>
                 <androidx.appcompat.widget.AppCompatButton
                     android:clickable="true"
                     android:ellipsize="end"
@@ -107,7 +107,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp" />
+                    android:layout_marginBottom="30dp"
+                    android:text="Login with facebook"/>
                 <LinearLayout android:gravity="start"
                     android:id="@+id/linearLoginWithGoogle"
                     android:layout_height="wrap_content"

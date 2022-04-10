@@ -17,11 +17,14 @@ class LoginViewModel: ViewModel() {
     private val _navigateToSignUp = MutableLiveData(false)
     private val authRepository = AuthRepository()
     private val _loginResult = MutableLiveData<Result<FirebaseUser?>?>(null)
+    private val _navigateToForgetPassword = MutableLiveData(false)
 
     val loginResult: LiveData<Result<FirebaseUser?>?>
         get() = _loginResult
     val navigateToSignUp: LiveData<Boolean>
         get() = _navigateToSignUp
+    val navigateToForgetPassword: LiveData<Boolean>
+        get() = _navigateToForgetPassword
 
     val email =  MutableLiveData("")
     val password = MutableLiveData("")
@@ -33,6 +36,14 @@ class LoginViewModel: ViewModel() {
 
     fun onNavigateToSignupComplete() {
         _navigateToSignUp.value = false
+    }
+
+    fun onNavigateToForgetPassword(){
+        _navigateToForgetPassword.value = true
+    }
+
+    fun onNavigateToForgetPasswordComplete(){
+        _navigateToForgetPassword.value = false
     }
 
     fun onLoginWithEmailAndPassword(){
