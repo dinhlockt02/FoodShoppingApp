@@ -1,17 +1,24 @@
 package xyz.daijoubuteam.foodshoppingapp.authentication.signup
 
+import android.app.Activity
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.identity.GetSignInIntentRequest
+import com.google.android.gms.auth.api.identity.Identity
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.GoogleAuthProvider
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentSignUpBinding
+import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
 
 class SignUpFragment : Fragment() {
 
@@ -32,26 +39,121 @@ class SignUpFragment : Fragment() {
         binding.viewmodel = viewmodel
         binding.lifecycleOwner = viewLifecycleOwner
 
+        setNavigateToLoginObserver()
+        setSignUpResultObserver()
+        setLoginWithGoogleButton()
+
+        return binding.root
+    }
+
+    private fun setSignupWithFacebookButton() {
+        binding.signUpWithFacebookButton.setOnClickListener {
+            hideKeyboard()
+            Snackbar.make(
+                this.requireView(),
+                "Hội những người anti facebook",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun setNavigateToLoginObserver() {
         viewmodel.navigateToLogin.observe(viewLifecycleOwner) {
-            if(it) {
+            if (it) {
                 findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
                 viewmodel.onNavigateToLoginComplete()
             }
         }
+    }
 
-        viewmodel.signUpResult.observe(viewLifecycleOwner){result ->
+    private fun setSignUpResultObserver() {
+        viewmodel.signUpResult.observe(viewLifecycleOwner) { result ->
             result?.let {
-                if(result.isSuccess){
-                    Log.d("signup", "success ${result.getOrNull().toString()}")
+                if (result.isSuccess) {
+                    hideKeyboard()
+                    Snackbar.make(
+                        this.requireView(),
+                        "Đăng ký thành công. Vui lòng kiểm tra email để xác thực.",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                     findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-                    viewmodel.onSignUpWithEmailAndPasswordComplete()
-                }else if (result.isFailure) {
-                    Toast.makeText(this.requireContext(), "${result.exceptionOrNull()?.message}", Toast.LENGTH_LONG).show()
-                    viewmodel.onSignUpWithEmailAndPasswordComplete()
+
+                } else if (result.isFailure) {
+                    hideKeyboard()
+                    Snackbar.make(
+                        requireView(),
+                        "${result.exceptionOrNull()?.localizedMessage}",
+                        Snackbar.LENGTH_LONG
+                    ).show()
                 }
             }
         }
-        return binding.root
+    }
+
+    private fun setLoginWithGoogleButton() {
+        binding.signUpWithGoogleButton.setOnClickListener {
+            signUpWithGoogle()
+        }
+    }
+
+    private val activityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ){
+        if(it.resultCode == Activity.RESULT_OK){
+            val credential = Identity.getSignInClient(requireActivity()).getSignInCredentialFromIntent(it.data)
+            val idToken = credential.googleIdToken
+            val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
+            viewmodel.onSignUpWithGoogle(firebaseCredential)
+        }
+    }
+
+    private fun signUpWithGoogle(){
+        val request = GetSignInIntentRequest.builder()
+            .setServerClientId(getString(R.string.default_web_client_id))
+            .build()
+        Identity.getSignInClient(requireActivity())
+            .getSignInIntent(request)
+            .addOnSuccessListener { pendingIntent ->
+                try {
+                    val intentSenderRequest = IntentSenderRequest.Builder(pendingIntent.intentSender).build()
+                    activityResultLauncher.launch(intentSenderRequest)
+                } catch (exception: Exception){
+                    hideKeyboard()
+                    hideKeyboard()
+                    Snackbar.make(
+                        this.requireView(),
+                        "\"Couldn't start One Tap UI: ${exception.localizedMessage}\"",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+            }
+            .addOnFailureListener {
+                hideKeyboard()
+                Snackbar.make(
+                    this.requireView(),
+                    "\"Couldn't start One Tap UI: ${it.localizedMessage}\"",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+    }
+
+    private fun setupSoftKeyboardUI(){
+        binding.etEmailOrPhone.setOnFocusChangeListener { view, hasFocus ->
+            if(!hasFocus){
+                hideKeyboard()
+            }
+        }
+        binding.etPassword.setOnFocusChangeListener { view, hasFocus ->
+            if(!hasFocus){
+                hideKeyboard()
+            }
+        }
+
+        binding.etConfirmPassword.setOnFocusChangeListener { view, hasFocus ->
+            if(!hasFocus){
+                hideKeyboard()
+            }
+        }
     }
 }
 

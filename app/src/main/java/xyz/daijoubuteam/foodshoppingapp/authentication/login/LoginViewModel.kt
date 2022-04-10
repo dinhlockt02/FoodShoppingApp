@@ -47,6 +47,12 @@ class LoginViewModel: ViewModel() {
     }
 
     fun onLoginWithEmailAndPassword(){
+        if(email.value.isNullOrEmpty() || password.value.isNullOrEmpty())
+        {
+            val exception = Exception("Illegal email or password")
+            _loginResult.value = Result.failure(exception)
+            return
+        }
         viewModelScope.launch {
             val credential = EmailAuthProvider.getCredential(email.value!!, password.value!!)
             _loginResult.value = authRepository.loginWithAuthCredential(credential)
@@ -56,13 +62,6 @@ class LoginViewModel: ViewModel() {
     fun onLoginWithGoogle(googleAuthCredential: AuthCredential){
         viewModelScope.launch {
             _loginResult.value = authRepository.loginWithAuthCredential(googleAuthCredential)
-        }
-    }
-
-    fun onLoginWithFacebook(accessToken: AccessToken){
-        viewModelScope.launch {
-            val credential =  FacebookAuthProvider.getCredential(accessToken.token)
-            _loginResult.value = authRepository.loginWithAuthCredential(credential)
         }
     }
 

@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_loginFragment_to_signUpFragment"
             app:destination="@id/signUpFragment"
-            app:popUpToInclusive="false" />
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
         <action
             android:id="@+id/action_loginFragment_to_forgetPasswordFragment"
-            app:destination="@id/forgetPasswordFragment" />
+            app:destination="@id/forgetPasswordFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -27,7 +35,11 @@
             android:id="@+id/action_signUpFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
     </fragment>
     <fragment
         android:id="@+id/forgetPasswordFragment"
@@ -36,11 +48,19 @@
         tools:layout="@layout/fragment_forget_password">
         <action
             android:id="@+id/action_forgetPasswordFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/loginFragment"/>
         <action
             android:id="@+id/action_forgetPasswordFragment_to_resendEmailResetPasswordFragment"
             app:destination="@id/resendEmailResetPasswordFragment"
-            >
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out">
         </action>
     </fragment>
     <fragment
@@ -53,6 +73,11 @@
             app:argType="string"/>
         <action
             android:id="@+id/action_resendEmailResetPasswordFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            app:popUpTo="@id/loginFragment"/>
     </fragment>
 </navigation>
