@@ -4,22 +4,28 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.AuthCredential
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthCredential
+import com.facebook.AccessToken
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
-import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
 
 class LoginViewModel: ViewModel() {
 
-    private val _navigateToSignUp = MutableLiveData<Boolean>(false)
-    private val authRepository = AuthRepository()
 
+    private val _navigateToSignUp = MutableLiveData(false)
+    private val authRepository = AuthRepository()
+    private val _loginResult = MutableLiveData<Result<FirebaseUser?>?>(null)
+
+    val loginResult: LiveData<Result<FirebaseUser?>?>
+        get() = _loginResult
     val navigateToSignUp: LiveData<Boolean>
         get() = _navigateToSignUp
+
+    val email =  MutableLiveData("")
+    val password = MutableLiveData("")
+    var firebaseUser: FirebaseUser? = Firebase.auth.currentUser
 
     fun onNavigateToSignup() {
         _navigateToSignUp.value = true
@@ -29,58 +35,28 @@ class LoginViewModel: ViewModel() {
         _navigateToSignUp.value = false
     }
 
-    val email =  MutableLiveData<String>("")
-    val password = MutableLiveData<String>("")
-
-    private val _loginResult = MutableLiveData<Result<FirebaseUser?>?>(null)
-        val loginResult: LiveData<Result<FirebaseUser?>?>
-            get() = _loginResult
-
-    var firebaseUser: FirebaseUser? = Firebase.auth.currentUser
-
     fun onLoginWithEmailAndPassword(){
         viewModelScope.launch {
-            _loginResult.value = authRepository.loginWithEmailAndPassword(email.value!!, password.value!!)
+            val credential = EmailAuthProvider.getCredential(email.value!!, password.value!!)
+            _loginResult.value = authRepository.loginWithAuthCredential(credential)
         }
-    }
-
-    fun onLoginWithEmailAndPasswordComplete(){
-        firebaseUser = _loginResult.value?.getOrNull()
-        _loginResult.value = null
-    }
-
-    private val _loginWithGoogleEvent = MutableLiveData<Boolean>(false)
-        val loginWithGoogleEvent:LiveData<Boolean>
-                get() = _loginWithGoogleEvent
-
-    fun onLoginWithGoogleEventTriggered(){
-        _loginWithGoogleEvent.value = true
-    }
-
-    fun onLoginWithGoogleEventTriggeredComplete(){
-        _loginWithGoogleEvent.value = false
     }
 
     fun onLoginWithGoogle(googleAuthCredential: AuthCredential){
         viewModelScope.launch {
-            _loginResult.value = authRepository.loginWithGoogle(googleAuthCredential)
+            _loginResult.value = authRepository.loginWithAuthCredential(googleAuthCredential)
         }
     }
 
-    fun onLoginWithGoogleComplete(){
+    fun onLoginWithFacebook(accessToken: AccessToken){
+        viewModelScope.launch {
+            val credential =  FacebookAuthProvider.getCredential(accessToken.token)
+            _loginResult.value = authRepository.loginWithAuthCredential(credential)
+        }
+    }
+
+    fun onLoginComplete(){
         firebaseUser = _loginResult.value?.getOrNull()
         _loginResult.value = null
     }
-
-//    private val _loginWithFacebookEvent = MutableLiveData<Boolean>(false)
-//        val loginWithFacebookEvent: LiveData<Boolean>
-//            get() = _loginWithFacebookEvent
-//
-//    fun onLoginWithFacebookEventTriggered(){
-//        _loginWithGoogleEvent.value = true
-//    }
-//
-//    fun onLoginWithFacebookEventTriggeredComplete(){
-//        _loginWithGoogleEvent.value = false
-//    }
 }

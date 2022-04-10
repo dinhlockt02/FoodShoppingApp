@@ -3,7 +3,6 @@ package xyz.daijoubuteam.foodshoppingapp.model
 
 import android.os.Parcel
 import android.os.Parcelable
-import com.google.firebase.firestore.Exclude
 
 data class User(
     val uid: String? = null,
@@ -14,8 +13,7 @@ data class User(
         parcel.readString(),
         parcel.readString(),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(uid)

@@ -4,78 +4,100 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.facebook.*
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.identity.GetSignInIntentRequest
 import com.google.android.gms.auth.api.identity.Identity
-import com.google.android.gms.auth.api.identity.SignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.GoogleAuthProvider
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
-import xyz.daijoubuteam.foodshoppingapp.authentication.AuthActivity
-import xyz.daijoubuteam.foodshoppingapp.authentication.signup.SignUpFragmentDirections
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentLoginBinding
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginResult
-import com.google.firebase.auth.FacebookAuthProvider
 
 
 class LoginFragment : Fragment() {
 
-    private lateinit var oneTapClient: SignInClient
-    private lateinit var signInRequest: BeginSignInRequest
-
     private lateinit var callbackManager: CallbackManager
-
-
     private lateinit var binding: FragmentLoginBinding
     private val viewmodel: LoginViewModel by lazy {
         val viewModelFactory = LoginViewModelFactory()
         ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
     }
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
 
         binding.viewmodel = viewmodel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        initOneTapSignIn()
         initialFacebookLoginButton()
 
         setNavigateToSignUpObserver()
         setLoginResultObserver()
-        setLoginWithGoogleEventObserver()
+        setLoginWithGoogleButton()
 
         autoLogin()
 
         return binding.root
     }
 
+    private fun setLoginWithGoogleButton() {
+        binding.linearLoginWithGoogle.setOnClickListener {
+            signIn()
+        }
+    }
+
+    private fun setNavigateToSignUpObserver() {
+        viewmodel.navigateToSignUp.observe(viewLifecycleOwner) {
+            if (it) {
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
+                viewmodel.onNavigateToSignupComplete()
+            }
+        }
+    }
+
+    private fun setLoginResultObserver() {
+        viewmodel.loginResult.observe(viewLifecycleOwner) {
+            it?.let { result ->
+                if (result.isSuccess) {
+                    viewmodel.onLoginComplete()
+                    loginSuccessful()
+                } else if (result.isFailure) {
+                    Toast.makeText(
+                        this.requireContext(),
+                        "${result.exceptionOrNull()?.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    viewmodel.onLoginComplete()
+                }
+            }
+        }
+    }
+
     private fun initialFacebookLoginButton(){
         callbackManager = CallbackManager.Factory.create()
         binding.facebookLoginButton.setPermissions("email", "public_profile")
         binding.facebookLoginButton.fragment = this
-        binding.facebookLoginButton.registerCallback(callbackManager, object: FacebookCallback<LoginResult>{
+        binding.facebookLoginButton.registerCallback(callbackManager, object:
+            FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult) {
+                viewmodel.onLoginWithFacebook(result.accessToken)
+            }
+
             override fun onCancel() {
                 Log.d("login", "facebook:onCancel")
             }
@@ -84,86 +106,33 @@ class LoginFragment : Fragment() {
                 Log.d("login", "facebook:onError", error)
             }
 
-            override fun onSuccess(result: LoginResult) {
-                handleFacebookAccessToken(result.accessToken)
-            }
-
         })
     }
 
-    private fun handleFacebookAccessToken(token: AccessToken){
-        val credential =  FacebookAuthProvider.getCredential(token.token)
-        viewmodel.onLoginWithGoogle(credential)
-    }
-
-    private fun setNavigateToSignUpObserver() {
-        viewmodel.navigateToSignUp.observe(viewLifecycleOwner, Observer {
-            if (it) {
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
-                viewmodel.onNavigateToSignupComplete()
-            }
-        })
-    }
-
-    private fun setLoginResultObserver() {
-        viewmodel.loginResult.observe(viewLifecycleOwner, Observer {
-            it?.let { result ->
-                if (result.isSuccess) {
-                    viewmodel.onLoginWithEmailAndPasswordComplete()
-                    loginSuccessful()
-                } else if (result.isFailure) {
-                    Toast.makeText(
-                        this.requireContext(),
-                        "${result.exceptionOrNull()?.message}",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    viewmodel.onLoginWithEmailAndPasswordComplete()
+    private fun signIn(){
+        val request = GetSignInIntentRequest.builder()
+            .setServerClientId(getString(R.string.default_web_client_id))
+            .build()
+        Identity.getSignInClient(requireActivity())
+            .getSignInIntent(request)
+            .addOnSuccessListener { pendingIntent ->
+                try {
+                    val intentSenderRequest = IntentSenderRequest.Builder(pendingIntent.intentSender).build()
+                    activityResultLauncher.launch(intentSenderRequest)
+                } catch (exception: Exception){
+                    Log.e("login", "Couldn't start One Tap UI: ${exception.localizedMessage}")
                 }
             }
-        })
-    }
-
-    private fun setLoginWithGoogleEventObserver(){
-        viewmodel.loginWithGoogleEvent.observe(viewLifecycleOwner, Observer {
-            if(it){
-                oneTapClient.beginSignIn(signInRequest)
-                    .addOnSuccessListener(this.requireActivity()) {result ->
-                        try {
-                            val intentSenderRequest = IntentSenderRequest.Builder(result.pendingIntent.intentSender).build()
-                            activityResultLauncher.launch(intentSenderRequest)
-                        } catch (exception: Exception){
-                            Log.e("login", "Couldn't start One Tap UI: ${exception.localizedMessage}")
-                        }
-                    }
-                    .addOnFailureListener {
-                        Log.e("login", "Couldn't start One Tap UI: ${it.localizedMessage}")
-                    }
+            .addOnFailureListener {
+                Log.e("login", "Couldn't start One Tap UI: ${it.localizedMessage}")
             }
-        })
-    }
-
-    private fun initOneTapSignIn(){
-        oneTapClient = Identity.getSignInClient(this.requireActivity())
-        signInRequest = BeginSignInRequest.builder()
-            .setPasswordRequestOptions(
-                BeginSignInRequest.PasswordRequestOptions.builder()
-                    .setSupported(true)
-                    .build()
-            )
-            .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                .setSupported(true)
-                .setServerClientId(getString(R.string.default_web_client_id))
-                .setFilterByAuthorizedAccounts(true)
-                .build())
-            .build()
-
     }
 
     private val activityResultLauncher = registerForActivityResult(
         ActivityResultContracts.StartIntentSenderForResult()
     ){
         if(it.resultCode == Activity.RESULT_OK){
-            val credential = oneTapClient.getSignInCredentialFromIntent(it.data)
+            val credential = Identity.getSignInClient(requireActivity()).getSignInCredentialFromIntent(it.data)
             val idToken = credential.googleIdToken
             val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
             viewmodel.onLoginWithGoogle(firebaseCredential)
