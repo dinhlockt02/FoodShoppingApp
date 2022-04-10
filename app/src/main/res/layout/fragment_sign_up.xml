@@ -8,17 +8,184 @@
             type="xyz.daijoubuteam.foodshoppingapp.authentication.signup.SignUpViewModel" />
     </data>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".authentication.SignUpFragment">
-
-        <Button
-            android:id="@+id/move_to_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Move to Login"
-            android:onClick="@{() -> viewmodel.onNavigateToLogin()}"/>
-
-    </FrameLayout>
+        <LinearLayout android:gravity="start" android:id="@+id/linearSignup"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            tools:context=".authentication.SignUpFragment">
+            <TextView android:ellipsize="end" android:id="@+id/txtSignUp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="51dp"
+                android:layout_width="wrap_content"
+                android:singleLine="true"
+                android:text="@string/sign_up" />
+            <TextView
+                android:id="@+id/txtEnterYourEmail"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="wrap_content"
+                android:text="@string/enter_your_email_and_new_password_for_sign_up" />
+            <TextView
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/or_already_have_account"
+                android:onClick="@{() -> viewmodel.onNavigateToLogin()}"/>
+            <EditText
+                android:ellipsize="end"
+                android:hint="Email"
+                android:id="@+id/etEmail"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_width="match_parent"
+                android:paddingBottom="14dp"
+                android:paddingStart="16dp"
+                android:paddingTop="18dp"
+                android:singleLine="true"
+                android:text="@={viewmodel.email}"/>
+            <EditText
+                android:id="@+id/etPassword"
+                android:ellipsize="end"
+                android:hint="@string/password"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:paddingBottom="14dp"
+                android:paddingStart="16dp"
+                android:paddingTop="18dp"
+                android:singleLine="true"
+                android:text="@={viewmodel.password}"/>
+            <EditText
+                android:ellipsize="end"
+                android:hint="@string/confirm_password"
+                android:id="@+id/etConfirmPassword"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:paddingBottom="14dp"
+                android:paddingStart="16dp"
+                android:paddingTop="18dp"
+                android:singleLine="true"
+                android:text="@={viewmodel.confirmPassword}"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:clickable="true"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:id="@+id/btnSignUp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:paddingBottom="13dp"
+                android:paddingEnd="30dp"
+                android:paddingStart="30dp"
+                android:paddingTop="14dp"
+                android:singleLine="true"
+                android:text="@string/sign_up"
+                android:textAllCaps="true"
+                android:onClick="@{() -> viewmodel.onSignUpWithEmailAndPassword()}"/>
+            <TextView
+                android:gravity="center_horizontal"
+                android:id="@+id/txtBySigningUpY"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:text="@string/by_signing_up_you_agree_to_our_terms_u2028condition_amp_privacy_policy"
+                />
+            <TextView android:ellipsize="end" android:id="@+id/txtOR"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_width="wrap_content"
+                android:singleLine="true"
+                android:text="@string/or" />
+            <LinearLayout android:gravity="start"
+                android:id="@+id/linearGroup121"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <FrameLayout android:id="@+id/frameRectangle5"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="30dp">
+                    <ImageView android:id="@+id/imageFacebookIcon"
+                        android:layout_gravity="center"
+                        android:layout_height="20dp"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_marginVertical="5dp"
+                        android:layout_width="5dp"
+                        android:scaleType="fitXY" />
+                </FrameLayout>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtContinueWithF"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:layout_marginEnd="66dp"
+                    android:layout_marginStart="28dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="0.87" android:layout_width="0dp"
+                    android:singleLine="true"
+                    android:text="@string/continue_with_facebook"
+                    android:textAllCaps="true"
+                    />
+            </LinearLayout>
+            <LinearLayout android:gravity="start"
+                android:id="@+id/linearGroup122"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="73dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_width="match_parent"
+                android:orientation="horizontal">
+                <FrameLayout android:id="@+id/frameRectangle6"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="30dp"
+                    >
+                    <ImageView android:id="@+id/imageGoogleIcon"
+                        android:layout_gravity="center"
+                        android:layout_height="20dp"
+                        android:layout_marginHorizontal="5dp"
+                        android:layout_marginVertical="5dp"
+                        android:layout_width="20dp"
+                        android:scaleType="fitXY"/>
+                </FrameLayout>
+                <TextView android:ellipsize="end"
+                    android:id="@+id/txtContinueWithG"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:layout_marginEnd="74dp"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="0.86" android:layout_width="0dp"
+                    android:singleLine="true"
+                    android:text="@string/continue_with_google"
+                    android:textAllCaps="true"
+                    />
+            </LinearLayout>
+        </LinearLayout>
 </layout>

@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Food Shopping App</string>
+    <string name="sign_in">Sign In</string>
+    <string name="don_t_have_an_account_sign_up_now">Don\'t have an account? Sign up now</string>
+    <string name="email_or_phone_number">Email or Phone Number</string>
+    <string name="btn_sign_in">Sign In</string>
+    <string name="or">OR</string>
+    <string name="continue_with_facebook">COUNTINUE WITH FACEBOOK</string>
+    <string name="continue_with_google">COUNTINUE WITH GOOGLE</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="by_signing_up_you_agree_to_our_terms_u2028condition_amp_privacy_policy"><![CDATA[By signing up you agree to our Terms  Condition & Privacy Policy]]></string>
+    <string name="enter_your_email_and_new_password_for_sign_up">Enter your Email and new Password for sign up,</string>
+    <string name="or_already_have_account">or Already have account?</string>
+    <string name="web_client_id" translatable="false">746360451616-ka2b25fmbbikf3616i5ttgf2a1t9pnb6.apps.googleusercontent.com</string>
+
+    <string name="facebook_app_id">398304498411353</string>
+    <string name="fb_login_protocol_scheme">fb1234</string>
+    <string name="facebook_client_token">6546bf8f661953e6a9cdcaf6692c57c0</string>
+
+
 </resources>

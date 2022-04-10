@@ -1,50 +1,155 @@
 package xyz.daijoubuteam.foodshoppingapp.authentication.login
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.identity.GetSignInIntentRequest
+import com.google.android.gms.auth.api.identity.Identity
+import com.google.firebase.auth.GoogleAuthProvider
+import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentLoginBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [LoginFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class LoginFragment : Fragment() {
 
+    private lateinit var callbackManager: CallbackManager
     private lateinit var binding: FragmentLoginBinding
-    private lateinit var viewmodel: LoginViewModel
+    private val viewmodel: LoginViewModel by lazy {
+        val viewModelFactory = LoginViewModelFactory()
+        ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-
-        viewmodel = ViewModelProvider(this)[LoginViewModel::class.java]
 
         binding.viewmodel = viewmodel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        viewmodel.navigateToSignUp.observe(viewLifecycleOwner, Observer {
-            if(it) {
+        initialFacebookLoginButton()
+
+        setNavigateToSignUpObserver()
+        setLoginResultObserver()
+        setLoginWithGoogleButton()
+
+        autoLogin()
+
+        return binding.root
+    }
+
+    private fun setLoginWithGoogleButton() {
+        binding.linearLoginWithGoogle.setOnClickListener {
+            signIn()
+        }
+    }
+
+    private fun setNavigateToSignUpObserver() {
+        viewmodel.navigateToSignUp.observe(viewLifecycleOwner) {
+            if (it) {
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToSignUpFragment())
                 viewmodel.onNavigateToSignupComplete()
             }
-        })
+        }
+    }
 
-        return binding.root
+    private fun setLoginResultObserver() {
+        viewmodel.loginResult.observe(viewLifecycleOwner) {
+            it?.let { result ->
+                if (result.isSuccess) {
+                    viewmodel.onLoginComplete()
+                    loginSuccessful()
+                } else if (result.isFailure) {
+                    Toast.makeText(
+                        this.requireContext(),
+                        "${result.exceptionOrNull()?.message}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    viewmodel.onLoginComplete()
+                }
+            }
+        }
+    }
+
+    private fun initialFacebookLoginButton(){
+        callbackManager = CallbackManager.Factory.create()
+        binding.facebookLoginButton.setPermissions("email", "public_profile")
+        binding.facebookLoginButton.fragment = this
+        binding.facebookLoginButton.registerCallback(callbackManager, object:
+            FacebookCallback<LoginResult> {
+            override fun onSuccess(result: LoginResult) {
+                viewmodel.onLoginWithFacebook(result.accessToken)
+            }
+
+            override fun onCancel() {
+                Log.d("login", "facebook:onCancel")
+            }
+
+            override fun onError(error: FacebookException) {
+                Log.d("login", "facebook:onError", error)
+            }
+
+        })
+    }
+
+    private fun signIn(){
+        val request = GetSignInIntentRequest.builder()
+            .setServerClientId(getString(R.string.default_web_client_id))
+            .build()
+        Identity.getSignInClient(requireActivity())
+            .getSignInIntent(request)
+            .addOnSuccessListener { pendingIntent ->
+                try {
+                    val intentSenderRequest = IntentSenderRequest.Builder(pendingIntent.intentSender).build()
+                    activityResultLauncher.launch(intentSenderRequest)
+                } catch (exception: Exception){
+                    Log.e("login", "Couldn't start One Tap UI: ${exception.localizedMessage}")
+                }
+            }
+            .addOnFailureListener {
+                Log.e("login", "Couldn't start One Tap UI: ${it.localizedMessage}")
+            }
+    }
+
+    private val activityResultLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ){
+        if(it.resultCode == Activity.RESULT_OK){
+            val credential = Identity.getSignInClient(requireActivity()).getSignInCredentialFromIntent(it.data)
+            val idToken = credential.googleIdToken
+            val firebaseCredential = GoogleAuthProvider.getCredential(idToken, null)
+            viewmodel.onLoginWithGoogle(firebaseCredential)
+        }
+    }
+
+    private fun autoLogin(){
+        if(viewmodel.firebaseUser != null) {
+            loginSuccessful()
+        }
+    }
+
+    private fun loginSuccessful() {
+        val intent = Intent(activity, MainActivity::class.java)
+        val bundle = Bundle()
+        bundle.putParcelable("USER", viewmodel.firebaseUser)
+        intent.putExtras(bundle)
+        startActivity(intent)
     }
 }
