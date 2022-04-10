@@ -1,25 +1,242 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <data>
         <variable
             name="viewmodel"
             type="xyz.daijoubuteam.foodshoppingapp.authentication.login.LoginViewModel" />
     </data>
-
-    <FrameLayout
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/linearSignin"
+        android:gravity="start"
         android:layout_height="match_parent"
-        tools:context=".authentication.login.LoginFragment">
-
-        <!-- TODO: Update blank fragment layout -->
-        <Button
-            android:id="@+id/move_to_signup"
-            android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white_A700">
+        <ImageView
+            android:id="@+id/imageChevronleft"
+            android:layout_height="24dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="12dp"
+            android:layout_width="24dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_chevronleft"
+            tools:ignore="ContentDescription" />
+        <TextView
+            android:ellipsize="end"
             android:layout_height="wrap_content"
-            android:text="Move to Signup"
-            android:onClick="@{() -> viewmodel.onNavigateToSignup()}"/>
-
-    </FrameLayout>
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="30dp"
+            android:singleLine="true"
+            android:text="Đăng Nhập"
+            android:textSize="40sp"
+            android:textColor="@color/bluegray_700"
+            tools:ignore="HardcodedText" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+            <TextView
+                android:ellipsize="end"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="4dp"
+                android:singleLine="true"
+                android:text="Chưa có tài khoản?"
+                android:textColor="@color/gray_700"
+                android:textSize="15sp"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                android:textFontWeight="500"
+                tools:ignore="HardcodedText"
+                tools:targetApi="p" />
+            <TextView
+                android:id="@+id/tvSignUpNow"
+                android:ellipsize="end"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:singleLine="true"
+                android:text="Đăng ký ngay!"
+                android:textColor="@color/orange_400"
+                android:textSize="15sp"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                android:textFontWeight="700"
+                tools:ignore="HardcodedText"
+                tools:targetApi="p" />
+        </LinearLayout>
+        <EditText
+            android:id="@+id/etEmailOrPhone"
+            android:background="@drawable/rectangle_bg_white_a700_border_gray_300_radius_8"
+            android:ellipsize="end"
+            android:hint="Email hoặc Số điện thoại"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="32dp"
+            android:padding="16dp"
+            android:singleLine="true"
+            android:textColorHint="@color/gray_500"
+            android:textSize="16sp"
+            android:textColor="@color/gray_500"
+            android:fontFamily="@font/avenir_next_lt_pro"
+            android:textFontWeight="400"
+            tools:ignore="HardcodedText,RtlSymmetry"
+            tools:targetApi="p" />
+        <EditText
+            android:background="@drawable/rectangle_bg_white_a700_border_gray_300_radius_8"
+            android:ellipsize="end"
+            android:hint="Mật khẩu"
+            android:id="@+id/etPassword"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:padding="16dp"
+            android:singleLine="true"
+            android:textColorHint="@color/gray_500"
+            android:textSize="16sp"
+            android:textColor="@color/gray_500"
+            android:fontFamily="@font/avenir_next_lt_pro"
+            android:textFontWeight="400"
+            android:password="true"
+            tools:ignore="Deprecated,HardcodedText,RtlSymmetry"
+            tools:targetApi="p" />
+        <TextView
+            android:id="@+id/tvForgotPassword"
+            android:ellipsize="end"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:singleLine="true"
+            android:text="Quên mật khẩu?"
+            android:textFontWeight="500"
+            android:textSize="15sp"
+            android:textColor="@color/bluegray_700"
+            android:fontFamily="@font/avenir_next_lt_pro"
+            tools:ignore="HardcodedText"
+            tools:targetApi="p" />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSignIn"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="20dp"
+            android:padding="14dp"
+            android:singleLine="true"
+            android:text="Đăng nhập"
+            android:textAllCaps="true"
+            android:textSize="16sp"
+            android:textFontWeight="400"
+            android:fontFamily="@font/avenir_next_lt_pro"
+            android:textColor="@color/white_A700"
+            android:background="@drawable/rectangle_bg_deep_orange_a200_radius_6"
+            tools:ignore="HardcodedText,UnusedAttribute" />
+        <TextView
+            android:ellipsize="end"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="wrap_content"
+            android:singleLine="true"
+            android:text="Hoặc"
+            android:textFontWeight="500"
+            android:textColor="@color/bluegray_500"
+            android:textSize="16sp"
+            tools:ignore="HardcodedText"
+            tools:targetApi="p" />
+        <LinearLayout
+            android:gravity="start"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/rectangle_bg_indigo_500_radius_6">
+            <FrameLayout
+                android:layout_height="30dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="9dp"
+                android:layout_width="30dp"
+                android:background="@drawable/rectangle_bg_white_a700_radius_4">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_height="20dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_width="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_facebookicon"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
+            <TextView
+                android:ellipsize="end"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                android:layout_marginEnd="66dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="0.87"
+                android:layout_width="0dp"
+                android:singleLine="true"
+                android:text="Đăng nhập với Facebook"
+                android:textAllCaps="true"
+                android:textColor="@color/white_A700"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                android:textFontWeight="400"
+                android:textSize="14sp"
+                tools:ignore="HardcodedText"
+                tools:targetApi="p" />
+        </LinearLayout>
+        <LinearLayout
+            android:gravity="start"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:background="@drawable/rectangle_bg_blue_a200_radius_6">
+            <FrameLayout
+                android:layout_height="30dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="9dp"
+                android:layout_width="30dp"
+                android:background="@drawable/rectangle_bg_white_a700_radius_4">
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_height="20dp"
+                    android:layout_marginHorizontal="5dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_width="20dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_googleicon"
+                    tools:ignore="ContentDescription" />
+            </FrameLayout>
+            <TextView
+                android:ellipsize="end"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                android:layout_marginEnd="66dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="0.86"
+                android:layout_width="0dp"
+                android:singleLine="true"
+                android:text="Đăng nhập với Google"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                android:textColor="@color/white_A700"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                android:textFontWeight="400"
+                tools:ignore="HardcodedText"
+                tools:targetApi="p" />
+        </LinearLayout>
+    </LinearLayout>
 </layout>

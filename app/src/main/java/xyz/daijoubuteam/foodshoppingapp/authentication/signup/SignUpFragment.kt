@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.authentication.login.LoginFragmentDirections
@@ -39,6 +40,10 @@ class SignUpFragment : Fragment() {
                 viewmodel.onNavigateToLoginComplete()
             }
         })
+
+        binding.tvSignInNow.setOnClickListener{view: View ->
+            view.findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
+        }
         return binding.root
     }
 }

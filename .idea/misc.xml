@@ -3,6 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/img_chevronleft.xml" value="0.1355" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/img_facebookicon.xml" value="0.1355" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/img_googleicon.xml" value="0.1355" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/rectangle_bg_blue_a200_radius_6.xml" value="0.1355" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/rectangle_bg_deep_orange_a200_radius_6.xml" value="0.1355" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/rectangle_bg_indigo_500_radius_6.xml" value="0.1355" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/rectangle_bg_white_a700_border_gray_300_radius_8.xml" value="0.1355" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/rectangle_bg_white_a700_radius_4.xml" value="0.1355" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/font/avenir_next_lt_pro.xml" value="0.25092592592592594" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/activity_auth.xml" value="0.25" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.264" />
+        <entry key="..\:/Project/FoodShoppingApp/app/src/main/res/layout/fragment_login.xml" value="0.10989583333333333" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13697916666666668" />
