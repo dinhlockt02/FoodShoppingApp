@@ -35,14 +35,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val helloHomePage = findViewById<TextView>(R.id.hello_home_page)
-        helloHomePage.text = "Hello ${auth.currentUser?.email.toString()}"
-
-        val signOutButton = findViewById<Button>(R.id.signout)
-        signOutButton.setOnClickListener {
-            Firebase.auth.signOut()
-        }
-        addAuthStateListener()
+//        val helloHomePage = findViewById<TextView>(R.id.hello_home_page)
+//        helloHomePage.text = "Hello ${auth.currentUser?.email.toString()}"
+//
+//        val signOutButton = findViewById<Button>(R.id.signout)
+//        signOutButton.setOnClickListener {
+//            Firebase.auth.signOut()
+//        }
+//        addAuthStateListener()
     }
 
 }

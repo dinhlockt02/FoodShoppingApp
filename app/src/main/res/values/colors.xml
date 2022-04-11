@@ -54,4 +54,7 @@
     <color name="bluegray_902">#2b2e30</color>
     <color name="bluegray_901">#293842</color>
     <color name="ic_launcher_background">#FFFFFF</color>
+
+    <color name="primaryColor">#FB6D3B</color>
+    <color name="primaryVariantColor">#FB6D3B</color>
 </resources>
