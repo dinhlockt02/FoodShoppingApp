@@ -42,6 +42,7 @@ class SignUpFragment : Fragment() {
         setNavigateToLoginObserver()
         setSignUpResultObserver()
         setLoginWithGoogleButton()
+        setupSoftKeyboardUI()
 
         return binding.root
     }
@@ -73,7 +74,7 @@ class SignUpFragment : Fragment() {
                     hideKeyboard()
                     Snackbar.make(
                         this.requireView(),
-                        "Đăng ký thành công. Vui lòng kiểm tra email để xác thực.",
+                        "Đăng ký thành công.",
                         Snackbar.LENGTH_SHORT
                     ).show()
                     findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())

@@ -56,7 +56,6 @@ class SignUpViewModel: ViewModel() {
         viewModelScope.launch {
             _signUpResult.value = authRepository.loginWithAuthCredential(googleAuthCredential)
         }
-        onSignUpWithGoogleComplete()
     }
 
     fun onSignUpWithGoogleComplete(){

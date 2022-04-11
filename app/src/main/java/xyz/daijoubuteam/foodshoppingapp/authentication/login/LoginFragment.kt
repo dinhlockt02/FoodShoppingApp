@@ -46,8 +46,6 @@ class LoginFragment : Fragment() {
         setupSoftKeyboardUI()
         setLoginWithFacebookButton()
 
-        autoLogin()
-
         return binding.root
     }
 
@@ -91,7 +89,6 @@ class LoginFragment : Fragment() {
             it?.let { result ->
                 if (result.isSuccess) {
                     viewmodel.onLoginComplete()
-                    loginSuccessful()
                 } else if (result.isFailure) {
                     hideKeyboard()
                     Snackbar.make(
@@ -146,19 +143,6 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun autoLogin(){
-        if(viewmodel.firebaseUser != null) {
-            loginSuccessful()
-        }
-    }
-
-    private fun loginSuccessful() {
-        val intent = Intent(activity, MainActivity::class.java)
-        val bundle = Bundle()
-        bundle.putParcelable("USER", viewmodel.firebaseUser)
-        intent.putExtras(bundle)
-        startActivity(intent)
-    }
 
     private fun setupSoftKeyboardUI(){
         binding.etEmailOrPhone.setOnFocusChangeListener { view, hasFocus ->
