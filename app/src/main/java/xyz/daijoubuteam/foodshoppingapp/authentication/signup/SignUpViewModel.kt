@@ -63,7 +63,6 @@ class SignUpViewModel: ViewModel() {
     }
 
     fun onSignUpWithEmailAndPasswordComplete(){
-        Firebase.auth.signOut()
        _signUpResult.value = null
     }
 }

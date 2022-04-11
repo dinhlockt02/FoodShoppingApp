@@ -77,8 +77,6 @@ class SignUpFragment : Fragment() {
                         "Đăng ký thành công.",
                         Snackbar.LENGTH_SHORT
                     ).show()
-                    findNavController().navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment())
-
                 } else if (result.isFailure) {
                     hideKeyboard()
                     Snackbar.make(

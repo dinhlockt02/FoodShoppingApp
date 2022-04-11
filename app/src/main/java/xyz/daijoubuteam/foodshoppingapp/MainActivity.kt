@@ -12,14 +12,22 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import xyz.daijoubuteam.foodshoppingapp.authentication.AuthActivity
+import xyz.daijoubuteam.foodshoppingapp.authentication.VerifyActivity
 
 class MainActivity : AppCompatActivity() {
 
     private val auth = Firebase.auth
-    init {
+
+    private fun addAuthStateListener() {
         auth.addAuthStateListener {
-            if(it.currentUser == null){
-                navigateToAuthenticationActivity()
+            if (it.currentUser == null) {
+                val intent = Intent(this, AuthActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+            } else if (!it.currentUser!!.isEmailVerified) {
+                val intent = Intent(this, VerifyActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
             }
         }
     }
@@ -34,11 +42,7 @@ class MainActivity : AppCompatActivity() {
         signOutButton.setOnClickListener {
             Firebase.auth.signOut()
         }
-    }
-
-    private fun navigateToAuthenticationActivity(){
-        val intent = Intent(this, AuthActivity::class.java)
-        startActivity(intent)
+        addAuthStateListener()
     }
 
 }
