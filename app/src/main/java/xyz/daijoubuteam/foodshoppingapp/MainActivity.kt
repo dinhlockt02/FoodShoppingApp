@@ -72,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun makeCurrentFragment(fragment:Fragment) {
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.myNavHomeHostFragment,fragment)
+            replace(R.id.navHomeFragment,fragment)
             commit()
         }
     }
