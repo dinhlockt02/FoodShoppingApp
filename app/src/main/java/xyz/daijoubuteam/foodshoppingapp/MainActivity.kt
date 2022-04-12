@@ -68,6 +68,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+        addAuthStateListener()
     }
 
     private fun makeCurrentFragment(fragment:Fragment) {

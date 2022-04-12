@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
 
 class SignUpViewModel: ViewModel() {
@@ -30,8 +31,8 @@ class SignUpViewModel: ViewModel() {
     val password = MutableLiveData("")
     val confirmPassword = MutableLiveData("")
 
-    private var _signUpResult =  MutableLiveData<Result<FirebaseUser?>?>()
-        val signUpResult: LiveData<Result<FirebaseUser?>?>
+    private var _signUpResult =  MutableLiveData<Result<User?>?>()
+        val signUpResult: LiveData<Result<User?>?>
             get() = _signUpResult
 
     fun onSignUpWithEmailAndPassword(){

@@ -42,15 +42,16 @@ class AuthRepository {
         }
     }
 
-    suspend fun signupWithEmailAndPassword(email: String, password: String): Result<FirebaseUser?>{
+    suspend fun signupWithEmailAndPassword(email: String, password: String): Result<User?>{
         return try {
             val result = auth.createUserWithEmailAndPassword(email, password).await()
             val isNewUser = result.additionalUserInfo?.isNewUser
+            var user: User? = null
             if(isNewUser == true){
-                createNewUser()
+                user = createNewUser()
             }
             auth.currentUser!!.sendEmailVerification()
-            Result.success(auth.currentUser)
+            Result.success(user)
         } catch (exception: Exception){
             Result.failure(exception)
         }
