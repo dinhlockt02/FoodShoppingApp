@@ -57,4 +57,5 @@
 
     <color name="primaryColor">#FB6D3B</color>
     <color name="primaryVariantColor">#FB6D3B</color>
+    <color name="lightOrange">#f76707</color>
 </resources>
