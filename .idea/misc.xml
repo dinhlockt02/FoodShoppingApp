@@ -18,10 +18,14 @@
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13697916666666668" />
+        <entry key="app/src/main/res/layout/fragment_bag.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_forget_password.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25161590576171877" />
-        <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.13958333333333334" />
+        <entry key="app/src/main/res/layout/fragment_on_going.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_orders_bag.xml" value="0.20108695652173914" />
+        <entry key="app/src/main/res/layout/fragment_orders_history.xml" value="0.18795289855072464" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/fragment_request_user_info.xml" value="0.25769927536231885" />
         <entry key="app/src/main/res/layout/fragment_resend_email_reset_password.xml" value="0.13958333333333334" />

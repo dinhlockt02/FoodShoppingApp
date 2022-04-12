@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import xyz.daijoubuteam.foodshoppingapp.model.User
@@ -50,7 +51,7 @@ class AuthRepository {
             if(isNewUser == true){
                 user = createNewUser()
             }
-            auth.currentUser!!.sendEmailVerification()
+            auth.currentUser!!.sendEmailVerification().await()
             Result.success(user)
         } catch (exception: Exception){
             Result.failure(exception)
@@ -70,7 +71,28 @@ class AuthRepository {
         val uid = auth.uid
         val userEmail = auth.currentUser?.email
         val user = User(uid = uid, email = userEmail)
-        db.collection("users").add(user).await()
+        db.collection("users").document(user.uid!!).set(user).await()
         return user
+    }
+
+    suspend fun getUserByUid(uid: String):Result<User?>{
+        return try {
+            val docRef = db.collection("users").document(uid)
+            val documentSnapShot = docRef.get().await()
+            val users = documentSnapShot.toObject<User>()
+            Result.success(users)
+
+        }catch (exception: Exception){
+            Result.failure(exception)
+        }
+    }
+
+    suspend fun updateUserInfo(user: User): Result<Boolean>{
+        return try {
+            db.collection("users").document(user.uid!!).set(user).await()
+            Result.success(true)
+        } catch (exception: Exception){
+            Result.failure(exception)
+        }
     }
 }
