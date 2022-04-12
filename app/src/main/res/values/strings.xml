@@ -27,6 +27,7 @@
     <string name="nav_bottom_orders">Orders</string>
     <string name="nav_bottom_saved">Saved</string>
     <string name="nav_bottom_profile">Profile</string>
+    <string name="feeds">Feeds</string>
 
 
 </resources>
