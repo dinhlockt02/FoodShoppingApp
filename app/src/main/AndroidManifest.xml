@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodShoppingApp">
         <activity
+            android:name=".authentication.RequestUserInfoActivity"
+            android:exported="false"/>
+        <activity
             android:name=".authentication.VerifyActivity"
             android:exported="false" />
 
@@ -33,7 +36,7 @@
         </activity>
         <activity
             android:name=".authentication.AuthActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
     </application>
 
 </manifest>
