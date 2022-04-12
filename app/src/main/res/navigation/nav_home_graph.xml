@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_home_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/feedsFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.feeds.FeedsFragment"
+        android:label="fragment_feeds"
+        tools:layout="@layout/fragment_feeds" />
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/savedFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.saved.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/fragment_saved" />
+</navigation>

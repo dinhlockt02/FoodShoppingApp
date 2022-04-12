@@ -2,10 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/home"
+        android:id="@+id/ic_home"
         android:icon="@drawable/ic_home"
         android:title="@string/nav_bottom_home"
         app:cnb_iconColor="@color/primaryColor" />
+    <item
+        android:id="@+id/ic_feeds"
+        android:enabled="true"
+        android:icon="@drawable/ic_profile"
+        android:title="@string/feeds" />
     <item
         android:id="@+id/ic_orders"
         android:icon="@drawable/ic_orders"
@@ -14,11 +19,5 @@
     <item
         android:id="@+id/ic_saved"
         android:icon="@drawable/ic_saved"
-        android:title="@string/nav_bottom_saved"
-        app:cnb_iconColor="@color/primaryColor" />
-    <item
-        android:id="@+id/ic_profile"
-        android:icon="@drawable/ic_profile"
-        android:title="@string/nav_bottom_profile"
-        app:cnb_iconColor="@color/primaryColor" />
+        android:title="@string/nav_bottom_saved" />
 </menu>

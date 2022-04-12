@@ -37,6 +37,7 @@
     <string name="gender_male">male</string>
     <string name="gender_female">female</string>
     <string name="gender_other">other</string>
+    <string name="feeds">Feeds</string>
 
 
 </resources>
