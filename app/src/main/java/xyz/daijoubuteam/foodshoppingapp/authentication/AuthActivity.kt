@@ -1,15 +1,42 @@
 package xyz.daijoubuteam.foodshoppingapp.authentication
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.gms.auth.api.identity.BeginSignInRequest
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
+import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
 
 class AuthActivity : AppCompatActivity() {
 
+    private val auth = Firebase.auth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+        addAuthStateListener()
     }
+
+    private fun addAuthStateListener() {
+        auth.addAuthStateListener { it ->
+            it.currentUser?.let { user ->
+                if(user.isEmailVerified){
+                    val intent = Intent(this, MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                } else {
+                    val intent = Intent(this, VerifyActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
+            }
+
+        }
+    }
+
 
 }

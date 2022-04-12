@@ -19,6 +19,14 @@
     <string name="facebook_app_id">398304498411353</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">6546bf8f661953e6a9cdcaf6692c57c0</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--navigation bottom-->
+    <string name="nav_bottom_home">Home</string>
+    <string name="nav_bottom_orders">Orders</string>
+    <string name="nav_bottom_saved">Saved</string>
+    <string name="nav_bottom_profile">Profile</string>
 
 
 </resources>

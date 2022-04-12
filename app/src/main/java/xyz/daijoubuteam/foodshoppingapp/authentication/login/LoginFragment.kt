@@ -7,34 +7,29 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.identity.GetSignInIntentRequest
 import com.google.android.gms.auth.api.identity.Identity
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.GoogleAuthProvider
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentLoginBinding
+import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
 
 
 class LoginFragment : Fragment() {
 
-    private lateinit var callbackManager: CallbackManager
     private lateinit var binding: FragmentLoginBinding
     private val viewmodel: LoginViewModel by lazy {
         val viewModelFactory = LoginViewModelFactory()
         ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
     }
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
@@ -44,19 +39,38 @@ class LoginFragment : Fragment() {
         binding.viewmodel = viewmodel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        initialFacebookLoginButton()
-
         setNavigateToSignUpObserver()
+        setNavigateToForgetPasswordObserver()
         setLoginResultObserver()
         setLoginWithGoogleButton()
-
-        autoLogin()
+        setupSoftKeyboardUI()
+        setLoginWithFacebookButton()
 
         return binding.root
     }
 
+    private fun setLoginWithFacebookButton() {
+        binding.loginWithFacebookButton.setOnClickListener {
+            hideKeyboard()
+            Snackbar.make(
+                this.requireView(),
+                "Hội những người anti facebook",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun setNavigateToForgetPasswordObserver() {
+        viewmodel.navigateToForgetPassword.observe(viewLifecycleOwner){
+            if(it){
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToForgetPasswordFragment())
+                viewmodel.onNavigateToForgetPasswordComplete()
+            }
+        }
+    }
+
     private fun setLoginWithGoogleButton() {
-        binding.linearLoginWithGoogle.setOnClickListener {
+        binding.loginWithGoogleButton.setOnClickListener {
             signIn()
         }
     }
@@ -75,12 +89,12 @@ class LoginFragment : Fragment() {
             it?.let { result ->
                 if (result.isSuccess) {
                     viewmodel.onLoginComplete()
-                    loginSuccessful()
                 } else if (result.isFailure) {
-                    Toast.makeText(
-                        this.requireContext(),
+                    hideKeyboard()
+                    Snackbar.make(
+                        this.requireView(),
                         "${result.exceptionOrNull()?.message}",
-                        Toast.LENGTH_LONG
+                        Snackbar.LENGTH_SHORT
                     ).show()
                     viewmodel.onLoginComplete()
                 }
@@ -88,26 +102,6 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun initialFacebookLoginButton(){
-        callbackManager = CallbackManager.Factory.create()
-        binding.facebookLoginButton.setPermissions("email", "public_profile")
-        binding.facebookLoginButton.fragment = this
-        binding.facebookLoginButton.registerCallback(callbackManager, object:
-            FacebookCallback<LoginResult> {
-            override fun onSuccess(result: LoginResult) {
-                viewmodel.onLoginWithFacebook(result.accessToken)
-            }
-
-            override fun onCancel() {
-                Log.d("login", "facebook:onCancel")
-            }
-
-            override fun onError(error: FacebookException) {
-                Log.d("login", "facebook:onError", error)
-            }
-
-        })
-    }
 
     private fun signIn(){
         val request = GetSignInIntentRequest.builder()
@@ -120,11 +114,21 @@ class LoginFragment : Fragment() {
                     val intentSenderRequest = IntentSenderRequest.Builder(pendingIntent.intentSender).build()
                     activityResultLauncher.launch(intentSenderRequest)
                 } catch (exception: Exception){
-                    Log.e("login", "Couldn't start One Tap UI: ${exception.localizedMessage}")
+                    hideKeyboard()
+                    Snackbar.make(
+                        this.requireView(),
+                        "\"Couldn't start One Tap UI: ${exception.localizedMessage}\"",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
             .addOnFailureListener {
-                Log.e("login", "Couldn't start One Tap UI: ${it.localizedMessage}")
+                hideKeyboard()
+                Snackbar.make(
+                    this.requireView(),
+                    "\"Couldn't start One Tap UI: ${it.localizedMessage}\"",
+                    Snackbar.LENGTH_SHORT
+                ).show()
             }
     }
 
@@ -139,17 +143,18 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun autoLogin(){
-        if(viewmodel.firebaseUser != null) {
-            loginSuccessful()
-        }
-    }
 
-    private fun loginSuccessful() {
-        val intent = Intent(activity, MainActivity::class.java)
-        val bundle = Bundle()
-        bundle.putParcelable("USER", viewmodel.firebaseUser)
-        intent.putExtras(bundle)
-        startActivity(intent)
+    private fun setupSoftKeyboardUI(){
+        binding.etEmailOrPhone.setOnFocusChangeListener { view, hasFocus ->
+            if(!hasFocus){
+                hideKeyboard()
+            }
+        }
+        binding.etPassword.setOnFocusChangeListener { view, hasFocus ->
+            if(!hasFocus){
+                hideKeyboard()
+            }
+        }
+
     }
 }

@@ -17,11 +17,14 @@ class LoginViewModel: ViewModel() {
     private val _navigateToSignUp = MutableLiveData(false)
     private val authRepository = AuthRepository()
     private val _loginResult = MutableLiveData<Result<FirebaseUser?>?>(null)
+    private val _navigateToForgetPassword = MutableLiveData(false)
 
     val loginResult: LiveData<Result<FirebaseUser?>?>
         get() = _loginResult
     val navigateToSignUp: LiveData<Boolean>
         get() = _navigateToSignUp
+    val navigateToForgetPassword: LiveData<Boolean>
+        get() = _navigateToForgetPassword
 
     val email =  MutableLiveData("")
     val password = MutableLiveData("")
@@ -35,7 +38,21 @@ class LoginViewModel: ViewModel() {
         _navigateToSignUp.value = false
     }
 
+    fun onNavigateToForgetPassword(){
+        _navigateToForgetPassword.value = true
+    }
+
+    fun onNavigateToForgetPasswordComplete(){
+        _navigateToForgetPassword.value = false
+    }
+
     fun onLoginWithEmailAndPassword(){
+        if(email.value.isNullOrEmpty() || password.value.isNullOrEmpty())
+        {
+            val exception = Exception("Illegal email or password")
+            _loginResult.value = Result.failure(exception)
+            return
+        }
         viewModelScope.launch {
             val credential = EmailAuthProvider.getCredential(email.value!!, password.value!!)
             _loginResult.value = authRepository.loginWithAuthCredential(credential)
@@ -45,13 +62,6 @@ class LoginViewModel: ViewModel() {
     fun onLoginWithGoogle(googleAuthCredential: AuthCredential){
         viewModelScope.launch {
             _loginResult.value = authRepository.loginWithAuthCredential(googleAuthCredential)
-        }
-    }
-
-    fun onLoginWithFacebook(accessToken: AccessToken){
-        viewModelScope.launch {
-            val credential =  FacebookAuthProvider.getCredential(accessToken.token)
-            _loginResult.value = authRepository.loginWithAuthCredential(credential)
         }
     }
 

@@ -48,9 +48,19 @@ class AuthRepository {
             if(isNewUser == true){
                 createNewUser()
             }
+            auth.currentUser!!.sendEmailVerification()
             Result.success(auth.currentUser)
         } catch (exception: Exception){
             Result.failure(exception)
+        }
+    }
+
+    suspend fun resetPasswordWithEmail(email: String): Result<Boolean>?{
+        return try {
+            auth.sendPasswordResetEmail(email).await()
+            Result.success(true)
+        } catch (e: Exception){
+            Result.failure(e)
         }
     }
 
