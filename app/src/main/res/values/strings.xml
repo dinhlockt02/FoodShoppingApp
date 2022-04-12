@@ -16,6 +16,12 @@
     <string name="or_already_have_account">or Already have account?</string>
     <string name="web_client_id" translatable="false">746360451616-ka2b25fmbbikf3616i5ttgf2a1t9pnb6.apps.googleusercontent.com</string>
 
+    <!--Forgot Password Fragment-->
+    <string name="forgot_password_title">Forgot Password</string>
+    <string name="forgot_password_requirement">Enter your email to reset password</string>
+    <string name="email_example">daijoubu@example.com</string>
+    <string name="reset_password">Reset Password</string>
+
     <string name="facebook_app_id">398304498411353</string>
     <string name="fb_login_protocol_scheme">fb1234</string>
     <string name="facebook_client_token">6546bf8f661953e6a9cdcaf6692c57c0</string>
@@ -38,6 +44,7 @@
     <string name="gender_female">female</string>
     <string name="gender_other">other</string>
     <string name="feeds">Feeds</string>
+
 
 
 </resources>
