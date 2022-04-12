@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "xyz.daijoubuteam.foodshoppingapp"
-        minSdk 21
+        minSdk 23
         targetSdk 32
         versionCode 1
         versionName "1.0"
@@ -82,4 +82,7 @@ dependencies {
 
     // material
     implementation 'com.google.android.material:material:1.5.0'
+
+    //chip-navigation-bar
+    implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
 }
