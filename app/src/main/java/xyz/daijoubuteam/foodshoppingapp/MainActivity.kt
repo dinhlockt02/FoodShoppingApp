@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.*
@@ -32,7 +33,7 @@ import xyz.daijoubuteam.foodshoppingapp.client.saved.SavedFragment
 import xyz.daijoubuteam.foodshoppingapp.databinding.ActivityMainBinding
 import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : FragmentActivity() {
 
     private val auth = Firebase.auth
     private lateinit var binding: ActivityMainBinding
