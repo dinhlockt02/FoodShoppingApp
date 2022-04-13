@@ -3,12 +3,31 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/img_chevronleft.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/img_facebookicon.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/img_googleicon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_indigo_500_radius_6 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_white_a700_radius_4 2.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/bell_outline.xml" value="0.147" />
+        <entry key="app/src/main/res/drawable/button_chevron.xml" value="0.1965" />
+        <entry key="app/src/main/res/drawable/circular_textview.xml" value="0.147" />
+        <entry key="app/src/main/res/drawable/circular_textview_notification.xml" value="0.13" />
+        <entry key="app/src/main/res/drawable/ic_baseline_chevron_right_24.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_orders.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_saved.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_shopping_bags.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_tag_sales.xml" value="0.1965" />
         <entry key="app/src/main/res/drawable/ic_user.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/img_chevron_background.xml" value="0.1965" />
+        <entry key="app/src/main/res/drawable/img_notification.xml" value="0.147" />
+        <entry key="app/src/main/res/drawable/information_outline.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/logout.xml" value="0.1865" />
+        <entry key="app/src/main/res/drawable/profile_background.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/radio_flat_regular.xml" value="0.2865" />
         <entry key="app/src/main/res/drawable/radio_flat_selected.xml" value="0.2865" />
         <entry key="app/src/main/res/drawable/radio_flat_selector.xml" value="0.1495" />
@@ -18,17 +37,20 @@
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13697916666666668" />
-        <entry key="app/src/main/res/layout/fragment_bag.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_request_user_info.xml" value="0.21175231933593752" />
+        <entry key="app/src/main/res/layout/fragment_collection_object.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_forget_password.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25161590576171877" />
-        <entry key="app/src/main/res/layout/fragment_on_going.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_orders_bag.xml" value="0.20108695652173914" />
-        <entry key="app/src/main/res/layout/fragment_orders_history.xml" value="0.18795289855072464" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.13958333333333334" />
+        <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.13958333333333334" />
+        <entry key="app/src/main/res/layout/fragment_orders_bag.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_orders_history.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_orders_on_going.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_orders_up_coming.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.21664581298828128" />
         <entry key="app/src/main/res/layout/fragment_request_user_info.xml" value="0.25769927536231885" />
         <entry key="app/src/main/res/layout/fragment_resend_email_reset_password.xml" value="0.13958333333333334" />
+        <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.21829710144927536" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.3144266764322917" />
         <entry key="app/src/main/res/menu/nav_bottom_menu.xml" value="0.1" />
       </map>
