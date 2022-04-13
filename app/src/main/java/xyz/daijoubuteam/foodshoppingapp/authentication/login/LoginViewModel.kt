@@ -1,5 +1,6 @@
 package xyz.daijoubuteam.foodshoppingapp.authentication.login
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -53,6 +54,7 @@ class LoginViewModel: ViewModel() {
             _loginResult.value = Result.failure(exception)
             return
         }
+
         viewModelScope.launch {
             val credential = EmailAuthProvider.getCredential(email.value!!, password.value!!)
             _loginResult.value = authRepository.loginWithAuthCredential(credential)

@@ -45,6 +45,8 @@
     <string name="gender_other">other</string>
     <string name="feeds">Feeds</string>
     <string name="your_gender">Your gender</string>
+    <string name="user_profile_avatar">User Profile Avatar</string>
+    <string name="bell_icon">bell icon</string>
 
 
 </resources>
