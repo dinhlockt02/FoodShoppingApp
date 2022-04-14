@@ -7,6 +7,41 @@
         <entry key="app/src/main/res/drawable-v24/img_chevronleft.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/img_facebookicon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/img_googleicon.xml" value="0.1" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/default_indicator.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/img_chevronleft.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/img_chevronright.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/indicator_selector.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/rectangle_bg_white_a700_radius_4.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/selected_indicator.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/the_slider_background.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/ic_profile.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/img_burger.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/img_chevrondown.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/img_cocktail.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/img_discount.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/img_macaroons.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/img_mdiaccesstime.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/img_search.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/img_star1.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/img_steak.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/radio_flat_regular.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/rectangle_bg_blue_a200_radius_6.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/rectangle_bg_white_a700_border_gray_300_radius_8.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/rectangle_bg_white_a700_radius_4.xml" value="0.1365" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/rectangle_bg_white_a700_radius_bl_12_br_12.xml" value="0.118" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable/rectangle_dhi_0.xml" value="0.118" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/fragment_home.xml" value="0.264" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/fragment_login.xml" value="0.1" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/fragment_profile.xml" value="0.11302083333333333" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/item_category.xml" value="0.536" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/item_cuisine.xml" value="0.4" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/item_eatery.xml" value="0.264" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/item_eatery2.xml" value="0.25" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/item_slide.xml" value="0.25" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/row_home2.xml" value="0.12158054711246201" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/row_home3.xml" value="0.1" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/the_items_layout.xml" value="0.25" />
+        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/menu/nav_bottom_menu.xml" value="0.25" />
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_indigo_500_radius_6 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_white_a700_radius_4 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bell_outline.xml" value="0.147" />

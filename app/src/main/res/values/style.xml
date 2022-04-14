@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<!--    <style name="groupStyleWhite_A700">-->
-<!--        <item name="android:background">@drawable/rectangle_bg_white_a700</item>-->
-<!--    </style>-->
+    <style name="topRoundedImageView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">12dp</item>
+        <item name="cornerSizeTopRight">12dp</item>
+    </style>
 </resources>
