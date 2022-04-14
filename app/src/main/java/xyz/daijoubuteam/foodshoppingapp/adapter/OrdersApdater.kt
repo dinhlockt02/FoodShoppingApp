@@ -31,12 +31,7 @@ class OrdersApdater : ListAdapter<Orders, OrdersApdater.OrdersViewHolder>(DiffCa
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersViewHolder {
-        val binding = DataBindingUtil.inflate<ItemOrderBinding>(
-            LayoutInflater.from(parent.context),
-            R.layout.item_order,
-            parent,
-            false
-        )
+        val binding = ItemOrderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return OrdersViewHolder(binding)
     }
 

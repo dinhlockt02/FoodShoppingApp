@@ -17,7 +17,10 @@ class OrdersOnGoingFragment : Fragment() {
     private var ordersList = arrayListOf<Orders>(
         Orders("1"),
         Orders("2"),
-        Orders("3"))
+        Orders("3"),
+        Orders("4"),
+        Orders("5"),
+        Orders("6"))
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
