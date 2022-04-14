@@ -136,7 +136,8 @@
                 app:layout_constraintStart_toEndOf="@+id/tvTime"
                 app:layout_constraintTop_toTopOf="@+id/imgClock"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <TextView android:ellipsize="end" android:gravity="start"
+        <TextView android:ellipsize="end"
+            android:gravity="start"
             android:id="@+id/tvEateryName"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"

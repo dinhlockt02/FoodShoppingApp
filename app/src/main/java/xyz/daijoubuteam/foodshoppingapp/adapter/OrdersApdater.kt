@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import xyz.daijoubuteam.foodshoppingapp.databinding.LayoutOrdersItemsBinding
+import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Orders
 
 class OrdersApdater: ListAdapter<Orders, OrdersApdater.OrdersViewHolder>(DiffCallBack) {
-    class OrdersViewHolder(private var binding: LayoutOrdersItemsBinding) : RecyclerView.ViewHolder(binding.root) {
+    class OrdersViewHolder(private var binding: ItemOrderBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(order: Orders) {
             binding.order = order
             binding.executePendingBindings()
@@ -29,7 +29,7 @@ class OrdersApdater: ListAdapter<Orders, OrdersApdater.OrdersViewHolder>(DiffCal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersViewHolder {
-        return OrdersViewHolder(LayoutOrdersItemsBinding.inflate(LayoutInflater.from(parent.context)))
+        return OrdersViewHolder(ItemOrderBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
     override fun onBindViewHolder(holder: OrdersViewHolder, position: Int) {
