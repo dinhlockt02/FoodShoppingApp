@@ -17,13 +17,17 @@ class AuthRepository {
     private val db = Firebase.firestore
 
     suspend fun loginWithAuthCredential(authCredential: AuthCredential): Result<User?>{
+        Log.i("login", "GOES HERE 0")
         return try {
+            Log.i("login", "GOES HERE 1")
             val result = auth.signInWithCredential(authCredential).await()
+            Log.i("login", "GOES HERE 2")
             val isNewUser = result.additionalUserInfo?.isNewUser
             var user: User? = null
             if(isNewUser == true){
                 user = createNewUser()
             }
+            Log.i("login", "GOES HERE")
             Result.success(user)
         }
         catch (firebaseAuthUserCollisionException: FirebaseAuthUserCollisionException){

@@ -83,8 +83,8 @@ dependencies {
     // material
     implementation 'com.google.android.material:material:1.5.0'
 
-    //chip-navigation-bar
-    implementation 'com.github.ismaeldivita:chip-navigation-bar:1.4.0'
+    // google maps api
+    implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
     // viewpager2
     implementation "androidx.viewpager2:viewpager2:1.0.0"
