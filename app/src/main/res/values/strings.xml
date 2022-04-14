@@ -1,14 +1,25 @@
 <resources>
-    <string name="app_name">Food Shopping App</string>
-    <string name="sign_in">Sign In</string>
-    <string name="don_t_have_an_account_sign_up_now">Don\'t have an account? Sign up now</string>
-    <string name="email_or_phone_number">Email or Phone Number</string>
+    <!-- Login-->
+    <string name="login_with_facebook">COUNTINUE WITH FACEBOOK</string>
+    <string name="login_with_google">COUNTINUE WITH GOOGLE</string>
+    <string name="dont_have_an_account">Don\'t have an account?</string>
+    <string name="sign_up_now">Sign up now!</string>
     <string name="btn_sign_in">Sign In</string>
-    <string name="or">OR</string>
-    <string name="continue_with_facebook">COUNTINUE WITH FACEBOOK</string>
-    <string name="continue_with_google">COUNTINUE WITH GOOGLE</string>
-    <string name="forgot_password">Forgot Password?</string>
+    <string name="sign_in">Sign In</string>
+    <!-- Signup -->
+    <string name="already_have_account">Already have account?</string>
+    <string name="sign_in_now">Sign in now!</string>
     <string name="sign_up">Sign Up</string>
+    <string name="btn_sign_up">Sign In</string>
+
+    <string name="sign_up_with_facebook">COUNTINUE WITH FACEBOOK</string>
+    <string name="sign_up_with_google">COUNTINUE WITH GOOGLE</string>
+    <!--    -->
+    <string name="app_name">Food Shopping App</string>
+    <string name="don_t_have_an_account_sign_up_now">Don\'t have an account? Sign up now</string>
+    <string name="email">Email</string>
+    <string name="or">OR</string>
+    <string name="forgot_password">Forgot Password?</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="by_signing_up_you_agree_to_our_terms_u2028condition_amp_privacy_policy"><![CDATA[By signing up you agree to our Terms  Condition & Privacy Policy]]></string>
