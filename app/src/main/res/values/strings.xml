@@ -47,14 +47,20 @@
     <string name="your_gender">Your gender</string>
     <string name="user_profile_avatar">User Profile Avatar</string>
     <string name="bell_icon">bell icon</string>
-    <string name="user_information">User Information</string>
+    <string name="user_information">Uer Information</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="email_address">Email</string>
     <string name="gender">Gender</string>
     <string name="phone_number">Phone number</string>
-    <string name="address">Address</string>
     <string name="add_more">Add more</string>
+    <string name="save">Save</string>
+    <string name="contact">Contact</string>
+    <string name="name">Name</string>
+    <string name="address">Address</string>
+    <string name="building_floor">Building/Floor</string>
+    <string name="room_name">Room Name</string>
+    <string name="map_marker_icon">Map Marker Icon</string>
 
     <string-array name="gender">
         <item>Male</item>
