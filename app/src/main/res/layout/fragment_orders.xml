@@ -6,11 +6,12 @@
     <data>
 
     </data>
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar_layout"
             android:layout_width="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_height="wrap_content">
@@ -21,13 +22,15 @@
             android:background="@color/white_A700" />
         </com.google.android.material.appbar.AppBarLayout>
         <com.google.android.material.tabs.TabLayout
+            app:layout_constraintTop_toBottomOf="@id/app_bar_layout"
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <androidx.viewpager2.widget.ViewPager2
+            app:layout_constraintTop_toBottomOf="@id/tab_layout"
             android:id="@+id/pager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </LinearLayout>
+            android:layout_height="0dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
