@@ -1,14 +1,420 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".client.home.HomeFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home" />
+        android:background="@drawable/rectangle_bg_white">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/homeToolbar"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            app:contentInsetStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:paddingBottom="8dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-</FrameLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintHello"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/txtHelloOcoho"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:gravity="start"
+                        android:singleLine="true"
+                        android:text="@string/lbl_hello_ocoho"
+                        android:textColor="@color/black_900"
+                        android:textFontWeight="400"
+                        android:textSize="27sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/imageRectangle9"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UnusedAttribute"
+                        tools:text="@string/lbl_hello_ocoho" />
+
+                    <ImageView
+                        android:id="@+id/imageRectangle9"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="113dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_avatar"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.68"
+                        app:layout_constraintStart_toEndOf="@+id/txtHelloOcoho"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--                Choose place-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintPlace"
+                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintHello">
+
+                    <TextView
+                        android:id="@+id/txtNorthBridgeH"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:gravity="start"
+                        android:singleLine="true"
+                        android:text="@string/msg_north_bridge_h"
+                        android:textColor="@color/gray_500"
+                        android:textFontWeight="500"
+                        android:textSize="15sp"
+                        app:layout_constraintEnd_toStartOf="@+id/imageChevrondown"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UnusedAttribute"
+                        tools:text="@string/msg_north_bridge_h" />
+                    <ImageView
+                        android:id="@+id/imageChevrondown"
+                        android:layout_height="17dp"
+                        android:layout_marginEnd="185dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_width="17dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_chevronright"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.02"
+                        app:layout_constraintStart_toEndOf="@+id/txtNorthBridgeH"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--                Search-->
+                <EditText
+                    android:id="@+id/etSearchForRest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="20dp"
+                    android:background="@drawable/rectangle_bg_gray_100_border_gray_301_radius_8"
+                    android:drawableStart="@drawable/img_search"
+                    android:drawablePadding="10dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:hint="@string/msg_search_for_rest"
+                    android:paddingStart="10dp"
+                    android:paddingTop="11dp"
+                    android:paddingBottom="11dp"
+                    android:singleLine="true"
+                    android:textColor="@color/gray_500"
+                    android:textColorHint="@color/gray_500"
+                    android:textFontWeight="500"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintPlace"
+                    tools:ignore="RtlSymmetry,UnusedAttribute" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.core.widget.NestedScrollView
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:id="@+id/scrollViewScrollview"
+            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/homeToolbar">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintGroup149"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+<!--                Carousel-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintCarousel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.viewpager.widget.ViewPager
+                        android:id="@+id/my_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.google.android.material.tabs.TabLayout
+                        android:id="@+id/my_tablayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="-8dp"
+                        android:background="#00FFFFFF"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_goneMarginBottom="20dp"
+                        app:tabBackground="@drawable/indicator_selector"
+                        app:tabGravity="center"
+                        app:tabIndicatorHeight="0dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                Popular Eatery-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintPopularEatery"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintCarousel">
+
+                    <TextView
+                        android:id="@+id/txtPopularEatries"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:gravity="start"
+                        android:singleLine="true"
+                        android:text="@string/lbl_popular_eatries"
+                        android:textColor="@color/bluegray_700"
+                        android:textFontWeight="500"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toStartOf="@+id/tvViewAll"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UnusedAttribute" />
+
+                    <TextView
+                        android:id="@+id/tvViewAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="150dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="1dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:singleLine="true"
+                        android:text="@string/lbl_view_all"
+                        android:textColor="@color/deep_orange_A200"
+                        android:textFontWeight="500"
+                        android:textSize="12sp"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/txtPopularEatries"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.69"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UnusedAttribute"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyPopularEatery"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintPopularEatery" />
+<!--                Categories-->
+                <TextView
+                    android:id="@+id/tvCategories"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="24dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:gravity="start"
+                    android:singleLine="true"
+                    android:text="@string/lbl_categories"
+                    android:textColor="@color/bluegray_700"
+                    android:textFontWeight="500"
+                    android:textSize="20sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyPopularEatery"
+                    tools:ignore="UnusedAttribute"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyCategories"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCategories"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintNearByEatery"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+<!--                Nearby eatery-->
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintNearByEatery"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyCategories">
+
+                    <TextView
+                        android:id="@+id/tvNearByEatries"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:gravity="start"
+                        android:singleLine="true"
+                        android:text="@string/lbl_nearby"
+                        android:textColor="@color/bluegray_700"
+                        android:textFontWeight="500"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toStartOf="@+id/tvViewAll1"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UnusedAttribute" />
+
+                    <TextView
+                        android:id="@+id/tvViewAll1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="150dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="1dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:singleLine="true"
+                        android:text="@string/lbl_view_all"
+                        android:textColor="@color/deep_orange_A200"
+                        android:textFontWeight="500"
+                        android:textSize="12sp"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/tvNearByEatries"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.69"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UnusedAttribute" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--                Popular Cuisines-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyNearByEatery"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    app:layout_constraintBottom_toTopOf="@+id/constraintPopularCuisines"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintNearByEatery"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintPopularCuisines"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyNearByEatery">
+
+                    <TextView
+                        android:id="@+id/tvPopularCuisines"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:gravity="start"
+                        android:singleLine="true"
+                        android:text="@string/msg_poppular_cuisin"
+                        android:textColor="@color/bluegray_700"
+                        android:textFontWeight="500"
+                        android:textSize="20sp"
+                        app:layout_constraintEnd_toStartOf="@+id/tvViewAll2"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UnusedAttribute" />
+
+                    <TextView
+                        android:id="@+id/tvViewAll2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="150dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginBottom="1dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:singleLine="true"
+                        android:text="@string/lbl_view_all"
+                        android:textColor="@color/deep_orange_A200"
+                        android:textFontWeight="500"
+                        android:textSize="12sp"
+                        app:layout_constraintBaseline_toBaselineOf="@+id/tvPopularCuisines"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.69"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UnusedAttribute" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyPopularCuisine"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="16dp"
+                    android:nestedScrollingEnabled="false"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintPopularCuisines"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

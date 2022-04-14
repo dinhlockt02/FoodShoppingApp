@@ -46,5 +46,34 @@
     <string name="feeds">Feeds</string>
     <string name="your_gender">Your gender</string>
 
+    <!-- Home fragment -->
+    <string name="lbl_hello_ocoho">Hello, Ocoho!</string>
+    <string name="msg_north_bridge_h">North Bridge, Halifax</string>
+    <string name="lbl_categories">Categories</string>
+    <string name="lbl_promos">Promos</string>
+    <string name="lbl_meal">Meal</string>
+    <string name="lbl_drink">Drink</string>
+    <string name="lbl_fastfood">FastFood</string>
+    <string name="lbl_snack">Snack</string>
+    <string name="lbl_nearby">Nearby</string>
+    <string name="msg_poppular_cuisin">Poppular Cuisines</string>
+    <string name="lbl_popular_eatries">Popular Eatries</string>
+    <string name="lbl_view_all">View all</string>
+    <string name="msg_search_for_rest">Search for restaurants, dishes... </string>
+    <string name="lbl_greece">Greece</string>
+    <string name="lbl_italian">Italian</string>
+    <string name="lbl_new_zealander">New Zealander</string>
+
+    <!-- Row home 2 -->
+    <string name="lbl_5_0">5.0</string>
+    <string name="lbl_18_mins">18 mins</string>
+    <string name="lbl_3_km">3 km</string>
+    <string name="msg_creamos_chape">Creamos - Chapel Ln</string>
+    <string name="msg_chapel_ln_harr">Chapel Ln, Harriseahead</string>
+
+    <!-- Row home 3 -->
+    <string name="msg_lorem_burger">Lorem Burger - North Bridge</string>
+    <string name="lbl_15_mins">15 mins</string>
+    <string name="lbl_1_1_km">1.1 km</string>
 
 </resources>
