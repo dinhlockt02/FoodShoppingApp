@@ -10,6 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.R
@@ -24,6 +26,7 @@ class HomeFragment : Fragment() {
     var page: ViewPager? = null
     var tabLayout: TabLayout? = null
     var listItems: ArrayList<SlideItem>? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -107,8 +110,15 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    private lateinit var sliderTimerCorroutine: Job
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        sliderTimerCorroutine.cancel()
+    }
+
     private fun setSliderTimer(delay: Long, period: Long){
-        lifecycleScope.launch {
+        sliderTimerCorroutine = lifecycleScope.launch {
             delay(delay)
             while(true){
                 if (page!!.currentItem < listItems!!.size - 1) {
