@@ -137,7 +137,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun setupSoftKeyboardUI(){
-        binding.etEmailOrPhone.setOnFocusChangeListener { view, hasFocus ->
+        binding.etEmail.setOnFocusChangeListener { view, hasFocus ->
             if(!hasFocus){
                 hideKeyboard()
             }
