@@ -1,4 +1,4 @@
-package xyz.daijoubuteam.foodshoppingapp.client.profile
+package xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -7,25 +7,22 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
 
-class ProfileViewModel: ViewModel() {
+class ProfileAddressEditViewModel: ViewModel() {
     private val auth = Firebase.auth
     private val authRepository = AuthRepository()
-    private var _user = MutableLiveData<User>(null)
-        val user: LiveData<User>
-            get() = _user
-    private var _notification = MutableLiveData(0)
-        val notification
-            get() = _notification
+    var user = MutableLiveData<User>(null)
+
     init {
         viewModelScope.launch {
             auth.uid?.let { uid ->
                 val userResult = authRepository.getUserByUid(uid)
                 if(userResult.isSuccess){
-                    _user.value = userResult.getOrNull()
+                    user.value = userResult.getOrNull()
                 }else
                 {
                     onShowError(userResult.exceptionOrNull()?.localizedMessage)

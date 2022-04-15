@@ -68,27 +68,27 @@ class RequestUserInfoActivity : AppCompatActivity() {
     private fun setupSoftKeyboardUI(){
         binding.firstName.setOnFocusChangeListener { view, hasFocus ->
             if(!hasFocus){
-                hideKeyboard(binding.btnSubmit)
+                hideKeyboard()
             }
         }
         binding.lastName.setOnFocusChangeListener { view, hasFocus ->
             if(!hasFocus){
-                hideKeyboard(binding.btnSubmit)
+                hideKeyboard()
             }
 
         }
         binding.phoneNumber.setOnFocusChangeListener { view, hasFocus ->
             if(!hasFocus){
-                hideKeyboard(binding.btnSubmit)
+                hideKeyboard()
             }
         }
         binding.lastName.setOnFocusChangeListener { view, hasFocus ->
             if(!hasFocus){
-                hideKeyboard(binding.btnSubmit)
+                hideKeyboard()
             }
         }
         binding.genderRadioGroup.setOnCheckedChangeListener { radioGroup, i ->
-            hideKeyboard(binding.btnSubmit)
+            hideKeyboard()
         }
     }
 }
