@@ -370,7 +370,7 @@
                         android:fontFamily="@font/avenir_next_lt_pro"
                         android:gravity="start"
                         android:singleLine="true"
-                        android:text="@string/msg_poppular_cuisin"
+                        android:text="@string/msg_popular_cuisin"
                         android:textColor="@color/bluegray_700"
                         android:textFontWeight="500"
                         android:textSize="20sp"

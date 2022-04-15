@@ -1,16 +1,16 @@
-package xyz.daijoubuteam.foodshoppingapp.adapter
+package xyz.daijoubuteam.foodshoppingapp.client.orders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import xyz.daijoubuteam.foodshoppingapp.databinding.LayoutOrdersItemsBinding
+import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrdersBinding
+
 import xyz.daijoubuteam.foodshoppingapp.model.Orders
 
 class OrdersApdater: ListAdapter<Orders, OrdersApdater.OrdersViewHolder>(DiffCallBack) {
-    class OrdersViewHolder(private var binding: LayoutOrdersItemsBinding) : RecyclerView.ViewHolder(binding.root) {
+    class OrdersViewHolder(private var binding: ItemOrdersBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(order: Orders) {
             binding.order = order
             binding.executePendingBindings()
@@ -29,7 +29,8 @@ class OrdersApdater: ListAdapter<Orders, OrdersApdater.OrdersViewHolder>(DiffCal
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersViewHolder {
-        return OrdersViewHolder(LayoutOrdersItemsBinding.inflate(LayoutInflater.from(parent.context)))
+        val binding = ItemOrdersBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return OrdersViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: OrdersViewHolder, position: Int) {

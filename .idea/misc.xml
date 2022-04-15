@@ -3,10 +3,6 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable-v24/img_chevronleft.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable-v24/img_facebookicon.xml" value="0.1" />
-        <entry key="app/src/main/res/drawable-v24/img_googleicon.xml" value="0.1" />
         <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/default_indicator.xml" value="0.1365" />
         <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/img_chevronleft.xml" value="0.1365" />
         <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/img_chevronright.xml" value="0.1365" />
@@ -42,6 +38,10 @@
         <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/row_home3.xml" value="0.1" />
         <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/the_items_layout.xml" value="0.25" />
         <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/menu/nav_bottom_menu.xml" value="0.25" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/img_chevronleft.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/img_facebookicon.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/img_googleicon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_indigo_500_radius_6 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_white_a700_radius_4 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bell_outline.xml" value="0.147" />
@@ -88,6 +88,10 @@
         <entry key="app/src/main/res/layout/fragment_resend_email_reset_password.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.21829710144927536" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.3144266764322917" />
+        <entry key="app/src/main/res/layout/item_category.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_cuisine.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_eatery.xml" value="0.11458333333333333" />
+        <entry key="app/src/main/res/layout/item_orders.xml" value="0.12817028985507245" />
         <entry key="app/src/main/res/layout/layout_orders_items.xml" value="0.190625" />
         <entry key="app/src/main/res/layout/layout_orders_list_items.xml" value="0.140625" />
         <entry key="app/src/main/res/menu/nav_bottom_menu.xml" value="0.1" />
