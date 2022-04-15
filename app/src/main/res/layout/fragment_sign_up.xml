@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="viewmodel"
             type="xyz.daijoubuteam.foodshoppingapp.authentication.signup.SignUpViewModel" />
@@ -40,10 +39,9 @@
                 android:layout_marginEnd="24dp"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="Đăng Ký"
+                android:text="@string/sign_up"
                 android:textColor="@color/bluegray_700"
-                android:textSize="40sp"
-                tools:ignore="HardcodedText" />
+                android:textSize="40sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -59,13 +57,11 @@
                     android:ellipsize="end"
                     android:fontFamily="@font/avenir_next_lt_pro"
                     android:singleLine="true"
-                    android:text="Đã có tài khoản?"
+                    android:text="@string/already_have_account"
                     android:textColor="@color/gray_700"
                     android:textFontWeight="500"
                     android:textSize="15sp"
-                    tools:ignore="HardcodedText"
                     tools:targetApi="p" />
-
                 <TextView
                     android:id="@+id/tvSignInNow"
                     android:layout_width="wrap_content"
@@ -74,75 +70,90 @@
                     android:fontFamily="@font/avenir_next_lt_pro"
                     android:onClick="@{() -> viewmodel.onNavigateToLogin()}"
                     android:singleLine="true"
-                    android:text="Đăng nhập ngay!"
+                    android:text="@string/sign_in_now"
                     android:textColor="@color/orange_400"
                     android:textFontWeight="700"
                     android:textSize="15sp"
-                    tools:ignore="HardcodedText"
                     tools:targetApi="p" />
             </LinearLayout>
-
-            <EditText
-                android:id="@+id/etEmailOrPhone"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/email"
+                app:hintTextColor="@color/lightOrange"
+                app:boxStrokeColor="@color/lightOrange"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="32dp"
-                android:background="@drawable/rectangle_bg_white_a700_border_gray_300_radius_8"
-                android:ellipsize="end"
-                android:fontFamily="@font/avenir_next_lt_pro"
-                android:hint="Email hoặc Số điện thoại"
-                android:padding="16dp"
-                android:singleLine="true"
-                android:text="@={viewmodel.email}"
-                android:textColor="@color/gray_500"
-                android:textColorHint="@color/gray_500"
-                android:textFontWeight="400"
-                android:textSize="16sp"
-                tools:ignore="HardcodedText,RtlSymmetry"
-                tools:targetApi="p" />
-
-            <EditText
-                android:id="@+id/etPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <EditText
+                    android:id="@+id/etEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:padding="16dp"
+                    android:singleLine="true"
+                    android:text="@={viewmodel.email}"
+                    android:textColor="@color/gray_800"
+                    android:textColorHint="@color/gray_500"
+                    android:textFontWeight="400"
+                    android:textSize="16sp"
+                    tools:ignore="RtlSymmetry"
+                    tools:targetApi="p" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/password"
+                app:hintTextColor="@color/lightOrange"
+                app:boxStrokeColor="@color/lightOrange"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/rectangle_bg_white_a700_border_gray_300_radius_8"
-                android:ellipsize="end"
-                android:fontFamily="@font/avenir_next_lt_pro"
-                android:hint="Mật khẩu"
-                android:padding="16dp"
-                android:password="true"
-                android:singleLine="true"
-                android:text="@={viewmodel.password}"
-                android:textColor="@color/gray_500"
-                android:textColorHint="@color/gray_500"
-                android:textFontWeight="400"
-                android:textSize="16sp"
-                tools:ignore="Deprecated,HardcodedText,RtlSymmetry"
-                tools:targetApi="p" />
-
-            <EditText
-                android:id="@+id/etConfirmPassword"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <EditText
+                    android:id="@+id/etPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:padding="16dp"
+                    android:password="true"
+                    android:singleLine="true"
+                    android:text="@={viewmodel.password}"
+                    android:textColor="@color/gray_800"
+                    android:textColorHint="@color/gray_500"
+                    android:textFontWeight="400"
+                    android:textSize="16sp"
+                    tools:ignore="Deprecated,RtlSymmetry"
+                    tools:targetApi="p" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/confirm_password"
+                app:hintTextColor="@color/lightOrange"
+                app:boxStrokeColor="@color/lightOrange"
                 android:layout_marginHorizontal="24dp"
                 android:layout_marginTop="16dp"
-                android:background="@drawable/rectangle_bg_white_a700_border_gray_300_radius_8"
-                android:ellipsize="end"
-                android:fontFamily="@font/avenir_next_lt_pro"
-                android:hint="Nhập lại mật khẩu"
-                android:padding="16dp"
-                android:password="true"
-                android:singleLine="true"
-                android:text="@={viewmodel.confirmPassword}"
-                android:textColor="@color/gray_500"
-                android:textColorHint="@color/gray_500"
-                android:textFontWeight="400"
-                android:textSize="16sp"
-                tools:ignore="Deprecated,HardcodedText,RtlSymmetry"
-                tools:targetApi="p" />
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                <EditText
+                    android:id="@+id/etConfirmPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:padding="16dp"
+                    android:password="true"
+                    android:singleLine="true"
+                    android:text="@={viewmodel.confirmPassword}"
+                    android:textColor="@color/gray_800"
+                    android:textColorHint="@color/gray_500"
+                    android:textFontWeight="400"
+                    android:textSize="16sp"
+                    tools:ignore="Deprecated, RtlSymmetry"
+                    tools:targetApi="p" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnSignIn"
@@ -157,12 +168,12 @@
                 android:onClick="@{() -> viewmodel.onSignUpWithEmailAndPassword()}"
                 android:padding="14dp"
                 android:singleLine="true"
-                android:text="Đăng Ký"
+                android:text="@string/btn_sign_up"
                 android:textAllCaps="true"
                 android:textColor="@color/white_A700"
                 android:textFontWeight="400"
                 android:textSize="16sp"
-                tools:ignore="HardcodedText,UnusedAttribute" />
+                tools:ignore="UnusedAttribute" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -172,11 +183,10 @@
                 android:layout_marginTop="24dp"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="Hoặc"
+                android:text="@string/or"
                 android:textColor="@color/bluegray_500"
                 android:textFontWeight="500"
                 android:textSize="16sp"
-                tools:ignore="HardcodedText"
                 tools:targetApi="p" />
 
             <LinearLayout
@@ -213,18 +223,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="28dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginEnd="66dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="14dp"
                     android:layout_weight="0.87"
                     android:ellipsize="end"
                     android:fontFamily="@font/avenir_next_lt_pro"
                     android:singleLine="true"
-                    android:text="Đăng ký với Facebook"
+                    android:text="@string/sign_up_with_facebook"
                     android:textAllCaps="true"
                     android:textColor="@color/white_A700"
                     android:textFontWeight="400"
                     android:textSize="14sp"
-                    tools:ignore="HardcodedText"
                     tools:targetApi="p" />
             </LinearLayout>
 
@@ -256,26 +265,23 @@
                         android:src="@drawable/img_googleicon"
                         tools:ignore="ContentDescription" />
                 </FrameLayout>
-
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="26dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginEnd="66dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="14dp"
                     android:layout_weight="0.86"
                     android:ellipsize="end"
                     android:fontFamily="@font/avenir_next_lt_pro"
                     android:singleLine="true"
-                    android:text="Đăng ký với Google"
+                    android:text="@string/sign_up_with_google"
                     android:textAllCaps="true"
                     android:textColor="@color/white_A700"
                     android:textFontWeight="400"
                     android:textSize="14sp"
-                    tools:ignore="HardcodedText"
                     tools:targetApi="p" />
             </LinearLayout>
         </LinearLayout>
-
 </layout>

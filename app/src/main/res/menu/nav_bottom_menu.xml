@@ -4,8 +4,7 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
-        android:title="@string/nav_bottom_home"
-        app:cnb_iconColor="@color/primaryColor" />
+        android:title="@string/nav_bottom_home" />
     <item
         android:id="@+id/feedsFragment"
         android:enabled="true"
@@ -14,10 +13,13 @@
     <item
         android:id="@+id/ordersFragment"
         android:icon="@drawable/ic_orders"
-        android:title="@string/nav_bottom_orders"
-        app:cnb_iconColor="@color/primaryColor" />
+        android:title="@string/nav_bottom_orders" />
     <item
         android:id="@+id/savedFragment"
         android:icon="@drawable/ic_saved"
         android:title="@string/nav_bottom_saved" />
+    <item
+        android:id="@+id/profileFragment"
+        app:showAsAction="never"
+        android:visible="false"/>
 </menu>

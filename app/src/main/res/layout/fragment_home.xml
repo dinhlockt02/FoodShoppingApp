@@ -49,14 +49,14 @@
                         android:textFontWeight="400"
                         android:textSize="27sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/imageRectangle9"
+                        app:layout_constraintEnd_toStartOf="@+id/fragment_home_avatar"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="UnusedAttribute"
                         tools:text="@string/lbl_hello_ocoho" />
 
                     <ImageView
-                        android:id="@+id/imageRectangle9"
+                        android:id="@+id/fragment_home_avatar"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="113dp"

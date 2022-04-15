@@ -2,15 +2,23 @@ package xyz.daijoubuteam.foodshoppingapp.client.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CategoryAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CuisineAdapter
@@ -142,8 +150,15 @@ class HomeFragment : Fragment() {
         listPopularEatery.add(Eatery(3, "Mon 1", "ABC CDE", 15, 2.0, 5, R.drawable.img_rectangle15))
     }
 
+    private lateinit var sliderTimerCorroutine: Job
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        sliderTimerCorroutine.cancel()
+    }
+
     private fun setSliderTimer(delay: Long, period: Long){
-        lifecycleScope.launch {
+        sliderTimerCorroutine = lifecycleScope.launch {
             delay(delay)
             while(true){
                 if (page.currentItem < listItems.size - 1) {
@@ -151,6 +166,14 @@ class HomeFragment : Fragment() {
                 } else page.currentItem = 0
                 delay(period)
             }
+        }
+    }
+
+
+    private fun setupOnAvatarClickListener(){
+        binding.fragmentHomeAvatar.setOnClickListener {
+            val activity = this.activity as? MainActivity
+            activity?.setMenuSelectedItem(R.id.profileFragment)
         }
     }
 }
