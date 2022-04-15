@@ -1,4 +1,4 @@
-package xyz.daijoubuteam.foodshoppingapp.client.home
+package xyz.daijoubuteam.foodshoppingapp.client.home.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.viewpager.widget.PagerAdapter
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.model.SlideItem
 
-class AdapterSlide(
+class SlideAdapter(
     private val Mcontext: Context,
     private val listSlideItem: List<SlideItem>
 ) :

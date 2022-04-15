@@ -7,5 +7,5 @@ data class Eatery (
     val time: Int,
     val distance: Double,
     val ratingCount: Int,
-    val imgRes: Int
+    val imgRes: Int,
 )

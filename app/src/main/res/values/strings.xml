@@ -88,7 +88,7 @@
     <string name="lbl_fastfood">FastFood</string>
     <string name="lbl_snack">Snack</string>
     <string name="lbl_nearby">Nearby</string>
-    <string name="msg_poppular_cuisin">Poppular Cuisines</string>
+    <string name="msg_popular_cuisin">Popular Cuisines</string>
     <string name="lbl_popular_eatries">Popular Eatries</string>
     <string name="lbl_view_all">View all</string>
     <string name="msg_search_for_rest">Search for restaurants, dishes... </string>

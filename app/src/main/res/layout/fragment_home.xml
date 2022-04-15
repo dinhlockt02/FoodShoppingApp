@@ -244,14 +244,17 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyPopularEatery"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="200dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="16dp"
                     android:nestedScrollingEnabled="false"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintPopularEatery" />
+                    app:layout_constraintTop_toBottomOf="@+id/constraintPopularEatery"
+                    tools:listitem="@layout/item_eatery"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    />
 <!--                Categories-->
                 <TextView
                     android:id="@+id/tvCategories"
@@ -285,6 +288,8 @@
                     app:layout_constraintBottom_toTopOf="@+id/constraintNearByEatery"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_category"
                     app:layout_constraintVertical_bias="0.0" />
 <!--                Nearby eatery-->
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -350,6 +355,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintNearByEatery"
+                    tools:listitem="@layout/item_eatery"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintVertical_bias="0.0" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -370,7 +377,7 @@
                         android:fontFamily="@font/avenir_next_lt_pro"
                         android:gravity="start"
                         android:singleLine="true"
-                        android:text="@string/msg_poppular_cuisin"
+                        android:text="@string/msg_popular_cuisin"
                         android:textColor="@color/bluegray_700"
                         android:textFontWeight="500"
                         android:textSize="20sp"
@@ -413,6 +420,8 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/constraintPopularCuisines"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_cuisine"
                     app:layout_constraintVertical_bias="0.0" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
