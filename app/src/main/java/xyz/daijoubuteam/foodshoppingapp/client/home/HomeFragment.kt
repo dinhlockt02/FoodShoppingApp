@@ -52,7 +52,6 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSliderTimer(2000,3000)
     }
 
     override fun onCreateView(
@@ -92,7 +91,7 @@ class HomeFragment : Fragment() {
 
         // The_slide_timer
         tabLayout.setupWithViewPager(page, true)
-
+        setSliderTimer(2000,3000)
         setupOnAvatarClickListener()
 
         return binding.root
