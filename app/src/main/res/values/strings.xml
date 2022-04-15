@@ -58,7 +58,7 @@
     <string name="your_gender">Your gender</string>
     <string name="user_profile_avatar">User Profile Avatar</string>
     <string name="bell_icon">bell icon</string>
-    <string name="user_information">Uer Information</string>
+    <string name="user_information">User Information</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="email_address">Email</string>
@@ -107,5 +107,6 @@
     <string name="msg_lorem_burger">Lorem Burger - North Bridge</string>
     <string name="lbl_15_mins">15 mins</string>
     <string name="lbl_1_1_km">1.1 km</string>
+    <string name="check">Check</string>
 
 </resources>

@@ -30,5 +30,18 @@
         android:id="@+id/profileFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_profileAddressEditFragment"
+            app:destination="@id/profileAddressEditFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileAddressEditFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address.ProfileAddressEditFragment"
+        android:label="ProfileAddressEditFragment"
+        tools:layout="@layout/fragment_profile_address_edit"/>
 </navigation>
