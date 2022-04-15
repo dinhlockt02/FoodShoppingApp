@@ -34,7 +34,7 @@ class VerifyActivity : AppCompatActivity() {
     }
 
     private fun setUserEmail(){
-        binding.emailTextView.text = auth.currentUser!!.email
+        binding.emailTextView.text = "We have just sent an email to ${auth.currentUser!!.email} for authentication"
     }
 
     private fun addAuthStateListener() {
