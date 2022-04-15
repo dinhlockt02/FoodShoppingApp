@@ -74,7 +74,8 @@ class AuthRepository {
     private suspend fun createNewUser(): User{
         val uid = auth.uid
         val userEmail = auth.currentUser?.email
-        val user = User(uid = uid, email = userEmail)
+        val photoUrl = auth.currentUser?.photoUrl
+        val user = User(uid = uid, email = userEmail, photoUrl = photoUrl)
         db.collection("users").document(user.uid!!).set(user).await()
         return user
     }

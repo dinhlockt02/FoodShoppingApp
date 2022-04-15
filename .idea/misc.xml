@@ -50,11 +50,13 @@
         <entry key="app/src/main/res/drawable/circular_textview.xml" value="0.147" />
         <entry key="app/src/main/res/drawable/circular_textview_notification.xml" value="0.13" />
         <entry key="app/src/main/res/drawable/edit_avatar_icon.xml" value="0.1405" />
+        <entry key="app/src/main/res/drawable/ic__31499_orange_and_white_polygon_background_template_design.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/ic_baseline_chevron_right_24.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/ic_camera_outline.xml" value="0.1405" />
         <entry key="app/src/main/res/drawable/ic_heart.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_home.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_orange_and_white_polygon_background_template_design.xml" value="0.131" />
         <entry key="app/src/main/res/drawable/ic_orders.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_saved.xml" value="0.1" />
@@ -63,6 +65,7 @@
         <entry key="app/src/main/res/drawable/ic_user.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/img_chevron_background.xml" value="0.1965" />
         <entry key="app/src/main/res/drawable/img_notification.xml" value="0.147" />
+        <entry key="app/src/main/res/drawable/img_search.xml" value="0.177" />
         <entry key="app/src/main/res/drawable/information_outline.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/logout.xml" value="0.1865" />
         <entry key="app/src/main/res/drawable/map_marker_outline.xml" value="0.1405" />
@@ -70,28 +73,14 @@
         <entry key="app/src/main/res/drawable/radio_flat_regular.xml" value="0.2865" />
         <entry key="app/src/main/res/drawable/radio_flat_selected.xml" value="0.2865" />
         <entry key="app/src/main/res/drawable/radio_flat_selector.xml" value="0.1495" />
+        <entry key="app/src/main/res/drawable/rectangle_bg_deep_orange_a200_radius_6.xml" value="0.177" />
+        <entry key="app/src/main/res/drawable/rectangle_bg_eatery_item.xml" value="0.177" />
+        <entry key="app/src/main/res/drawable/rectangle_bg_gray_100_border_gray_301_radius_8.xml" value="0.177" />
+        <entry key="app/src/main/res/drawable/rectangle_bg_gray_100_radius_8.xml" value="0.177" />
         <entry key="app/src/main/res/drawable/rectangle_bg_indigo_500_radius_6 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rectangle_bg_indigo_500_radius_6.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rectangle_bg_white.xml" value="0.177" />
         <entry key="app/src/main/res/drawable/rectangle_bg_white_a700_radius_4 2.xml" value="0.1" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/img_chevronleft.xml" value="0.1355" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/img_facebookicon.xml" value="0.1355" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/img_googleicon.xml" value="0.1355" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/rectangle_bg_blue_a200_radius_6.xml" value="0.1355" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/rectangle_bg_deep_orange_a200_radius_6.xml" value="0.1355" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/rectangle_bg_indigo_500_radius_6.xml" value="0.1355" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/rectangle_bg_white_a700_border_gray_300_radius_8.xml" value="0.1355" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/drawable-v24/rectangle_bg_white_a700_radius_4.xml" value="0.1355" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/font/avenir_next_lt_pro.xml" value="0.25092592592592594" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/activity_auth.xml" value="0.25" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/activity_main.xml" value="0.25" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/fragment_login.xml" value="0.264" />
-        <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.264" />
-        <entry key="..\:/Project/FoodShoppingApp/app/src/main/res/layout/fragment_login.xml" value="0.10989583333333333" />
-        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/account_auth.xml" value="0.264" />
-        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/activity_auth.xml" value="0.22826086956521738" />
-        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/change_email_address.xml" value="0.22826086956521738" />
-        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_login.xml" value="0.22826086956521738" />
-        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13697916666666668" />
@@ -107,15 +96,17 @@
         <entry key="app/src/main/res/layout/fragment_orders_bag 2.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/fragment_orders_bag.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_orders_history.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_orders_on_going.xml" value="0.35255570117955437" />
+        <entry key="app/src/main/res/layout/fragment_orders_on_going.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_orders_up_coming.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.21664581298828128" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.11991577148437499" />
         <entry key="app/src/main/res/layout/fragment_profile_address_edit.xml" value="0.3079645350359488" />
         <entry key="app/src/main/res/layout/fragment_request_user_info.xml" value="0.25769927536231885" />
         <entry key="app/src/main/res/layout/fragment_resend_email_reset_password.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.21829710144927536" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.3144266764322917" />
         <entry key="app/src/main/res/layout/item_category.xml" value="0.2246376811594203" />
+        <entry key="app/src/main/res/layout/item_order.xml" value="0.34369659423828125" />
+        <entry key="app/src/main/res/layout/item_slide.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/layout_address_item.xml" value="0.25609986432700527" />
         <entry key="app/src/main/res/layout/layout_orders_items.xml" value="0.190625" />
         <entry key="app/src/main/res/layout/layout_orders_list_items.xml" value="0.140625" />

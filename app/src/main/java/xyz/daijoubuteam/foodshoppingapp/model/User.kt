@@ -1,6 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.model
 
 
+import android.net.Uri
 import android.os.Parcel
 import android.os.Parcelable
 
@@ -14,7 +15,8 @@ data class User(
     var isPhoneNumberVerified: Boolean = false,
     val address: ArrayList<String> = ArrayList(),
     var gender: Gender? = null,
-    var nickname: String? = null
+    var nickname: String? = null,
+    var photoUrl: Uri? = null
 )
 
 enum class Gender(val gender: String) {
