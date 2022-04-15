@@ -2,11 +2,15 @@ package xyz.daijoubuteam.foodshoppingapp.client.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
@@ -14,6 +18,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentHomeBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Category
@@ -26,13 +31,13 @@ class HomeFragment : Fragment() {
     var page: ViewPager? = null
     var tabLayout: TabLayout? = null
     var listItems: ArrayList<SlideItem>? = null
-
+    private lateinit var binding: FragmentHomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false)
+        binding = DataBindingUtil.inflate<FragmentHomeBinding>(inflater, R.layout.fragment_home, container, false)
 
         //List popular eateries and near by eateries
         val listPopularEatery : ArrayList<Eatery> = ArrayList()
@@ -104,6 +109,9 @@ class HomeFragment : Fragment() {
         val adapterSlide: AdapterSlide = AdapterSlide(this.requireContext(), listItems!!)
         page!!.adapter = adapterSlide
 
+        // navigate to profile
+        setupOnAvatarClickListener()
+
         // The_slide_timer
         tabLayout!!.setupWithViewPager(page, true)
         setSliderTimer(2000,3000)
@@ -126,6 +134,14 @@ class HomeFragment : Fragment() {
                 } else page!!.currentItem = 0
                 delay(period)
             }
+        }
+    }
+
+
+    private fun setupOnAvatarClickListener(){
+        binding.fragmentHomeAvatar.setOnClickListener {
+            val activity = this.activity as? MainActivity
+            activity?.setMenuSelectedItem(R.id.profileFragment)
         }
     }
 }

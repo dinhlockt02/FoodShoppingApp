@@ -1,151 +1,176 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".client.profile.ProfileFragment"
-    android:background="@color/background_gray">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="xyz.daijoubuteam.foodshoppingapp.client.profile.ProfileViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/profile_layout_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@color/white_A700">
-        <LinearLayout
-            android:id="@+id/profile_user_header"
+        android:layout_height="match_parent"
+        tools:context=".client.profile.ProfileFragment"
+        android:background="@color/background_gray">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/profile_layout_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginVertical="40dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:paddingVertical="24dp">
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profile_user_avatar"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:contentDescription="@string/user_profile_avatar"
-                tools:src="@tools:sample/avatars"
-                android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/circular_image" />
-            <TextView
-                android:id="@+id/profile_user_name"
-                android:layout_width="wrap_content"
+            android:background="@drawable/ic_orange_and_white_polygon_background_template_design">
+
+            <LinearLayout
+                android:id="@+id/profile_user_header"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Trần Văn An"
-                android:layout_marginTop="24dp"
-                android:textSize="20sp"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
-        </LinearLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/imageNotificationbe"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:scaleType="fitXY"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/bell_outline"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:contentDescription="@string/bell_icon"/>
-            <TextView
-                android:id="@+id/number_notify_message"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="3"
-                android:width="24dp"
-                android:height="24dp"
+                android:layout_marginVertical="40dp"
+                android:orientation="vertical"
                 android:gravity="center"
+                android:paddingVertical="24dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/profile_user_avatar"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:contentDescription="@string/user_profile_avatar"
+                    tools:src="@drawable/default_avatar_male"
+                    tools:background="@color/orange_50"
+                    app:imageUrl="@{viewmodel.user.photoUrl}"
+                    app:gender="@{viewmodel.user.gender}"
+                    android:scaleType="centerCrop"
+                    app:shapeAppearanceOverlay="@style/circular_image" />
+
+                <TextView
+                    android:id="@+id/profile_user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Trần Văn An"
+                    android:text="@{viewmodel.user.firstname + ' ' + viewmodel.user.lastname}"
+                    android:layout_marginTop="24dp"
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:textColor="@color/white_A700"
-                android:background="@drawable/circular_textview_notification"/>
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/imageNotificationbe"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/bell_outline"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:contentDescription="@string/bell_icon" />
+
+                <TextView
+                    android:id="@+id/number_notify_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="3"
+                    android:width="24dp"
+                    android:height="24dp"
+                    android:gravity="center"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/white_A700"
+                    android:text="@{viewmodel.notification.toString()}"
+                    android:background="@drawable/circular_textview_notification" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/profile_layout_header"
+            android:layout_marginTop="22dp"
+            android:orientation="vertical">
+
+            <com.google.android.material.button.MaterialButton
+                app:icon="@drawable/ic_profile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Profile &amp; Address"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                app:iconTint="@color/black"
+                android:textColor="@color/black"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                app:backgroundTint="@null"
+                android:background="@drawable/button_chevron" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray" />
+
+            <com.google.android.material.button.MaterialButton
+                app:icon="@drawable/ic_tag_sales"
+                app:iconSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="My voucher"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                app:iconTint="@color/black"
+                android:textColor="@color/black"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                app:backgroundTint="@null"
+                android:background="@drawable/button_chevron" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@android:color/darker_gray" />
+
+            <com.google.android.material.button.MaterialButton
+                app:icon="@drawable/information_outline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="About us"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                app:iconTint="@color/black"
+                android:textColor="@color/black"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                app:backgroundTint="@null"
+                android:background="@drawable/button_chevron" />
+
+            <com.google.android.material.button.MaterialButton
+                app:icon="@drawable/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Log Out"
+                android:textAlignment="textStart"
+                android:textAllCaps="false"
+                android:layout_marginTop="12dp"
+                app:iconTint="@color/primaryColor"
+                android:textColor="@color/primaryColor"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                app:backgroundTint="@null"
+                android:background="@color/white" />
+        </LinearLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/profile_layout_header"
-        android:layout_marginTop="22dp"
-        android:orientation="vertical">
-        <com.google.android.material.button.MaterialButton
-            app:icon="@drawable/ic_profile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Profile &amp; Address"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            app:iconTint="@color/black"
-            android:textColor="@color/black"
-            android:fontFamily="@font/avenir_next_lt_pro"
-            app:backgroundTint="@null"
-            android:background="@drawable/button_chevron" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@android:color/darker_gray"/>
-        <com.google.android.material.button.MaterialButton
-            app:icon="@drawable/ic_tag_sales"
-            app:iconSize="24dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="My voucher"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            app:iconTint="@color/black"
-            android:textColor="@color/black"
-            android:fontFamily="@font/avenir_next_lt_pro"
-            app:backgroundTint="@null"
-            android:background="@drawable/button_chevron" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@android:color/darker_gray"/>
-        <com.google.android.material.button.MaterialButton
-            app:icon="@drawable/information_outline"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="About us"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            app:iconTint="@color/black"
-            android:textColor="@color/black"
-            android:fontFamily="@font/avenir_next_lt_pro"
-            app:backgroundTint="@null"
-            android:background="@drawable/button_chevron" />
-
-        <com.google.android.material.button.MaterialButton
-            app:icon="@drawable/logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Log Out"
-            android:textAlignment="textStart"
-            android:textAllCaps="false"
-            android:layout_marginTop="12dp"
-            app:iconTint="@color/primaryColor"
-            android:textColor="@color/primaryColor"
-            android:fontFamily="@font/avenir_next_lt_pro"
-            app:backgroundTint="@null"
-            android:background="@color/white" />
-    </LinearLayout>
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

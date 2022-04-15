@@ -18,4 +18,8 @@
         android:id="@+id/savedFragment"
         android:icon="@drawable/ic_saved"
         android:title="@string/nav_bottom_saved" />
+    <item
+        android:id="@+id/profileFragment"
+        app:showAsAction="never"
+        android:visible="false"/>
 </menu>

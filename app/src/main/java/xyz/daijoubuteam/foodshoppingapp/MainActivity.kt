@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -18,6 +19,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -54,8 +57,8 @@ class MainActivity : FragmentActivity() {
             }
         }
 
-        isUserRegisterInformation.observe(this){
-            if(it == false){
+        isUserRegisterInformation.observe(this) {
+            if (it == false) {
                 val intent = Intent(this@MainActivity, RequestUserInfoActivity::class.java)
                 startActivity(intent)
             }
@@ -84,4 +87,13 @@ class MainActivity : FragmentActivity() {
             }
         }
     }
+
+    fun setMenuSelectedItem(id: Int){
+        if(id == binding.bottomNavigation.selectedItemId || !this::binding.isInitialized)
+            return
+        binding.bottomNavigation.menu.findItem(id)?.let {
+            binding.bottomNavigation.selectedItemId = it.itemId
+        }
+    }
+
 }
