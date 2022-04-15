@@ -13,6 +13,7 @@ class CategoryAdapter: ListAdapter<Category, CategoryAdapter.CategoryViewHolder>
     class CategoryViewHolder(private var binding: ItemCategoryBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) {
             binding.category = category
+            binding.imgIcon.setImageResource(category.icon)
             binding.executePendingBindings()
         }
     }
@@ -29,7 +30,7 @@ class CategoryAdapter: ListAdapter<Category, CategoryAdapter.CategoryViewHolder>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        return CategoryViewHolder(ItemCategoryBinding.inflate(LayoutInflater.from(parent.context)))
+        return CategoryViewHolder(ItemCategoryBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {

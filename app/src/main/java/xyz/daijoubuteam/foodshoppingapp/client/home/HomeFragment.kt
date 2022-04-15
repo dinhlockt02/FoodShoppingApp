@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import kotlinx.coroutines.delay
@@ -22,7 +21,6 @@ import xyz.daijoubuteam.foodshoppingapp.model.Category
 import xyz.daijoubuteam.foodshoppingapp.model.Cuisine
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 import xyz.daijoubuteam.foodshoppingapp.model.SlideItem
-import java.util.*
 import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
@@ -46,6 +44,7 @@ class HomeFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setSliderTimer(2000,3000)
     }
 
     override fun onCreateView(
@@ -58,6 +57,12 @@ class HomeFragment : Fragment() {
         binding.recyCategories.adapter = CategoryAdapter()
         val adapterCategory = binding.recyCategories.adapter as CategoryAdapter
         adapterCategory.submitList(listCategories)
+
+
+        //recycler popular eatery
+        binding.recyPopularEatery.adapter = EateryAdapter()
+        val adapterPopuplarEatery = binding.recyPopularEatery.adapter as EateryAdapter
+        adapterPopuplarEatery.submitList(listPopularEatery)
 
         //recycler eatery
         binding.recyNearByEatery.adapter = EateryAdapter()
@@ -79,11 +84,14 @@ class HomeFragment : Fragment() {
 
         // The_slide_timer
         tabLayout.setupWithViewPager(page, true)
-        setSliderTimer(2000,3000)
+
+
+
         return binding.root
     }
 
     private fun initialListItems() {
+        listItems = ArrayList<SlideItem>()
         listItems.add(
             SlideItem(
                 1,
@@ -111,6 +119,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initialCuisineList() {
+        listCuisines = ArrayList<Cuisine>()
         listCuisines.add(Cuisine(1, "New Zealander", R.drawable.img_newzealand))
         listCuisines.add(Cuisine(2, "Italian", R.drawable.img_italian))
         listCuisines.add(Cuisine(3, "Greece", R.drawable.img_greece))
@@ -118,6 +127,7 @@ class HomeFragment : Fragment() {
 
     private fun initListCategories() {
         //List categories
+        listCategories = ArrayList<Category>()
         listCategories.add(Category(1, "Promos", R.drawable.img_discount))
         listCategories.add(Category(2, "Meal", R.drawable.img_steak))
         listCategories.add(Category(3, "Drink", R.drawable.img_cocktail))
@@ -126,6 +136,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun initialListEatery() {
+        listPopularEatery = ArrayList<Eatery>()
         listPopularEatery.add(Eatery(1, "Mon 1", "ABC CDE", 15, 2.0, 5, R.drawable.img_rectangle15))
         listPopularEatery.add(Eatery(3, "Mon 1", "ABC CDE", 15, 2.0, 5, R.drawable.img_rectangle15_2))
         listPopularEatery.add(Eatery(3, "Mon 1", "ABC CDE", 15, 2.0, 5, R.drawable.img_rectangle15))

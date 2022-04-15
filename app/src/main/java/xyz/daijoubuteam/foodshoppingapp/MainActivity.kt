@@ -1,35 +1,19 @@
 package xyz.daijoubuteam.foodshoppingapp
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.*
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.authentication.AuthActivity
 import xyz.daijoubuteam.foodshoppingapp.authentication.RequestUserInfoActivity
 import xyz.daijoubuteam.foodshoppingapp.authentication.VerifyActivity
-import xyz.daijoubuteam.foodshoppingapp.client.feeds.FeedsFragment
-import xyz.daijoubuteam.foodshoppingapp.client.home.HomeFragment
-import xyz.daijoubuteam.foodshoppingapp.client.orders.OrdersFragment
-import xyz.daijoubuteam.foodshoppingapp.client.saved.SavedFragment
 import xyz.daijoubuteam.foodshoppingapp.databinding.ActivityMainBinding
 import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
 

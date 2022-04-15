@@ -29,6 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/constraintGroup4"
+            app:srcCompat="@drawable/img_rectangle15"
             tools:src="@drawable/img_rectangle15"></com.google.android.material.imageview.ShapeableImageView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -173,6 +174,7 @@
                 android:textColor="@color/bluegray_700"
                 android:fontFamily="@font/avenir_next_lt_pro"
                 android:textFontWeight="500"
+                android:text="@{eatery.name}"
                 tools:text="@string/msg_creamos_chape"
                 tools:ignore="UnusedAttribute" />
 
@@ -194,6 +196,7 @@
                 android:textSize="12sp"
                 android:fontFamily="@font/avenir_next_lt_pro"
                 android:textFontWeight="500"
+                android:text="@{eatery.address}"
                 tools:text="@string/msg_chapel_ln_harr"
                 tools:ignore="UnusedAttribute" />
         </androidx.constraintlayout.widget.ConstraintLayout>

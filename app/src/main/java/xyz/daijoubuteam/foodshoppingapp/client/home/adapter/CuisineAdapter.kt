@@ -18,6 +18,7 @@ class CuisineAdapter : ListAdapter<Cuisine, CuisineAdapter.CuisineViewHolder>(Di
     class CuisineViewHolder(private var binding : ItemCuisineBinding): RecyclerView.ViewHolder(binding.root){
         fun bind (cuisine: Cuisine) {
             binding.cuisine = cuisine
+            binding.imgAvatar.setImageResource(cuisine.imgAvatar)
             binding.executePendingBindings()
         }
     }

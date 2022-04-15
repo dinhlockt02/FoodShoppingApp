@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:singleLine="true"
-            android:text="@string/lbl_italian"
+            android:text="@{cuisine.name}"
             app:layout_constraintTop_toBottomOf="@+id/cardImageAvatar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

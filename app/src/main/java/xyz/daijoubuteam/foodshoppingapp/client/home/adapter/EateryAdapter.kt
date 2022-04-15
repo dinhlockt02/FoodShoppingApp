@@ -12,6 +12,8 @@ class EateryAdapter : ListAdapter<Eatery, EateryAdapter.EateryViewHolder>(DiffCa
     class EateryViewHolder(private var binding: ItemEateryBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(eatery: Eatery) {
             binding.eatery = eatery
+            // cach tam thoi
+            binding.imgAvatar.setImageResource(eatery.imgRes)
             binding.executePendingBindings()
         }
     }
@@ -33,7 +35,7 @@ class EateryAdapter : ListAdapter<Eatery, EateryAdapter.EateryViewHolder>(DiffCa
     }
 
     override fun onBindViewHolder(holder: EateryViewHolder, position: Int) {
-        var eateryItem = getItem(position)
+        val eateryItem = getItem(position)
         holder.bind(eateryItem)
     }
 }
