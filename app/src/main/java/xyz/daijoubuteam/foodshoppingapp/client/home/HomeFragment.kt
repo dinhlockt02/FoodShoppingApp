@@ -93,7 +93,7 @@ class HomeFragment : Fragment() {
         // The_slide_timer
         tabLayout.setupWithViewPager(page, true)
 
-
+        setupOnAvatarClickListener()
 
         return binding.root
     }
@@ -145,9 +145,9 @@ class HomeFragment : Fragment() {
 
     private fun initialListEatery() {
         listPopularEatery = ArrayList<Eatery>()
-        listPopularEatery.add(Eatery(1, "Mon 1", "ABC CDE", 15, 2.0, 5, R.drawable.img_rectangle15))
-        listPopularEatery.add(Eatery(3, "Mon 1", "ABC CDE", 15, 2.0, 5, R.drawable.img_rectangle15_2))
-        listPopularEatery.add(Eatery(3, "Mon 1", "ABC CDE", 15, 2.0, 5, R.drawable.img_rectangle15))
+        listPopularEatery.add(Eatery(1, "Quan Ngon", "Vo Van Ngan", 23, 4.0, 5, R.drawable.img_rectangle15))
+        listPopularEatery.add(Eatery(3, "Quan Khong Ngon", "Tan Lap", 18, 2.8, 4, R.drawable.img_rectangle15_2))
+        listPopularEatery.add(Eatery(3, "Hen Xui", "Thao Dien", 10, 2.2, 3, R.drawable.img_rectangle15))
     }
 
     private lateinit var sliderTimerCorroutine: Job

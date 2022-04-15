@@ -104,11 +104,8 @@
         <entry key="app/src/main/res/layout/fragment_resend_email_reset_password.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.21829710144927536" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.3144266764322917" />
-        <entry key="app/src/main/res/layout/item_category.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_cuisine.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_eatery.xml" value="0.23103535970052083" />
-        <entry key="app/src/main/res/layout/item_orders.xml" value="0.12817028985507245" />
         <entry key="app/src/main/res/layout/item_category.xml" value="0.2246376811594203" />
+        <entry key="app/src/main/res/layout/item_eatery.xml" value="0.41220652262369795" />
         <entry key="app/src/main/res/layout/item_order.xml" value="0.34369659423828125" />
         <entry key="app/src/main/res/layout/item_slide.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/layout_address_item.xml" value="0.25609986432700527" />

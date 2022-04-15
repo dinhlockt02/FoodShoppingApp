@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/constraintGroup4"
             app:srcCompat="@drawable/img_rectangle15"
-            tools:src="@drawable/img_rectangle15"></com.google.android.material.imageview.ShapeableImageView>
+            tools:src="@drawable/img_rectangle15" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintGroup4"
@@ -71,6 +71,7 @@
                     android:textSize="12sp"
                     android:fontFamily="@font/avenir_next_lt_pro"
                     android:textFontWeight="500"
+                    android:text="@{Integer.toString(eatery.ratingCount)}"
                     tools:ignore="UnusedAttribute" />
 
                 <TextView
@@ -90,6 +91,7 @@
                     android:textSize="12sp"
                     android:fontFamily="@font/avenir_next_lt_pro"
                     android:textFontWeight="500"
+                    android:text="@{Integer.toString(eatery.time)}"
                     tools:ignore="UnusedAttribute" />
 
                 <TextView
@@ -98,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:singleLine="true"
-                    android:text="@string/lbl_3_km"
+                    android:text="@{Double.toString(eatery.distance)}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageStar1"
                     app:layout_constraintHorizontal_bias="0.11"
