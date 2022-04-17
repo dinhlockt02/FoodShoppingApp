@@ -108,6 +108,15 @@
     <string name="lbl_15_mins">15 mins</string>
     <string name="lbl_1_1_km">1.1 km</string>
     <string name="check">Check</string>
+    <string name="account_authentication">Account Authentication</string>
+    <string name="hello">Hello</string>
+    <string name="authentication_notification">We have just sent an email to daijoubuteam7@gmail.com for authentication</string>
+    <string name="not_this_email_address">Not this email address?</string>
+    <string name="log_out">Log out</string>
+    <string name="resend">Resend</string>
+    <string name="change_email_address">Change email address</string>
+    <string name="change">Change</string>
+    <string name="email_address_requirement">Enter email address you want to change</string>
 
     <string name="request_location_request">Please allow us access your device location</string>
     <string name="accept">Ok</string>
