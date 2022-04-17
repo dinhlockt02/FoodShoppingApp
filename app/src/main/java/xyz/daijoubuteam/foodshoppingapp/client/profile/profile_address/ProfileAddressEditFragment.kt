@@ -1,12 +1,17 @@
 package xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.snackbar.Snackbar
+import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProfileAddressEditBinding
 import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
 
@@ -29,7 +34,15 @@ class ProfileAddressEditFragment: Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         setupErrorSnackbar()
         setupSoftKeyboardUI()
+        setupOnAddNewAddressButtonClicked()
         return binding.root
+    }
+
+    private fun setupOnAddNewAddressButtonClicked() {
+        binding.profileEditAddressAddMoreButton.setOnClickListener {
+            val action = ProfileAddressEditFragmentDirections.actionProfileAddressEditFragmentToAddNewAddressFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun setupErrorSnackbar(){

@@ -109,4 +109,7 @@
     <string name="lbl_1_1_km">1.1 km</string>
     <string name="check">Check</string>
 
+    <string name="request_location_request">Please allow us access your device location</string>
+    <string name="accept">Ok</string>
+    <string name="maps_api_key">AIzaSyBhMpre2PTJtHR2W-LBIrCm8CdevKtqLMg</string>
 </resources>

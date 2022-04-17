@@ -10,16 +10,6 @@ import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.model.Gender
 import kotlin.random.Random
 
-//@BindingAdapter("imageUrl")
-//fun setImageUrl(view: ImageView, url: Uri?){
-//    var imageUrl = url
-//    Glide
-//        .with(view.context)
-//        .load(imageUrl)
-//        .centerCrop()
-////        .placeholder(R.drawable.loading_spinner)
-//        .into(view);
-//}
 
 @BindingAdapter("imageUrl", "defaultUrl")
 fun setImageUrlDefault(view: ImageView, url: Uri?, defaultUrl: String?) {
@@ -45,7 +35,7 @@ fun setImageUrlAvatar(view: ImageView, url: Uri?, gender: Gender?) {
                 else -> if (Random.nextBoolean()) R.drawable.default_avatar_male else R.drawable.default_avatar_female
             }
         )
-        view.setBackgroundResource(R.color.orange_50)
+        view.setBackgroundResource(R.color.orange_50 )
         return
     }
     Glide

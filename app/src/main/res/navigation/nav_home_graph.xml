@@ -43,5 +43,14 @@
         android:id="@+id/profileAddressEditFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address.ProfileAddressEditFragment"
         android:label="ProfileAddressEditFragment"
-        tools:layout="@layout/fragment_profile_address_edit"/>
+        tools:layout="@layout/fragment_profile_address_edit">
+        <action
+            android:id="@+id/action_profileAddressEditFragment_to_addNewAddressFragment"
+            app:destination="@id/addNewAddressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewAddressFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.profile.address.AddNewAddressFragment"
+        android:label="AddNewAddressFragment"
+        tools:layout="@layout/fragment_add_new_address"/>
 </navigation>
