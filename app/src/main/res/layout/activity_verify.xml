@@ -17,24 +17,114 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
 
-            <com.google.android.material.textview.MaterialTextView
+                <ImageView
+                    android:id="@+id/imageChevronleft"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="24dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_chevronleft"
+                    app:layout_constraintBottom_toBottomOf="@id/account_auth"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/account_auth"
+                    tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/account_auth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/gray_700"
+                    android:textSize="20sp"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:textFontWeight="500"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/account_authentication"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:ellipsize="end"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="30dp"
+                android:singleLine="true"
+                android:text="@string/hello"
+                android:textSize="40sp"
+                android:textColor="@color/bluegray_700"/>
+
+            <TextView
                 android:id="@+id/emailTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="daijoubuteam@gmail.com" />
-
-            <Button
-                android:id="@+id/btnLogout"
-                android:layout_width="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="30dp"
+                android:ellipsize="end"
+                android:text="@string/authentication_notification"
+                android:textColor="@color/bluegray_700"
+                android:textSize="16sp" />
+            <TextView
+                android:id="@+id/notThisEmailTextView"
+                android:ellipsize="end"
                 android:layout_height="wrap_content"
-                android:text="Logout" />
-
-            <Button
-                android:id="@+id/btnResend"
                 android:layout_width="wrap_content"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="20dp"
+                android:singleLine="true"
+                android:textColor="@color/orange_400"
+                android:layout_marginHorizontal="24dp"
+                android:text="@string/not_this_email_address"
+                android:textFontWeight="500"
+                android:textSize="15sp"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                tools:targetApi="p" />
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Resend" />
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="16dp">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLogout"
+                    android:ellipsize="end"
+                    android:layout_height="wrap_content"
+                    android:layout_width="160dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:paddingHorizontal="18dp"
+                    android:singleLine="true"
+                    android:text="@string/log_out"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textFontWeight="400"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:textColor="@color/white_A700"
+                    android:background="@drawable/rectangle_bg_deep_orange_a200_radius_6"
+                    tools:ignore="UnusedAttribute" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnResend"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_width="160dp"
+                    android:layout_marginHorizontal="10dp"
+                    android:paddingHorizontal="18dp"
+                    android:singleLine="true"
+                    android:text="@string/resend"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textFontWeight="400"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:textColor="@color/white_A700"
+                    android:background="@drawable/rectangle_bg_deep_orange_a200_radius_6"
+                    tools:ignore="UnusedAttribute" />
+            </LinearLayout>
         </LinearLayout>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
