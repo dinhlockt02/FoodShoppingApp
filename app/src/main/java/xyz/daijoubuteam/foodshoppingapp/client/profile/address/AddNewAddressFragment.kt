@@ -1,11 +1,11 @@
 package xyz.daijoubuteam.foodshoppingapp.client.profile.address
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
-import android.system.Os.accept
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +14,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -24,144 +26,127 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.net.PlacesClient
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.tasks.await
+import xyz.daijoubuteam.foodshoppingapp.BuildConfig
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentAddNewAddressBinding
-import kotlin.concurrent.fixedRateTimer
 
 
 class AddNewAddressFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var map: GoogleMap
     private lateinit var binding: FragmentAddNewAddressBinding
-    private var locationPermissionGranted = false
     private var lastKnownLocation: Location? = null
+
     // The entry point to the Places API.
     private lateinit var placesClient: PlacesClient
 
     // The entry point to the Fused Location Provider.
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
 
+    // Navigation Args
+    private val args: AddNewAddressFragmentArgs by navArgs()
+
+    // Selected Location
+    private var selectedLocation: LatLng? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        selectedLocation = args.locationLatLng
+
         binding = FragmentAddNewAddressBinding.inflate(inflater, container, false)
-
-        // Construct a PlacesClient
-        Places.initialize(requireContext().applicationContext, getString(R.string.maps_api_key))
-        placesClient = Places.createClient(requireContext())
-
-        // Construct a FusedLocationProviderClient.
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
-
-        val mapsFragment = childFragmentManager.findFragmentById(R.id.preview_map) as SupportMapFragment?
-
-
-        mapsFragment?.getMapAsync(this)
-
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    private fun getLocationPermission(){
-        if(ContextCompat.checkSelfPermission(requireActivity().applicationContext, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            locationPermissionGranted = true
-            updateLocationUI()
-        } else {
-            requestLocationPermission.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION))
-        }
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    private val requestLocationPermission = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ){permissions ->
-        when{
-            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                locationPermissionGranted = true
-            }
-
-            permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                locationPermissionGranted = true
-            }
-
-            else -> {
-                locationPermissionGranted = false
-            }
-        }
-        updateLocationUI()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.N)
-    @Suppress("MissingPermission")
-    private fun updateLocationUI() {
-        if(!this::map.isInitialized){
-            return
-        }
-        try {
-            if(locationPermissionGranted){
-                map.isMyLocationEnabled = true
-                map.uiSettings.isMyLocationButtonEnabled = true
-                Log.i("map-current", "GOES updateLocationUI")
-                getDeviceLocation()
-            }else {
-                map.isMyLocationEnabled = false
-                map.uiSettings.isMyLocationButtonEnabled = false
-                lastKnownLocation = null
-                getLocationPermission()
-            }
-        } catch (e: SecurityException){
-            Log.e("Exception: %s", e.message, e)
-        }
-    }
-
-    @Suppress("MissingPermission")
-    private fun getDeviceLocation() {
-        try {
-            if(locationPermissionGranted){
-                val locationResult = fusedLocationProviderClient.lastLocation
-                locationResult.addOnCompleteListener {task ->
-                    if (task.isSuccessful) {
-                        lastKnownLocation = task.result
-                        Log.i("map-current", lastKnownLocation.toString())
-                        if (lastKnownLocation != null) {
-                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                LatLng(lastKnownLocation!!.latitude,
-                                    lastKnownLocation!!.longitude), DEFAULT_ZOOM.toFloat()))
-                        }
-                        else {
-                            Log.d("map-current", "Current location is null. Using defaults.")
-                            Log.e("map-current", "Exception: ${task.exception?.message }",task.exception, )
-                            map.moveCamera(CameraUpdateFactory
-                                .newLatLngZoom(defaultLocation, DEFAULT_ZOOM.toFloat()))
-                            map.uiSettings.isMyLocationButtonEnabled = false
-                        }
-                    }
-                }
-            }else {
-                Log.d("map-current", "request permission failed.")
-                map.moveCamera(CameraUpdateFactory
-                    .newLatLngZoom(defaultLocation, DEFAULT_ZOOM.toFloat()))
-                map.addMarker(MarkerOptions().position(defaultLocation))
-                map.uiSettings.isMyLocationButtonEnabled = false
-            }
-        } catch (e: SecurityException){
-
-        }
-    }
-
-
-    companion object {
-        val DEFAULT_ZOOM = 17
-        val defaultLocation = LatLng(10.8700,106.8031)
+        // Construct a PlacesClient
+        Places.initialize(requireContext().applicationContext, BuildConfig.GOOGLE_MAPS_API_KEY)
+        placesClient = Places.createClient(requireContext())
+        // Construct a FusedLocationProviderClient.
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
+        val mapsFragment =
+            childFragmentManager.findFragmentById(R.id.preview_map) as SupportMapFragment?
+        mapsFragment?.getMapAsync(this)
     }
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
-        updateLocationUI()
-        getDeviceLocation()
+        if (isLocationPermissionGranted()) {
+            setupMap()
+        } else {
+            requestLocationPermission.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
     }
+
+    private val requestLocationPermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            setupMap()
+        } else {
+            Snackbar.make(requireView(), R.string.request_map_explain, Snackbar.LENGTH_LONG)
+                .show()
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun setupMap() {
+        if (isLocationPermissionGranted()) {
+            map.isMyLocationEnabled = true
+            map.uiSettings.setAllGesturesEnabled(false)
+            map.uiSettings.isMapToolbarEnabled = false
+
+            if(selectedLocation !== null){
+                map.addMarker(MarkerOptions().position(selectedLocation!!))
+                map.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedLocation!!, DEFAULT_ZOOM))
+            } else {
+                fusedLocationProviderClient.lastLocation.addOnCompleteListener(lastLocationResultListener)
+            }
+            map.setOnMapClickListener(mapClickListener)
+        }
+    }
+
+    private val mapClickListener = GoogleMap.OnMapClickListener {
+        val action = AddNewAddressFragmentDirections.actionAddNewAddressFragmentToSelectLocationFragment(selectedLocation)
+        findNavController().navigate(action)
+    }
+
+    private val lastLocationResultListener = com.google.android.gms.tasks.OnCompleteListener<Location>{ task ->
+        if (task.isSuccessful) {
+            lastKnownLocation = task.result
+            if (lastKnownLocation != null) {
+                map.moveCamera(
+                    CameraUpdateFactory.newLatLngZoom(
+                        LatLng(
+                            lastKnownLocation!!.latitude,
+                            lastKnownLocation!!.longitude
+                        ), DEFAULT_ZOOM
+                    )
+                )
+            } else {
+                map.moveCamera(
+                    CameraUpdateFactory
+                        .newLatLngZoom(defaultLocation, DEFAULT_ZOOM)
+                )
+            }
+        }
+    }
+
+    companion object {
+        const val DEFAULT_ZOOM = 16.5f
+        val defaultLocation = LatLng(10.8700, 106.8031)
+    }
+
+    private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(
+        requireActivity().applicationContext,
+        Manifest.permission.ACCESS_COARSE_LOCATION
+    ) == PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT < 24
 }

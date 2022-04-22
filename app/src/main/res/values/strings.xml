@@ -121,4 +121,6 @@
     <string name="request_location_request">Please allow us access your device location</string>
     <string name="accept">Ok</string>
     <string name="maps_api_key">AIzaSyBhMpre2PTJtHR2W-LBIrCm8CdevKtqLMg</string>
+    <string name="request_map_explain">You need to allow location permission to use map</string>
+    <string name="select">Select</string>
 </resources>
