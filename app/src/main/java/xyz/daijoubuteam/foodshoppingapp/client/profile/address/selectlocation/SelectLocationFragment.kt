@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -32,8 +33,6 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var binding: FragmentSelectLocationBinding
     private lateinit var map: GoogleMap
-    // The entry point to the Places API.
-    private lateinit var placesClient: PlacesClient
 
     // The entry point to the Fused Location Provider.
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
@@ -74,9 +73,21 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
         if(isLocationPermissionGranted()){
             setupMap()
         }else {
+            requestLocationPermission.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+        }
+    }
+
+    private val requestLocationPermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            setupMap()
+        } else {
             findNavController().navigateUp()
         }
     }
+
+
 
     @SuppressLint("MissingPermission")
     private fun setupMap() {
@@ -114,7 +125,7 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
 
     private val mapOnClickListener = GoogleMap.OnMapClickListener {
         if(marker == null){
-            marker = map.addMarker(MarkerOptions().position(it).title("Your address location is here!"))
+            marker = map.addMarker(MarkerOptions().position(it).title(getString(R.string.your_shipping_location_is_here)))
         }else {
             marker!!.position = it
         }

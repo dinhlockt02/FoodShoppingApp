@@ -40,7 +40,7 @@ class ProfileAddressEditFragment: Fragment() {
 
     private fun setupOnAddNewAddressButtonClicked() {
         binding.profileEditAddressAddMoreButton.setOnClickListener {
-            val action = ProfileAddressEditFragmentDirections.actionProfileAddressEditFragmentToAddNewAddressFragment()
+            val action = ProfileAddressEditFragmentDirections.actionProfileAddressEditFragmentToSelectLocationFragment()
             findNavController().navigate(action)
         }
     }

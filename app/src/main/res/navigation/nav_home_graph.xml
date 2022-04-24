@@ -44,8 +44,8 @@
         android:label="ProfileAddressEditFragment"
         tools:layout="@layout/fragment_profile_address_edit">
         <action
-            android:id="@+id/action_profileAddressEditFragment_to_addNewAddressFragment"
-            app:destination="@id/addNewAddressFragment" />
+            android:id="@+id/action_profileAddressEditFragment_to_selectLocationFragment"
+            app:destination="@id/selectLocationFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewAddressFragment"
@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_addNewAddressFragment_to_selectLocationFragment"
             app:destination="@id/selectLocationFragment" />
+        <action
+            android:id="@+id/action_addNewAddressFragment_to_profileAddressEditFragment"
+            app:destination="@id/profileAddressEditFragment" />
     </fragment>
     <fragment
         android:id="@+id/selectLocationFragment"

@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewmodel"
+            type="xyz.daijoubuteam.foodshoppingapp.client.profile.address.AddNewAddressViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,7 +52,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Trần Văn An" />
+                tools:text="Trần Văn An"
+                android:text="@={viewmodel.shippingAddress.name}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -63,6 +66,7 @@
             android:fontFamily="@font/avenir_next_lt_pro"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
             android:hint="@string/gender"
+            app:gender="@={viewmodel.shippingAddress.gender}"
             android:singleLine="true"
             android:textSize="16sp"
             app:layout_constraintTop_toBottomOf="@id/add_address_contact_name"
@@ -97,7 +101,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="0905150509" />
+                tools:text="0905150509"
+                android:text="@={viewmodel.shippingAddress.phoneNumber}"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textview.MaterialTextView
@@ -113,73 +118,28 @@
             android:layout_marginHorizontal="24dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_address_new_address_text_field"
+            android:id="@+id/add_address_text_field"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="12dp"
             android:fontFamily="@font/avenir_next_lt_pro"
-            android:hint="@string/name"
+            android:hint="@string/address"
             android:singleLine="true"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/add_address_address_label"
-            tools:text="@string/email_example">
+            app:layout_constraintTop_toBottomOf="@id/add_address_address_label">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Kí túc xá khu A Đại Học Quốc gia thành phố Hồ Chí Minhr"
-                android:singleLine="true" />
+                android:text="@={viewmodel.shippingAddress.address}"
+                tools:text="A03 - Bến Tre, Đông Hoà, Dĩ An, Bình Dương, Vietnam" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_address_building_floor_text_field"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="12dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/avenir_next_lt_pro"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="@string/building_floor"
-            android:singleLine="true"
-            android:textSize="16sp"
-            app:layout_constraintTop_toBottomOf="@id/add_address_new_address_text_field"
-            app:layout_constraintEnd_toStartOf="@id/add_address_room_name_text_field"
-            app:layout_constraintHorizontal_weight="0.6"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="Toà AG4" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/add_address_room_name_text_field"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:layout_marginTop="12dp"
-            android:fontFamily="@font/avenir_next_lt_pro"
-            android:hint="@string/room_name"
-            android:singleLine="true"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="0.4"
-            app:layout_constraintStart_toEndOf="@id/add_address_building_floor_text_field"
-            app:layout_constraintTop_toBottomOf="@id/add_address_new_address_text_field">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="304" />
-        </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSignIn"
@@ -195,6 +155,7 @@
             android:textSize="16sp"
             android:fontFamily="@font/avenir_next_lt_pro"
             android:textColor="@color/white_A700"
+            android:onClick="@{() -> viewmodel.onSaveAddress()}"
             android:background="@drawable/rectangle_bg_deep_orange_a200_radius_6"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

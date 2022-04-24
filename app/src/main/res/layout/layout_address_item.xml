@@ -41,27 +41,15 @@
         android:ems="20"
         android:fontFamily="@font/avenir_next_lt_pro"/>
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/address_room_building"
+        android:id="@+id/address_address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/contact_phone_number"
         app:layout_constraintStart_toStartOf="@id/contact_name"
-        tools:text="Phòng 304, Toà AG4"
+        tools:text="Địa chỉ nà"
         android:ellipsize="end"
         android:maxLines="1"
         android:ems="20"
-        android:fontFamily="@font/avenir_next_lt_pro"/>
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/address_address_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/address_room_building"
-        app:layout_constraintStart_toStartOf="@id/contact_name"
-        tools:text="Kí túc xá Khu A, Đại học quốc gia thành phố Hồ Chí Minh"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:ems="20"
-
         android:fontFamily="@font/avenir_next_lt_pro"/>
     <View
         android:layout_width="match_parent"
