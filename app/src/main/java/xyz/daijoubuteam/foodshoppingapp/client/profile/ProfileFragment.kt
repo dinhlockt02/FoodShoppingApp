@@ -1,14 +1,21 @@
 package xyz.daijoubuteam.foodshoppingapp.client.profile
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageView
+import com.canhub.cropper.options
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProfileBinding
+import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 
 class ProfileFragment : Fragment() {
 
@@ -28,19 +35,21 @@ class ProfileFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         setupNavigateToProfileAndAddressFragment()
         setupErrorSnackbar()
+
         return binding.root
     }
 
-    private fun setupNavigateToProfileAndAddressFragment(){
+    private fun setupNavigateToProfileAndAddressFragment() {
         binding.btnProfileAndAddress.setOnClickListener {
-            val action = ProfileFragmentDirections.actionProfileFragmentToProfileAddressEditFragment()
+            val action =
+                ProfileFragmentDirections.actionProfileFragmentToProfileAddressEditFragment()
             findNavController().navigate(action)
         }
     }
 
-    private fun setupErrorSnackbar(){
-        viewmodel.errMessage.observe(viewLifecycleOwner){
-            if(!it.isNullOrEmpty() && it.isNotBlank()) {
+    private fun setupErrorSnackbar() {
+        viewmodel.errMessage.observe(viewLifecycleOwner) {
+            if (!it.isNullOrEmpty() && it.isNotBlank()) {
                 Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
             }
         }

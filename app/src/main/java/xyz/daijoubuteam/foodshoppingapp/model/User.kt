@@ -15,6 +15,6 @@ data class User(
     val shippingAddresses: ArrayList<ShippingAddress> = ArrayList(),
     var gender: Gender? = null,
     var nickname: String? = null,
-    var photoUrl: Uri? = null,
+    var photoUrl: String? = null,
 )
 
