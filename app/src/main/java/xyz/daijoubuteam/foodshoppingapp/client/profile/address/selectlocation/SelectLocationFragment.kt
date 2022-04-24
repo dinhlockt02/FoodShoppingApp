@@ -50,7 +50,7 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        selectedLocation = args.locationLatLng
+        selectedLocation = args.editAddress?.location
 
         // Inflate the layout for this fragment
         binding = FragmentSelectLocationBinding.inflate(inflater, container, false)
@@ -140,9 +140,20 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
     private val selectButtonClickListener = View.OnClickListener {
         if(marker == null){
             Snackbar.make(requireView(), "Please select location", Snackbar.LENGTH_LONG).show()
-        }else {
-            val action = SelectLocationFragmentDirections.actionSelectLocationFragmentToAddNewAddressFragment(marker!!.position)
-            findNavController().navigate(action)
+        } else {
+            if(args.editAddress != null)
+            {
+                val action = SelectLocationFragmentDirections.actionSelectLocationFragmentToAddNewAddressFragment(editAddress = args.editAddress?.apply {
+                    location = marker!!.position
+                })
+                findNavController().navigate(action)
+            }
+            else
+            {
+                val action = SelectLocationFragmentDirections.actionSelectLocationFragmentToAddNewAddressFragment(marker!!.position)
+                findNavController().navigate(action)
+            }
+
         }
     }
 

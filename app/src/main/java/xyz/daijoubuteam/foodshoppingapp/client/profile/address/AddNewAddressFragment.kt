@@ -62,10 +62,15 @@ class AddNewAddressFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View {
 
-        selectedLocation = args.locationLatLng
-
         binding = FragmentAddNewAddressBinding.inflate(inflater, container, false)
         binding.viewmodel = viewmodel
+        if(args.editAddress == null){
+            selectedLocation = args.locationLatLng
+        }else if(args.editAddress != null){
+            selectedLocation = args.editAddress!!.location
+            viewmodel.shippingAddress.value = args.editAddress
+
+        }
         return binding.root
     }
 
@@ -80,7 +85,18 @@ class AddNewAddressFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
-        if (isLocationPermissionGranted()) {
+        if (isLocationPermissionGranted() || args.editAddress != null) {
+            setupMap()
+        }
+        else {
+            findNavController().navigateUp()
+        }
+    }
+
+    private val requestLocationPermission = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
             setupMap()
         } else {
             findNavController().navigateUp()
@@ -119,11 +135,15 @@ class AddNewAddressFragment : Fragment(), OnMapReadyCallback {
             } else {
                 findNavController().navigateUp()
             }
+        } else if(args.editAddress !== null) {
+            map.addMarker(MarkerOptions().position(selectedLocation!!).title(getString(R.string.your_shipping_location_is_here)))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedLocation!!, DEFAULT_ZOOM))
+            map.setOnMapClickListener(mapClickListener)
         }
     }
 
     private val mapClickListener = GoogleMap.OnMapClickListener {
-        val action = AddNewAddressFragmentDirections.actionAddNewAddressFragmentToSelectLocationFragment(selectedLocation)
+        val action = AddNewAddressFragmentDirections.actionAddNewAddressFragmentToSelectLocationFragment(editAddress = viewmodel.shippingAddress.value)
         findNavController().navigate(action)
     }
 

@@ -5,9 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.maps.model.LatLng
 import kotlinx.coroutines.launch
-import xyz.daijoubuteam.foodshoppingapp.model.Gender
 import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
 import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
@@ -49,13 +47,20 @@ class AddNewAddressViewModel : ViewModel() {
                     _message.value = "Can not get current user"
                     return@launch
                 }
-                shippingAddress.value?.let { user!!.shippingAddresses.add(it) }
+                shippingAddress.value?.let {currentShippingAddress ->
+                    val existShippingAddressIndex = user!!.shippingAddresses.indexOfFirst {
+                        it.id == currentShippingAddress.id
+                    }
+                    if(existShippingAddressIndex == -1)
+                        user!!.shippingAddresses.add(currentShippingAddress)
+                    else
+                        user!!.shippingAddresses[existShippingAddressIndex] = currentShippingAddress
+                }
                 val updateResult = userRepository.updateCurrentUserInfo(user!!)
                 if(updateResult.isSuccess){
                     _saveAddressEventComplete.value = updateResult.getOrNull()
                 }else {
                     _message.value = updateResult.exceptionOrNull()?.message.toString()
-                    Log.i("AddNewAddressViewModel", updateResult.exceptionOrNull()?.message.toString())
                     _saveAddressEventComplete.value = false
                 }
             }

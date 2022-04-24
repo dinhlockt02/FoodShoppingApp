@@ -17,6 +17,7 @@ import com.google.android.gms.auth.api.identity.GetSignInIntentRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.GoogleAuthProvider
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentLoginBinding
@@ -120,6 +121,7 @@ class LoginFragment : Fragment() {
                         "\"Couldn't start One Tap UI: ${exception.localizedMessage}\"",
                         Snackbar.LENGTH_SHORT
                     ).show()
+                    Timber.i("\"Couldn't start One Tap UI: ${exception.localizedMessage}\"")
                 }
             }
             .addOnFailureListener {

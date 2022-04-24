@@ -11,8 +11,10 @@ import com.canhub.cropper.CropImageContract
 import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
 import com.google.android.material.snackbar.Snackbar
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.adapter.AddressAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProfileAddressEditBinding
+import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
 import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
 
 class ProfileAddressEditFragment : Fragment() {
@@ -41,7 +43,11 @@ class ProfileAddressEditFragment : Fragment() {
     }
 
     private fun setupAddressRecyclerViewAdapter() {
-        binding.profileEditAddressRecyclerView.adapter = AddressAdapter()
+        binding.profileEditAddressRecyclerView.adapter = AddressAdapter(AddressAdapter.OnClickListener{
+            val action =
+                ProfileAddressEditFragmentDirections.actionProfileAddressEditFragmentToAddNewAddressFragment(editAddress = it)
+            findNavController().navigate(action)
+        })
         val adapter = binding.profileEditAddressRecyclerView.adapter as AddressAdapter
         viewmodel.user.observe(viewLifecycleOwner) {
             if (it !== null) {

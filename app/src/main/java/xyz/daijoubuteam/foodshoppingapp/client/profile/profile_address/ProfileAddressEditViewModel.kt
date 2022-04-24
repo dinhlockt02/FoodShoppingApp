@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
 import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 
@@ -82,5 +83,8 @@ class ProfileAddressEditViewModel : ViewModel() {
                 onShowMessage(e.message)
             }
         }
+    }
+    private fun onEditAddress(shippingAddress: ShippingAddress){
+
     }
 }
