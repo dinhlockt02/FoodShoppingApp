@@ -12,6 +12,7 @@ class UserRepository {
     private val auth = Firebase.auth
     private val db = Firebase.firestore
 
+
     suspend fun getCurrentUser():Result<User?>{
         return try {
             val uid = auth.currentUser?.uid
