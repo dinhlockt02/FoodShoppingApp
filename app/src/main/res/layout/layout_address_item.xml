@@ -1,72 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginVertical="8dp"
-    >
-    <ImageView
-        android:id="@+id/item_icon"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/map_marker_icon"
-        android:src="@drawable/map_marker_outline"
-        app:tint="@color/primaryColor" />
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/contact_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/item_icon"
-        app:layout_constraintBottom_toTopOf="@id/contact_phone_number"
-        tools:text="Trần Đình Lộc"
-        android:layout_marginStart="16dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:fontFamily="@font/avenir_next_lt_pro"/>
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/contact_phone_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/contact_name"
-        app:layout_constraintStart_toStartOf="@id/contact_name"
-        app:layout_constraintBottom_toTopOf="@id/address_room_building"
-        tools:text="0905272269"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:ems="20"
-        android:fontFamily="@font/avenir_next_lt_pro"/>
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/address_room_building"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/contact_phone_number"
-        app:layout_constraintStart_toStartOf="@id/contact_name"
-        tools:text="Phòng 304, Toà AG4"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:ems="20"
-        android:fontFamily="@font/avenir_next_lt_pro"/>
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/address_address_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/address_room_building"
-        app:layout_constraintStart_toStartOf="@id/contact_name"
-        tools:text="Kí túc xá Khu A, Đại học quốc gia thành phố Hồ Chí Minh"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:ems="20"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-        android:fontFamily="@font/avenir_next_lt_pro"/>
-    <View
+    <data>
+        <variable
+            name="shippingAddress"
+            type="xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="12dp"
-        android:background="@android:color/darker_gray"
-        app:layout_constraintTop_toBottomOf="@id/address_address_name"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="8dp">
+
+        <ImageView
+            android:id="@+id/item_icon"
+            app:layout_constraintTop_toTopOf="@id/contact_name"
+            app:layout_constraintBottom_toBottomOf="@id/address_address"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/map_marker_icon"
+            android:src="@drawable/map_marker_outline"
+            app:tint="@color/primaryColor" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/contact_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/item_icon"
+            app:layout_constraintBottom_toTopOf="@id/contact_phone_number"
+            tools:text="Trần Đình Lộc"
+            android:text="@{shippingAddress.name}"
+            android:layout_marginStart="16dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:fontFamily="@font/avenir_next_lt_pro" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/contact_phone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/contact_name"
+            app:layout_constraintStart_toStartOf="@id/contact_name"
+            app:layout_constraintBottom_toTopOf="@id/address_address"
+            tools:text="0905272269"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:ems="20"
+            android:text="@{shippingAddress.phoneNumber}"
+            android:fontFamily="@font/avenir_next_lt_pro" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/address_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/contact_phone_number"
+            app:layout_constraintStart_toStartOf="@id/contact_name"
+            tools:text="Địa chỉ nà"
+            android:text="@{shippingAddress.address}"
+            android:ellipsize="end"
+            android:ems="20"
+            android:fontFamily="@font/avenir_next_lt_pro" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@id/address_address" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

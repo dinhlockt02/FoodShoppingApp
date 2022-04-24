@@ -59,7 +59,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home , container, false)
-
         //recycler categories
         binding.recyCategories.adapter = CategoryAdapter()
         val adapterCategory = binding.recyCategories.adapter as CategoryAdapter

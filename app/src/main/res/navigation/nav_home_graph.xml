@@ -9,8 +9,7 @@
         android:id="@+id/homeFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" >
-    </fragment>
+        tools:layout="@layout/fragment_home"/>
     <fragment
         android:id="@+id/feedsFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.feeds.FeedsFragment"
@@ -30,7 +29,7 @@
         android:id="@+id/profileFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_profileAddressEditFragment"
             app:destination="@id/profileAddressEditFragment"
@@ -45,12 +44,38 @@
         android:label="ProfileAddressEditFragment"
         tools:layout="@layout/fragment_profile_address_edit">
         <action
-            android:id="@+id/action_profileAddressEditFragment_to_addNewAddressFragment"
-            app:destination="@id/addNewAddressFragment" />
+            android:id="@+id/action_profileAddressEditFragment_to_selectLocationFragment"
+            app:destination="@id/selectLocationFragment" />
     </fragment>
     <fragment
         android:id="@+id/addNewAddressFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.profile.address.AddNewAddressFragment"
         android:label="AddNewAddressFragment"
-        tools:layout="@layout/fragment_add_new_address"/>
+        tools:layout="@layout/fragment_add_new_address">
+        <argument
+            android:name="locationLatLng"
+            android:defaultValue="@null"
+            app:argType="com.google.android.gms.maps.model.LatLng"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_addNewAddressFragment_to_selectLocationFragment"
+            app:destination="@id/selectLocationFragment" />
+        <action
+            android:id="@+id/action_addNewAddressFragment_to_profileAddressEditFragment"
+            app:destination="@id/profileAddressEditFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectLocationFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.profile.address.selectlocation.SelectLocationFragment"
+        android:label="SelectLocationFragment"
+        tools:layout="@layout/fragment_select_location">
+        <argument
+            android:name="locationLatLng"
+            android:defaultValue="@null"
+            app:argType="com.google.android.gms.maps.model.LatLng"
+            app:nullable="true" />
+        <action
+            android:id="@+id/action_selectLocationFragment_to_addNewAddressFragment"
+            app:destination="@id/addNewAddressFragment" />
+    </fragment>
 </navigation>

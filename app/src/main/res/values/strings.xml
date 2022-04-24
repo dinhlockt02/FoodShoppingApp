@@ -121,4 +121,9 @@
     <string name="request_location_request">Please allow us access your device location</string>
     <string name="accept">Ok</string>
     <string name="maps_api_key">AIzaSyBhMpre2PTJtHR2W-LBIrCm8CdevKtqLMg</string>
+    <string name="request_map_explain">You need to allow location permission to use map</string>
+    <string name="select">Select</string>
+    <string name="province_city_district">Province, City, District</string>
+    <string name="street_address">Street Address</string>
+    <string name="your_shipping_location_is_here">Your shipping locaion is here</string>
 </resources>

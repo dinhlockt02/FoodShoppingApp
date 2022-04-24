@@ -10,27 +10,20 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
+import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 
 class ProfileViewModel: ViewModel() {
-    private val auth = Firebase.auth
-    private val authRepository = AuthRepository()
-    private var _user = MutableLiveData<User>(null)
-        val user: LiveData<User>
-            get() = _user
+    private val userRepository = UserRepository()
+    lateinit var user: LiveData<User>
     private var _notification = MutableLiveData(0)
         val notification
             get() = _notification
     init {
-        viewModelScope.launch {
-            auth.uid?.let { uid ->
-                val userResult = authRepository.getUserByUid(uid)
-                if(userResult.isSuccess){
-                    _user.value = userResult.getOrNull()
-                }else
-                {
-                    onShowError(userResult.exceptionOrNull()?.localizedMessage)
-                }
-            }
+        val userResult = userRepository.getCurrentUserLiveData()
+        if(userResult.isSuccess && userResult.getOrNull() !== null){
+            user = userResult.getOrNull()!!
+        }else {
+            onShowError(userResult.exceptionOrNull()?.message)
         }
     }
 
@@ -40,5 +33,9 @@ class ProfileViewModel: ViewModel() {
 
     private fun onShowError(msg: String?){
         this._errMessage.value = msg
+    }
+
+    fun onSignout(){
+        Firebase.auth.signOut()
     }
 }

@@ -1,21 +1,21 @@
 package xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageView
+import com.canhub.cropper.options
 import com.google.android.material.snackbar.Snackbar
-import xyz.daijoubuteam.foodshoppingapp.R
+import xyz.daijoubuteam.foodshoppingapp.adapter.AddressAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProfileAddressEditBinding
 import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
 
-class ProfileAddressEditFragment: Fragment() {
+class ProfileAddressEditFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileAddressEditBinding
     private val viewmodel: ProfileAddressEditViewModel by lazy {
@@ -35,39 +35,83 @@ class ProfileAddressEditFragment: Fragment() {
         setupErrorSnackbar()
         setupSoftKeyboardUI()
         setupOnAddNewAddressButtonClicked()
+        setupAddressRecyclerViewAdapter()
+        setupOnProfileEditUserAvatarClick()
         return binding.root
+    }
+
+    private fun setupAddressRecyclerViewAdapter() {
+        binding.profileEditAddressRecyclerView.adapter = AddressAdapter()
+        val adapter = binding.profileEditAddressRecyclerView.adapter as AddressAdapter
+        viewmodel.user.observe(viewLifecycleOwner) {
+            if (it !== null) {
+                adapter.submitList(it.shippingAddresses)
+            }
+        }
     }
 
     private fun setupOnAddNewAddressButtonClicked() {
         binding.profileEditAddressAddMoreButton.setOnClickListener {
-            val action = ProfileAddressEditFragmentDirections.actionProfileAddressEditFragmentToAddNewAddressFragment()
+            val action =
+                ProfileAddressEditFragmentDirections.actionProfileAddressEditFragmentToSelectLocationFragment()
             findNavController().navigate(action)
         }
     }
 
-    private fun setupErrorSnackbar(){
-        viewmodel.errMessage.observe(viewLifecycleOwner){
-            if(!it.isNullOrEmpty() && it.isNotBlank()) {
+
+    private fun setupErrorSnackbar() {
+        viewmodel.message.observe(viewLifecycleOwner) {
+            if (!it.isNullOrEmpty() && it.isNotBlank()) {
                 Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
             }
         }
     }
 
-    private fun setupSoftKeyboardUI(){
+    private fun setupSoftKeyboardUI() {
         binding.profileEditFirstNameTextField.setOnFocusChangeListener { view, hasFocus ->
-            if(!hasFocus){
+            if (!hasFocus) {
                 hideKeyboard()
             }
         }
         binding.profileEditLastNameTextField.setOnFocusChangeListener { view, hasFocus ->
-            if(!hasFocus){
+            if (!hasFocus) {
                 hideKeyboard()
             }
         }
         binding.profileEditPhoneNumber.setOnFocusChangeListener { view, hasFocus ->
-            if(!hasFocus){
+            if (!hasFocus) {
                 hideKeyboard()
             }
         }
+    }
+
+    private fun setupOnProfileEditUserAvatarClick(){
+        binding.profileEditUserAvatar.setOnClickListener {
+                startCrop()
+        }
+    }
+
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+            val uriContent = result.uriContent
+            binding.profileEditUserAvatar.setImageURI(uriContent)
+            if (uriContent != null) {
+                viewmodel.uploadUserAvatar(uriContent)
+            }
+
+        } else {
+            viewmodel.onShowMessage(result.error?.message)
+        }
+    }
+
+    private fun startCrop() {
+        // start picker to get image for cropping and then use the image in cropping activity
+        cropImage.launch(
+            options {
+                setGuidelines(CropImageView.Guidelines.ON)
+                setCropShape(CropImageView.CropShape.OVAL)
+                setFixAspectRatio(true)
+            }
+        )
     }
 }

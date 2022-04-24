@@ -17,17 +17,13 @@ class AuthRepository {
     private val db = Firebase.firestore
 
     suspend fun loginWithAuthCredential(authCredential: AuthCredential): Result<User?>{
-        Log.i("login", "GOES HERE 0")
         return try {
-            Log.i("login", "GOES HERE 1")
             val result = auth.signInWithCredential(authCredential).await()
-            Log.i("login", "GOES HERE 2")
             val isNewUser = result.additionalUserInfo?.isNewUser
             var user: User? = null
             if(isNewUser == true){
                 user = createNewUser()
             }
-            Log.i("login", "GOES HERE")
             Result.success(user)
         }
         catch (firebaseAuthUserCollisionException: FirebaseAuthUserCollisionException){
@@ -75,7 +71,7 @@ class AuthRepository {
         val uid = auth.uid
         val userEmail = auth.currentUser?.email
         val photoUrl = auth.currentUser?.photoUrl
-        val user = User(uid = uid, email = userEmail, photoUrl = photoUrl)
+        val user = User(uid = uid, email = userEmail, photoUrl = photoUrl.toString())
         db.collection("users").document(user.uid!!).set(user).await()
         return user
     }
@@ -88,6 +84,7 @@ class AuthRepository {
             Result.success(users)
 
         }catch (exception: Exception){
+            Log.i("failure", "Get User failed: ${exception.message}")
             Result.failure(exception)
         }
     }

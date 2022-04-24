@@ -2,8 +2,7 @@ package xyz.daijoubuteam.foodshoppingapp.model
 
 
 import android.net.Uri
-import android.os.Parcel
-import android.os.Parcelable
+import com.google.android.gms.maps.model.LatLng
 
 data class User(
     val uid: String? = null,
@@ -13,14 +12,9 @@ data class User(
     var isUserRegisterInformation: Boolean = false,
     var phoneNumber: String? = null,
     var isPhoneNumberVerified: Boolean = false,
-    val address: ArrayList<String> = ArrayList(),
+    val shippingAddresses: ArrayList<ShippingAddress> = ArrayList(),
     var gender: Gender? = null,
     var nickname: String? = null,
-    var photoUrl: Uri? = null
+    var photoUrl: String? = null,
 )
 
-enum class Gender(val gender: String) {
-    MALE("male"),
-    FEMALE("female"),
-    OTHER("other")
-}
