@@ -1,5 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.repositories
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -26,6 +28,22 @@ class UserRepository {
             Result.failure(exception)
         }
     }
+
+    fun getCurrentUserLiveData(): Result<LiveData<User>>{
+        return try {
+            val uid = auth.currentUser?.uid
+                ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid)
+            val user = MutableLiveData<User>()
+            docRef.addSnapshotListener { value, error ->
+                user.value = value?.toObject()
+            }
+            Result.success(user)
+        }catch (e: Exception){
+            Result.failure(e)
+        }
+    }
+
     suspend fun updateCurrentUserInfo(user: User): Result<Boolean>{
         return try {
             val uid = auth.currentUser?.uid

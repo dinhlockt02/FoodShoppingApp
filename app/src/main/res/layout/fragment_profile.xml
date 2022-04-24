@@ -169,7 +169,8 @@
                 android:textColor="@color/primaryColor"
                 android:fontFamily="@font/avenir_next_lt_pro"
                 app:backgroundTint="@null"
-                android:background="@color/white" />
+                android:background="@color/white"
+                android:onClick="@{() -> viewmodel.onSignout()}"/>
         </LinearLayout>
 
 

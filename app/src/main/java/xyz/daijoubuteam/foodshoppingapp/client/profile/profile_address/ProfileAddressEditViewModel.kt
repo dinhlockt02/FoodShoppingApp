@@ -11,7 +11,6 @@ import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 
 class ProfileAddressEditViewModel : ViewModel() {
-    private val auth = Firebase.auth
     private val userRepository = UserRepository()
     var user = MutableLiveData<User>(null)
 
@@ -54,6 +53,7 @@ class ProfileAddressEditViewModel : ViewModel() {
                         throw Exception("Save failed")
                     }
                 }else if(updateResult.isSuccess){
+                    user.value = user.value
                     onShowMessage("Save successful")
                 }
             }catch (exception: Exception){
