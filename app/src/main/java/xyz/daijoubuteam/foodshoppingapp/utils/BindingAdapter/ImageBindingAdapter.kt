@@ -21,7 +21,7 @@ fun setImageUrlDefault(view: ImageView, url: Uri?, defaultUrl: String?) {
         .with(view.context)
         .load(imageUrl)
         .centerCrop()
-//        .placeholder(R.drawable.loading_spinner)
+//        .placeholder(R.drawable.bell_outline)
         .into(view);
 }
 
@@ -42,6 +42,6 @@ fun setImageUrlAvatar(view: ImageView, url: Uri?, gender: Gender?) {
         .with(view.context)
         .load(url)
         .centerCrop()
-//        .placeholder(R.drawable.loading_spinner)
+//        .placeholder(R.drawable.bell_outline)
         .into(view);
 }

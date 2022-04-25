@@ -1,7 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.model
 
 data class Category (
-    val id: Int,
-    val name: String,
-    val icon: Int
+    val id: String?=null,
+    val name: String?=null,
+    val icon: String?=null
 )

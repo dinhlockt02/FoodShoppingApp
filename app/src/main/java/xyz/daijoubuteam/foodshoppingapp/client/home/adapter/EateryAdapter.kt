@@ -13,14 +13,14 @@ class EateryAdapter : ListAdapter<Eatery, EateryAdapter.EateryViewHolder>(DiffCa
         fun bind(eatery: Eatery) {
             binding.eatery = eatery
             // cach tam thoi
-            binding.imgAvatar.setImageResource(eatery.imgRes)
+            //binding.imgAvatar.setImageResource(eatery.imgRes)
             binding.executePendingBindings()
         }
     }
 
     companion object DiffCallBack : DiffUtil.ItemCallback<Eatery>(){
         override fun areItemsTheSame(oldItem: Eatery, newItem: Eatery): Boolean {
-            return oldItem == newItem
+            return oldItem === newItem
         }
 
         override fun areContentsTheSame(oldItem: Eatery, newItem: Eatery): Boolean {
