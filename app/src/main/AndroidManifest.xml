@@ -5,6 +5,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,6 +19,9 @@
         <activity
             android:name=".authentication.RequestUserInfoActivity"
             android:exported="false"/>
+
+        <activity android:name="com.canhub.cropper.CropImageActivity"
+            android:theme="@style/Theme.AppCompat"/>
         <activity
             android:name=".authentication.VerifyActivity"
             android:exported="false" />

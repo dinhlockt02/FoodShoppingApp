@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.canhub.cropper.CropImageContract
+import com.canhub.cropper.CropImageView
+import com.canhub.cropper.options
 import com.google.android.material.snackbar.Snackbar
 import xyz.daijoubuteam.foodshoppingapp.adapter.AddressAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProfileAddressEditBinding
@@ -33,6 +36,7 @@ class ProfileAddressEditFragment : Fragment() {
         setupSoftKeyboardUI()
         setupOnAddNewAddressButtonClicked()
         setupAddressRecyclerViewAdapter()
+        setupOnProfileEditUserAvatarClick()
         return binding.root
     }
 
@@ -79,5 +83,35 @@ class ProfileAddressEditFragment : Fragment() {
                 hideKeyboard()
             }
         }
+    }
+
+    private fun setupOnProfileEditUserAvatarClick(){
+        binding.profileEditUserAvatar.setOnClickListener {
+                startCrop()
+        }
+    }
+
+    private val cropImage = registerForActivityResult(CropImageContract()) { result ->
+        if (result.isSuccessful) {
+            val uriContent = result.uriContent
+            binding.profileEditUserAvatar.setImageURI(uriContent)
+            if (uriContent != null) {
+                viewmodel.uploadUserAvatar(uriContent)
+            }
+
+        } else {
+            viewmodel.onShowMessage(result.error?.message)
+        }
+    }
+
+    private fun startCrop() {
+        // start picker to get image for cropping and then use the image in cropping activity
+        cropImage.launch(
+            options {
+                setGuidelines(CropImageView.Guidelines.ON)
+                setCropShape(CropImageView.CropShape.OVAL)
+                setFixAspectRatio(true)
+            }
+        )
     }
 }

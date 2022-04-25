@@ -1,5 +1,6 @@
 package xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -29,35 +30,56 @@ class ProfileAddressEditViewModel : ViewModel() {
     val message: LiveData<String>
         get() = _message
 
-    private fun onShowMessage(msg: String?) {
+    fun onShowMessage(msg: String?) {
         this._message.value = msg
+        onShowMessageComplete()
     }
 
-    fun onShowMessageComplete(){
+    fun onShowMessageComplete() {
         this._message.value = ""
     }
 
     fun onSaveUserData() {
         viewModelScope.launch {
             try {
-                if(user.value == null){
+                if (user.value == null) {
                     throw Exception("User not found")
                 }
                 val updateResult = userRepository.updateCurrentUserInfo(user.value!!)
-                if(updateResult.isFailure){
+                if (updateResult.isFailure) {
                     val exception = updateResult.exceptionOrNull()
-                    if(exception != null){
+                    if (exception != null) {
                         throw exception
-                    }else
-                    {
+                    } else {
                         throw Exception("Save failed")
                     }
-                }else if(updateResult.isSuccess){
+                } else if (updateResult.isSuccess) {
                     user.value = user.value
                     onShowMessage("Save successful")
                 }
-            }catch (exception: Exception){
+            } catch (exception: Exception) {
                 onShowMessage(exception.message)
+            }
+        }
+    }
+
+    fun uploadUserAvatar(uri: Uri) {
+        viewModelScope.launch {
+            try {
+                val uploadAvatarResult = userRepository.uploadAvatar(uri)
+                if (uploadAvatarResult.isFailure) {
+                    throw if (uploadAvatarResult.exceptionOrNull() == null) uploadAvatarResult.exceptionOrNull()!!
+                    else Exception("Upload image failed")
+                }
+                user.value?.photoUrl = uri.toString()
+                user.value?.let {
+                    val updateResult = userRepository.updateCurrentUserInfo(it)
+                    if (updateResult.isFailure)
+                        throw if (uploadAvatarResult.exceptionOrNull() == null) uploadAvatarResult.exceptionOrNull()!!
+                        else Exception("Upload image failed")
+                }
+            } catch (e: Exception) {
+                onShowMessage(e.message)
             }
         }
     }

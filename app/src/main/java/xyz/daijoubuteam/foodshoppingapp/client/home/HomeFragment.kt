@@ -55,6 +55,7 @@ class HomeFragment : Fragment() {
         setupPopularEateryListViewAdapter()
         setupCategoryListViewAdapter()
         setupNearbyEateryListViewAdapter()
+        setupOnAvatarClickListener()
         return binding.root
     }
 
@@ -87,6 +88,13 @@ class HomeFragment : Fragment() {
             if (it != null) {
                 adapter.submitList(it)
             }
+        }
+    }
+
+    private fun setupOnAvatarClickListener(){
+        binding.fragmentHomeAvatar.setOnClickListener {
+            val activity = this.activity as? MainActivity
+            activity?.setMenuSelectedItem(R.id.profileFragment)
         }
     }
 }

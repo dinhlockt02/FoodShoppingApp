@@ -12,7 +12,7 @@ import kotlin.random.Random
 
 
 @BindingAdapter("imageUrl", "defaultUrl")
-fun setImageUrlDefault(view: ImageView, url: Uri?, defaultUrl: String?) {
+fun setImageUrlDefaultUri(view: ImageView, url: Uri?, defaultUrl: String?) {
     var imageUrl = url
     if (url == null) {
         imageUrl = defaultUrl?.toUri()
@@ -25,8 +25,13 @@ fun setImageUrlDefault(view: ImageView, url: Uri?, defaultUrl: String?) {
         .into(view);
 }
 
+@BindingAdapter("imageUrl", "defaultUrl")
+fun setImageUrlDefaultString(view: ImageView, url: String?, defaultUrl: String?) {
+    setImageUrlDefaultUri(view, url?.toUri(), defaultUrl)
+}
+
 @BindingAdapter("imageUrl", "gender")
-fun setImageUrlAvatar(view: ImageView, url: Uri?, gender: Gender?) {
+fun setImageUrlAvatarUri(view: ImageView, url: Uri?, gender: Gender?) {
     if (url == null) {
         view.setImageResource(
             when (gender) {
@@ -44,4 +49,9 @@ fun setImageUrlAvatar(view: ImageView, url: Uri?, gender: Gender?) {
         .centerCrop()
 //        .placeholder(R.drawable.bell_outline)
         .into(view);
+}
+
+@BindingAdapter("imageUrl", "gender")
+fun setImageUrlAvatarString(view: ImageView, url: String?, gender: Gender?) {
+    setImageUrlAvatarUri(view, url?.toUri(), gender)
 }

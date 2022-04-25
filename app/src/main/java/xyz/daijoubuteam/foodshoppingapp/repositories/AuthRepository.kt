@@ -71,7 +71,7 @@ class AuthRepository {
         val uid = auth.uid
         val userEmail = auth.currentUser?.email
         val photoUrl = auth.currentUser?.photoUrl
-        val user = User(uid = uid, email = userEmail, photoUrl = photoUrl)
+        val user = User(uid = uid, email = userEmail, photoUrl = photoUrl.toString())
         db.collection("users").document(user.uid!!).set(user).await()
         return user
     }
