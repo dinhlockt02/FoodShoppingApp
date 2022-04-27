@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="product"
+            type="xyz.daijoubuteam.foodshoppingapp.model.Product" />
+    </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
@@ -25,7 +28,7 @@
             android:textColor="@color/bluegray_700"
             android:fontFamily="@font/avenir_next_lt_pro"
             android:textFontWeight="400"
-            android:text="Shrimp Pizza"
+            android:text="@{product.name}"
             tools:text="Shrimp Pizza"
             tools:ignore="HardcodedText,UnusedAttribute" />
         <TextView
@@ -58,7 +61,7 @@
             app:layout_constraintEnd_toStartOf="@+id/tvEateryName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/img_rectangle44"
+            android:src="@{product.imgAvatar}"
             tools:src="@drawable/img_rectangle44"
             tools:ignore="ContentDescription" />
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -126,4 +129,4 @@
                 app:layout_constraintTop_toTopOf="@+id/tvOldPrice"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
