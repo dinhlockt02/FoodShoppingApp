@@ -1,12 +1,15 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
@@ -20,10 +23,13 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
+import xyz.daijoubuteam.foodshoppingapp.adapter.AddressAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CategoryAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CuisineAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.EateryAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.SlideAdapter
+import xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address.ProfileAddressEditViewModel
+import xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address.ProfileAddressEditViewModelFactory
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentHomeBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Category
 import xyz.daijoubuteam.foodshoppingapp.model.Cuisine
@@ -33,140 +39,57 @@ import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-
-    private lateinit var listPopularEatery : ArrayList<Eatery>
-    private lateinit var listCategories : ArrayList<Category>
-    private lateinit var listCuisines : ArrayList<Cuisine>
-
-    private lateinit var page: ViewPager
-    private lateinit var tabLayout: TabLayout
-    private lateinit var listItems : ArrayList<SlideItem>
-
-    init {
-        initListCategories()
-        initialListEatery()
-        initialCuisineList()
-        initialListItems()
-    }
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    private val viewmodel: HomeViewModel by lazy {
+        val factory = HomeViewModelFactory()
+        ViewModelProvider(this, factory)[HomeViewModel::class.java]
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home , container, false)
-        //recycler categories
-        binding.recyCategories.adapter = CategoryAdapter()
-        val adapterCategory = binding.recyCategories.adapter as CategoryAdapter
-        adapterCategory.submitList(listCategories)
-
-
-        //recycler popular eatery
-        binding.recyPopularEatery.adapter = EateryAdapter()
-        val adapterPopuplarEatery = binding.recyPopularEatery.adapter as EateryAdapter
-        adapterPopuplarEatery.submitList(listPopularEatery)
-
-        //recycler eatery
-        binding.recyNearByEatery.adapter = EateryAdapter()
-        val adapterNearByEatery = binding.recyNearByEatery.adapter as EateryAdapter
-        adapterNearByEatery.submitList(listPopularEatery)
-
-        //List cuisines
-        binding.recyPopularCuisine.adapter = CuisineAdapter()
-        val bindingCuisineAdapter = binding.recyPopularCuisine.adapter as CuisineAdapter
-        bindingCuisineAdapter.submitList(listCuisines)
-
-        //Slider
-        page = binding.myPager
-        tabLayout = binding.myTablayout
-
-
-        val slideAdapter: SlideAdapter = SlideAdapter(this.requireContext(), listItems)
-        page.adapter = slideAdapter
-
-        // The_slide_timer
-        tabLayout.setupWithViewPager(page, true)
-        setSliderTimer(2000,3000)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding.viewmodel = viewmodel
+        binding.lifecycleOwner = viewLifecycleOwner
+        setupPopularEateryListViewAdapter()
+        setupCategoryListViewAdapter()
+        setupNearbyEateryListViewAdapter()
         setupOnAvatarClickListener()
-
         return binding.root
     }
 
-    private fun initialListItems() {
-        listItems = ArrayList<SlideItem>()
-        listItems.add(
-            SlideItem(
-                1,
-                R.drawable.img_rectangle12,
-            )
-        )
-        listItems.add(
-            SlideItem(
-                2,
-                R.drawable.img_rectangle12,
-            )
-        )
-        listItems.add(
-            SlideItem(
-                3,
-                R.drawable.img_rectangle12,
-            )
-        )
-        listItems.add(
-            SlideItem(
-                4,
-                R.drawable.img_rectangle12,
-            )
-        )
-    }
-
-    private fun initialCuisineList() {
-        listCuisines = ArrayList<Cuisine>()
-        listCuisines.add(Cuisine(1, "New Zealander", R.drawable.img_newzealand))
-        listCuisines.add(Cuisine(2, "Italian", R.drawable.img_italian))
-        listCuisines.add(Cuisine(3, "Greece", R.drawable.img_greece))
-    }
-
-    private fun initListCategories() {
-        //List categories
-        listCategories = ArrayList<Category>()
-        listCategories.add(Category(1, "Promos", R.drawable.img_discount))
-        listCategories.add(Category(2, "Meal", R.drawable.img_steak))
-        listCategories.add(Category(3, "Drink", R.drawable.img_cocktail))
-        listCategories.add(Category(4, "Fastfood", R.drawable.img_burger))
-        listCategories.add(Category(5, "Snack", R.drawable.img_macaroons))
-    }
-
-    private fun initialListEatery() {
-        listPopularEatery = ArrayList<Eatery>()
-        listPopularEatery.add(Eatery(1, "Quan Ngon", "Vo Van Ngan", 23, 4.0, 5, R.drawable.img_rectangle15))
-        listPopularEatery.add(Eatery(3, "Quan Khong Ngon", "Tan Lap", 18, 2.8, 4, R.drawable.img_rectangle15_2))
-        listPopularEatery.add(Eatery(3, "Hen Xui", "Thao Dien", 10, 2.2, 3, R.drawable.img_rectangle15))
-    }
-
-    private lateinit var sliderTimerCorroutine: Job
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        sliderTimerCorroutine.cancel()
-    }
-
-    private fun setSliderTimer(delay: Long, period: Long){
-        sliderTimerCorroutine = lifecycleScope.launch {
-            delay(delay)
-            while(true){
-                if (page.currentItem < listItems.size - 1) {
-                    page.currentItem = page.currentItem + 1
-                } else page.currentItem = 0
-                delay(period)
+    private fun setupPopularEateryListViewAdapter() {
+        binding.recyPopularEatery.adapter = EateryAdapter()
+        val adapter = binding.recyPopularEatery.adapter as EateryAdapter
+        viewmodel.eateryList.observe(viewLifecycleOwner) {
+            Toast.makeText(requireContext(), "eateries list changed", Toast.LENGTH_LONG).show()
+            if (it != null) {
+                adapter.submitList(it)
             }
         }
     }
 
+    private fun setupCategoryListViewAdapter() {
+        binding.recyCategories.adapter = CategoryAdapter()
+        val adapter = binding.recyCategories.adapter as CategoryAdapter
+        viewmodel.categoryList.observe(viewLifecycleOwner) {
+            if (it != null) {
+                Toast.makeText(requireContext(), "category list changed", Toast.LENGTH_LONG).show()
+                adapter.submitList(it)
+            }
+        }
+    }
+
+    private fun setupNearbyEateryListViewAdapter() {
+        binding.recyNearByEatery.adapter = EateryAdapter()
+        val adapter = binding.recyNearByEatery.adapter as EateryAdapter
+        viewmodel.eateryList.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.submitList(it)
+            }
+        }
+    }
 
     private fun setupOnAvatarClickListener(){
         binding.fragmentHomeAvatar.setOnClickListener {

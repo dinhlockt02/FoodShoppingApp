@@ -45,7 +45,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/avenir_next_lt_pro"
             android:singleLine="true"
-            android:text="@string/lbl_promos"
+            android:text="@{category.name}"
             android:textColor="@color/bluegray_901"
             android:textFontWeight="500"
             android:textSize="15sp"
