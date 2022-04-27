@@ -1,6 +1,8 @@
 package xyz.daijoubuteam.foodshoppingapp.model
 
-enum class Gender(val gender: String) {
+import android.os.Parcelable
+
+enum class Gender(val gender: String? = "male") {
     MALE("male"),
     FEMALE("female"),
     OTHER("other")

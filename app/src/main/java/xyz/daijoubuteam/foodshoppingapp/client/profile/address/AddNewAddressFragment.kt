@@ -37,6 +37,7 @@ import xyz.daijoubuteam.foodshoppingapp.BuildConfig
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentAddNewAddressBinding
 import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
+import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
 import java.util.*
 
 
@@ -62,27 +63,38 @@ class AddNewAddressFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View {
 
-        selectedLocation = args.locationLatLng
-
         binding = FragmentAddNewAddressBinding.inflate(inflater, container, false)
         binding.viewmodel = viewmodel
+
+        if(args.editAddress == null && args.locationLatLng != null){
+            selectedLocation = args.locationLatLng
+        }else if(args.editAddress != null && args.locationLatLng == null){
+            selectedLocation = args.editAddress?.location
+            viewmodel.shippingAddress.value = args.editAddress
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupSoftKeyboardUI()
         setupViewModelObserver()
+
         val mapsFragment =
             childFragmentManager.findFragmentById(R.id.preview_map) as SupportMapFragment?
+
         mapsFragment?.getMapAsync(this)
 
     }
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
-        if (isLocationPermissionGranted()) {
+        if (isLocationPermissionGranted() || args.editAddress != null) {
             setupMap()
-        } else {
+        }
+        else {
             findNavController().navigateUp()
         }
     }
@@ -119,11 +131,15 @@ class AddNewAddressFragment : Fragment(), OnMapReadyCallback {
             } else {
                 findNavController().navigateUp()
             }
+        } else if(args.editAddress !== null) {
+            map.addMarker(MarkerOptions().position(selectedLocation!!).title(getString(R.string.your_shipping_location_is_here)))
+            map.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedLocation!!, DEFAULT_ZOOM))
+            map.setOnMapClickListener(mapClickListener)
         }
     }
 
     private val mapClickListener = GoogleMap.OnMapClickListener {
-        val action = AddNewAddressFragmentDirections.actionAddNewAddressFragmentToSelectLocationFragment(selectedLocation)
+        val action = AddNewAddressFragmentDirections.actionAddNewAddressFragmentToSelectLocationFragment(editAddress = viewmodel.shippingAddress.value)
         findNavController().navigate(action)
     }
 
@@ -146,4 +162,28 @@ class AddNewAddressFragment : Fragment(), OnMapReadyCallback {
         requireActivity().applicationContext,
         Manifest.permission.ACCESS_COARSE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT < 24
+
+    private fun setupSoftKeyboardUI() {
+        binding.addAddressContactName.editText?.setOnFocusChangeListener { view, hasFocus ->
+            if (!shouldShowSoftKeyboard()) {
+                hideKeyboard()
+            }
+        }
+        binding.addAddressPhoneNumberTextField.editText?.setOnFocusChangeListener { view, hasFocus ->
+            if (!shouldShowSoftKeyboard()) {
+                hideKeyboard()
+            }
+        }
+        binding.addAddressTextField.editText?.setOnFocusChangeListener { view, hasFocus ->
+            if (!shouldShowSoftKeyboard()) {
+                hideKeyboard()
+            }
+        }
+    }
+
+    private fun shouldShowSoftKeyboard(): Boolean {
+        return binding.addAddressContactName.editText?.hasFocus() == true ||
+                binding.addAddressPhoneNumberTextField.editText?.hasFocus() == true ||
+                binding.addAddressTextField.editText?.hasFocus() == true
+    }
 }

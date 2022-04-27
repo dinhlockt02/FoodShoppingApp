@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
 import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 
@@ -35,7 +36,7 @@ class ProfileAddressEditViewModel : ViewModel() {
         onShowMessageComplete()
     }
 
-    fun onShowMessageComplete() {
+    private fun onShowMessageComplete() {
         this._message.value = ""
     }
 
@@ -71,12 +72,15 @@ class ProfileAddressEditViewModel : ViewModel() {
                     throw if (uploadAvatarResult.exceptionOrNull() == null) uploadAvatarResult.exceptionOrNull()!!
                     else Exception("Upload image failed")
                 }
-                user.value?.photoUrl = uri.toString()
+                user.value?.photoUrl = uploadAvatarResult.getOrNull().toString()
                 user.value?.let {
                     val updateResult = userRepository.updateCurrentUserInfo(it)
                     if (updateResult.isFailure)
                         throw if (uploadAvatarResult.exceptionOrNull() == null) uploadAvatarResult.exceptionOrNull()!!
                         else Exception("Upload image failed")
+                    else if(updateResult.isSuccess) {
+                        onShowMessage("Upload successful")
+                    }
                 }
             } catch (e: Exception) {
                 onShowMessage(e.message)

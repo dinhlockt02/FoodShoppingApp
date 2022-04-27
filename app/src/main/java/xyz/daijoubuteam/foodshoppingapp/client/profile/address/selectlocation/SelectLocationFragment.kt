@@ -50,7 +50,7 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        selectedLocation = args.locationLatLng
+        selectedLocation = args.editAddress?.location
 
         // Inflate the layout for this fragment
         binding = FragmentSelectLocationBinding.inflate(inflater, container, false)
@@ -60,9 +60,11 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireContext())
 
-        val mapsFragment = childFragmentManager.findFragmentById(R.id.select_map) as SupportMapFragment?
+        val mapsFragment =
+            childFragmentManager.findFragmentById(R.id.select_map) as SupportMapFragment?
 
         mapsFragment?.getMapAsync(this)
         binding.selectBtn.setOnClickListener(selectButtonClickListener)
@@ -70,9 +72,9 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
 
     override fun onMapReady(map: GoogleMap) {
         this.map = map
-        if(isLocationPermissionGranted()){
+        if (isLocationPermissionGranted()) {
             setupMap()
-        }else {
+        } else {
             requestLocationPermission.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
         }
     }
@@ -88,45 +90,49 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-
     @SuppressLint("MissingPermission")
     private fun setupMap() {
         map.isMyLocationEnabled = true
-        if(selectedLocation !== null){
+        if (selectedLocation !== null) {
             marker = map.addMarker(MarkerOptions().position(selectedLocation!!))
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(selectedLocation!!, DEFAULT_ZOOM))
-        }
-        else {
-            fusedLocationProviderClient.lastLocation.addOnCompleteListener(lastLocationResultListener)
+        } else {
+            fusedLocationProviderClient.lastLocation.addOnCompleteListener(
+                lastLocationResultListener
+            )
         }
         map.setOnMapClickListener(mapOnClickListener)
     }
 
-    private val lastLocationResultListener = com.google.android.gms.tasks.OnCompleteListener<Location>{ task ->
-        if (task.isSuccessful) {
-            val lastKnownLocation = task.result
-            if (lastKnownLocation != null) {
-                map.moveCamera(
-                    CameraUpdateFactory.newLatLngZoom(
-                        LatLng(
-                            lastKnownLocation.latitude,
-                            lastKnownLocation.longitude
-                        ), DEFAULT_ZOOM
+    private val lastLocationResultListener =
+        com.google.android.gms.tasks.OnCompleteListener<Location> { task ->
+            if (task.isSuccessful) {
+                val lastKnownLocation = task.result
+                if (lastKnownLocation != null) {
+                    map.moveCamera(
+                        CameraUpdateFactory.newLatLngZoom(
+                            LatLng(
+                                lastKnownLocation.latitude,
+                                lastKnownLocation.longitude
+                            ), DEFAULT_ZOOM
+                        )
                     )
-                )
-            } else {
-                map.moveCamera(
-                    CameraUpdateFactory
-                        .newLatLngZoom(defaultLocation, DEFAULT_ZOOM)
-                )
+                } else {
+                    map.moveCamera(
+                        CameraUpdateFactory
+                            .newLatLngZoom(defaultLocation, DEFAULT_ZOOM)
+                    )
+                }
             }
         }
-    }
 
     private val mapOnClickListener = GoogleMap.OnMapClickListener {
-        if(marker == null){
-            marker = map.addMarker(MarkerOptions().position(it).title(getString(R.string.your_shipping_location_is_here)))
-        }else {
+        if (marker == null) {
+            marker = map.addMarker(
+                MarkerOptions().position(it)
+                    .title(getString(R.string.your_shipping_location_is_here))
+            )
+        } else {
             marker!!.position = it
         }
     }
@@ -138,11 +144,24 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
 
 
     private val selectButtonClickListener = View.OnClickListener {
-        if(marker == null){
-            Snackbar.make(requireView(), "Please select location", Snackbar.LENGTH_LONG).show()
-        }else {
-            val action = SelectLocationFragmentDirections.actionSelectLocationFragmentToAddNewAddressFragment(marker!!.position)
-            findNavController().navigate(action)
+        if (marker == null) {
+            Snackbar.make(requireView(), getString(R.string.please_select_location), Snackbar.LENGTH_LONG).show()
+        } else {
+            if (args.editAddress != null) {
+                val action =
+                    SelectLocationFragmentDirections.actionSelectLocationFragmentToAddNewAddressFragment(
+                        editAddress = args.editAddress?.apply {
+                            location = marker!!.position
+                        })
+                findNavController().navigate(action)
+            } else {
+                val action =
+                    SelectLocationFragmentDirections.actionSelectLocationFragmentToAddNewAddressFragment(
+                        marker!!.position
+                    )
+                findNavController().navigate(action)
+            }
+
         }
     }
 
