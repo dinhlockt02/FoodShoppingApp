@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.model.Gender
@@ -17,11 +18,15 @@ fun setImageUrlDefaultUri(view: ImageView, url: Uri?, defaultUrl: String?) {
     if (url == null) {
         imageUrl = defaultUrl?.toUri()
     }
+    val circularProgressDrawable = CircularProgressDrawable(view.context)
+    circularProgressDrawable.strokeWidth = 5f
+    circularProgressDrawable.centerRadius = 30f
+    circularProgressDrawable.start()
     Glide
         .with(view.context)
         .load(imageUrl)
         .centerCrop()
-//        .placeholder(R.drawable.loading_spinner)
+        .placeholder(circularProgressDrawable)
         .into(view);
 }
 
@@ -43,11 +48,15 @@ fun setImageUrlAvatarUri(view: ImageView, url: Uri?, gender: Gender?) {
         view.setBackgroundResource(R.color.orange_50 )
         return
     }
+    val circularProgressDrawable = CircularProgressDrawable(view.context)
+    circularProgressDrawable.strokeWidth = 5f
+    circularProgressDrawable.centerRadius = 30f
+    circularProgressDrawable.start()
     Glide
         .with(view.context)
         .load(url)
         .centerCrop()
-//        .placeholder(R.drawable.loading_spinner)
+        .placeholder(circularProgressDrawable)
         .into(view);
 }
 

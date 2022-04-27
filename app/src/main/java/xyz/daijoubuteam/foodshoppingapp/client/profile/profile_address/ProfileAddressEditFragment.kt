@@ -14,7 +14,6 @@ import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.adapter.AddressAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProfileAddressEditBinding
-import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
 import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
 
 class ProfileAddressEditFragment : Fragment() {
@@ -34,20 +33,25 @@ class ProfileAddressEditFragment : Fragment() {
         binding = FragmentProfileAddressEditBinding.inflate(inflater, container, false)
         binding.viewmodel = viewmodel
         binding.lifecycleOwner = viewLifecycleOwner
-        setupErrorSnackbar()
+
+        setupMessageSnackbar()
         setupSoftKeyboardUI()
         setupOnAddNewAddressButtonClicked()
         setupAddressRecyclerViewAdapter()
         setupOnProfileEditUserAvatarClick()
+
         return binding.root
     }
 
     private fun setupAddressRecyclerViewAdapter() {
-        binding.profileEditAddressRecyclerView.adapter = AddressAdapter(AddressAdapter.OnClickListener{
-            val action =
-                ProfileAddressEditFragmentDirections.actionProfileAddressEditFragmentToAddNewAddressFragment(editAddress = it)
-            findNavController().navigate(action)
-        })
+        binding.profileEditAddressRecyclerView.adapter =
+            AddressAdapter(AddressAdapter.OnClickListener {
+                val action =
+                    ProfileAddressEditFragmentDirections.actionProfileAddressEditFragmentToAddNewAddressFragment(
+                        editAddress = it
+                    )
+                findNavController().navigate(action)
+            })
         val adapter = binding.profileEditAddressRecyclerView.adapter as AddressAdapter
         viewmodel.user.observe(viewLifecycleOwner) {
             if (it !== null) {
@@ -65,7 +69,7 @@ class ProfileAddressEditFragment : Fragment() {
     }
 
 
-    private fun setupErrorSnackbar() {
+    private fun setupMessageSnackbar() {
         viewmodel.message.observe(viewLifecycleOwner) {
             if (!it.isNullOrEmpty() && it.isNotBlank()) {
                 Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
@@ -74,26 +78,32 @@ class ProfileAddressEditFragment : Fragment() {
     }
 
     private fun setupSoftKeyboardUI() {
-        binding.profileEditFirstNameTextField.setOnFocusChangeListener { view, hasFocus ->
-            if (!hasFocus) {
+        binding.profileEditFirstNameTextField.editText?.setOnFocusChangeListener { view, hasFocus ->
+            if (!shouldShowSoftKeyboard()) {
                 hideKeyboard()
             }
         }
-        binding.profileEditLastNameTextField.setOnFocusChangeListener { view, hasFocus ->
-            if (!hasFocus) {
+        binding.profileEditLastNameTextField.editText?.setOnFocusChangeListener { view, hasFocus ->
+            if (!shouldShowSoftKeyboard()) {
                 hideKeyboard()
             }
         }
-        binding.profileEditPhoneNumber.setOnFocusChangeListener { view, hasFocus ->
-            if (!hasFocus) {
+        binding.profileEditPhoneNumber.editText?.setOnFocusChangeListener { view, hasFocus ->
+            if (!shouldShowSoftKeyboard()) {
                 hideKeyboard()
             }
         }
     }
 
-    private fun setupOnProfileEditUserAvatarClick(){
+    private fun shouldShowSoftKeyboard(): Boolean {
+        return binding.profileEditFirstNameTextField.editText?.hasFocus() == true ||
+                binding.profileEditLastNameTextField.editText?.hasFocus() == true ||
+                binding.profileEditPhoneNumber.editText?.hasFocus() == true
+    }
+
+    private fun setupOnProfileEditUserAvatarClick() {
         binding.profileEditUserAvatar.setOnClickListener {
-                startCrop()
+            startCrop()
         }
     }
 
@@ -111,7 +121,6 @@ class ProfileAddressEditFragment : Fragment() {
     }
 
     private fun startCrop() {
-        // start picker to get image for cropping and then use the image in cropping activity
         cropImage.launch(
             options {
                 setGuidelines(CropImageView.Guidelines.ON)

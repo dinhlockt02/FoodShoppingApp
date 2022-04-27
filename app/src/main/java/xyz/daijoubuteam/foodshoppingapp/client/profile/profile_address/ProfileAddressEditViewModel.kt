@@ -36,7 +36,7 @@ class ProfileAddressEditViewModel : ViewModel() {
         onShowMessageComplete()
     }
 
-    fun onShowMessageComplete() {
+    private fun onShowMessageComplete() {
         this._message.value = ""
     }
 
@@ -72,19 +72,19 @@ class ProfileAddressEditViewModel : ViewModel() {
                     throw if (uploadAvatarResult.exceptionOrNull() == null) uploadAvatarResult.exceptionOrNull()!!
                     else Exception("Upload image failed")
                 }
-                user.value?.photoUrl = uri.toString()
+                user.value?.photoUrl = uploadAvatarResult.getOrNull().toString()
                 user.value?.let {
                     val updateResult = userRepository.updateCurrentUserInfo(it)
                     if (updateResult.isFailure)
                         throw if (uploadAvatarResult.exceptionOrNull() == null) uploadAvatarResult.exceptionOrNull()!!
                         else Exception("Upload image failed")
+                    else if(updateResult.isSuccess) {
+                        onShowMessage("Upload successful")
+                    }
                 }
             } catch (e: Exception) {
                 onShowMessage(e.message)
             }
         }
-    }
-    private fun onEditAddress(shippingAddress: ShippingAddress){
-
     }
 }

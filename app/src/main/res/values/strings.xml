@@ -126,4 +126,5 @@
     <string name="province_city_district">Province, City, District</string>
     <string name="street_address">Street Address</string>
     <string name="your_shipping_location_is_here">Your shipping locaion is here</string>
+    <string name="please_select_location">Please select location</string>
 </resources>

@@ -1,15 +1,11 @@
 package xyz.daijoubuteam.foodshoppingapp.client.profile
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.model.User
-import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
 import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 
 class ProfileViewModel: ViewModel() {
@@ -27,12 +23,12 @@ class ProfileViewModel: ViewModel() {
         }
     }
 
-    private val _errMessage = MutableLiveData("")
-    val errMessage: LiveData<String>
-        get() = _errMessage
+    private val _message = MutableLiveData("")
+    val message: LiveData<String>
+        get() = _message
 
     private fun onShowError(msg: String?){
-        this._errMessage.value = msg
+        this._message.value = msg
     }
 
     fun onSignout(){

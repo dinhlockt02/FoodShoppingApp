@@ -10,6 +10,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
 import xyz.daijoubuteam.foodshoppingapp.model.User
 
@@ -65,6 +66,7 @@ class UserRepository {
             val avatarRef = storageRef.child("images/${uri.lastPathSegment}")
             avatarRef.putFile(uri).await()
             val downloadUrl = avatarRef.downloadUrl.await()
+            Timber.i(downloadUrl.toString())
             Result.success(downloadUrl)
         }catch (e: Exception){
             Result.failure(e)

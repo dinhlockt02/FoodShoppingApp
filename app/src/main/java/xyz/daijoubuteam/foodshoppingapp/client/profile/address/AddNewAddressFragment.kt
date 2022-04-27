@@ -37,6 +37,7 @@ import xyz.daijoubuteam.foodshoppingapp.BuildConfig
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentAddNewAddressBinding
 import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
+import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
 import java.util.*
 
 
@@ -64,21 +65,26 @@ class AddNewAddressFragment : Fragment(), OnMapReadyCallback {
 
         binding = FragmentAddNewAddressBinding.inflate(inflater, container, false)
         binding.viewmodel = viewmodel
-        if(args.editAddress == null){
-            selectedLocation = args.locationLatLng
-        }else if(args.editAddress != null){
-            selectedLocation = args.editAddress!!.location
-            viewmodel.shippingAddress.value = args.editAddress
 
+        if(args.editAddress == null && args.locationLatLng != null){
+            selectedLocation = args.locationLatLng
+        }else if(args.editAddress != null && args.locationLatLng == null){
+            selectedLocation = args.editAddress?.location
+            viewmodel.shippingAddress.value = args.editAddress
         }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setupSoftKeyboardUI()
         setupViewModelObserver()
+
         val mapsFragment =
             childFragmentManager.findFragmentById(R.id.preview_map) as SupportMapFragment?
+
         mapsFragment?.getMapAsync(this)
 
     }
@@ -89,16 +95,6 @@ class AddNewAddressFragment : Fragment(), OnMapReadyCallback {
             setupMap()
         }
         else {
-            findNavController().navigateUp()
-        }
-    }
-
-    private val requestLocationPermission = registerForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { isGranted ->
-        if (isGranted) {
-            setupMap()
-        } else {
             findNavController().navigateUp()
         }
     }
@@ -166,4 +162,28 @@ class AddNewAddressFragment : Fragment(), OnMapReadyCallback {
         requireActivity().applicationContext,
         Manifest.permission.ACCESS_COARSE_LOCATION
     ) == PackageManager.PERMISSION_GRANTED || Build.VERSION.SDK_INT < 24
+
+    private fun setupSoftKeyboardUI() {
+        binding.addAddressContactName.editText?.setOnFocusChangeListener { view, hasFocus ->
+            if (!shouldShowSoftKeyboard()) {
+                hideKeyboard()
+            }
+        }
+        binding.addAddressPhoneNumberTextField.editText?.setOnFocusChangeListener { view, hasFocus ->
+            if (!shouldShowSoftKeyboard()) {
+                hideKeyboard()
+            }
+        }
+        binding.addAddressTextField.editText?.setOnFocusChangeListener { view, hasFocus ->
+            if (!shouldShowSoftKeyboard()) {
+                hideKeyboard()
+            }
+        }
+    }
+
+    private fun shouldShowSoftKeyboard(): Boolean {
+        return binding.addAddressContactName.editText?.hasFocus() == true ||
+                binding.addAddressPhoneNumberTextField.editText?.hasFocus() == true ||
+                binding.addAddressTextField.editText?.hasFocus() == true
+    }
 }
