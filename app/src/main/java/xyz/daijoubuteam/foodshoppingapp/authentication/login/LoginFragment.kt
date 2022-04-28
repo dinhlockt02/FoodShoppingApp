@@ -136,15 +136,18 @@ class LoginFragment : Fragment() {
 
     private fun setupSoftKeyboardUI(){
         binding.etEmail.setOnFocusChangeListener { view, hasFocus ->
-            if(!hasFocus){
+            if(!shouldShowSoftKeyboard()){
                 hideKeyboard()
             }
         }
         binding.etPassword.setOnFocusChangeListener { view, hasFocus ->
-            if(!hasFocus){
+            if(!shouldShowSoftKeyboard()){
                 hideKeyboard()
             }
         }
+    }
 
+    private fun shouldShowSoftKeyboard(): Boolean {
+        return binding.etEmail.hasFocus() || binding.etPassword.hasFocus()
     }
 }
