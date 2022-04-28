@@ -47,16 +47,6 @@ class SignUpFragment : Fragment() {
         return binding.root
     }
 
-    private fun setSignupWithFacebookButton() {
-        binding.signUpWithFacebookButton.setOnClickListener {
-            hideKeyboard()
-            Snackbar.make(
-                this.requireView(),
-                "Hội những người anti facebook",
-                Snackbar.LENGTH_SHORT
-            ).show()
-        }
-    }
 
     private fun setNavigateToLoginObserver() {
         viewmodel.navigateToLogin.observe(viewLifecycleOwner) {

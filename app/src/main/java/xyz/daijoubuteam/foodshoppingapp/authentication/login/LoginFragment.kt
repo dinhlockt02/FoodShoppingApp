@@ -45,20 +45,8 @@ class LoginFragment : Fragment() {
         setLoginResultObserver()
         setLoginWithGoogleButton()
         setupSoftKeyboardUI()
-        setLoginWithFacebookButton()
 
         return binding.root
-    }
-
-    private fun setLoginWithFacebookButton() {
-        binding.loginWithFacebookButton.setOnClickListener {
-            hideKeyboard()
-            Snackbar.make(
-                this.requireView(),
-                "Hội những người anti facebook",
-                Snackbar.LENGTH_SHORT
-            ).show()
-        }
     }
 
     private fun setNavigateToForgetPasswordObserver() {
