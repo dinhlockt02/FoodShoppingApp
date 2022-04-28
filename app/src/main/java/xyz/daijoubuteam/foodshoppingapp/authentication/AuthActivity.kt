@@ -1,24 +1,52 @@
 package xyz.daijoubuteam.foodshoppingapp.authentication
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import com.google.android.material.snackbar.Snackbar
+import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.NavigationUI
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
+import xyz.daijoubuteam.foodshoppingapp.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {
 
     private val auth = Firebase.auth
+    private lateinit var binding: ActivityAuthBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_auth)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_auth)
         addAuthStateListener()
+        setupActionBar()
+    }
+
+
+    private fun setupActionBar(){
+        binding.authToolbar.setTitleTextColor(Color.TRANSPARENT)
+        setSupportActionBar(binding.authToolbar)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.login_fragment_container_view) as NavHostFragment
+        val navController = navHostFragment.findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        NavigationUI.setupWithNavController(binding.authToolbar, navController, appBarConfiguration)
+        navController.addOnDestinationChangedListener { controller: NavController?, destination: NavDestination, arguments: Bundle? ->
+            setupActionBarUI()
+            binding.authToolbar.setNavigationIcon(R.drawable.img_chevronleft)
+        }
+    }
+
+    private fun setupActionBarUI(){
+//        supportActionBar?.setDisplayShowTitleEnabled(false)
+//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        supportActionBar?.setHomeAsUpIndicator(R.drawable.img_chevronleft)
     }
 
     private fun addAuthStateListener() {

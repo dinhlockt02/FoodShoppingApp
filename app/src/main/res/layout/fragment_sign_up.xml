@@ -19,17 +19,6 @@
             android:focusable="true"
             android:focusableInTouchMode="true">
 
-            <ImageView
-                android:id="@+id/imageChevronleft"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="24dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/img_chevronleft"
-                tools:ignore="ContentDescription" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -189,53 +178,55 @@
                 android:textSize="16sp"
                 tools:targetApi="p" />
 
-            <LinearLayout
-                android:id="@+id/sign_up_with_facebook_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/rectangle_bg_indigo_500_radius_6"
-                android:gravity="start"
-                android:orientation="horizontal">
 
-                <FrameLayout
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@drawable/rectangle_bg_white_a700_radius_4">
+<!--            Facebook Button-->
+<!--            <LinearLayout-->
+<!--                android:id="@+id/sign_up_with_facebook_button"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginHorizontal="24dp"-->
+<!--                android:layout_marginTop="24dp"-->
+<!--                android:background="@drawable/rectangle_bg_indigo_500_radius_6"-->
+<!--                android:gravity="start"-->
+<!--                android:orientation="horizontal">-->
 
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:layout_gravity="center"
-                        android:layout_marginHorizontal="5dp"
-                        android:layout_marginVertical="5dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/img_facebookicon"
-                        tools:ignore="ContentDescription" />
-                </FrameLayout>
+<!--                <FrameLayout-->
+<!--                    android:layout_width="30dp"-->
+<!--                    android:layout_height="30dp"-->
+<!--                    android:layout_marginStart="8dp"-->
+<!--                    android:layout_marginTop="9dp"-->
+<!--                    android:layout_marginBottom="8dp"-->
+<!--                    android:background="@drawable/rectangle_bg_white_a700_radius_4">-->
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="28dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="14dp"
-                    android:layout_weight="0.87"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/avenir_next_lt_pro"
-                    android:singleLine="true"
-                    android:text="@string/sign_up_with_facebook"
-                    android:textAllCaps="true"
-                    android:textColor="@color/white_A700"
-                    android:textFontWeight="400"
-                    android:textSize="14sp"
-                    tools:targetApi="p" />
-            </LinearLayout>
+<!--                    <ImageView-->
+<!--                        android:layout_width="20dp"-->
+<!--                        android:layout_height="20dp"-->
+<!--                        android:layout_gravity="center"-->
+<!--                        android:layout_marginHorizontal="5dp"-->
+<!--                        android:layout_marginVertical="5dp"-->
+<!--                        android:scaleType="fitXY"-->
+<!--                        android:src="@drawable/img_facebookicon"-->
+<!--                        tools:ignore="ContentDescription" />-->
+<!--                </FrameLayout>-->
+
+<!--                <TextView-->
+<!--                    android:layout_width="0dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginStart="28dp"-->
+<!--                    android:layout_marginTop="15dp"-->
+<!--                    android:layout_marginEnd="20dp"-->
+<!--                    android:layout_marginBottom="14dp"-->
+<!--                    android:layout_weight="0.87"-->
+<!--                    android:ellipsize="end"-->
+<!--                    android:fontFamily="@font/avenir_next_lt_pro"-->
+<!--                    android:singleLine="true"-->
+<!--                    android:text="@string/sign_up_with_facebook"-->
+<!--                    android:textAllCaps="true"-->
+<!--                    android:textColor="@color/white_A700"-->
+<!--                    android:textFontWeight="400"-->
+<!--                    android:textSize="14sp"-->
+<!--                    tools:targetApi="p" />-->
+<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:id="@+id/sign_up_with_google_button"
