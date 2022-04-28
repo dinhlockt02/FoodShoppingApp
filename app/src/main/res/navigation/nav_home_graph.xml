@@ -9,7 +9,11 @@
         android:id="@+id/homeFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_detailEateryFragment"
+            app:destination="@id/detailEateryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/feedsFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.feeds.FeedsFragment"
@@ -89,4 +93,14 @@
                 app:destination="@id/addNewAddressFragment" />
         </fragment>
     </navigation>
+    <fragment
+        android:id="@+id/detailEateryFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.home.DetailEateryFragment"
+        android:label="DetailEateryFragment"
+        tools:layout="@layout/fragment_detail_eatery">
+        <argument
+            android:name="eaterySelected"
+            app:argType="xyz.daijoubuteam.foodshoppingapp.model.Eatery">
+        </argument>
+    </fragment>
 </navigation>

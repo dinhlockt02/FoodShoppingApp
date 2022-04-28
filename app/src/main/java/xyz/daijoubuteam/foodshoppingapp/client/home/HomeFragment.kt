@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavOptions
@@ -39,7 +40,7 @@ import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-    private val viewmodel: HomeViewModel by lazy {
+    private val viewModel: HomeViewModel by lazy {
         val factory = HomeViewModelFactory()
         ViewModelProvider(this, factory)[HomeViewModel::class.java]
     }
@@ -50,20 +51,27 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        binding.viewmodel = viewmodel
+        binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         setupPopularEateryListViewAdapter()
         setupCategoryListViewAdapter()
-        setupNearbyEateryListViewAdapter()
+        //setupNearbyEateryListViewAdapter()
         setupOnAvatarClickListener()
+
+        viewModel.navigateToSelectedEatery.observe(viewLifecycleOwner, Observer {
+            if(it != null) {
+                this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailEateryFragment(it))
+            }
+        })
         return binding.root
     }
 
     private fun setupPopularEateryListViewAdapter() {
-        binding.recyPopularEatery.adapter = EateryAdapter()
+        binding.recyPopularEatery.adapter = EateryAdapter(EateryAdapter.OnClickListener{
+            viewModel.displayPropertyDetailEatery(it)
+        })
         val adapter = binding.recyPopularEatery.adapter as EateryAdapter
-        viewmodel.eateryList.observe(viewLifecycleOwner) {
-            Toast.makeText(requireContext(), "eateries list changed", Toast.LENGTH_LONG).show()
+        viewModel.eateryList.observe(viewLifecycleOwner) {
             if (it != null) {
                 adapter.submitList(it)
             }
@@ -73,23 +81,22 @@ class HomeFragment : Fragment() {
     private fun setupCategoryListViewAdapter() {
         binding.recyCategories.adapter = CategoryAdapter()
         val adapter = binding.recyCategories.adapter as CategoryAdapter
-        viewmodel.categoryList.observe(viewLifecycleOwner) {
+        viewModel.categoryList.observe(viewLifecycleOwner) {
             if (it != null) {
-                Toast.makeText(requireContext(), "category list changed", Toast.LENGTH_LONG).show()
                 adapter.submitList(it)
             }
         }
     }
 
-    private fun setupNearbyEateryListViewAdapter() {
-        binding.recyNearByEatery.adapter = EateryAdapter()
-        val adapter = binding.recyNearByEatery.adapter as EateryAdapter
-        viewmodel.eateryList.observe(viewLifecycleOwner) {
-            if (it != null) {
-                adapter.submitList(it)
-            }
-        }
-    }
+//    private fun setupNearbyEateryListViewAdapter() {
+//        binding.recyNearByEatery.adapter = EateryAdapter()
+//        val adapter = binding.recyNearByEatery.adapter as EateryAdapter
+//        viewModel.eateryList.observe(viewLifecycleOwner) {
+//            if (it != null) {
+//                adapter.submitList(it)
+//            }
+//        }
+//    }
 
     private fun setupOnAvatarClickListener(){
         binding.fragmentHomeAvatar.setOnClickListener {

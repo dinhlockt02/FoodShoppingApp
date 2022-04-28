@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemEateryBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 
-class EateryAdapter : ListAdapter<Eatery, EateryAdapter.EateryViewHolder>(DiffCallBack) {
+class EateryAdapter(private val onClickListener:OnClickListener) : ListAdapter<Eatery, EateryAdapter.EateryViewHolder>(DiffCallBack) {
     class EateryViewHolder(private var binding: ItemEateryBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(eatery: Eatery) {
             binding.eatery = eatery
@@ -36,6 +36,13 @@ class EateryAdapter : ListAdapter<Eatery, EateryAdapter.EateryViewHolder>(DiffCa
 
     override fun onBindViewHolder(holder: EateryViewHolder, position: Int) {
         val eateryItem = getItem(position)
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(eateryItem)
+        }
         holder.bind(eateryItem)
+    }
+
+    class OnClickListener(val clickListener: (eatery:Eatery) -> Unit) {
+        fun onClick(eatery:Eatery) = clickListener(eatery)
     }
 }

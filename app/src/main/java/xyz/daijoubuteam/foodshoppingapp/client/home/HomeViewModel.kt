@@ -21,6 +21,10 @@ class HomeViewModel: ViewModel() {
     val errMessage: LiveData<String>
         get() = _errMessage
 
+    private val _navigateToSelectedEatery = MutableLiveData<Eatery>()
+    val navigateToSelectedEatery: LiveData<Eatery>
+        get() = _navigateToSelectedEatery
+
     init {
         getPopularEateryList()
         getCategoryList()
@@ -47,4 +51,13 @@ class HomeViewModel: ViewModel() {
             onShowError(categoryListResult.exceptionOrNull()?.message)
         }
     }
+
+    //show detail eatery selected
+    fun displayPropertyDetailEatery(eaterySelected: Eatery) {
+        _navigateToSelectedEatery.value = eaterySelected
+    }
+
+//    fun displayPropertyDetailEateryComplete() {
+//        _navigateToSelectedEatery.value = null
+//    }
 }
