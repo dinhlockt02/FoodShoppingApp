@@ -127,4 +127,7 @@
     <string name="street_address">Street Address</string>
     <string name="your_shipping_location_is_here">Your shipping locaion is here</string>
     <string name="please_select_location">Please select location</string>
+    <string name="send_email_successful">Send email successful</string>
+    <string name="send_email_failed">Send email failed</string>
+    <string name="enter_your_email_here">Enter your email here</string>
 </resources>

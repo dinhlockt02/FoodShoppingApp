@@ -10,8 +10,11 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentForgetPasswordBinding
+import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
 
 class ForgetPasswordFragment : Fragment() {
 
@@ -35,6 +38,8 @@ class ForgetPasswordFragment : Fragment() {
 
         setNavigateToLoginObserver()
         setSendResetPasswordEmailResultObserver()
+        setMessageObserver()
+        setupHideKeyboard()
 
         return binding.root
     }
@@ -43,11 +48,10 @@ class ForgetPasswordFragment : Fragment() {
         viewmodel.sendResetPasswordEmailResult.observe(viewLifecycleOwner){
             it?.let {result ->
                 if(result.isSuccess){
-                    Toast.makeText(requireContext(), "Send email successful", Toast.LENGTH_LONG).show()
-                    findNavController().navigate(ForgetPasswordFragmentDirections.actionForgetPasswordFragmentToResendEmailResetPasswordFragment(viewmodel.email.value!!))
+                    viewmodel.onShowMessage(getString(R.string.send_email_successful))
                 } else {
-                    Toast.makeText(requireContext(), "Send email failed", Toast.LENGTH_LONG).show()
-                    Log.e("forget-password", it.exceptionOrNull()?.message.toString(), it.exceptionOrNull())
+                    viewmodel.onShowMessage(getString(R.string.send_email_failed))
+                    Timber.e(it.exceptionOrNull()?.message.toString(), it.exceptionOrNull())
                 }
                 viewmodel.onSendResetPasswordEmailComplete()
             }
@@ -61,5 +65,26 @@ class ForgetPasswordFragment : Fragment() {
                 viewmodel.onNavigateToLoginComplete()
             }
         }
+    }
+
+    private fun setMessageObserver(){
+        viewmodel.message.observe(viewLifecycleOwner){
+            if(!it.isNullOrEmpty()){
+                Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
+                viewmodel.onShowMessageComplete()
+            }
+        }
+    }
+
+    private fun setupHideKeyboard(){
+        binding.forgetPasswordEmailTextInput.editText?.setOnFocusChangeListener { view, hasFocus ->
+            if(!shouldShowKeyboard()){
+                hideKeyboard()
+            }
+        }
+    }
+
+    private fun shouldShowKeyboard(): Boolean {
+        return binding.forgetPasswordEmailTextInput.editText?.hasFocus() == true
     }
 }
