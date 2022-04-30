@@ -52,6 +52,10 @@ class HomeViewModel: ViewModel() {
         }
     }
 
+    fun onNavigateToSelectedEateryComplete(){
+        _navigateToSelectedEatery.value = null
+    }
+
     //show detail eatery selected
     fun displayPropertyDetailEatery(eaterySelected: Eatery) {
         _navigateToSelectedEatery.value = eaterySelected

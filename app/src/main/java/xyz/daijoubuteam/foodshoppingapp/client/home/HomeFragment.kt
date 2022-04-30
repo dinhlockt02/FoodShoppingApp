@@ -61,6 +61,7 @@ class HomeFragment : Fragment() {
         viewModel.navigateToSelectedEatery.observe(viewLifecycleOwner, Observer {
             if(it != null) {
                 this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailEateryFragment(it))
+                viewModel.onNavigateToSelectedEateryComplete()
             }
         })
         return binding.root

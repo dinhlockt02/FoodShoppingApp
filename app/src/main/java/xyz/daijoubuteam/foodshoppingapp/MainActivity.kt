@@ -1,13 +1,16 @@
 package xyz.daijoubuteam.foodshoppingapp
 
 import android.content.Intent
+import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.contains
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
@@ -22,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.authentication.AuthActivity
 import xyz.daijoubuteam.foodshoppingapp.authentication.RequestUserInfoActivity
 import xyz.daijoubuteam.foodshoppingapp.authentication.VerifyActivity
@@ -67,6 +71,14 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         val navController = Navigation.findNavController(this, R.id.navHomeFragment)
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (binding.bottomNavigation.menu.findItem(destination.id) == null) {
+                binding.bottomNavigation.visibility = View.GONE
+            }else {
+                binding.bottomNavigation.visibility = View.VISIBLE
+            }
+
+        }
         lifecycleScope.launch {
             auth.currentUser?.let {
                 val userResult = authRepository.getUserByUid(it.uid)
@@ -78,14 +90,14 @@ class MainActivity : AppCompatActivity() {
                 isUserRegisterInformation.value = user.isUserRegisterInformation
             }
         }
+
     }
 
-    fun setMenuSelectedItem(id: Int){
-        if(id == binding.bottomNavigation.selectedItemId || !this::binding.isInitialized)
+    fun setMenuSelectedItem(id: Int) {
+        if (id == binding.bottomNavigation.selectedItemId || !this::binding.isInitialized)
             return
         binding.bottomNavigation.menu.findItem(id)?.let {
             binding.bottomNavigation.selectedItemId = it.itemId
         }
     }
-
 }
