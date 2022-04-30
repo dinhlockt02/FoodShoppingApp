@@ -1,4 +1,4 @@
-package xyz.daijoubuteam.foodshoppingapp.client.home
+package xyz.daijoubuteam.foodshoppingapp.client.home.detail_eatery
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

@@ -72,8 +72,7 @@ class MainActivity : AppCompatActivity() {
         val navController = Navigation.findNavController(this, R.id.navHomeFragment)
         NavigationUI.setupWithNavController(binding.bottomNavigation, navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (binding.bottomNavigation.menu.findItem(destination.id) == null
-                || destination.id == R.id.profileFragment) {
+            if (binding.bottomNavigation.menu.findItem(destination.id) == null) {
                 binding.bottomNavigation.visibility = View.GONE
             }else {
                 binding.bottomNavigation.visibility = View.VISIBLE

@@ -11,7 +11,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:background="@drawable/rectangle_bg_white">
+        android:background="@drawable/rectangle_bg_white"
+        tools:ignore="ExtraText">
         <TextView
             android:ellipsize="end"
             android:id="@+id/tvEateryName"
@@ -29,6 +30,7 @@
             android:fontFamily="@font/avenir_next_lt_pro"
             android:textFontWeight="400"
             tools:text="Shrimp Pizza"
+            android:text="@{product.name}"
             tools:ignore="HardcodedText,UnusedAttribute" />
         <TextView
             android:id="@+id/tvIngredient"
@@ -47,9 +49,8 @@
             android:textSize="12sp"
             android:fontFamily="@font/avenir_next_lt_pro"
             android:textFontWeight="500"
-            android:text="Shrimp, mushroom, cheese, tomato"
-            tools:text="Shrimp, mushroom, cheese, tomato"
-            tools:ignore="HardcodedText,UnusedAttribute" />
+            android:text="@{product.ingredients.toString().substring(1,product.ingredients.toString().length())}"
+            tools:text="Shrimp, mushroom, cheese, tomato"/>
         <ImageView android:id="@+id/imgAvatar"
             android:layout_height="90dp"
             android:layout_width="90dp"
@@ -60,6 +61,7 @@
             app:layout_constraintEnd_toStartOf="@+id/tvEateryName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/img_rectangle44"
             tools:src="@drawable/img_rectangle44"
             tools:ignore="ContentDescription" />
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -89,7 +91,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText,UnusedAttribute"
-                android:text="$ 12.00"
+                android:text="@{Double.toString(product.newPrice)}"
                 tools:text="$ 12.00" />
             <TextView
                 android:id="@+id/tvOldPrice"
@@ -108,7 +110,7 @@
                 android:textSize="12sp"
                 android:fontFamily="@font/avenir_next_lt_pro"
                 android:textFontWeight="500"
-                android:text="$ 20.00"
+                android:text="@{Double.toString(product.oldPrice)}"
                 tools:text="$ 20.00"
                 tools:ignore="HardcodedText,UnusedAttribute" />
             <View

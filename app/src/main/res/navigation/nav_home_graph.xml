@@ -99,7 +99,7 @@
     </navigation>
     <fragment
         android:id="@+id/detailEateryFragment"
-        android:name="xyz.daijoubuteam.foodshoppingapp.client.home.DetailEateryFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.home.detail_eatery.DetailEateryFragment"
         android:label="DetailEateryFragment"
         tools:layout="@layout/fragment_detail_eatery">
         <argument

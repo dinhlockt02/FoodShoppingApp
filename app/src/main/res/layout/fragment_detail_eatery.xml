@@ -7,7 +7,7 @@
     <data>
         <variable
             name="viewModel"
-            type="xyz.daijoubuteam.foodshoppingapp.client.home.DetailEateryViewModel" />
+            type="xyz.daijoubuteam.foodshoppingapp.client.home.detail_eatery.DetailEateryViewModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintGroup257"
