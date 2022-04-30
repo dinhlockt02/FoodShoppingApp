@@ -20,7 +20,7 @@ class EateryAdapter(private val onClickListener:OnClickListener) : ListAdapter<E
 
     companion object DiffCallBack : DiffUtil.ItemCallback<Eatery>(){
         override fun areItemsTheSame(oldItem: Eatery, newItem: Eatery): Boolean {
-            return oldItem === newItem
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: Eatery, newItem: Eatery): Boolean {

@@ -14,14 +14,12 @@ class EateryRepository {
     private val db = Firebase.firestore
 
     fun getListEatery(): Result<LiveData<List<Eatery>>> {
-        var eateries : MutableLiveData<List<Eatery>> = MutableLiveData()
+        val eateries : MutableLiveData<List<Eatery>> = MutableLiveData()
         return try {
             val docRef = db.collection("eateries")
-            val eateriesList : MutableList<Eatery> = mutableListOf()
             docRef.addSnapshotListener { value, error ->
                 eateries.value = value?.toObjects(Eatery::class.java)
             }
-
             Result.success(eateries)
         }catch (e: Exception){
             Result.failure(e)
@@ -29,14 +27,12 @@ class EateryRepository {
     }
 
     fun getListCategory(): Result<LiveData<List<Category>>> {
-        var categories: MutableLiveData<List<Category>> = MutableLiveData()
+        val categories: MutableLiveData<List<Category>> = MutableLiveData()
         return try {
             val docRef = db.collection("categories")
-            val categoriesList: MutableList<Category> = mutableListOf()
             docRef.addSnapshotListener{value, error ->
                 categories.value = value?.toObjects(Category::class.java)
             }
-
             Result.success(categories)
         } catch (e: Exception) {
             Result.failure(e)

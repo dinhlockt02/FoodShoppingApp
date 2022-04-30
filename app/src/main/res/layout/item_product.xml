@@ -28,7 +28,6 @@
             android:textColor="@color/bluegray_700"
             android:fontFamily="@font/avenir_next_lt_pro"
             android:textFontWeight="400"
-            android:text="@{product.name}"
             tools:text="Shrimp Pizza"
             tools:ignore="HardcodedText,UnusedAttribute" />
         <TextView
@@ -61,7 +60,6 @@
             app:layout_constraintEnd_toStartOf="@+id/tvEateryName"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@{product.imgAvatar}"
             tools:src="@drawable/img_rectangle44"
             tools:ignore="ContentDescription" />
         <androidx.constraintlayout.widget.ConstraintLayout
