@@ -6,19 +6,37 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewmodel.compose.viewModel
+import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.ProductAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentDetailEateryBinding
 
 class DetailEateryFragment : Fragment() {
+    private lateinit var binding: FragmentDetailEateryBinding
+    private val viewModel: DetailEateryViewModel by lazy {
+        val application = requireNotNull(activity).application
+        val eateryProperty = DetailEateryFragmentArgs.fromBundle(requireArguments()).eaterySelected
+        val viewModelFactory = DetailEateryViewModelFactory(eateryProperty,application)
+        ViewModelProvider(this, viewModelFactory)[DetailEateryViewModel::class.java]
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val application = requireNotNull(activity).application
-        val binding =  FragmentDetailEateryBinding.inflate(inflater)
+    ): View {
+
+        binding =  FragmentDetailEateryBinding.inflate(inflater)
         binding.lifecycleOwner = this
-        val eateryProperty = DetailEateryFragmentArgs.fromBundle(requireArguments()).eaterySelected
-        val viewModelFactory = DetailEateryViewModelFactory(eateryProperty,application)
-        binding.viewModel = ViewModelProvider(this, viewModelFactory).get(DetailEateryViewModel::class.java)
+        binding.viewModel = viewModel
+        setupForYouProductListViewAdapter()
         return binding.root
+    }
+
+    private fun setupForYouProductListViewAdapter() {
+        binding.forYouProductRecyclerView.adapter = ProductAdapter()
+        val adapter = binding.forYouProductRecyclerView.adapter as ProductAdapter
+        viewModel.selectedProperty.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.submitList(it.products)
+            }
+        }
     }
 }

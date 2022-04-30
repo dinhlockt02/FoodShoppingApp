@@ -255,7 +255,7 @@
                     android:textSize="12sp"
                     android:fontFamily="@font/avenir_next_lt_pro"
                     android:textFontWeight="500"
-                    android:text="@string/lbl_5_0"
+                    android:text="@{Double.toString(viewModel.selectedProperty.average_rating_count)}"
                     tools:ignore="UnusedAttribute" />
                 <TextView android:ellipsize="end"
                     android:id="@+id/txt200Rated"
@@ -356,18 +356,18 @@
                     android:fontFamily="@font/avenir_next_lt_pro"
                     android:gravity="start"
                     android:singleLine="true"
-                    android:text="New Product - Autumn"
+                    android:text="For you"
                     android:textColor="@color/bluegray_500"
                     android:textFontWeight="500"
                     android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/newProductRecyclerView"
+                    app:layout_constraintBottom_toTopOf="@+id/forYouProductRecyclerView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/viewDivider1"
                     tools:ignore="HardcodedText,UnusedAttribute" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/newProductRecyclerView"
+                    android:id="@+id/forYouProductRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="0dp"
@@ -388,7 +388,7 @@
                     app:layout_constraintBottom_toTopOf="@id/tvSpecialDelivery"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/newProductRecyclerView" />
+                    app:layout_constraintTop_toBottomOf="@+id/forYouProductRecyclerView" />
 
                 <TextView
                     android:id="@+id/tvSpecialDelivery"
