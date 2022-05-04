@@ -130,4 +130,7 @@
     <string name="send_email_successful">Send email successful</string>
     <string name="send_email_failed">Send email failed</string>
     <string name="enter_your_email_here">Enter your email here</string>
+    <string name="back_home_button">Back Home Button</string>
+    <string name="thumbnail_eatery">thumbnail eatery</string>
+    <string name="button_information_eatery">button information eatery</string>
 </resources>

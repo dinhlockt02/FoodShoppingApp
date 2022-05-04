@@ -97,7 +97,7 @@
         <entry key="app/src/main/res/layout/card.xml" value="0.20923913043478262" />
         <entry key="app/src/main/res/layout/fragment_add_new_address.xml" value="0.2151268115942029" />
         <entry key="app/src/main/res/layout/fragment_collection_object.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_detail_eatery.xml" value="0.12777777777777777" />
+        <entry key="app/src/main/res/layout/fragment_detail_eatery.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_feeds.xml" value="0.2151268115942029" />
         <entry key="app/src/main/res/layout/fragment_forget_password.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.165" />
