@@ -6,9 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemProductBinding
+import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 import xyz.daijoubuteam.foodshoppingapp.model.Product
 
-class ProductAdapter: ListAdapter<Product, ProductAdapter.ProductViewHolder>(DiffCallBack) {
+class ProductAdapter(private val onClickListener: OnClickListener): ListAdapter<Product, ProductAdapter.ProductViewHolder>(DiffCallBack) {
     class ProductViewHolder(private var binding: ItemProductBinding): RecyclerView.ViewHolder(binding.root) {
        fun bind(product: Product) {
            binding.product = product
@@ -32,6 +33,13 @@ class ProductAdapter: ListAdapter<Product, ProductAdapter.ProductViewHolder>(Dif
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val productItem = getItem(position)
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(productItem)
+        }
         holder.bind(productItem)
+    }
+
+    class OnClickListener(val clickListener: (product: Product) -> Unit) {
+        fun onClick(product: Product) = clickListener(product)
     }
 }

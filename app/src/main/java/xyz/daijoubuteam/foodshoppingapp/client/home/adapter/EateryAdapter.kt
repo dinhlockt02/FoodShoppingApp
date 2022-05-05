@@ -12,8 +12,6 @@ class EateryAdapter(private val onClickListener:OnClickListener) : ListAdapter<E
     class EateryViewHolder(private var binding: ItemEateryBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(eatery: Eatery) {
             binding.eatery = eatery
-            // cach tam thoi
-            //binding.imgAvatar.setImageResource(eatery.imgRes)
             binding.executePendingBindings()
         }
     }

@@ -49,6 +49,7 @@
         <entry key="app/src/main/res/drawable-v24/img_chevronleft.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/img_facebookicon.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/img_googleicon.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/img_roundbackbutt.xml" value="0.118" />
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_indigo_500_radius_6 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_white_a700_radius_4 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bell_outline.xml" value="0.147" />
@@ -89,6 +90,7 @@
         <entry key="app/src/main/res/drawable/rectangle_bg_indigo_500_radius_6.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rectangle_bg_white.xml" value="0.177" />
         <entry key="app/src/main/res/drawable/rectangle_bg_white_a700_radius_4 2.xml" value="0.1" />
+        <entry key="app/src/main/res/layout-v28/fragment_detail_eatery_info.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.13697916666666668" />
@@ -98,12 +100,13 @@
         <entry key="app/src/main/res/layout/change_email_address.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_add_new_address.xml" value="0.2151268115942029" />
         <entry key="app/src/main/res/layout/fragment_collection_object.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_detail_eatery.xml" value="0.12777777777777777" />
-        <entry key="app/src/main/res/layout/fragment_detail_eatery_infor.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_detail_eatery.xml" value="0.42162162162162165" />
+        <entry key="app/src/main/res/layout/fragment_detail_eatery_info.xml" value="0.140625" />
+        <entry key="app/src/main/res/layout/fragment_detail_eatery_infor.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_feeds.xml" value="0.2151268115942029" />
         <entry key="app/src/main/res/layout/fragment_forget_password.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/fragment_item_time_activity_eatery.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_item_time_activity_eatery.xml" value="0.23620045979817716" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25161590576171877" />
         <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/fragment_orders_bag 2.xml" value="0.140625" />

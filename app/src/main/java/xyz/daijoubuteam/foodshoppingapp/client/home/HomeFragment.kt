@@ -1,42 +1,20 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.cancelAndJoin
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
-import xyz.daijoubuteam.foodshoppingapp.adapter.AddressAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CategoryAdapter
-import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CuisineAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.EateryAdapter
-import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.SlideAdapter
-import xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address.ProfileAddressEditViewModel
-import xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address.ProfileAddressEditViewModelFactory
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentHomeBinding
-import xyz.daijoubuteam.foodshoppingapp.model.Category
-import xyz.daijoubuteam.foodshoppingapp.model.Cuisine
-import xyz.daijoubuteam.foodshoppingapp.model.Eatery
-import xyz.daijoubuteam.foodshoppingapp.model.SlideItem
-import kotlin.collections.ArrayList
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -53,6 +31,7 @@ class HomeFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        hideActionBar()
         setupPopularEateryListViewAdapter()
         setupCategoryListViewAdapter()
         //setupNearbyEateryListViewAdapter()
@@ -65,6 +44,11 @@ class HomeFragment : Fragment() {
             }
         })
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
     }
 
     private fun setupPopularEateryListViewAdapter() {
@@ -104,5 +88,9 @@ class HomeFragment : Fragment() {
             val activity = this.activity as? MainActivity
             activity?.setMenuSelectedItem(R.id.profileFragment)
         }
+    }
+
+    private fun hideActionBar() {
+        (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
     }
 }
