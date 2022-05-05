@@ -70,6 +70,7 @@ class ForgetPasswordFragment : Fragment() {
     private fun setMessageObserver(){
         viewmodel.message.observe(viewLifecycleOwner){
             if(!it.isNullOrEmpty()){
+                hideKeyboard()
                 Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
                 viewmodel.onShowMessageComplete()
             }
