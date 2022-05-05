@@ -8,6 +8,10 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.maxkeppeler.sheets.core.ButtonStyle
+import com.maxkeppeler.sheets.info.InfoSheet
+import xyz.daijoubuteam.foodshoppingapp.R
+import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.EateryAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.ProductAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentDetailEateryBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
@@ -41,7 +45,19 @@ class DetailEateryFragment : Fragment() {
     }
 
     private fun setupForYouProductListViewAdapter() {
-        binding.forYouProductRecyclerView.adapter = ProductAdapter()
+        binding.forYouProductRecyclerView.adapter = ProductAdapter(ProductAdapter.OnClickListener{
+            context?.let { it ->
+                InfoSheet().show(it) {
+                    title("Add Item")
+                    displayNegativeButton(false)
+                    positiveButtonStyle(ButtonStyle.NORMAL)
+                    onPositive("Install") {
+                        // Handle event
+                    }
+                    customView(R.layout.fragment_item_time_activity_eatery)
+                }
+            }
+        })
         val adapter = binding.forYouProductRecyclerView.adapter as ProductAdapter
         viewModel.selectedProperty.observe(viewLifecycleOwner) {
             if (it != null) {
