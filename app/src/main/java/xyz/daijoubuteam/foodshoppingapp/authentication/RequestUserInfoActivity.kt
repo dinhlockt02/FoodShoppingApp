@@ -61,10 +61,11 @@ class RequestUserInfoActivity : AppCompatActivity() {
                         else -> Gender.OTHER
                     }
                     user.isUserRegisterInformation = true
+                    user.photoUrl = null
                     authRepository.updateUserInfo(user)
                     isUserRegisterInformation.value = user.isUserRegisterInformation
                 } catch (e: Exception){
-                    Snackbar.make(binding.root, e.message, Snackbar.LENGTH_LONG).show()
+                    Snackbar.make(binding.root, e.message.toString(), Snackbar.LENGTH_LONG).show()
                 }
             }
         }

@@ -1,5 +1,6 @@
 package xyz.daijoubuteam.foodshoppingapp.utils.BindingAdapter
 
+import android.annotation.SuppressLint
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
@@ -7,6 +8,7 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.model.Gender
 import kotlin.random.Random
@@ -35,32 +37,40 @@ fun setImageUrlDefaultString(view: ImageView, url: String?, defaultUrl: String?)
     setImageUrlDefaultUri(view, url?.toUri(), defaultUrl)
 }
 
+@SuppressLint("UseCompatLoadingForDrawables")
 @BindingAdapter("imageUrl", "gender")
 fun setImageUrlAvatarUri(view: ImageView, url: Uri?, gender: Gender?) {
+
+    val defaultAvatarDrawable = view.context.applicationContext.getDrawable(when (gender) {
+        Gender.MALE -> R.drawable.default_avatar_male
+        Gender.FEMALE -> R.drawable.default_avatar_female
+        else -> if (Random.nextBoolean()) R.drawable.default_avatar_male else R.drawable.default_avatar_female
+    })
+
     if (url == null) {
-        view.setImageResource(
-            when (gender) {
-                Gender.MALE -> R.drawable.default_avatar_male
-                Gender.FEMALE -> R.drawable.default_avatar_female
-                else -> if (Random.nextBoolean()) R.drawable.default_avatar_male else R.drawable.default_avatar_female
-            }
-        )
+        Timber.i(url.toString())
+        view.setImageDrawable(defaultAvatarDrawable)
         view.setBackgroundResource(R.color.orange_50 )
         return
+    } else {
+        val circularProgressDrawable = CircularProgressDrawable(view.context)
+        circularProgressDrawable.strokeWidth = 5f
+        circularProgressDrawable.centerRadius = 30f
+        circularProgressDrawable.start()
+        Glide
+            .with(view.context)
+            .load(url)
+            .centerCrop()
+            .placeholder(circularProgressDrawable)
+            .error(defaultAvatarDrawable)
+            .into(view);
     }
-    val circularProgressDrawable = CircularProgressDrawable(view.context)
-    circularProgressDrawable.strokeWidth = 5f
-    circularProgressDrawable.centerRadius = 30f
-    circularProgressDrawable.start()
-    Glide
-        .with(view.context)
-        .load(url)
-        .centerCrop()
-        .placeholder(circularProgressDrawable)
-        .into(view);
+
+
 }
 
 @BindingAdapter("imageUrl", "gender")
 fun setImageUrlAvatarString(view: ImageView, url: String?, gender: Gender?) {
-    setImageUrlAvatarUri(view, url?.toUri(), gender)
+    val uri: Uri? = if(url.isNullOrBlank()) null else url.toUri()
+    setImageUrlAvatarUri(view, uri, gender)
 }
