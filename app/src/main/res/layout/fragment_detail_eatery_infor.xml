@@ -2,15 +2,16 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <data>
-
+        <variable
+            name="viewModel"
+            type="xyz.daijoubuteam.foodshoppingapp.client.home.detail_eatery.DetailEateryViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".client.home.detail_eatery_info.DetailEateryInforFragment">
+        tools:context=".client.home.detail_eatery.DetailEateryInforFragment">
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardAddressEatery"
             app:layout_constraintTop_toTopOf="parent"

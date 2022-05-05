@@ -106,5 +106,18 @@
             android:name="eaterySelected"
             app:argType="xyz.daijoubuteam.foodshoppingapp.model.Eatery">
         </argument>
+        <action
+            android:id="@+id/action_detailEateryFragment_to_detailEateryInforFragment"
+            app:destination="@id/detailEateryInforFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailEateryInforFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.home.detail_eatery.DetailEateryInforFragment"
+        android:label="DetailEateryInforFragment"
+        tools:layout="@layout/fragment_detail_eatery_infor">
+        <argument
+            android:name="eatery"
+            app:argType="xyz.daijoubuteam.foodshoppingapp.model.Eatery">
+        </argument>
     </fragment>
 </navigation>

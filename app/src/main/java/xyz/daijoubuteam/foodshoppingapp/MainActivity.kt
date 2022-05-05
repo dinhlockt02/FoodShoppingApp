@@ -1,6 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp
 
 import android.content.Intent
+import android.graphics.Color
 import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
@@ -16,6 +17,9 @@ import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.*
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -102,8 +106,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupHomeActionBar() {
+    private fun setupHomeActionBar(){
         setSupportActionBar(binding.homeToolbar)
-        supportActionBar?.hide()
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.navHomeFragment) as NavHostFragment
+        val navController = navHostFragment.findNavController()
+        val appBarConfiguration = AppBarConfiguration(navController.graph)
+        NavigationUI.setupWithNavController(binding.homeToolbar, navController, appBarConfiguration)
+        navController.addOnDestinationChangedListener { controller: NavController?, destination: NavDestination, arguments: Bundle? ->
+            binding.homeToolbar.setNavigationIcon(R.drawable.img_chevronleft)
+        }
     }
+
 }

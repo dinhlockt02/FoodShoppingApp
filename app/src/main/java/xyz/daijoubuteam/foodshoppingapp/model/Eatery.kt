@@ -1,6 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.model
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
+import com.google.firebase.firestore.GeoPoint
 
 @Parcelize
 data class Eatery (
@@ -12,5 +13,5 @@ data class Eatery (
     val description: String?=null,
     val reviews: ArrayList<String>?=null,
     val products: ArrayList<Product>?=null,
-    val image: String?=null
+    val image: String?=null,
 ): Parcelable

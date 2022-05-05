@@ -60,8 +60,4 @@ class HomeViewModel: ViewModel() {
     fun displayPropertyDetailEatery(eaterySelected: Eatery) {
         _navigateToSelectedEatery.value = eaterySelected
     }
-
-//    fun displayPropertyDetailEateryComplete() {
-//        _navigateToSelectedEatery.value = null
-//    }
 }

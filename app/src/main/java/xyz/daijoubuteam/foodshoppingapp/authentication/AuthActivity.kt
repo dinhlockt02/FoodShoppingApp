@@ -29,7 +29,6 @@ class AuthActivity : AppCompatActivity() {
         setupActionBar()
     }
 
-
     private fun setupActionBar(){
         binding.authToolbar.setTitleTextColor(Color.TRANSPARENT)
         setSupportActionBar(binding.authToolbar)
