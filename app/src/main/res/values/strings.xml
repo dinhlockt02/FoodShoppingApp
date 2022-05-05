@@ -133,4 +133,7 @@
     <string name="back_home_button">Back Home Button</string>
     <string name="thumbnail_eatery">thumbnail eatery</string>
     <string name="button_information_eatery">button information eatery</string>
+    <string name="save_button">save button</string>
+    <string name="opening_hours">Opening Hours</string>
+    <string name="contact_information">Contact Information</string>
 </resources>
