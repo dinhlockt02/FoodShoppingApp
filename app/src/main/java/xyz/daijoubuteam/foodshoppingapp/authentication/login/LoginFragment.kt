@@ -1,9 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.authentication.login
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +15,6 @@ import com.google.android.gms.auth.api.identity.GetSignInIntentRequest
 import com.google.android.gms.auth.api.identity.Identity
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.GoogleAuthProvider
-import timber.log.Timber
-import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentLoginBinding
 import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
@@ -45,8 +41,19 @@ class LoginFragment : Fragment() {
         setLoginResultObserver()
         setLoginWithGoogleButton()
         setupSoftKeyboardUI()
+        setupMessageObserver()
 
         return binding.root
+    }
+
+    private fun setupMessageObserver(){
+        viewmodel.message.observe(viewLifecycleOwner){
+            if(!it.isNullOrBlank()){
+                hideKeyboard()
+                Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
+                viewmodel.onShowMessageComplete()
+            }
+        }
     }
 
     private fun setNavigateToForgetPasswordObserver() {
@@ -79,18 +86,12 @@ class LoginFragment : Fragment() {
                 if (result.isSuccess) {
                     viewmodel.onLoginComplete()
                 } else if (result.isFailure) {
-                    hideKeyboard()
-                    Snackbar.make(
-                        this.requireView(),
-                        "${result.exceptionOrNull()?.message}",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    viewmodel.onShowMessage("${result.exceptionOrNull()?.message}")
                     viewmodel.onLoginComplete()
                 }
             }
         }
     }
-
 
     private fun signIn(){
         val request = GetSignInIntentRequest.builder()
@@ -103,22 +104,11 @@ class LoginFragment : Fragment() {
                     val intentSenderRequest = IntentSenderRequest.Builder(pendingIntent.intentSender).build()
                     activityResultLauncher.launch(intentSenderRequest)
                 } catch (exception: Exception){
-                    hideKeyboard()
-                    Snackbar.make(
-                        this.requireView(),
-                        "\"Couldn't start One Tap UI: ${exception.localizedMessage}\"",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                    Timber.i("\"Couldn't start One Tap UI: ${exception.localizedMessage}\"")
+                    viewmodel.onShowMessage("\"Couldn't start One Tap UI: ${exception.localizedMessage}\"")
                 }
             }
             .addOnFailureListener {
-                hideKeyboard()
-                Snackbar.make(
-                    this.requireView(),
-                    "\"Couldn't start One Tap UI: ${it.localizedMessage}\"",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                viewmodel.onShowMessage("\"Couldn't start One Tap UI: ${it.localizedMessage}\"")
             }
     }
 
