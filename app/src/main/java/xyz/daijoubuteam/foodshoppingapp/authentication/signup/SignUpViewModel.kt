@@ -15,9 +15,13 @@ import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
 class SignUpViewModel: ViewModel() {
     private val _navigateToLogin = MutableLiveData(false)
     private val authRepository = AuthRepository()
+    private val _message = MutableLiveData("")
 
     val navigateToLogin: LiveData<Boolean>
         get() = _navigateToLogin
+
+    val message: LiveData<String>
+        get() = _message
 
     fun onNavigateToLogin() {
         _navigateToLogin.value = true
@@ -50,7 +54,6 @@ class SignUpViewModel: ViewModel() {
         viewModelScope.launch {
             _signUpResult.value = authRepository.signupWithEmailAndPassword(email.value!!, password.value!!)
         }
-        onSignUpWithEmailAndPasswordComplete()
     }
 
     fun onSignUpWithGoogle(googleAuthCredential: AuthCredential){
@@ -59,11 +62,17 @@ class SignUpViewModel: ViewModel() {
         }
     }
 
-    fun onSignUpWithGoogleComplete(){
+
+    fun onSignUpComplete(){
         _signUpResult.value = null
     }
 
-    fun onSignUpWithEmailAndPasswordComplete(){
-       _signUpResult.value = null
+
+    fun onShowMessage(msg: String){
+        _message.value = msg
+    }
+
+    fun onShowMessageComplete(){
+        _message.value = ""
     }
 }

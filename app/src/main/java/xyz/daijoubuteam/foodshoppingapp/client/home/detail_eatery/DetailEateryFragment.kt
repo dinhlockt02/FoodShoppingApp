@@ -71,7 +71,6 @@ class DetailEateryFragment : Fragment() {
             findNavController().navigateUp()
         }
     }
-
     private fun handleClickButtonInfo() {
         binding.floatingActionInfo.setOnClickListener {
             this.findNavController().navigate(DetailEateryFragmentDirections.actionDetailEateryFragmentToDetailEateryInforFragment(eateryProperty))

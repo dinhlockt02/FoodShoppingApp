@@ -8,6 +8,7 @@ import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
@@ -44,23 +45,28 @@ class RequestUserInfoActivity : AppCompatActivity() {
     private fun updateUserInfo(){
         lifecycleScope.launch {
             auth.currentUser?.let {
-                val userResult = authRepository.getUserByUid(it.uid)
-                if (userResult.isFailure || userResult.getOrNull() == null) {
-                    auth.signOut()
-                    return@launch
+                try {
+                    val userResult = authRepository.getUserByUid(it.uid)
+                    if (userResult.isFailure || userResult.getOrNull() == null) {
+                        auth.signOut()
+                        return@launch
+                    }
+                    val user = userResult.getOrNull()!!
+                    user.firstname = binding.firstName.text?.trim().toString()
+                    user.lastname = binding.lastName.text?.trim().toString()
+                    user.phoneNumber = binding.phoneNumber.text?.trim().toString()
+                    user.gender = when(binding.genderRadioGroup.checkedRadioButtonId){
+                        R.id.gender_male -> Gender.MALE
+                        R.id.gender_female -> Gender.FEMALE
+                        else -> Gender.OTHER
+                    }
+                    user.isUserRegisterInformation = true
+                    user.photoUrl = null
+                    authRepository.updateUserInfo(user)
+                    isUserRegisterInformation.value = user.isUserRegisterInformation
+                } catch (e: Exception){
+                    Snackbar.make(binding.root, e.message.toString(), Snackbar.LENGTH_LONG).show()
                 }
-                val user = userResult.getOrNull()!!
-                user.firstname = binding.firstName.text?.trim().toString()
-                user.lastname = binding.lastName.text?.trim().toString()
-                user.phoneNumber = binding.phoneNumber.text?.trim().toString()
-                user.gender = when(binding.genderRadioGroup.checkedRadioButtonId){
-                    R.id.gender_male -> Gender.MALE
-                    R.id.gender_female -> Gender.FEMALE
-                    else -> Gender.OTHER
-                }
-                user.isUserRegisterInformation = true
-                authRepository.updateUserInfo(user)
-                isUserRegisterInformation.value = user.isUserRegisterInformation
             }
         }
     }

@@ -19,6 +19,7 @@ class LoginViewModel: ViewModel() {
     private val authRepository = AuthRepository()
     private val _loginResult = MutableLiveData<Result<User?>?>(null)
     private val _navigateToForgetPassword = MutableLiveData(false)
+    private val _message = MutableLiveData("")
 
     val loginResult: LiveData<Result<User?>?>
         get() = _loginResult
@@ -26,6 +27,8 @@ class LoginViewModel: ViewModel() {
         get() = _navigateToSignUp
     val navigateToForgetPassword: LiveData<Boolean>
         get() = _navigateToForgetPassword
+    val message: LiveData<String>
+        get() = _message
 
     val email =  MutableLiveData("")
     val password = MutableLiveData("")
@@ -70,5 +73,13 @@ class LoginViewModel: ViewModel() {
     fun onLoginComplete(){
         user = _loginResult.value?.getOrNull()
         _loginResult.value = null
+    }
+
+    fun onShowMessage(msg: String){
+        _message.value = msg
+    }
+
+    fun onShowMessageComplete(){
+        _message.value = ""
     }
 }

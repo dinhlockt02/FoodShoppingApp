@@ -43,10 +43,20 @@ class SignUpFragment : Fragment() {
         setSignUpResultObserver()
         setLoginWithGoogleButton()
         setupSoftKeyboardUI()
+        setupMessageObserver()
 
         return binding.root
     }
 
+    private fun setupMessageObserver(){
+        viewmodel.message.observe(viewLifecycleOwner){
+            if(!it.isNullOrBlank()){
+                hideKeyboard()
+                Snackbar.make(requireView(), it, Snackbar.LENGTH_LONG).show()
+                viewmodel.onShowMessageComplete()
+            }
+        }
+    }
 
     private fun setNavigateToLoginObserver() {
         viewmodel.navigateToLogin.observe(viewLifecycleOwner) {
@@ -61,20 +71,11 @@ class SignUpFragment : Fragment() {
         viewmodel.signUpResult.observe(viewLifecycleOwner) { result ->
             result?.let {
                 if (result.isSuccess) {
-                    hideKeyboard()
-                    Snackbar.make(
-                        this.requireView(),
-                        "Đăng ký thành công.",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    viewmodel.onShowMessage("Đăng ký thành công.")
                 } else if (result.isFailure) {
-                    hideKeyboard()
-                    Snackbar.make(
-                        requireView(),
-                        "${result.exceptionOrNull()?.localizedMessage}",
-                        Snackbar.LENGTH_LONG
-                    ).show()
+                    viewmodel.onShowMessage("${result.exceptionOrNull()?.localizedMessage}")
                 }
+                viewmodel.onSignUpComplete()
             }
         }
     }
@@ -107,22 +108,11 @@ class SignUpFragment : Fragment() {
                     val intentSenderRequest = IntentSenderRequest.Builder(pendingIntent.intentSender).build()
                     activityResultLauncher.launch(intentSenderRequest)
                 } catch (exception: Exception){
-                    hideKeyboard()
-                    hideKeyboard()
-                    Snackbar.make(
-                        this.requireView(),
-                        "\"Couldn't start One Tap UI: ${exception.localizedMessage}\"",
-                        Snackbar.LENGTH_SHORT
-                    ).show()
+                    viewmodel.onShowMessage("\"Couldn't start One Tap UI: ${exception.localizedMessage}\"")
                 }
             }
             .addOnFailureListener {
-                hideKeyboard()
-                Snackbar.make(
-                    this.requireView(),
-                    "\"Couldn't start One Tap UI: ${it.localizedMessage}\"",
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                viewmodel.onShowMessage("\"Couldn't start One Tap UI: ${it.localizedMessage}\"")
             }
     }
 
