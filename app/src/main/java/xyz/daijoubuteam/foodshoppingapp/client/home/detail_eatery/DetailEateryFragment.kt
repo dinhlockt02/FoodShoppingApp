@@ -6,12 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.ProductAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentDetailEateryBinding
 
 
 class DetailEateryFragment : Fragment() {
-    private lateinit var binding: FragmentDetailEateryBinding
+    private lateinit var binding: xyz.daijoubuteam.foodshoppingapp.databinding.FragmentDetailEateryBinding
     private val viewModel: DetailEateryViewModel by lazy {
         val application = requireNotNull(activity).application
         val eateryProperty = DetailEateryFragmentArgs.fromBundle(requireArguments()).eaterySelected
@@ -27,6 +28,7 @@ class DetailEateryFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         setupForYouProductListViewAdapter()
+        handleClickButtonHome()
         return binding.root
     }
 
@@ -37,6 +39,12 @@ class DetailEateryFragment : Fragment() {
             if (it != null) {
                 adapter.submitList(it.products)
             }
+        }
+    }
+
+    private fun handleClickButtonHome() {
+        binding.floatingActionButtonHome.setOnClickListener {
+            findNavController().navigateUp()
         }
     }
 }
