@@ -38,13 +38,43 @@
         <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/row_home3.xml" value="0.1" />
         <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/layout/the_items_layout.xml" value="0.25" />
         <entry key="..\:/Project/Android/FoodShoppingApp/app/src/main/res/menu/nav_bottom_menu.xml" value="0.25" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/drawable/bell_outline.xml" value="0.1545" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/drawable/button_chevron.xml" value="0.1545" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/drawable/circular_textview_notification.xml" value="0.1545" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/drawable/ic_outline_info_24.xml" value="0.1545" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/drawable/ic_profile.xml" value="0.1545" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/drawable/rectangle_bg_blue_a200_radius_6.xml" value="0.1545" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/drawable/rectangle_bg_bluegray_700_radius_2.xml" value="0.1545" />
         <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/account_auth.xml" value="0.12158054711246201" />
-        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/activity_auth.xml" value="0.12158054711246201" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/activity_auth.xml" value="0.176" />
         <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/activity_main.xml" value="0.12158054711246201" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/activity_request_user_info.xml" value="0.12158054711246201" />
         <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/activity_verify.xml" value="0.264" />
         <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/change_email_address.xml" value="0.264" />
-        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_login.xml" value="0.12158054711246201" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_add_new_address.xml" value="0.144" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_detail_eatery.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_detail_eatery_infor.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_feeds.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_forget_password.xml" value="0.176" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_home.xml" value="0.176" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_item_time_activity_eatery.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_login.xml" value="0.264" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_orders.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_orders_bag.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_orders_history.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_orders_on_going.xml" value="0.12158054711246201" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_orders_up_coming.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_profile.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_profile_address_edit.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_restaurant.xml" value="0.12158054711246201" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_saved.xml" value="0.12158054711246201" />
         <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/fragment_sign_up.xml" value="0.12158054711246201" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/item_category.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/item_cuisine.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/item_eatery.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/item_eatery2.xml" value="0.22826086956521738" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/item_orders.xml" value="0.12158054711246201" />
+        <entry key="..\:/Study/Mobile_Application_Intro/FoodShoppingApp/app/src/main/res/layout/layout_address_item.xml" value="0.22826086956521738" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/img_chevronleft.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/img_facebookicon.xml" value="0.1" />
