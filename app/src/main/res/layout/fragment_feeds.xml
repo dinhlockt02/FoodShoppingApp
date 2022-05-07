@@ -3,141 +3,195 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-        android:id="@+id/linearAccountAuth"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white_A700"
-        android:padding="24dp"
-        android:gravity="start"
-        android:orientation="vertical">
+        android:padding="24dp">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
+            android:id="@+id/linearCreateReview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:id="@id/imageChevronleft"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:scaleType="fitXY"
-                android:src="@drawable/img_chevronleft"
-                app:layout_constraintBottom_toBottomOf="@id/create_review"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/create_review"
-                tools:ignore="ContentDescription" />
-            <TextView
-                android:id="@+id/create_review"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/avenir_next_lt_pro"
-                android:text="@string/create_review"
-                android:textColor="@color/gray_700"
-                android:textFontWeight="500"
-                android:textSize="27sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/login_with_google_button"
+            android:layout_height="match_parent"
+            android:background="@color/white_A700"
             android:gravity="start"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_width="match_parent"
-            android:orientation="horizontal">
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@id/profile_user_avatar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:contentDescription="@string/user_profile_avatar"
-                tools:src="@drawable/default_avatar_male"
-                tools:background="@color/orange_50"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:scaleType="centerCrop"
-                app:shapeAppearanceOverlay="@style/circular_image" />
-            <TextView
-                android:layout_width="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toEndOf="@id/profile_user_avatar"
-                app:layout_constraintTop_toTopOf="@id/profile_user_avatar"
-                app:layout_constraintBottom_toBottomOf="@id/profile_user_avatar"
-                android:layout_marginStart="20dp"
-                tools:text="Đỗ Phú Quang"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="20sp"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:orientation="horizontal">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/select_eatery_edittext"
-            android:ellipsize="end"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginVertical="5dp"
-            android:padding="16dp"
-            android:singleLine="true"
-            android:textColorHint="@color/gray_500"
-            android:textSize="16sp"
-            android:textColor="@color/gray_800"
-            android:fontFamily="@font/avenir_next_lt_pro"
-            android:textFontWeight="400"
-            tools:ignore="RtlSymmetry"
-            tools:hint="Select Eatery" />
+                <ImageView
+                    android:id="@id/imageChevronleft"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_chevronleft"
+                    app:layout_constraintBottom_toBottomOf="@id/create_review"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/create_review"
+                    tools:ignore="ContentDescription" />
 
-        <ImageView
-            android:id="@+id/imgAvatar"
-            android:layout_height="200dp"
-            android:layout_width="match_parent"
-            android:layout_marginVertical="10dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/img_rectangle37"/>
+                <TextView
+                    android:id="@+id/create_review"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:text="@string/create_review"
+                    android:textColor="@color/gray_700"
+                    android:textFontWeight="500"
+                    android:textSize="27sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/reviewScrollView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:fillViewport="true"
+                android:orientation="vertical"
+                android:paddingBottom="32dp"
+                android:layout_marginTop="24dp"
+                app:layout_constraintVertical_bias="0.0">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/user_account"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@id/profile_user_avatar"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:contentDescription="@string/user_profile_avatar"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:shapeAppearanceOverlay="@style/circular_image"
+                            tools:background="@color/orange_50"
+                            tools:src="@drawable/default_avatar_male" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="20dp"
+                            android:textColor="@color/black"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="@id/profile_user_avatar"
+                            app:layout_constraintStart_toEndOf="@id/profile_user_avatar"
+                            app:layout_constraintTop_toTopOf="@id/profile_user_avatar"
+                            tools:text="Đỗ Phú Quang" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/select_eatery_edittext"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/user_account"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_marginVertical="5dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:padding="16dp"
+                        android:singleLine="true"
+                        android:textColor="@color/gray_800"
+                        android:textColorHint="@color/gray_500"
+                        android:textFontWeight="400"
+                        android:textSize="16sp"
+                        tools:hint="Select Eatery"
+                        tools:ignore="RtlSymmetry" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/description_text_input"
+                        android:hint="What do you think about this eatery?"
+                        app:layout_constraintTop_toBottomOf="@id/select_eatery_edittext"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:hintTextColor="@color/lightOrange"
+                        app:boxStrokeColor="@color/lightOrange"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:ellipsize="end"
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:padding="16dp"
+                        android:singleLine="false"
+                        android:textColorHint="@color/gray_500"
+                        android:textSize="16sp"
+                        android:textColor="@color/gray_800"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:textFontWeight="400"
+                        tools:ignore="RtlSymmetry"
+                        tools:targetApi="p"
+                        tools:text="Quán như cc" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                    <ImageView
+                        android:id="@+id/imgDescription"
+                        app:layout_constraintTop_toBottomOf="@id/description_text_input"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:layout_marginVertical="10dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_rectangle37" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btn_select_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintTop_toBottomOf="@id/imgDescription"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:background="@drawable/rectangle_bg_deep_orange_a200_radius_6"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:singleLine="true"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white_A700"
+                        android:textFontWeight="400"
+                        android:textSize="16sp"
+                        tools:ignore="UnusedAttribute"
+                        tools:text="select image" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.core.widget.NestedScrollView>
+
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_select_image"
-            android:layout_width="match_parent"
+            android:id="@+id/btn_confirm"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/rectangle_bg_deep_orange_a200_radius_6"
+            android:background="@drawable/rectangle_bg_blue_a200_radius_6"
             android:ellipsize="end"
             android:fontFamily="@font/avenir_next_lt_pro"
+            android:paddingHorizontal="40dp"
             android:singleLine="true"
-            tools:text="select image"
             android:textAllCaps="true"
             android:textColor="@color/white_A700"
             android:textFontWeight="400"
             android:textSize="16sp"
-            tools:ignore="UnusedAttribute" />
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="100dp">
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_confirm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/rectangle_bg_blue_a200_radius_6"
-                android:ellipsize="end"
-                android:fontFamily="@font/avenir_next_lt_pro"
-                android:singleLine="true"
-                tools:text="Confirm"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:textAllCaps="true"
-                android:paddingHorizontal="40dp"
-                android:textColor="@color/white_A700"
-                android:textFontWeight="400"
-                android:textSize="16sp"
-                tools:ignore="UnusedAttribute" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintBottom_toBottomOf="@id/linearCreateReview"
+            app:layout_constraintEnd_toEndOf="@id/linearCreateReview"
+            tools:ignore="UnusedAttribute"
+            tools:text="Confirm" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </LinearLayout>
 
 </layout>
