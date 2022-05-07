@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".client.ordercheckout.OrderCheckoutFragment">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollViewScrollOrderCheckout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/constraintTotalOrder"
+            android:clipToPadding="false"
+            android:fillViewport="true">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bluegray_51">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintDeliver"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintDeliverTo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textViewDeliverTo"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:text="Deliver to"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textViewDeliverChange"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textViewDeliverChange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:singleLine="true"
+                            android:text="Change"
+                            android:textColor="@color/deep_orange_A200"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/textViewDeliverAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:textColor="@color/bluegray_700"
+                        android:textFontWeight="500"
+                        android:textSize="18sp"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintDeliverTo"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        tools:text="A03 - Bến Tre, Đông Hoà, Dĩ An, Bình Dương, Vietnam" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/textViewDeliverAddress"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/imageClock"
+                            android:layout_height="wrap_content"
+                            android:layout_width="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/img_mdiaccesstime_5"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+                        <TextView
+                            android:id="@+id/textViewDeliverAt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:text="Deliver at - "
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@id/imageClock"
+                            app:layout_constraintStart_toEndOf="@id/imageClock"
+                            app:layout_constraintTop_toTopOf="@id/imageClock"/>
+
+                        <TextView
+                            android:id="@+id/textViewTimeDeliver"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@id/imageClock"
+                            app:layout_constraintEnd_toStartOf="@+id/textViewDeliverAtChange"
+                            app:layout_constraintStart_toEndOf="@id/textViewDeliverAt"
+                            app:layout_constraintTop_toTopOf="@id/imageClock"
+                            tools:text="10:00 AM" />
+                        <TextView
+                            android:id="@+id/textViewDeliverAtChange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:singleLine="true"
+                            android:text="Change"
+                            android:textColor="@color/deep_orange_A200"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@id/imageClock"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/imageClock"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintContact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraintDeliver">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintContactInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textViewContact"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:text="Contact"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textViewContactEdit"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textViewContactEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:singleLine="true"
+                            android:text="Edit"
+                            android:textColor="@color/deep_orange_A200"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/constraintContactInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent">
+                        <TextView
+                            android:id="@+id/textViewContactName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:text="Nguyen Nguyen Nguyen Nguyen"/>
+                        <TextView
+                            android:id="@+id/textViewContactComma"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:textColor="@color/bluegray_700"
+                            android:text=", "
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toEndOf="@id/textViewContactName"
+                            app:layout_constraintBottom_toBottomOf="@id/textViewContactName"
+                            app:layout_constraintTop_toTopOf="@id/textViewContactName"/>
+
+                        <TextView
+                            android:id="@+id/textViewPhoneNumber"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@id/textViewContactName"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/textViewContactComma"
+                            app:layout_constraintTop_toTopOf="@id/textViewContactName"
+                            tools:text="1234567890" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintOrder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraintContact">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintOrderSum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textViewOrderSum"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:text="Order sumamary"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="24sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/textViewOrderAddMore"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/textViewOrderAddMore"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:singleLine="true"
+                            android:text="Add more"
+                            android:textColor="@color/deep_orange_A200"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewOrders"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="0dp"
+                        android:nestedScrollingEnabled="false"
+                        android:orientation="vertical"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/constraintOrderSum"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/item_product" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintSubtotal"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/recyclerViewOrders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:id="@+id/textViewSubtotalTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:text="Subtotal"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/textViewSubtotalPrice"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_marginEnd="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@id/textViewSubtotalTitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/textViewSubtotalTitle"
+                            app:layout_constraintTop_toTopOf="@id/textViewSubtotalTitle"
+                            tools:text="$ 15.00"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/constraintSubtotal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent">
+                        <TextView
+                            android:id="@+id/textViewShippingFeeTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:text="Shipping fee"
+                            android:textSize="16sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"/>
+
+                        <TextView
+                            android:id="@+id/textViewShippingFeeTotal"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:layout_marginEnd="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@id/textViewShippingFeeTitle"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/textViewShippingFeeTitle"
+                            app:layout_constraintTop_toTopOf="@id/textViewShippingFeeTitle"
+                            tools:text="$ 1.00"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintPaymentMethod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraintOrder">
+                    <TextView
+                        android:id="@+id/textViewPaymentMethodTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginEnd="24dp"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:text="Payment Method"
+                        android:textColor="@color/bluegray_700"
+                        android:textFontWeight="500"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <RadioGroup
+                        android:id="@+id/radioGroupPaymentMethod"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/textViewPaymentMethodTitle"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+
+                        <RadioButton
+                            android:id="@+id/cashPayment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginEnd="12dp"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:gravity="center"
+                            android:background="@drawable/radio_flat_selector"
+                            android:text="Cash"
+                            android:button="@android:color/transparent"
+                            android:textColor="@color/radio_flat_text_selector" />
+
+                        <RadioButton
+                            android:id="@+id/cardPayment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="12dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Card"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_flat_selector"
+                            android:textColor="@color/radio_flat_text_selector" />
+
+                        <RadioButton
+                            android:id="@+id/otherPayment"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="Other"
+                            android:button="@android:color/transparent"
+                            android:background="@drawable/radio_flat_selector"
+                            android:textColor="@color/radio_flat_text_selector" />
+                    </RadioGroup>
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/radioGroupPaymentMethod">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/textInputPromo"
+                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="10dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:hint="Promo Code or Voucher"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@+id/btnApplyVoucher"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </com.google.android.material.textfield.TextInputLayout>
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnApplyVoucher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangle_bg_deep_orange_a200_radius_6"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:gravity="center"
+                            android:layout_marginEnd="24dp"
+                            android:singleLine="true"
+                            android:text="Apply"
+                            android:textAllCaps="true"
+                            android:textColor="@color/white_A700"
+                            android:textFontWeight="400"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="UnusedAttribute" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintTotalOrder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="24dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintTotalPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/textViewTotal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:text="Total"
+                        android:textColor="@color/bluegray_700"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/textViewTotalPrice"
+                        android:gravity="end"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/avenir_next_lt_pro"
+                        android:singleLine="true"
+                        android:textColor="@color/deep_orange_A200"
+                        android:textFontWeight="500"
+                        android:textSize="22sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textViewTotal"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="$ 16.00" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSignIn"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:singleLine="true"
+                    android:text="PLACE ORDER"
+                    android:textAllCaps="true"
+                    android:textSize="16sp"
+                    android:textFontWeight="400"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:textColor="@color/white_A700"
+                    android:background="@drawable/rectangle_bg_deep_orange_a200_radius_6"
+                    tools:ignore="UnusedAttribute"/>
+            </LinearLayout>
+                
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
