@@ -136,4 +136,7 @@
     <string name="save_button">save button</string>
     <string name="opening_hours">Opening Hours</string>
     <string name="contact_information">Contact Information</string>
+    <string name="image_product">image product</string>
+    <string name="total">Total</string>
+    <string name="_0">0</string>
 </resources>

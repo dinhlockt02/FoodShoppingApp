@@ -13,10 +13,8 @@
         <action
             android:id="@+id/action_homeFragment_to_detailEateryFragment"
             app:destination="@id/detailEateryFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out"/>
+            app:enterAnim="@anim/pop_up"
+            app:popExitAnim="@anim/pop_down" />
     </fragment>
     <fragment
         android:id="@+id/feedsFragment"
@@ -108,7 +106,16 @@
         </argument>
         <action
             android:id="@+id/action_detailEateryFragment_to_detailEateryInforFragment"
-            app:destination="@id/detailEateryInforFragment" />
+            app:destination="@id/detailEateryInforFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_out_right"
+            app:popExitAnim="@anim/slide_in_left" />
+        <action
+            android:id="@+id/action_detailEateryFragment_to_productToBagFragment"
+            app:destination="@id/productToBagFragment"
+            app:enterAnim="@anim/pop_up"
+            app:popExitAnim="@anim/pop_down" />
     </fragment>
     <fragment
         android:id="@+id/detailEateryInforFragment"
@@ -118,6 +125,16 @@
         <argument
             android:name="eatery"
             app:argType="xyz.daijoubuteam.foodshoppingapp.model.Eatery">
+        </argument>
+    </fragment>
+    <fragment
+        android:id="@+id/productToBagFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.home.product_to_bag.ProductToBagFragment"
+        android:label="ProductToBagFragment"
+        tools:layout="@layout/fragment_product_to_bag">
+        <argument
+            android:name="product"
+            app:argType="xyz.daijoubuteam.foodshoppingapp.model.Product">
         </argument>
     </fragment>
 </navigation>

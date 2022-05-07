@@ -46,17 +46,7 @@ class DetailEateryFragment : Fragment() {
 
     private fun setupForYouProductListViewAdapter() {
         binding.forYouProductRecyclerView.adapter = ProductAdapter(ProductAdapter.OnClickListener{
-            context?.let { it ->
-                InfoSheet().show(it) {
-                    title("Add Item")
-                    displayNegativeButton(false)
-                    positiveButtonStyle(ButtonStyle.NORMAL)
-                    onPositive("Install") {
-                        // Handle event
-                    }
-                    customView(R.layout.fragment_item_time_activity_eatery)
-                }
-            }
+            findNavController().navigate(DetailEateryFragmentDirections.actionDetailEateryFragmentToProductToBagFragment(it))
         })
         val adapter = binding.forYouProductRecyclerView.adapter as ProductAdapter
         viewModel.selectedProperty.observe(viewLifecycleOwner) {
@@ -73,7 +63,7 @@ class DetailEateryFragment : Fragment() {
     }
     private fun handleClickButtonInfo() {
         binding.floatingActionInfo.setOnClickListener {
-            this.findNavController().navigate(DetailEateryFragmentDirections.actionDetailEateryFragmentToDetailEateryInforFragment(eateryProperty))
+            findNavController().navigate(DetailEateryFragmentDirections.actionDetailEateryFragmentToDetailEateryInforFragment(eateryProperty))
         }
     }
 }

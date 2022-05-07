@@ -58,11 +58,6 @@
                     app:pressedTranslationZ="0dp"
                     app:srcCompat="@drawable/ic_saved"
                     app:fabSize="mini"/>
-                    app:backgroundTint="@android:color/transparent"
-                    app:borderWidth="0dp"
-                    app:elevation="0dp"
-                    app:pressedTranslationZ="0dp"
-                    app:srcCompat="@drawable/img_roundfavorite"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
         <ImageView
@@ -129,64 +124,6 @@
                 android:text="@{viewModel.selectedProperty.name}"
                 tools:ignore="HardcodedText,UnusedAttribute" />
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintTag"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_width="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvProductName"
-                app:layout_constraintBottom_toTopOf="@id/constraintInfo">
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnFastFood"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:layout_height="25dp"
-                    android:layout_width="70dp"
-                    android:paddingVertical="5dp"
-                    android:paddingHorizontal="8dp"
-                    android:layout_margin="4dp"
-                    android:singleLine="true"
-                    android:text="@string/lbl_fastfood"
-                    android:textAllCaps="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:background="@drawable/rectangle_bg_gray_202_radius_4"
-                    android:textSize="12sp"
-                    android:textColor="@color/bluegray_700"
-                    android:fontFamily="@font/avenir_next_lt_pro"
-                    android:textFontWeight="500"
-                    tools:ignore="UnusedAttribute" />
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnWesternCuisine"
-                    android:ellipsize="end"
-                    android:gravity="center"
-                    android:layout_height="25dp"
-                    android:layout_marginEnd="145dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_width="104dp"
-                    android:paddingVertical="5dp"
-                    android:paddingHorizontal="8dp"
-                    android:layout_margin="4dp"
-                    android:singleLine="true"
-                    android:textAllCaps="false"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.03"
-                    app:layout_constraintStart_toEndOf="@+id/btnFastFood"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:background="@drawable/rectangle_bg_gray_202_radius_4"
-                    android:textSize="12sp"
-                    android:textColor="@color/bluegray_700"
-                    android:fontFamily="@font/avenir_next_lt_pro"
-                    android:textFontWeight="500"
-                    android:text="Western cuisine"
-                    tools:ignore="HardcodedText,UnusedAttribute" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintInfo"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
@@ -196,7 +133,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintTag">
+                app:layout_constraintTop_toBottomOf="@id/tvProductName">
                 <ImageView android:id="@+id/imageMdiaccesstime"
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"

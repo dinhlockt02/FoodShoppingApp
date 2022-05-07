@@ -53,6 +53,7 @@
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_indigo_500_radius_6 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_white_a700_radius_4 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bell_outline.xml" value="0.147" />
+        <entry key="app/src/main/res/drawable/border_edit_text.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/button_chevron.xml" value="0.1965" />
         <entry key="app/src/main/res/drawable/camera_outline.xml" value="0.1405" />
         <entry key="app/src/main/res/drawable/circular_textview.xml" value="0.147" />
@@ -100,7 +101,7 @@
         <entry key="app/src/main/res/layout/change_email_address.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_add_new_address.xml" value="0.2151268115942029" />
         <entry key="app/src/main/res/layout/fragment_collection_object.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_detail_eatery.xml" value="0.42162162162162165" />
+        <entry key="app/src/main/res/layout/fragment_detail_eatery.xml" value="0.2578875171467764" />
         <entry key="app/src/main/res/layout/fragment_detail_eatery_info.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/fragment_detail_eatery_infor.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_feeds.xml" value="0.2151268115942029" />
@@ -114,6 +115,7 @@
         <entry key="app/src/main/res/layout/fragment_orders_history.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_orders_on_going.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_orders_up_coming.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_product_to_bag.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.11991577148437499" />
         <entry key="app/src/main/res/layout/fragment_profile_address_edit.xml" value="0.22010025287230084" />
         <entry key="app/src/main/res/layout/fragment_request_user_info.xml" value="0.25769927536231885" />
