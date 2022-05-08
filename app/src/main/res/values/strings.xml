@@ -137,4 +137,9 @@
     <string name="opening_hours">Opening Hours</string>
     <string name="contact_information">Contact Information</string>
     <string name="create_review">Create Review</string>
+    <string name="what_do_you_think_about_this_eatery">What do you think about this eatery?</string>
+    <string name="post">Post</string>
+    <string name="description_image">Description image</string>
+    <string name="edit_review">Edit Review</string>
+    <string name="confirm">Confirm</string>
 </resources>

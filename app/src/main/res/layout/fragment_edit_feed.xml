@@ -29,18 +29,18 @@
                     android:layout_height="24dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/img_chevronleft"
-                    app:layout_constraintBottom_toBottomOf="@id/create_review"
+                    app:layout_constraintBottom_toBottomOf="@id/edit_review"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/create_review"
+                    app:layout_constraintTop_toTopOf="@id/edit_review"
                     tools:ignore="ContentDescription" />
 
                 <TextView
-                    android:id="@+id/create_review"
+                    android:id="@+id/edit_review"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/avenir_next_lt_pro"
-                    android:text="@string/create_review"
+                    android:text="@string/edit_review"
                     android:textColor="@color/gray_700"
                     android:textFontWeight="500"
                     android:textSize="27sp"
@@ -55,7 +55,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
                 <androidx.core.widget.NestedScrollView
-                    android:id="@+id/reviewScrollView"
+                    android:id="@id/reviewScrollView"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
@@ -195,7 +195,7 @@
                     android:textFontWeight="400"
                     android:textSize="16sp"
                     tools:ignore="UnusedAttribute"
-                    android:text="@string/post" />
+                    android:text="@string/confirm" />
             </LinearLayout>
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
