@@ -6,6 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white_A700"
         android:padding="24dp">
 
         <LinearLayout
@@ -90,8 +91,8 @@
                                 app:layout_constraintStart_toStartOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:shapeAppearanceOverlay="@style/circular_image"
-                                tools:background="@color/orange_50"
-                                tools:src="@drawable/default_avatar_male" />
+                                android:background="@color/orange_50"
+                                android:src="@drawable/default_avatar_male" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -102,7 +103,8 @@
                                 app:layout_constraintBottom_toBottomOf="@id/profile_user_avatar"
                                 app:layout_constraintStart_toEndOf="@id/profile_user_avatar"
                                 app:layout_constraintTop_toTopOf="@id/profile_user_avatar"
-                                tools:text="Đỗ Phú Quang" />
+                                android:text="Đỗ Phú Quang"
+                                tools:ignore="HardcodedText"/>
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -120,7 +122,7 @@
                             android:textColorHint="@color/gray_500"
                             android:textFontWeight="400"
                             android:textSize="16sp"
-                            tools:hint="Select Eatery"
+                            android:hint="@string/select_eatery"
                             tools:ignore="RtlSymmetry" />
                         <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
@@ -173,7 +175,7 @@
                             android:textFontWeight="400"
                             android:textSize="16sp"
                             tools:ignore="UnusedAttribute"
-                            tools:text="select image" />
+                            android:text="@string/select_image" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.core.widget.NestedScrollView>
                 <androidx.appcompat.widget.AppCompatButton

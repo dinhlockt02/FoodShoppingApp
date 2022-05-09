@@ -142,4 +142,6 @@
     <string name="description_image">Description image</string>
     <string name="edit_review">Edit Review</string>
     <string name="confirm">Confirm</string>
+    <string name="select_image">select image</string>
+    <string name="select_eatery">Select Eatery</string>
 </resources>
