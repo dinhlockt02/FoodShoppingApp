@@ -15,6 +15,9 @@
             app:destination="@id/detailEateryFragment"
             app:enterAnim="@anim/pop_up"
             app:popExitAnim="@anim/pop_down" />
+        <action
+            android:id="@+id/action_homeFragment_to_verticalListEateryFragment"
+            app:destination="@id/verticalListEateryFragment" />
     </fragment>
     <fragment
         android:id="@+id/feedsFragment"
@@ -136,5 +139,14 @@
             android:name="product"
             app:argType="xyz.daijoubuteam.foodshoppingapp.model.Product">
         </argument>
+    </fragment>
+    <fragment
+        android:id="@+id/verticalListEateryFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.home.vertical_list_eateries.VerticalListEateryFragment"
+        android:label="fragment_vertical_list_eatery"
+        tools:layout="@layout/fragment_vertical_list_eatery" >
+        <action
+            android:id="@+id/action_verticalListEateryFragment_to_detailEateryFragment"
+            app:destination="@id/detailEateryFragment" />
     </fragment>
 </navigation>

@@ -1,6 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.utils.BindingAdapter
 
 import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.view.View
 import android.widget.ImageView
@@ -8,6 +9,7 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.model.Gender
@@ -73,4 +75,18 @@ fun setImageUrlAvatarUri(view: ImageView, url: Uri?, gender: Gender?) {
 fun setImageUrlAvatarString(view: ImageView, url: String?, gender: Gender?) {
     val uri: Uri? = if(url.isNullOrBlank()) null else url.toUri()
     setImageUrlAvatarUri(view, uri, gender)
+}
+
+@BindingAdapter("imageUrl")
+fun setImageUrlDrawable(view: ImageView, url: String?) {
+    val circularProgressDrawable = CircularProgressDrawable(view.context)
+    circularProgressDrawable.strokeWidth = 5f
+    circularProgressDrawable.centerRadius = 30f
+    circularProgressDrawable.start()
+    Glide
+        .with(view.context)
+        .load(url)
+        .centerCrop()
+        .placeholder(circularProgressDrawable)
+        .into(view);
 }

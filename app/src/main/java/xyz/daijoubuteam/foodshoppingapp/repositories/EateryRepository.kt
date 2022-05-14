@@ -1,10 +1,12 @@
 package xyz.daijoubuteam.foodshoppingapp.repositories
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.Category
 import xyz.daijoubuteam.foodshoppingapp.model.Cuisine
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
@@ -19,6 +21,7 @@ class EateryRepository {
             val docRef = db.collection("eateries")
             docRef.addSnapshotListener { value, error ->
                 eateries.value = value?.toObjects(Eatery::class.java)
+                Timber.i(eateries.value?.get(0)?.addressEatery.toString())
             }
             Result.success(eateries)
         }catch (e: Exception){

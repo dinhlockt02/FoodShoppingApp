@@ -1,6 +1,9 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home
 
+import android.annotation.SuppressLint
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,14 +13,18 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CategoryAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.EateryAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentHomeBinding
+import java.util.*
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
+
     private val viewModel: HomeViewModel by lazy {
         val factory = HomeViewModelFactory()
         ViewModelProvider(this, factory)[HomeViewModel::class.java]

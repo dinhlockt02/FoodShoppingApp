@@ -1,8 +1,12 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home
 
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.withContext
 import xyz.daijoubuteam.foodshoppingapp.model.Category
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 import xyz.daijoubuteam.foodshoppingapp.model.User

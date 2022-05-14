@@ -21,7 +21,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgAvatar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             app:shapeAppearanceOverlay="@style/topRoundedImageView"
@@ -29,8 +29,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/constraintGroup4"
-            app:srcCompat="@drawable/img_rectangle15"
-            tools:src="@drawable/img_rectangle15" />
+            app:imageUrl="@{eatery.photoUrl}"
+            />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintGroup4"
@@ -198,7 +198,7 @@
                 android:textSize="12sp"
                 android:fontFamily="@font/avenir_next_lt_pro"
                 android:textFontWeight="500"
-                android:text="@{eatery.address}"
+                android:text="@{eatery.addressEatery.address}"
                 tools:text="@string/msg_chapel_ln_harr"
                 tools:ignore="UnusedAttribute" />
         </androidx.constraintlayout.widget.ConstraintLayout>

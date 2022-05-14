@@ -19,7 +19,6 @@ class UserRepository {
     private val db = Firebase.firestore
     private val storage = Firebase.storage
 
-
     suspend fun getCurrentUser():Result<User?>{
         return try {
             val uid = auth.currentUser?.uid
@@ -28,7 +27,6 @@ class UserRepository {
             val documentSnapShot = docRef.get().await()
             val users = documentSnapShot.toObject<User>()
             Result.success(users)
-
         }catch (exception: Exception){
             Result.failure(exception)
         }
