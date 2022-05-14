@@ -1,6 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home
 
 import android.annotation.SuppressLint
+import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -24,7 +25,7 @@ import java.util.*
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-
+    var location: Location? = null
     private val viewModel: HomeViewModel by lazy {
         val factory = HomeViewModelFactory()
         ViewModelProvider(this, factory)[HomeViewModel::class.java]
@@ -41,9 +42,10 @@ class HomeFragment : Fragment() {
         hideActionBar()
         setupPopularEateryListViewAdapter()
         setupCategoryListViewAdapter()
-        //setupNearbyEateryListViewAdapter()
+        location = (requireActivity() as? MainActivity)?.userLocation
+        binding.txtUserAddress.text =
+            location?.let { getCityName(it.latitude, it.longitude) }
         setupOnAvatarClickListener()
-
         viewModel.navigateToSelectedEatery.observe(viewLifecycleOwner, Observer {
             if(it != null) {
                 this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailEateryFragment(it))
@@ -56,6 +58,11 @@ class HomeFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     private fun setupPopularEateryListViewAdapter() {
@@ -99,5 +106,11 @@ class HomeFragment : Fragment() {
 
     private fun hideActionBar() {
         (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
+    }
+
+    private fun getCityName(lat: Double,long: Double):String{
+        val geoCoder = Geocoder(context, Locale.getDefault())
+        val Adress = geoCoder.getFromLocation(lat,long,3)
+        return Adress[0].getAddressLine(0)
     }
 }

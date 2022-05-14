@@ -106,7 +106,7 @@
         <entry key="app/src/main/res/layout/fragment_detail_eatery_infor.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_feeds.xml" value="0.2151268115942029" />
         <entry key="app/src/main/res/layout/fragment_forget_password.xml" value="0.13958333333333334" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_item_time_activity_eatery.xml" value="0.23620045979817716" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25161590576171877" />
         <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.13958333333333334" />
@@ -146,5 +146,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.35704125177809387" />
+      </ProjectState>
+    </option>
   </component>
 </project>

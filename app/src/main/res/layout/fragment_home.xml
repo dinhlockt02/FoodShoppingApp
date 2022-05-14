@@ -80,37 +80,39 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintHello">
 
                     <TextView
-                        android:id="@+id/txtNorthBridgeH"
+                        android:id="@+id/txtUserAddress"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginStart="20dp"
+                        android:layout_marginEnd="150dp"
                         android:ellipsize="end"
                         android:fontFamily="@font/avenir_next_lt_pro"
                         android:gravity="start"
                         android:singleLine="true"
-                        android:text="@string/msg_north_bridge_h"
+                        app:flow_wrapMode="chain2"
                         android:textColor="@color/gray_500"
                         android:textFontWeight="500"
                         android:textSize="15sp"
-                        app:layout_constraintEnd_toStartOf="@+id/imageChevrondown"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="UnusedAttribute"
-                        tools:text="@string/msg_north_bridge_h" />
-                    <ImageView
-                        android:id="@+id/imageChevrondown"
-                        android:layout_height="17dp"
-                        android:layout_marginEnd="185dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_width="17dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/img_chevronright"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.02"
-                        app:layout_constraintStart_toEndOf="@+id/txtNorthBridgeH"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UnusedAttribute" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnLocation"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:insetLeft="0dp"
+                        android:insetTop="0dp"
+                        android:insetRight="0dp"
+                        android:insetBottom="0dp"
+                        app:icon="@drawable/img_chevronright"
+                        app:iconTint="@color/primaryColor"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/txtUserAddress"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <!--                Search-->
                 <EditText

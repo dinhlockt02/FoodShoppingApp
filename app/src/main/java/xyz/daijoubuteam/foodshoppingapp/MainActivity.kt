@@ -5,27 +5,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.location.*
-import android.opengl.Visibility
-import android.os.Build
-import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
+import android.os.*
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.location.LocationManagerCompat.getCurrentLocation
-import androidx.core.view.contains
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.*
@@ -37,24 +24,17 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.authentication.AuthActivity
 import xyz.daijoubuteam.foodshoppingapp.authentication.RequestUserInfoActivity
 import xyz.daijoubuteam.foodshoppingapp.authentication.VerifyActivity
-import xyz.daijoubuteam.foodshoppingapp.client.profile.address.selectlocation.SelectLocationFragment
 import xyz.daijoubuteam.foodshoppingapp.databinding.ActivityMainBinding
 import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
+import com.google.android.gms.location.*
+import com.google.android.gms.location.LocationRequest
+import xyz.daijoubuteam.foodshoppingapp.client.home.HomeFragment
 import java.util.*
 
 class MainActivity() : AppCompatActivity() {
@@ -64,16 +44,18 @@ class MainActivity() : AppCompatActivity() {
     private val authRepository = AuthRepository()
     private val isUserRegisterInformation = MutableLiveData<Boolean?>(null)
     private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var _userLocation: Location? = null
+    val userLocation
+            get () = _userLocation
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         //set up location
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
+        getLastLocation()
         addAuthStateListener()
         setupHomeActionBar()
-        requestLocationPermission()
     }
 
     override fun onStart() {
@@ -142,39 +124,75 @@ class MainActivity() : AppCompatActivity() {
         }
     }
 
-    //handle location
-
-
-    private fun isLocationPermissionGranted() = ContextCompat.checkSelfPermission(
-        this.applicationContext,
-        Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-        this,
-        Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-        || Build.VERSION.SDK_INT < 24
-
-    private fun requestLocationPermission() {
-        if(isLocationPermissionGranted())
-            return;
-        else
-            requestLocationPermission.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
-    }
-
-    @SuppressLint("MissingPermission")
-    private val requestLocationPermission = registerForActivityResult(
-        ActivityResultContracts.RequestPermission(),
-    ) { isGranted ->
-        if (isGranted) {
-
-        } else {
-
+    //Get current user location
+    private fun checkPermission():Boolean{
+        if(ActivityCompat.checkSelfPermission(
+                this,Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(
+                this,Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+        ){
+            return true
         }
+        return false
     }
 
-    private fun isLocationEnabled(): Boolean {
-        val locationManager: LocationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager;
+    private fun requestPermission(){
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION),
+            100
+        )
+    }
+
+    private fun isLocationEnabled():Boolean{
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) ||
                 locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
     }
 
+    @SuppressLint("MissingPermission")
+    fun getLastLocation(){
+        if(checkPermission()){
+            if(isLocationEnabled()){
+                fusedLocationClient.lastLocation.addOnCompleteListener {task->
+                    val location:Location? = task.result
+                    if(location == null){
+                        newLocationData()
+                    }else{
+                        _userLocation = location
+                        //textView.text = "You Current Location is : Long: "+ location.longitude + " , Lat: " + location.latitude + "\n" + getCityName(location.latitude,location.longitude)
+                    }
+                }
+            }else{
+                Toast.makeText(this,"Please Turn on Your device Location",Toast.LENGTH_SHORT).show()
+            }
+        }else{
+            requestPermission()
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun newLocationData(){
+        val locationRequest: LocationRequest = LocationRequest.create().apply {
+            priority = PRIORITY_HIGH_ACCURACY
+            interval = 0
+            fastestInterval = 0
+            numUpdates = 1
+        }
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        Looper.myLooper()?.let {
+            fusedLocationClient.requestLocationUpdates(
+                locationRequest,locationCallback, it
+            )
+        }
+    }
+
+
+    private val locationCallback = object : LocationCallback(){
+        override fun onLocationResult(locationResult: LocationResult) {
+            val lastLocation: Location = locationResult.lastLocation
+            _userLocation = lastLocation
+        }
+    }
 }
 

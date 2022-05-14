@@ -1,5 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home
 
+import android.location.Geocoder
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,16 +9,18 @@ import androidx.lifecycle.ViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import kotlinx.coroutines.withContext
+import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.model.Category
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.EateryRepository
+import java.util.*
 
 class HomeViewModel: ViewModel() {
     private val eateryRepository = EateryRepository()
     lateinit var eateryList: LiveData<List<Eatery>>
     lateinit var categoryList: LiveData<List<Category>>
-
+    private var _location: Location? = null
     private var _notification = MutableLiveData(0)
     val notification
         get() = _notification
@@ -37,6 +41,7 @@ class HomeViewModel: ViewModel() {
     private fun onShowError(msg: String?){
         this._errMessage.value = msg
     }
+
 
     private fun getPopularEateryList() {
         val eateryListResult = eateryRepository.getListEatery()
@@ -64,4 +69,5 @@ class HomeViewModel: ViewModel() {
     fun displayPropertyDetailEatery(eaterySelected: Eatery) {
         _navigateToSelectedEatery.value = eaterySelected
     }
+
 }
