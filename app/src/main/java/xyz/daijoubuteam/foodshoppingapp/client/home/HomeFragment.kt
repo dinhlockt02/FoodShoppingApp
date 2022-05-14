@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
@@ -43,7 +44,16 @@ class HomeFragment : Fragment() {
                 viewModel.onNavigateToSelectedEateryComplete()
             }
         })
+
+        setupNavigateToSearchFragment()
+
         return binding.root
+    }
+
+    private fun setupNavigateToSearchFragment() {
+        binding.btnSearch.setOnClickListener {
+            this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment())
+        }
     }
 
     override fun onStart() {

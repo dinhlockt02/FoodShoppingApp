@@ -113,32 +113,25 @@
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <!--                Search-->
-                <EditText
-                    android:id="@+id/etSearchForRest"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSearch"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="20dp"
-                    android:background="@drawable/rectangle_bg_gray_100_border_gray_301_radius_8"
-                    android:drawableStart="@drawable/img_search"
-                    android:drawablePadding="10dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/avenir_next_lt_pro"
-                    android:hint="@string/msg_search_for_rest"
-                    android:paddingStart="10dp"
-                    android:paddingTop="11dp"
-                    android:paddingBottom="11dp"
-                    android:singleLine="true"
-                    android:textColor="@color/gray_500"
-                    android:textColorHint="@color/gray_500"
-                    android:textFontWeight="500"
-                    android:textSize="15sp"
+                    style="@style/Widget.Material3.Button.OutlinedButton.Icon"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
+                    app:icon="@drawable/img_search"
+                    app:iconTint="@color/black"
+                    android:text="Search for eateries"
+                    android:textSize="20dp"
+                    android:gravity="start"
+                    app:strokeColor="@color/primaryColor"
+                    android:textColor="@color/black"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintPlace"
-                    tools:ignore="RtlSymmetry,UnusedAttribute" />
+                    app:layout_constraintTop_toBottomOf="@+id/constraintPlace" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
 
