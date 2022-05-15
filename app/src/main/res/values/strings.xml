@@ -54,6 +54,7 @@
     <string name="gender_male">male</string>
     <string name="gender_female">female</string>
     <string name="gender_other">other</string>
+    <string name="bag">Bag</string>
     <string name="feeds">Feeds</string>
     <string name="your_gender">Your gender</string>
     <string name="user_profile_avatar">User Profile Avatar</string>

@@ -21,9 +21,9 @@
     </fragment>
     <fragment
         android:id="@+id/feedsFragment"
-        android:name="xyz.daijoubuteam.foodshoppingapp.client.feeds.FeedsFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.bag.FeedsFragment"
         android:label="fragment_feeds"
-        tools:layout="@layout/fragment_feeds" />
+        tools:layout="@layout/fragment_bag" />
     <fragment
         android:id="@+id/ordersFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.OrdersFragment"

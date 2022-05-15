@@ -1,18 +1,12 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemCuisineBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Cuisine
-import xyz.daijoubuteam.foodshoppingapp.model.Orders
-import java.util.ArrayList
 
 class CuisineAdapter : ListAdapter<Cuisine, CuisineAdapter.CuisineViewHolder>(DiffCallBack) {
     class CuisineViewHolder(private var binding : ItemCuisineBinding): RecyclerView.ViewHolder(binding.root){
