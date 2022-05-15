@@ -47,4 +47,5 @@ class CarouselAdapter: ListAdapter<Carousel, CarouselAdapter.CarouselViewHolder>
 //        }
         holder.bind(carouselItem)
     }
+
 }

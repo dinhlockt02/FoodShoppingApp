@@ -4,5 +4,4 @@ class OrderItem (
     val productId: String?=null,
     val quantity: Int?=null,
     val price: Long?=null,
-    val img: String?=null
 )
