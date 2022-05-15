@@ -58,7 +58,9 @@ class MainActivity() : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         //set up location
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        getLastLocation()
+        if(auth.currentUser != null) {
+            getLastLocation()
+        }
         addAuthStateListener()
         setupHomeActionBar()
 
