@@ -21,7 +21,6 @@ class EateryRepository {
             val docRef = db.collection("eateries")
             docRef.addSnapshotListener { value, error ->
                 eateries.value = value?.toObjects(Eatery::class.java)
-                Timber.i(eateries.value?.get(0)?.addressEatery.toString())
             }
             Result.success(eateries)
         }catch (e: Exception){

@@ -7,6 +7,9 @@
         <variable
             name="eatery"
             type="xyz.daijoubuteam.foodshoppingapp.model.Eatery" />
+        <variable
+            name="distance"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:singleLine="true"
-
+                    android:text="@{distance}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/imageStar1"
                     app:layout_constraintHorizontal_bias="0.11"

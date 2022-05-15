@@ -10,7 +10,10 @@ import android.os.*
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.window.Dialog
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
@@ -34,8 +37,10 @@ import xyz.daijoubuteam.foodshoppingapp.databinding.ActivityMainBinding
 import xyz.daijoubuteam.foodshoppingapp.repositories.AuthRepository
 import com.google.android.gms.location.*
 import com.google.android.gms.location.LocationRequest
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.client.home.HomeFragment
 import java.util.*
+import kotlin.collections.ArrayList
 
 class MainActivity() : AppCompatActivity() {
 
@@ -44,7 +49,7 @@ class MainActivity() : AppCompatActivity() {
     private val authRepository = AuthRepository()
     private val isUserRegisterInformation = MutableLiveData<Boolean?>(null)
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-    private var _userLocation: Location? = null
+    private var _userLocation: MutableLiveData<Location> = MutableLiveData<Location>()
     val userLocation
             get () = _userLocation
 
@@ -56,6 +61,7 @@ class MainActivity() : AppCompatActivity() {
         getLastLocation()
         addAuthStateListener()
         setupHomeActionBar()
+
     }
 
     override fun onStart() {
@@ -137,11 +143,7 @@ class MainActivity() : AppCompatActivity() {
     }
 
     private fun requestPermission(){
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION,Manifest.permission.ACCESS_FINE_LOCATION),
-            100
-        )
+        requestLocationPermission.launch(listOf(Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION).toTypedArray())
     }
 
     private fun isLocationEnabled():Boolean{
@@ -159,7 +161,10 @@ class MainActivity() : AppCompatActivity() {
                     if(location == null){
                         newLocationData()
                     }else{
-                        _userLocation = location
+                        _userLocation.value = location!!
+                        val mainApplication = application as? MainApplication
+                        mainApplication?.location?.value = location
+                        Timber.i(location.toString())
                         //textView.text = "You Current Location is : Long: "+ location.longitude + " , Lat: " + location.latitude + "\n" + getCityName(location.latitude,location.longitude)
                     }
                 }
@@ -190,9 +195,36 @@ class MainActivity() : AppCompatActivity() {
 
     private val locationCallback = object : LocationCallback(){
         override fun onLocationResult(locationResult: LocationResult) {
-            val lastLocation: Location = locationResult.lastLocation
-            _userLocation = lastLocation
+            var lastLocation: Location = locationResult.lastLocation
+            _userLocation.value = lastLocation
+            val mainApplication = application as? MainApplication
+
+            if(mainApplication?.location?.value != null) {
+                lastLocation = mainApplication.location.value!!
+            }
+            mainApplication?.location?.observe(this@MainActivity){
+                Timber.i(it.toString())
+                if(it != null) {
+                    lastLocation = it
+                }
+            }
         }
     }
+
+    private val requestLocationPermission = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+        if(it[Manifest.permission.ACCESS_FINE_LOCATION] == true) {
+            getLastLocation()
+        }
+        else if(it[Manifest.permission.ACCESS_COARSE_LOCATION] == true) {
+            getLastLocation()
+        }
+        else
+        {
+            //thong bao
+            Firebase.auth.signOut()
+        }
+    }
+
+
 }
 
