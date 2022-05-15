@@ -2,30 +2,28 @@ package xyz.daijoubuteam.foodshoppingapp.client.orders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderBinding
-import xyz.daijoubuteam.foodshoppingapp.model.Orders
+import xyz.daijoubuteam.foodshoppingapp.model.Order
 
-class OrdersApdater : ListAdapter<Orders, OrdersApdater.OrdersViewHolder>(DiffCallBack) {
+class OrdersApdater : ListAdapter<Order, OrdersApdater.OrdersViewHolder>(DiffCallBack) {
     class OrdersViewHolder(private var binding: ItemOrderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(order: Orders) {
+        fun bind(order: Order) {
             binding.order = order
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallBack : DiffUtil.ItemCallback<Orders>() {
-        override fun areItemsTheSame(oldItem: Orders, newItem: Orders): Boolean {
+    companion object DiffCallBack : DiffUtil.ItemCallback<Order>() {
+        override fun areItemsTheSame(oldItem: Order, newItem: Order): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: Orders, newItem: Orders): Boolean {
-            return oldItem.titleOrders == newItem.titleOrders
+        override fun areContentsTheSame(oldItem: Order, newItem: Order): Boolean {
+            return oldItem.id == newItem.id
         }
     }
 

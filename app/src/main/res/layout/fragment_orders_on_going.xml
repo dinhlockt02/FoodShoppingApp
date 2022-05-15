@@ -18,7 +18,7 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="10"
-            tools:listitem="@layout/item_product_promotion"
+            tools:listitem="@layout/item_order"
             android:paddingVertical="10dp"
             android:orientation="vertical"/>
     </FrameLayout>
