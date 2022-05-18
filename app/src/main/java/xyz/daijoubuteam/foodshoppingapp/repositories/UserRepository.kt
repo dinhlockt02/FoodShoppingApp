@@ -72,22 +72,22 @@ class UserRepository {
         }
     }
 
-    fun getListOrderItemByEateryId(): Result<LiveData<List<OrderItem>>>{
-        return try {
-            val uid = auth.currentUser?.uid
-                ?: throw Exception("Current user not found.")
-            val docRef = db.collection("users").document(uid)
-            val orderItemList: MutableLiveData<List<OrderItem>> = MutableLiveData()
-            val user = MutableLiveData<User>()
-            docRef.addSnapshotListener { value, error ->
-                user.value = value?.toObject()
-            }
-            orderItemList.value =  user.value?.bag
-            orderItemList.value?.find { orderItem -> orderItem.productId?.contains("c8vy6QVL2ZTLC0uOrdV7") ?: false }
-            Timber.i(orderItemList.toString())
-            Result.success(orderItemList)
-        } catch (exception: Exception){
-            Result.failure(exception)
-        }
-    }
+//    fun getListOrderItemByEateryId(): Result<LiveData<List<OrderItem>>>{
+//        return try {
+//            val uid = auth.currentUser?.uid
+//                ?: throw Exception("Current user not found.")
+//            val docRef = db.collection("users").document(uid)
+//            val orderItemList: MutableLiveData<List<OrderItem>> = MutableLiveData()
+//            val user = MutableLiveData<User>()
+//            docRef.addSnapshotListener { value, error ->
+//                user.value = value?.toObject()
+//            }
+//            orderItemList.value =  user.value?.bag
+//            orderItemList.value?.find { orderItem -> orderItem.productId?.contains("c8vy6QVL2ZTLC0uOrdV7") ?: false }
+//            Timber.i(orderItemList.toString())
+//            Result.success(orderItemList)
+//        } catch (exception: Exception){
+//            Result.failure(exception)
+//        }
+//    }
 }

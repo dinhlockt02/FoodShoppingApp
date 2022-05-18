@@ -45,7 +45,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="id/quantity_dishes_text_view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textSize="24sp"
