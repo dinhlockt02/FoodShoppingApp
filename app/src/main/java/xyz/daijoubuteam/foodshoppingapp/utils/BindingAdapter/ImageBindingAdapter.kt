@@ -1,18 +1,21 @@
 package xyz.daijoubuteam.foodshoppingapp.utils.BindingAdapter
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.Drawable
+import android.graphics.drawable.PictureDrawable
 import android.net.Uri
-import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import coil.ImageLoader
+import coil.decode.SvgDecoder
+import coil.request.ImageRequest
 import com.bumptech.glide.Glide
-import com.google.android.material.imageview.ShapeableImageView
+import com.bumptech.glide.RequestBuilder
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.model.Gender
+import java.io.InputStream
 import kotlin.random.Random
 
 
@@ -89,4 +92,27 @@ fun setImageUrlDrawable(view: ImageView, url: String?) {
         .centerCrop()
         .placeholder(circularProgressDrawable)
         .into(view);
+}
+
+@BindingAdapter("imgVector")
+fun setImageSVGDrawable(view: ImageView, url: String?) {
+    val circularProgressDrawable = CircularProgressDrawable(view.context)
+    circularProgressDrawable.strokeWidth = 5f
+    circularProgressDrawable.centerRadius = 30f
+    circularProgressDrawable.start()
+
+    val imageLoader = ImageLoader.Builder(view.context)
+        .componentRegistry { add(SvgDecoder(view.context)) }
+        .build()
+
+    val request = ImageRequest.Builder(view.context)
+        .crossfade(true)
+        .crossfade(500)
+        .placeholder(circularProgressDrawable)
+        .error(R.drawable.information_outline)
+        .data(url)
+        .target(view)
+        .build()
+
+    imageLoader.enqueue(request)
 }
