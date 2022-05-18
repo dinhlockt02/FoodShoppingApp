@@ -5,21 +5,28 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import xyz.daijoubuteam.foodshoppingapp.model.Notification
 import xyz.daijoubuteam.foodshoppingapp.model.User
 import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 
 class ProfileViewModel: ViewModel() {
     private val userRepository = UserRepository()
     lateinit var user: LiveData<User>
-    private var _notification = MutableLiveData(0)
-        val notification
-            get() = _notification
+    lateinit var notifications: LiveData<List<Notification>>
+
+
     init {
         val userResult = userRepository.getCurrentUserLiveData()
         if(userResult.isSuccess && userResult.getOrNull() !== null){
             user = userResult.getOrNull()!!
         }else {
             onShowError(userResult.exceptionOrNull()?.message)
+        }
+        val notificationResult  = userRepository.getCurrentUserNotificationLiveData()
+        if(notificationResult.isSuccess && notificationResult.getOrNull() != null) {
+            notifications = notificationResult.getOrNull()!!
+        }else{
+            onShowError(notificationResult.exceptionOrNull()?.message)
         }
     }
 

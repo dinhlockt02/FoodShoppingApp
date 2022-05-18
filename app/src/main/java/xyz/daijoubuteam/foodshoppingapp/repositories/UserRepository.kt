@@ -11,6 +11,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
+import xyz.daijoubuteam.foodshoppingapp.model.Notification
 import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
 import xyz.daijoubuteam.foodshoppingapp.model.User
 
@@ -68,6 +69,22 @@ class UserRepository {
             val downloadUrl = avatarRef.downloadUrl.await()
             Timber.i(downloadUrl.toString())
             Result.success(downloadUrl)
+        }catch (e: Exception){
+            Result.failure(e)
+        }
+    }
+
+    fun getCurrentUserNotificationLiveData(): Result<LiveData<List<Notification>>>{
+        return try {
+            val uid = auth.currentUser?.uid
+                ?: throw Exception("Current user not found.")
+            val notificationRef = db.collection("users").document(uid).collection(("notifications"))
+            val notifications = MutableLiveData<List<Notification>>()
+            notificationRef.addSnapshotListener { value, error ->
+                notifications.value = value?.toObjects(Notification::class.java)
+                Timber.i(notifications.value?.size.toString())
+            }
+            Result.success(notifications)
         }catch (e: Exception){
             Result.failure(e)
         }

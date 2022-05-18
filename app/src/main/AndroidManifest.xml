@@ -16,6 +16,16 @@
         android:theme="@style/Theme.FoodShoppingApp"
         android:name=".MainApplication">
         <meta-data android:name="com.google.android.geo.API_KEY" android:value="${GOOGLE_MAPS_API_KEY}"/>
+
+
+        <service
+            android:name=".services.AppFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".authentication.RequestUserInfoActivity"
             android:exported="false"/>
