@@ -230,7 +230,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
                         android:layout_width="0dp"
-                        android:text="Chợ Kí túc xá Khu A, phường Linh Trung, Thành phố Thủ Đức, Thành phố TPHCM"
+                        android:text="@{viewModel.selectedProperty.addressEatery.address}"
                         android:scrollHorizontally="false"
                         android:maxLines="10"
                         android:ellipsize="none"

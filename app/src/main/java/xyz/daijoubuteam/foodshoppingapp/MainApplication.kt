@@ -9,10 +9,14 @@ import android.media.AudioAttributes
 import android.media.RingtoneManager
 import android.os.Build
 import com.google.firebase.messaging.FirebaseMessaging
+import android.location.Location
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import timber.log.Timber
 
 
 class MainApplication: Application() {
+    val location: MutableLiveData<Location> = MutableLiveData<Location>()
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())

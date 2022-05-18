@@ -103,4 +103,7 @@ dependencies {
     implementation "com.maxkeppeler.sheets:core:$maxkeppeler_laster_verion"
     implementation "com.maxkeppeler.sheets:info:$maxkeppeler_laster_verion"
     implementation "com.maxkeppeler.sheets:options:$maxkeppeler_laster_verion"
+    //Coil
+    implementation("io.coil-kt:coil:1.2.0")
+    implementation("io.coil-kt:coil-svg:1.2.0")
 }

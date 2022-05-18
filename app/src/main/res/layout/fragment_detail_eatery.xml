@@ -70,7 +70,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/constraintBackgroundRadius"
-            android:src="@drawable/img_rectangle37"
+            app:imageUrl="@{viewModel.selectedProperty.photoUrl}"
             android:contentDescription="@string/thumbnail_eatery" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_action_info"

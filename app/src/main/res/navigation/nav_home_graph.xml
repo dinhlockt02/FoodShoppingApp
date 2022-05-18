@@ -23,9 +23,9 @@
     </fragment>
     <fragment
         android:id="@+id/feedsFragment"
-        android:name="xyz.daijoubuteam.foodshoppingapp.client.feeds.FeedsFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.bag.FeedsFragment"
         android:label="fragment_feeds"
-        tools:layout="@layout/fragment_feeds" />
+        tools:layout="@layout/fragment_bag" />
     <fragment
         android:id="@+id/ordersFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.OrdersFragment"
@@ -147,4 +147,12 @@
         android:name="xyz.daijoubuteam.foodshoppingapp.client.home.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+        android:id="@+id/verticalListEateryFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.home.vertical_list_eateries.VerticalListEateryFragment"
+        android:label="fragment_vertical_list_eatery"
+        tools:layout="@layout/fragment_vertical_list_eatery" >
+        <action
+            android:id="@+id/action_verticalListEateryFragment_to_detailEateryFragment"
+            app:destination="@id/detailEateryFragment" />
+    </fragment>
 </navigation>

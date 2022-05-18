@@ -38,7 +38,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/txtHelloOcoho"
+                        android:id="@+id/txtHelloUser"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="8dp"
@@ -46,29 +46,47 @@
                         android:fontFamily="@font/avenir_next_lt_pro"
                         android:gravity="start"
                         android:singleLine="true"
-                        android:text="@string/lbl_hello_ocoho"
+                        android:text="@{viewmodel.currentUser.firstname}"
                         android:textColor="@color/black_900"
                         android:textFontWeight="400"
                         android:textSize="27sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/fragment_home_avatar"
+                        app:layout_constraintEnd_toStartOf="@id/user_avatar"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="UnusedAttribute"
                         tools:text="@string/lbl_hello_ocoho" />
 
-                    <ImageView
-                        android:id="@+id/fragment_home_avatar"
+<!--                    <com.google.android.material.imageview.ShapeableImageView-->
+<!--                        android:id="@+id/fragment_home_avatar"-->
+<!--                        android:layout_width="40dp"-->
+<!--                        android:layout_height="40dp"-->
+<!--                        android:layout_marginStart="113dp"-->
+<!--                        android:scaleType="fitXY"-->
+<!--                        imageUrl="@{viewmodel.currentUser.photoUrl}"-->
+<!--                        defaultUrl="@{viewmodel.currentUser.photoUrl}"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintHorizontal_bias="0.68"-->
+<!--                        app:layout_constraintStart_toEndOf="@+id/txtHelloUser"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:strokeWidth="10dp"-->
+<!--                        app:strokeColor="@color/primaryColor"/>-->
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/user_avatar"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_marginStart="113dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/img_avatar"
+                        android:contentDescription="@string/user_profile_avatar"
+                        tools:src="@drawable/default_avatar_male"
+                        tools:background="@color/orange_50"
+                        app:imageUrl="@{viewmodel.currentUser.photoUrl}"
+                        app:defaultUrl="@{viewmodel.currentUser.photoUrl}"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.68"
-                        app:layout_constraintStart_toEndOf="@+id/txtHelloOcoho"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintStart_toEndOf="@+id/txtHelloUser"
+                        android:layout_marginStart="113dp"
+                        android:scaleType="centerCrop"
+                        app:shapeAppearanceOverlay="@style/circular_image" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <!--                Choose place-->
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -80,37 +98,39 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintHello">
 
                     <TextView
-                        android:id="@+id/txtNorthBridgeH"
+                        android:id="@+id/txtUserAddress"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginStart="20dp"
+                        android:layout_marginEnd="150dp"
                         android:ellipsize="end"
                         android:fontFamily="@font/avenir_next_lt_pro"
                         android:gravity="start"
                         android:singleLine="true"
-                        android:text="@string/msg_north_bridge_h"
+                        app:flow_wrapMode="chain2"
                         android:textColor="@color/gray_500"
                         android:textFontWeight="500"
                         android:textSize="15sp"
-                        app:layout_constraintEnd_toStartOf="@+id/imageChevrondown"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="UnusedAttribute"
-                        tools:text="@string/msg_north_bridge_h" />
-                    <ImageView
-                        android:id="@+id/imageChevrondown"
-                        android:layout_height="17dp"
-                        android:layout_marginEnd="185dp"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginTop="1dp"
-                        android:layout_width="17dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/img_chevronright"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.02"
-                        app:layout_constraintStart_toEndOf="@+id/txtNorthBridgeH"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UnusedAttribute" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnLocation"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:insetLeft="0dp"
+                        android:insetTop="0dp"
+                        android:insetRight="0dp"
+                        android:insetBottom="0dp"
+                        app:icon="@drawable/img_chevronright"
+                        app:iconTint="@color/primaryColor"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/txtUserAddress"
+                        style="@style/Widget.AppCompat.Button.Borderless"
+                        app:iconGravity="textStart"
+                        app:iconPadding="0dp" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <!--                Search-->
                 <com.google.android.material.button.MaterialButton

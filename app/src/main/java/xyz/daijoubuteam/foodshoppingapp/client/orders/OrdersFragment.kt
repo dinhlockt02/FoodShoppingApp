@@ -13,7 +13,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import xyz.daijoubuteam.foodshoppingapp.R
-import xyz.daijoubuteam.foodshoppingapp.client.orders.bag.OrdersBagFragment
 import xyz.daijoubuteam.foodshoppingapp.client.orders.history.OrdersHistoryFragment
 import xyz.daijoubuteam.foodshoppingapp.client.orders.ongoing.OrdersOnGoingFragment
 import xyz.daijoubuteam.foodshoppingapp.client.orders.upcoming.OrdersUpComingFragment
@@ -49,15 +48,14 @@ class OrdersFragment : Fragment() {
 
     class CustomOrdersFragementAdapter(fragment: Fragment): FragmentStateAdapter(fragment){
 
-        var tabTitle = listOf<String>("1","2","3","4")
-        override fun getItemCount() = 4
+        var tabTitle = listOf<String>("UpComing","OnGoing","History")
+        override fun getItemCount() = 3
 
         override fun createFragment(position: Int): Fragment {
             return when(position){
-                0 -> OrdersOnGoingFragment()
-                1 -> OrdersUpComingFragment()
-                2 -> OrdersHistoryFragment()
-                else -> OrdersBagFragment()
+                0 -> OrdersUpComingFragment()
+                1 -> OrdersOnGoingFragment()
+                else -> OrdersHistoryFragment()
             }
         }
 

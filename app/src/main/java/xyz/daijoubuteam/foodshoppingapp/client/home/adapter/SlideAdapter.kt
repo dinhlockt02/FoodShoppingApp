@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
 import xyz.daijoubuteam.foodshoppingapp.R
-import xyz.daijoubuteam.foodshoppingapp.model.SlideItem
+//import xyz.daijoubuteam.foodshoppingapp.model.SlideItem
 
 class SlideAdapter(
     private val Mcontext: Context,
-    private val listSlideItem: List<SlideItem>
+    //private val listSlideItem: List<SlideItem>
 ) :
     PagerAdapter() {
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
@@ -25,7 +25,7 @@ class SlideAdapter(
     }
 
     override fun getCount(): Int {
-        return listSlideItem.size
+        return 0
     }
 
     override fun isViewFromObject(view: View, o: Any): Boolean {

@@ -9,18 +9,18 @@ import androidx.databinding.DataBindingUtil
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.client.orders.OrdersApdater
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentOrdersOnGoingBinding
-import xyz.daijoubuteam.foodshoppingapp.model.Orders
+import xyz.daijoubuteam.foodshoppingapp.model.Order
 
 class OrdersOnGoingFragment : Fragment() {
 
     private lateinit var binding: FragmentOrdersOnGoingBinding
-    private var ordersList = arrayListOf<Orders>(
-        Orders("1"),
-        Orders("2"),
-        Orders("3"),
-        Orders("4"),
-        Orders("5"),
-        Orders("6"))
+    private var ordersList = arrayListOf<Order>()
+//        Order("1"),
+//        Order("2"),
+//        Order("3"),
+//        Order("4"),
+//        Order("5"),
+//        Order("6")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
