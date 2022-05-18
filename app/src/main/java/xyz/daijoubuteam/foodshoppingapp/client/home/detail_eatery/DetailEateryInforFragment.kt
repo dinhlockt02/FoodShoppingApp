@@ -35,7 +35,7 @@ class DetailEateryInforFragment : Fragment(), OnMapReadyCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentDetailEateryInforBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel

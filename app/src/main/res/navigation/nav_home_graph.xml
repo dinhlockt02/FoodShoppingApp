@@ -14,6 +14,8 @@
             android:id="@+id/action_homeFragment_to_detailEateryFragment"
             app:destination="@id/detailEateryFragment"
             app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/pop_down" />
         <action
             android:id="@+id/action_homeFragment_to_verticalListEateryFragment"
@@ -110,10 +112,10 @@
         <action
             android:id="@+id/action_detailEateryFragment_to_detailEateryInforFragment"
             app:destination="@id/detailEateryInforFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_out_right"
-            app:popExitAnim="@anim/slide_in_left" />
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
         <action
             android:id="@+id/action_detailEateryFragment_to_productToBagFragment"
             app:destination="@id/productToBagFragment"

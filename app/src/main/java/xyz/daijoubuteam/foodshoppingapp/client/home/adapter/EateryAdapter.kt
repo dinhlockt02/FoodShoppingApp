@@ -17,10 +17,6 @@ import xyz.daijoubuteam.foodshoppingapp.utils.observeOnce
 
 class EateryAdapter(private val onClickListener:OnClickListener) : ListAdapter<Eatery, EateryAdapter.EateryViewHolder>(DiffCallBack) {
 
-
-    override fun onViewAttachedToWindow(holder: EateryViewHolder) {
-        super.onViewAttachedToWindow(holder)
-    }
     class EateryViewHolder(private var binding: ItemEateryBinding) : RecyclerView.ViewHolder(binding.root) {
         private var currentLocation: Location? = null
         private val mainApplication = binding.root.context.applicationContext as MainApplication
@@ -44,7 +40,6 @@ class EateryAdapter(private val onClickListener:OnClickListener) : ListAdapter<E
                     currentLocation = lct
                     val location: Location = Location(LocationManager.GPS_PROVIDER)
                     eatery.addressEatery?.location?.let {
-                        Timber.i(currentLocation.toString())
                         location.latitude = it.latitude
                         location.longitude = it.longitude
                         binding.distance = String.format("%.2f", currentLocation?.distanceTo(location)?.div(1000)) + " km"
@@ -78,7 +73,6 @@ class EateryAdapter(private val onClickListener:OnClickListener) : ListAdapter<E
         }
         holder.bind(eateryItem)
     }
-
 
     class OnClickListener(val clickListener: (eatery:Eatery) -> Unit) {
         fun onClick(eatery:Eatery) = clickListener(eatery)
