@@ -10,7 +10,10 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.model.Carousel
 import xyz.daijoubuteam.foodshoppingapp.model.Category
@@ -48,7 +51,11 @@ class HomeViewModel: ViewModel() {
         getPopularEateryList()
         getCategoryList()
         getCarouselList()
-        getCurrentUser()
+        if(Firebase.auth.currentUser != null) {
+            getCurrentUser()
+        } else {
+            _currentUser = MutableLiveData();
+        }
     }
 
     private fun onShowError(msg: String?){

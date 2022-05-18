@@ -303,7 +303,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/constraintOrderSum"
                         tools:itemCount="3"
-                        tools:listitem="@layout/item_product" />
+                        tools:listitem="@layout/item_order_item" />
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintSubtotal"
                         android:layout_marginTop="10dp"
