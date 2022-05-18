@@ -88,6 +88,7 @@
         <entry key="app/src/main/res/drawable/ic_tag_sales.xml" value="0.1965" />
         <entry key="app/src/main/res/drawable/ic_user.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/img_chevron_background.xml" value="0.1965" />
+        <entry key="app/src/main/res/drawable/img_cocktail.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/img_notification.xml" value="0.147" />
         <entry key="app/src/main/res/drawable/img_search.xml" value="0.177" />
         <entry key="app/src/main/res/drawable/information_outline.xml" value="0.1865" />
@@ -144,7 +145,7 @@
         <entry key="app/src/main/res/layout/item_card_eatery.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_category.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_cuisine.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/item_eatery.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_eatery.xml" value="0.3305613305613306" />
         <entry key="app/src/main/res/layout/item_gender_exposed_dropdown_menu.xml" value="0.13728470111448834" />
         <entry key="app/src/main/res/layout/item_order.xml" value="0.34369659423828125" />
         <entry key="app/src/main/res/layout/item_orders.xml" value="0.21693840579710144" />

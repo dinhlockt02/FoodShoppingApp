@@ -45,6 +45,7 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         hideActionBar()
         setupPopularEateryListViewAdapter()
+        setupNearbyEateryListViewAdapter()
         setupCategoryListViewAdapter()
         setupOnAvatarClickListener()
         //setupCarouselListViewAdapter()
@@ -97,15 +98,17 @@ class HomeFragment : Fragment() {
 //        binding.myTablayout.setupWithViewPager(binding.myPager)
 //    }
 
-//    private fun setupNearbyEateryListViewAdapter() {
-//        binding.recyNearByEatery.adapter = EateryAdapter()
-//        val adapter = binding.recyNearByEatery.adapter as EateryAdapter
-//        viewModel.eateryList.observe(viewLifecycleOwner) {
-//            if (it != null) {
-//                adapter.submitList(it)
-//            }
-//        }
-//    }
+    private fun setupNearbyEateryListViewAdapter() {
+        binding.recyNearByEatery.adapter = EateryAdapter(EateryAdapter.OnClickListener{
+            viewModel.displayPropertyDetailEatery(it)
+        })
+        val adapter = binding.recyNearByEatery.adapter as EateryAdapter
+        viewModel.eateryList.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.submitList(it)
+            }
+        }
+    }
 
 //    private fun setupNearbyEateryListViewAdapter() {
 //        binding.recyNearByEatery.adapter = EateryAdapter()
