@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".client.home.search.SearchFragment"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/navigate_up_chevron"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:icon="@drawable/img_chevronleft"
+            android:textColor="@color/red_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:iconTint="@color/black"
+            style="@style/Widget.Material3.Button.IconButton"
+            android:layout_marginTop="12dp"
+            app:rippleColor="@android:color/transparent" />
+
+        <EditText
+            android:id="@+id/search_edit_text"
+            app:layout_constraintStart_toEndOf="@id/navigate_up_chevron"
+            app:layout_constraintTop_toTopOf="@id/navigate_up_chevron"
+            app:layout_constraintBottom_toBottomOf="@id/navigate_up_chevron"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/msg_search_for_rest"
+            android:paddingVertical="4dp"
+            android:paddingStart="14dp"
+            android:layout_marginEnd="14dp"
+            android:background="@drawable/rounded_edittext"
+            android:maxLines="1"
+            android:imeOptions="actionSearch"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
