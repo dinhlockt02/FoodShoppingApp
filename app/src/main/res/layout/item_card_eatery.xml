@@ -1,28 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardEatery"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_width="match_parent"
+
+    <data>
+        <variable
+            name="eatery"
+            type="xyz.daijoubuteam.foodshoppingapp.model.Eatery" />
+        <variable
+            name="distance"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintRestaurantCard"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
-        <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/rectangle_bg_eatery_item"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="12dp"
+        android:elevation="6dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imgEatery"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/thumbnailCardEatery"
-                android:layout_width="match_parent"
-                android:layout_height="194dp"
-                app:srcCompat="@drawable/img"
-                android:scaleType="centerCrop"
-                android:contentDescription="@string/image_product"
+            android:layout_height="120dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            app:imageUrl="@{eatery.photoUrl}"
+            app:layout_constraintBottom_toTopOf="@+id/constraintGroup4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/topRoundedImageView" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintGroup4"
+            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/imgEatery"
+            android:background="@drawable/rectangle_bg_white_radius_bl_12_br_12">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintTimeSpaceRa"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="55dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_width="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvEateryAddress">
+                <TextView
+                    android:id="@+id/tvDistance"
+                    android:ellipsize="end"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:singleLine="true"
+                    android:text="@{distance}"
+                    android:layout_marginStart="4dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintHorizontal_bias="0.11"
+                    android:textColor="@color/bluegray_700"
+                    android:textSize="12sp"
+                    tools:text="18 km"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:textFontWeight="500"
+                    tools:ignore="UnusedAttribute" />
+                <ImageView
+                    android:id="@+id/imageStar1"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="26dp"
+                    android:layout_marginBottom="2dp"
+                    android:layout_width="14dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_star"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvDistance"
+                    app:layout_constraintDimensionRatio="1.0:1.0"
+                    app:layout_constraintHorizontal_bias="0.67"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription" />
+                <TextView
+                    android:id="@+id/tvRatingCount"
+                    android:ellipsize="end"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_width="wrap_content"
+                    android:singleLine="true"
+                    android:text="@{Double.toString(eatery.average_rating_count)}"
+                    tools:text="@string/lbl_5_0"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageStar1"
+                    android:textColor="@color/bluegray_700"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/avenir_next_lt_pro"
+                    android:textFontWeight="500"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:ellipsize="end"
+                android:gravity="start"
+                android:id="@+id/tvEateryName"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_width="0dp"
+                android:singleLine="true"
+                app:layout_constraintBottom_toTopOf="@+id/tvEateryAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                />
+                android:textSize="16sp"
+                android:textColor="@color/bluegray_700"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                android:textFontWeight="500"
+                android:text="@{eatery.name}"
+                tools:text="@string/msg_creamos_chape"
+                tools:ignore="UnusedAttribute" />
+
+            <TextView
+                android:ellipsize="end"
+                android:gravity="start"
+                android:id="@+id/tvEateryAddress"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:layout_width="0dp"
+                android:singleLine="true"
+                app:layout_constraintBottom_toTopOf="@+id/constraintTimeSpaceRa"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvEateryName"
+                android:textColor="@color/gray_500"
+                android:textSize="12sp"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                android:textFontWeight="500"
+                android:text="@{eatery.addressEatery.address}"
+                tools:text="@string/msg_chapel_ln_harr"
+                tools:ignore="UnusedAttribute" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

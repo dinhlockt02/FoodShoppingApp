@@ -25,11 +25,13 @@ import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CarouselAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CategoryAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.EateryAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentHomeBinding
+import java.lang.reflect.Type
 import java.util.*
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     var location: Location? = null
+
     private val viewModel: HomeViewModel by lazy {
         val factory = HomeViewModelFactory()
         ViewModelProvider(this, factory)[HomeViewModel::class.java]
@@ -44,21 +46,13 @@ class HomeFragment : Fragment() {
         binding.viewmodel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
         hideActionBar()
+        handleUserLocation()
+        setupOnAvatarClickListener()
         setupPopularEateryListViewAdapter()
         setupNearbyEateryListViewAdapter()
         setupCategoryListViewAdapter()
-        setupOnAvatarClickListener()
-        //setupCarouselListViewAdapter()
-        handleUserLocation()
-        //location = (requireActivity() as? MainActivity)?.userLocation
-
-
-        viewModel.navigateToSelectedEatery.observe(viewLifecycleOwner, Observer {
-            if(it != null) {
-                this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailEateryFragment(it))
-                viewModel.onNavigateToSelectedEateryComplete()
-            }
-        })
+        handleClickEateryItem()
+        handleClickBtnViewAllEatery()
         return binding.root
     }
 
@@ -66,77 +60,14 @@ class HomeFragment : Fragment() {
         super.onStart()
         (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
     }
-
-    private fun setupPopularEateryListViewAdapter() {
-        binding.recyPopularEatery.adapter = EateryAdapter(EateryAdapter.OnClickListener{
-            viewModel.displayPropertyDetailEatery(it)
-        })
-        val adapter = binding.recyPopularEatery.adapter as EateryAdapter
-        viewModel.popularEateryList.observe(viewLifecycleOwner) {
-            if (it != null) {
-                adapter.submitList(it)
-            }
-        }
-    }
-
-    private fun setupCategoryListViewAdapter() {
-        binding.recyCategories.adapter = CategoryAdapter()
-        val adapter = binding.recyCategories.adapter as CategoryAdapter
-        viewModel.categoryList.observe(viewLifecycleOwner) {
-            if (it != null) {
-                adapter.submitList(it)
-            }
-        }
-    }
-
-//    private fun setupCarouselListViewAdapter() {
-//        viewModel.carouselEventList.observe(viewLifecycleOwner) {
-//            if (it != null) {
-//                binding.myPager.adapter = SlideAdapter(this.requireContext(), it)
-//            }
-//        }
-//        binding.myTablayout.setupWithViewPager(binding.myPager)
-//    }
-
-    private fun setupNearbyEateryListViewAdapter() {
-        binding.recyNearByEatery.adapter = EateryAdapter(EateryAdapter.OnClickListener{
-            viewModel.displayPropertyDetailEatery(it)
-        })
-        val adapter = binding.recyNearByEatery.adapter as EateryAdapter
-        viewModel.eateryList.observe(viewLifecycleOwner) {
-            if (it != null) {
-                adapter.submitList(it)
-            }
-        }
-    }
-
-//    private fun setupNearbyEateryListViewAdapter() {
-//        binding.recyNearByEatery.adapter = EateryAdapter()
-//        val adapter = binding.recyNearByEatery.adapter as EateryAdapter
-//        viewModel.eateryList.observe(viewLifecycleOwner) {
-//            if (it != null) {
-//                adapter.submitList(it)
-//            }
-//        }
-//    }
-
-    private fun setupOnAvatarClickListener(){
-        binding.userAvatar.setOnClickListener {
-            val activity = this.activity as? MainActivity
-            activity?.setMenuSelectedItem(R.id.profileFragment)
-        }
-    }
-
     private fun hideActionBar() {
         (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
     }
-
     private fun getCityName(lat: Double,long: Double):String{
         val geoCoder = Geocoder(context, Locale.getDefault())
         val address = geoCoder.getFromLocation(lat,long,3)
         return address[0].getAddressLine(0)
     }
-
     private fun handleUserLocation() {
         // location user
         val mainApplication = activity?.application as? MainApplication
@@ -153,4 +84,75 @@ class HomeFragment : Fragment() {
             }
         }
     }
+    private fun setupOnAvatarClickListener(){
+        binding.userAvatar.setOnClickListener {
+            val activity = this.activity as? MainActivity
+            activity?.setMenuSelectedItem(R.id.profileFragment)
+        }
+    }
+    private fun setupPopularEateryListViewAdapter() {
+        binding.recyPopularEatery.adapter = EateryAdapter(EateryAdapter.OnClickListener{
+            viewModel.displayPropertyDetailEatery(it)
+        })
+        val adapter = binding.recyPopularEatery.adapter as EateryAdapter
+        viewModel.popularEateryList.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.submitList(it)
+            }
+        }
+    }
+    private fun setupCategoryListViewAdapter() {
+        binding.recyCategories.adapter = CategoryAdapter()
+        val adapter = binding.recyCategories.adapter as CategoryAdapter
+        viewModel.categoryList.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.submitList(it)
+            }
+        }
+    }
+    private fun setupNearbyEateryListViewAdapter() {
+        binding.recyNearByEatery.adapter = EateryAdapter(EateryAdapter.OnClickListener{
+            viewModel.displayPropertyDetailEatery(it)
+        })
+        val adapter = binding.recyNearByEatery.adapter as EateryAdapter
+        viewModel.eateryList.observe(viewLifecycleOwner) {
+            if (it != null) {
+                adapter.submitList(it)
+            }
+        }
+    }
+    private fun handleClickEateryItem() {
+        viewModel.navigateToSelectedEatery.observe(viewLifecycleOwner, Observer {
+            if(it != null) {
+                this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailEateryFragment(it))
+                viewModel.onNavigateToSelectedEateryComplete()
+            }
+        })
+    }
+    private fun handleClickBtnViewAllEatery() {
+        binding.btnPopularEateries.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToVerticalListEateryFragment(TypesViewAll.POPULAR))
+        }
+        binding.btnNearbyEateries.setOnClickListener {
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToVerticalListEateryFragment(TypesViewAll.NEARBY))
+        }
+    }
+//    private fun setupCarouselListViewAdapter() {
+//        viewModel.carouselEventList.observe(viewLifecycleOwner) {
+//            if (it != null) {
+//                binding.myPager.adapter = SlideAdapter(this.requireContext(), it)
+//            }
+//        }
+//        binding.myTablayout.setupWithViewPager(binding.myPager)
+//    }
+
+//    private fun setupNearbyEateryListViewAdapter() {
+//        binding.recyNearByEatery.adapter = EateryAdapter()
+//        val adapter = binding.recyNearByEatery.adapter as EateryAdapter
+//        viewModel.eateryList.observe(viewLifecycleOwner) {
+//            if (it != null) {
+//                adapter.submitList(it)
+//            }
+//        }
+//    }
 }
