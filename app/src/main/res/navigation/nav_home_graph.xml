@@ -14,15 +14,19 @@
             android:id="@+id/action_homeFragment_to_detailEateryFragment"
             app:destination="@id/detailEateryFragment"
             app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/pop_down" />
         <action
             android:id="@+id/action_homeFragment_to_verticalListEateryFragment"
-            app:destination="@id/verticalListEateryFragment" />
+            app:destination="@id/verticalListEateryFragment"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
         <action
             android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment"
-            app:enterAnim="@anim/pop_up"
-            app:popExitAnim="@anim/pop_down"/>
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/feedsFragment"
@@ -53,7 +57,11 @@
             app:popExitAnim="@anim/fade_out" />
         <action
             android:id="@+id/action_profileFragment_to_notificationListFragment"
-            app:destination="@id/notificationListFragment" />
+            app:destination="@id/notificationListFragment"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
     </fragment>
     <navigation android:id="@+id/navigation"
         app:startDestination="@id/profileAddressEditFragment">
@@ -118,10 +126,10 @@
         <action
             android:id="@+id/action_detailEateryFragment_to_detailEateryInforFragment"
             app:destination="@id/detailEateryInforFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_out_right"
-            app:popExitAnim="@anim/slide_in_left" />
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
         <action
             android:id="@+id/action_detailEateryFragment_to_productToBagFragment"
             app:destination="@id/productToBagFragment"
@@ -158,9 +166,17 @@
         android:name="xyz.daijoubuteam.foodshoppingapp.client.home.vertical_list_eateries.VerticalListEateryFragment"
         android:label="fragment_vertical_list_eatery"
         tools:layout="@layout/fragment_vertical_list_eatery" >
+        <argument
+            android:name="type"
+            app:argType="xyz.daijoubuteam.foodshoppingapp.client.home.TypesViewAll">
+        </argument>
         <action
             android:id="@+id/action_verticalListEateryFragment_to_detailEateryFragment"
-            app:destination="@id/detailEateryFragment" />
+            app:destination="@id/detailEateryFragment"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
     </fragment>
     <fragment
         android:id="@+id/notificationListFragment"

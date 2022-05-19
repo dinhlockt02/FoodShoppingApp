@@ -1,5 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home.detail_eatery
 
+import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,11 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.maxkeppeler.sheets.core.ButtonStyle
 import com.maxkeppeler.sheets.info.InfoSheet
+import xyz.daijoubuteam.foodshoppingapp.MainApplication
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.EateryAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.ProductAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentDetailEateryBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
+import xyz.daijoubuteam.foodshoppingapp.utils.observeOnce
 
 
 class DetailEateryFragment : Fragment() {
@@ -43,7 +47,6 @@ class DetailEateryFragment : Fragment() {
         super.onStart()
         (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
     }
-
     private fun setupForYouProductListViewAdapter() {
         binding.forYouProductRecyclerView.adapter = ProductAdapter(ProductAdapter.OnClickListener{
             findNavController().navigate(DetailEateryFragmentDirections.actionDetailEateryFragmentToProductToBagFragment(it))
@@ -55,7 +58,6 @@ class DetailEateryFragment : Fragment() {
             }
         }
     }
-
     private fun handleClickButtonHome() {
         binding.floatingActionButtonHome.setOnClickListener {
             findNavController().navigateUp()

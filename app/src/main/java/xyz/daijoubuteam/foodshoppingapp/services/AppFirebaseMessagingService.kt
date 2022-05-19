@@ -55,6 +55,7 @@ class AppFirebaseMessagingService : FirebaseMessagingService() {
                 val user = userRef.get().await()
                 if (!user.exists()) return@launch
 
+
                 val notificationRef = userRef.collection("notifications").document()
 
                 val notification = xyz.daijoubuteam.foodshoppingapp.model.Notification(

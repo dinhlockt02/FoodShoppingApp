@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProfileBinding
 
@@ -18,6 +19,7 @@ class ProfileFragment : Fragment() {
         val factory = ProfileViewModelFactory()
         ViewModelProvider(this, factory)[ProfileViewModel::class.java]
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,9 +33,16 @@ class ProfileFragment : Fragment() {
         setupNavigateToProfileAndAddressFragment()
         setupMessageSnackbar()
         setupNotificationLayoutClickListener()
-        (requireActivity() as? MainActivity)?.supportActionBar?.hide()
         return binding.root
     }
+
+    override fun onStart() {
+        super.onStart()
+        val supportActionBar = (requireActivity() as? MainActivity)?.supportActionBar
+        Timber.i(supportActionBar.toString())
+        supportActionBar?.hide()
+    }
+
 
     private fun setupNotificationLayoutClickListener() {
         binding.notificationLayout.setOnClickListener {
