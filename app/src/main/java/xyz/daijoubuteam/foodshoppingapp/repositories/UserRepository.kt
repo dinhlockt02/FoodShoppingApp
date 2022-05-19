@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.Query
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -78,7 +79,7 @@ class UserRepository {
         return try {
             val uid = auth.currentUser?.uid
                 ?: throw Exception("Current user not found.")
-            val notificationRef = db.collection("users").document(uid).collection("notifications").orderBy("timestampFirebase", Query.Direction.DESCENDING)
+            val notificationRef = db.collection("users").document(uid).collection("notifications")
             val notifications = MutableLiveData<List<Notification>>()
             notificationRef.addSnapshotListener { value, error ->
                 val notificationsList = value?.toObjects(Notification::class.java)

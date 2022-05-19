@@ -1,8 +1,12 @@
 package xyz.daijoubuteam.foodshoppingapp.model
 
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.DocumentReference
+
 data class Order (
-    val id: String?= null,
-    val eateryId: String?= null,
+    val eateryId: DocumentReference?= null,
     val orderItems: ArrayList<OrderItem> = ArrayList(),
-    val totalPrice: Long,
+    var totalPrice: Double?=null,
+    val orderTime: Timestamp?=null,
+    val id: String?= null,
 )
