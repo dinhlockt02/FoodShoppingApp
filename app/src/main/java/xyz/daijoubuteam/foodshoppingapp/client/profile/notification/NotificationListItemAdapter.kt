@@ -58,7 +58,7 @@ class NotificationListItemAdapter(private val onClickListener: OnClickListener):
         }
 
         override fun areContentsTheSame(oldItem: Notification, newItem: Notification): Boolean {
-            return oldItem.notificationRead == newItem.notificationRead
+            return oldItem == newItem
         }
 
     }

@@ -59,7 +59,7 @@ class AppFirebaseMessagingService : FirebaseMessagingService() {
                 val notificationRef = userRef.collection("notifications").document()
 
                 val notification = xyz.daijoubuteam.foodshoppingapp.model.Notification(
-                    notificationRef.id,
+                    null,
                     message.data["title"] ?: "",
                     message.data["body"] ?: "",
                     null,

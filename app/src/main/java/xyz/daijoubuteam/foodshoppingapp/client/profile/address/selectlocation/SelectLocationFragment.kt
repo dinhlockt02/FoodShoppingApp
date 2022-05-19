@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.libraries.places.api.net.PlacesClient
 import com.google.android.material.snackbar.Snackbar
+import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.client.profile.address.AddNewAddressFragment
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentSelectLocationBinding
@@ -45,6 +46,24 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
 
     // Selected Location
     private var selectedLocation: LatLng? = null
+
+    override fun onStart() {
+        super.onStart()
+        showActionBar()
+    }
+
+    private fun showActionBar(){
+        val activity = requireActivity() as MainActivity
+        activity.supportActionBar?.show()
+        activity.supportActionBar?.title = "Choose address"
+    }
+
+    private fun customHideActionbar(title: String? = null) {
+        val activity = requireActivity() as MainActivity
+        activity.supportActionBar?.hide()
+        activity.supportActionBar?.title = title ?: ""
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,6 +104,7 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
         if (isGranted) {
             setupMap()
         } else {
+            customHideActionbar()
             findNavController().navigateUp()
         }
     }
@@ -153,12 +173,14 @@ class SelectLocationFragment : Fragment(), OnMapReadyCallback {
                         editAddress = args.editAddress?.apply {
                             location = marker!!.position
                         })
+                customHideActionbar()
                 findNavController().navigate(action)
             } else {
                 val action =
                     SelectLocationFragmentDirections.actionSelectLocationFragmentToAddNewAddressFragment(
                         marker!!.position
                     )
+                customHideActionbar()
                 findNavController().navigate(action)
             }
 

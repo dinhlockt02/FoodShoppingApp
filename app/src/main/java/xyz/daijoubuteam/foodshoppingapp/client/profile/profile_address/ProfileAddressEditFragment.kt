@@ -1,5 +1,6 @@
 package xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
 import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
+import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.adapter.AddressAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProfileAddressEditBinding
 import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
@@ -23,6 +25,25 @@ class ProfileAddressEditFragment : Fragment() {
         val factory = ProfileAddressEditViewModelFactory()
         ViewModelProvider(this, factory)[ProfileAddressEditViewModel::class.java]
     }
+
+    override fun onStart() {
+        super.onStart()
+        showActionBar()
+    }
+
+    private fun showActionBar(){
+        val activity = requireActivity() as MainActivity
+        activity.supportActionBar?.show()
+        activity.supportActionBar?.title = "Profile"
+    }
+
+    private fun customHideActionbar(title: String? = null) {
+        val activity = requireActivity() as MainActivity
+        activity.supportActionBar?.hide()
+        activity.supportActionBar?.title = title ?: ""
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +64,7 @@ class ProfileAddressEditFragment : Fragment() {
         return binding.root
     }
 
+
     private fun setupAddressRecyclerViewAdapter() {
         binding.profileEditAddressRecyclerView.adapter =
             AddressAdapter(AddressAdapter.OnClickListener {
@@ -51,6 +73,8 @@ class ProfileAddressEditFragment : Fragment() {
                         editAddress = it
                     )
                 findNavController().navigate(action)
+                customHideActionbar()
+
             })
         val adapter = binding.profileEditAddressRecyclerView.adapter as AddressAdapter
         viewmodel.user.observe(viewLifecycleOwner) {
@@ -65,6 +89,7 @@ class ProfileAddressEditFragment : Fragment() {
             val action =
                 ProfileAddressEditFragmentDirections.actionProfileAddressEditFragmentToSelectLocationFragment()
             findNavController().navigate(action)
+            customHideActionbar()
         }
     }
 

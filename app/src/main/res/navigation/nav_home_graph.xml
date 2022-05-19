@@ -37,7 +37,8 @@
         android:id="@+id/ordersFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.OrdersFragment"
         android:label="fragment_orders"
-        tools:layout="@layout/fragment_orders" />
+        tools:layout="@layout/fragment_orders"
+        />
     <fragment
         android:id="@+id/savedFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.saved.SavedFragment"
@@ -51,10 +52,10 @@
         <action
             android:id="@+id/action_profileFragment_to_profileAddressEditFragment"
             app:destination="@id/navigation"
-            app:enterAnim="@anim/fade_in"
+            app:enterAnim="@anim/pop_up"
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
+            app:popExitAnim="@anim/pop_down" />
         <action
             android:id="@+id/action_profileFragment_to_notificationListFragment"
             app:destination="@id/notificationListFragment"
@@ -72,10 +73,18 @@
             tools:layout="@layout/fragment_profile_address_edit">
             <action
                 android:id="@+id/action_profileAddressEditFragment_to_selectLocationFragment"
-                app:destination="@id/selectLocationFragment" />
+                app:destination="@id/selectLocationFragment"
+                app:enterAnim="@anim/pop_up"
+                app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/pop_down" />
             <action
                 android:id="@+id/action_profileAddressEditFragment_to_addNewAddressFragment"
-                app:destination="@id/addNewAddressFragment" />
+                app:destination="@id/addNewAddressFragment"
+                app:enterAnim="@anim/pop_up"
+                app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/pop_down" />
         </fragment>
         <fragment
             android:id="@+id/addNewAddressFragment"
@@ -94,10 +103,18 @@
                 app:nullable="true" />
             <action
                 android:id="@+id/action_addNewAddressFragment_to_selectLocationFragment"
-                app:destination="@id/selectLocationFragment" />
+                app:destination="@id/selectLocationFragment"
+                app:enterAnim="@anim/pop_up"
+                app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/pop_down" />
             <action
                 android:id="@+id/action_addNewAddressFragment_to_profileAddressEditFragment"
-                app:destination="@id/profileAddressEditFragment" />
+                app:destination="@id/profileAddressEditFragment"
+                app:enterAnim="@anim/pop_up"
+                app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/pop_down" />
         </fragment>
         <fragment
             android:id="@+id/selectLocationFragment"
@@ -111,7 +128,11 @@
                 app:nullable="true" />
             <action
                 android:id="@+id/action_selectLocationFragment_to_addNewAddressFragment"
-                app:destination="@id/addNewAddressFragment" />
+                app:destination="@id/addNewAddressFragment"
+                app:enterAnim="@anim/pop_up"
+                app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/pop_down" />
         </fragment>
     </navigation>
     <fragment
