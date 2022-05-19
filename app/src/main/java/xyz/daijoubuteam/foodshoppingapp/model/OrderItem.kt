@@ -1,7 +1,9 @@
 package xyz.daijoubuteam.foodshoppingapp.model
 
+import com.google.firebase.firestore.DocumentReference
+
 class OrderItem (
-    val productId: String?=null,
-    val quantity: Int?=null,
-    val price: Long?=null,
+    val productId: DocumentReference ?= null,
+    var quantity: Int?=null,
+    var price: Double?=null,
 )
