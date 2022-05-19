@@ -7,23 +7,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.protobuf.DescriptorProtos
-import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.MainApplication
+import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentVerticalListEateryBinding
+import xyz.daijoubuteam.foodshoppingapp.databinding.ItemCardEateryBinding
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemEateryBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
-import androidx.lifecycle.Observer
 import xyz.daijoubuteam.foodshoppingapp.utils.observeOnce
 
-class EateryAdapter(private val onClickListener:OnClickListener) : ListAdapter<Eatery, EateryAdapter.EateryViewHolder>(DiffCallBack) {
-
-    class EateryViewHolder(private var binding: ItemEateryBinding) : RecyclerView.ViewHolder(binding.root) {
+class VerticalCardEateryAdapter(private val onClickListener: VerticalCardEateryAdapter.OnClickListener): ListAdapter<Eatery, VerticalCardEateryAdapter.VerticalCardEateryViewHolder>(DiffCallBack) {
+    class VerticalCardEateryViewHolder(private var binding: ItemCardEateryBinding): RecyclerView.ViewHolder(binding.root) {
         private var currentLocation: Location? = null
         private val mainApplication = binding.root.context.applicationContext as MainApplication
 
         fun bind(eatery: Eatery) {
             binding.eatery = eatery
-            mainApplication.location.observeOnce{ lct ->
+            mainApplication.location.observeOnce { lct ->
                 if(lct != null) {
                     currentLocation = lct
                     val location: Location = Location(LocationManager.GPS_PROVIDER)
@@ -37,8 +35,7 @@ class EateryAdapter(private val onClickListener:OnClickListener) : ListAdapter<E
             binding.executePendingBindings()
         }
     }
-
-    companion object DiffCallBack : DiffUtil.ItemCallback<Eatery>(){
+    companion object DiffCallBack: DiffUtil.ItemCallback<Eatery>() {
         override fun areItemsTheSame(oldItem: Eatery, newItem: Eatery): Boolean {
             return oldItem == newItem
         }
@@ -48,14 +45,17 @@ class EateryAdapter(private val onClickListener:OnClickListener) : ListAdapter<E
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EateryViewHolder {
-        val binding = ItemEateryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return EateryViewHolder(binding)
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): VerticalCardEateryViewHolder {
+        val binding =  ItemCardEateryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return VerticalCardEateryViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: EateryViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: VerticalCardEateryViewHolder, position: Int) {
         val eateryItem = getItem(position)
-        holder.itemView.setOnClickListener{
+        holder.itemView.setOnClickListener {
             onClickListener.onClick(eateryItem)
         }
         holder.bind(eateryItem)

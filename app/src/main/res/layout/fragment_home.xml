@@ -229,32 +229,24 @@
                         android:textColor="@color/bluegray_700"
                         android:textFontWeight="500"
                         android:textSize="20sp"
-                        app:layout_constraintEnd_toStartOf="@+id/tvViewAll"
                         app:layout_constraintHorizontal_bias="0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         tools:ignore="UnusedAttribute" />
-
-                    <TextView
-                        android:id="@+id/tvViewAll"
+                    <Button
+                        android:id="@+id/btnPopularEateries"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="150dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginBottom="1dp"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/avenir_next_lt_pro"
-                        android:singleLine="true"
+                        android:padding="0dp"
                         android:text="@string/lbl_view_all"
-                        android:textColor="@color/deep_orange_A200"
-                        android:textFontWeight="500"
-                        android:textSize="12sp"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/txtPopularEatries"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.69"
+                        android:background="@null"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="UnusedAttribute"/>
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:textAllCaps="false"
+                        />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -262,7 +254,7 @@
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="9dp"
                     android:nestedScrollingEnabled="false"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -330,32 +322,24 @@
                         android:textColor="@color/bluegray_700"
                         android:textFontWeight="500"
                         android:textSize="20sp"
-                        app:layout_constraintEnd_toStartOf="@+id/tvViewAll1"
                         app:layout_constraintHorizontal_bias="0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         tools:ignore="UnusedAttribute" />
-
-                    <TextView
-                        android:id="@+id/tvViewAll1"
+                    <Button
+                        android:id="@+id/btnNearbyEateries"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="150dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginBottom="1dp"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/avenir_next_lt_pro"
-                        android:singleLine="true"
+                        android:padding="0dp"
                         android:text="@string/lbl_view_all"
-                        android:textColor="@color/deep_orange_A200"
-                        android:textFontWeight="500"
-                        android:textSize="12sp"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/tvNearByEatries"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.69"
+                        android:background="@null"
                         app:layout_constraintTop_toTopOf="parent"
-                        tools:ignore="UnusedAttribute" />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:textAllCaps="false"
+                        />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <!--                Popular Cuisines-->
                 <androidx.recyclerview.widget.RecyclerView

@@ -24,6 +24,12 @@ import xyz.daijoubuteam.foodshoppingapp.repositories.EateryRepository
 import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 import java.util.*
 
+
+enum class TypesViewAll {
+    POPULAR,
+    NEARBY
+}
+
 class HomeViewModel: ViewModel() {
     private val eateryRepository = EateryRepository()
     private val carouselEventRepository = CarouselEventRepository()
@@ -47,7 +53,6 @@ class HomeViewModel: ViewModel() {
         get() = _currentUser
 
     init {
-        //getEateryList()
         getPopularEateryList()
         getCategoryList()
         getCarouselList()
@@ -61,6 +66,7 @@ class HomeViewModel: ViewModel() {
     private fun onShowError(msg: String?){
         this._errMessage.value = msg
     }
+
     private fun getEateryList() {
         val eateryListResult = eateryRepository.getListEatery()
         if(eateryListResult.isSuccess && eateryListResult.getOrNull() !== null){
