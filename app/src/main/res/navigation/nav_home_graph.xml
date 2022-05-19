@@ -147,6 +147,11 @@
         </argument>
     </fragment>
     <fragment
+        android:id="@+id/searchFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.home.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
         android:id="@+id/verticalListEateryFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.home.vertical_list_eateries.VerticalListEateryFragment"
         android:label="fragment_vertical_list_eatery"

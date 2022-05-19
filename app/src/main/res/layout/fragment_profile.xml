@@ -94,7 +94,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:textColor="@color/white_A700"
-                    android:text="@{viewmodel.notification.toString()}"
+                    android:text="@{Integer.toString(viewmodel.notifications.size)}"
                     android:background="@drawable/circular_textview_notification" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

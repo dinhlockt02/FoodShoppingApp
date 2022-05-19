@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.PagerAdapter
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -54,6 +55,12 @@ class HomeFragment : Fragment() {
         handleClickEateryItem()
         handleClickBtnViewAllEatery()
         return binding.root
+    }
+
+    private fun setupNavigateToSearchFragment() {
+        binding.btnSearch.setOnClickListener {
+            this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment())
+        }
     }
 
     override fun onStart() {
