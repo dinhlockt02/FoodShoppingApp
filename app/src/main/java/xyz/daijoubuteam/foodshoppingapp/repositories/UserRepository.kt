@@ -21,7 +21,7 @@ class UserRepository {
     private val db = Firebase.firestore
     private val storage = Firebase.storage
 
-    suspend fun getCurrentUser():Result<User?>{
+    suspend fun getCurrentUser(): Result<User?> {
         return try {
             val uid = auth.currentUser?.uid
                 ?: throw Exception("Current user not found.")
@@ -29,12 +29,12 @@ class UserRepository {
             val documentSnapShot = docRef.get().await()
             val users = documentSnapShot.toObject<User>()
             Result.success(users)
-        }catch (exception: Exception){
+        } catch (exception: Exception) {
             Result.failure(exception)
         }
     }
 
-    fun getCurrentUserLiveData(): Result<LiveData<User>>{
+    fun getCurrentUserLiveData(): Result<LiveData<User>> {
         return try {
             val uid = auth.currentUser?.uid
                 ?: throw Exception("Current user not found.")
@@ -44,23 +44,23 @@ class UserRepository {
                 user.value = value?.toObject()
             }
             Result.success(user)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Result.failure(e)
         }
     }
 
-    suspend fun updateCurrentUserInfo(user: User): Result<Boolean>{
+    suspend fun updateCurrentUserInfo(user: User): Result<Boolean> {
         return try {
             val uid = auth.currentUser?.uid
                 ?: throw Exception("Current user not found.")
             db.collection("users").document(uid).set(user).await()
             Result.success(true)
-        } catch (exception: Exception){
+        } catch (exception: Exception) {
             Result.failure(exception)
         }
     }
 
-    suspend fun uploadAvatar(uri: Uri): Result<Uri>{
+    suspend fun uploadAvatar(uri: Uri): Result<Uri> {
         return try {
             val storageRef = storage.reference
             val avatarRef = storageRef.child("images/${uri.lastPathSegment}")
@@ -68,24 +68,39 @@ class UserRepository {
             val downloadUrl = avatarRef.downloadUrl.await()
             Timber.i(downloadUrl.toString())
             Result.success(downloadUrl)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Result.failure(e)
         }
     }
 
-    fun getCurrentUserNotificationLiveData(): Result<LiveData<List<Notification>>>{
+    fun getCurrentUserNotificationLiveData(): Result<LiveData<List<Notification>>> {
         return try {
             val uid = auth.currentUser?.uid
                 ?: throw Exception("Current user not found.")
-            val notificationRef = db.collection("users").document(uid).collection(("notifications"))
+            val notificationRef = db.collection("users").document(uid).collection("notifications")
             val notifications = MutableLiveData<List<Notification>>()
             notificationRef.addSnapshotListener { value, error ->
-                notifications.value = value?.toObjects(Notification::class.java)
+                val notificationsList = value?.toObjects(Notification::class.java)
+                notifications.value = notificationsList ?: listOf()
                 Timber.i(notifications.value?.size.toString())
             }
             Result.success(notifications)
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Result.failure(e)
+        }
+    }
+
+    suspend fun updateNotification(notification: Notification): Result<Boolean> {
+        return try {
+            val uid = auth.currentUser?.uid
+                ?: throw Exception("Current user not found.")
+            if (notification.id == null) throw Exception("Notification not found.")
+            db.collection("users").document(uid).collection("notifications").document(
+                notification.id
+            ).set(notification).await()
+            Result.success(true);
+        }catch (exception: Exception){
+            Result.failure(exception)
         }
     }
 //    fun getListOrderItemByEateryId(): Result<LiveData<List<OrderItem>>>{

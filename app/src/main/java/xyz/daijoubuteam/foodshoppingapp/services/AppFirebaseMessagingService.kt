@@ -60,7 +60,11 @@ class AppFirebaseMessagingService : FirebaseMessagingService() {
                 val notification = xyz.daijoubuteam.foodshoppingapp.model.Notification(
                     notificationRef.id,
                     message.data["title"] ?: "",
-                    message.data["body"] ?: ""
+                    message.data["body"] ?: "",
+                    null,
+                    false,
+                    message.data["sender_image_url"],
+                    message.data["senderId"]
                 )
 
                 db.runBatch {

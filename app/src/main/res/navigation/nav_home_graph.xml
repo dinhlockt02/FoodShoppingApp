@@ -51,6 +51,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_profileFragment_to_notificationListFragment"
+            app:destination="@id/notificationListFragment" />
     </fragment>
     <navigation android:id="@+id/navigation"
         app:startDestination="@id/profileAddressEditFragment">
@@ -159,4 +162,9 @@
             android:id="@+id/action_verticalListEateryFragment_to_detailEateryFragment"
             app:destination="@id/detailEateryFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/notificationListFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.profile.notification.NotificationListFragment"
+        android:label="NotificationListFragment"
+        tools:layout="@layout/fragment_notification_list"/>
 </navigation>

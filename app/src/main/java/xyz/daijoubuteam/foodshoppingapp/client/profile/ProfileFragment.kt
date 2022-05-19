@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -29,8 +30,16 @@ class ProfileFragment : Fragment() {
 
         setupNavigateToProfileAndAddressFragment()
         setupMessageSnackbar()
-
+        setupNotificationLayoutClickListener()
+        (requireActivity() as? MainActivity)?.supportActionBar?.hide()
         return binding.root
+    }
+
+    private fun setupNotificationLayoutClickListener() {
+        binding.notificationLayout.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToNotificationListFragment()
+            findNavController().navigate(action)
+        }
     }
 
     private fun setupNavigateToProfileAndAddressFragment() {

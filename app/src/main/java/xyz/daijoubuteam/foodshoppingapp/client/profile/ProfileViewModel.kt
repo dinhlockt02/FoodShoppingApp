@@ -2,6 +2,7 @@ package xyz.daijoubuteam.foodshoppingapp.client.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -13,6 +14,7 @@ class ProfileViewModel: ViewModel() {
     private val userRepository = UserRepository()
     lateinit var user: LiveData<User>
     lateinit var notifications: LiveData<List<Notification>>
+    lateinit var notReadNotification: LiveData<List<Notification>>
 
 
     init {
@@ -25,6 +27,11 @@ class ProfileViewModel: ViewModel() {
         val notificationResult  = userRepository.getCurrentUserNotificationLiveData()
         if(notificationResult.isSuccess && notificationResult.getOrNull() != null) {
             notifications = notificationResult.getOrNull()!!
+            notReadNotification = Transformations.map(notifications){ notiList ->
+                notiList.filter { noti ->
+                    !noti.notificationRead
+                }
+            }
         }else{
             onShowError(notificationResult.exceptionOrNull()?.message)
         }
