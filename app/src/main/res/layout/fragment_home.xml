@@ -182,29 +182,37 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <androidx.viewpager.widget.ViewPager
-                        android:id="@+id/my_pager"
+<!--                    <androidx.viewpager.widget.ViewPager-->
+<!--                        android:id="@+id/my_pager"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="180dp"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent" />-->
+
+<!--                    <com.google.android.material.tabs.TabLayout-->
+<!--                        android:id="@+id/my_tablayout"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginBottom="-8dp"-->
+<!--                        android:background="#00FFFFFF"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_goneMarginBottom="20dp"-->
+<!--                        app:tabBackground="@drawable/indicator_selector"-->
+<!--                        app:tabGravity="center"-->
+<!--                        app:tabIndicatorHeight="0dp" />-->
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/slideHomeViewPager"
                         android:layout_width="match_parent"
                         android:layout_height="180dp"
+                        app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <com.google.android.material.tabs.TabLayout
-                        android:id="@+id/my_tablayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="-8dp"
-                        android:background="#00FFFFFF"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_goneMarginBottom="20dp"
-                        app:tabBackground="@drawable/indicator_selector"
-                        app:tabGravity="center"
-                        app:tabIndicatorHeight="0dp" />
-
+                        android:layoutDirection="ltr" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 <!--                Popular Eatery-->
                 <androidx.constraintlayout.widget.ConstraintLayout

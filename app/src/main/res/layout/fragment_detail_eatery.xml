@@ -71,6 +71,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/constraintBackgroundRadius"
             app:imageUrl="@{viewModel.selectedProperty.photoUrl}"
+            app:defaultUrl="@{viewModel.selectedProperty.photoUrl}"
             android:contentDescription="@string/thumbnail_eatery" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/floating_action_info"

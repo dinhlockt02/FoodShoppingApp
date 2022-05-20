@@ -80,19 +80,19 @@ fun setImageUrlAvatarString(view: ImageView, url: String?, gender: Gender?) {
     setImageUrlAvatarUri(view, uri, gender)
 }
 
-@BindingAdapter("imageUrl")
-fun setImageUrlDrawable(view: ImageView, url: String?) {
-    val circularProgressDrawable = CircularProgressDrawable(view.context)
-    circularProgressDrawable.strokeWidth = 5f
-    circularProgressDrawable.centerRadius = 30f
-    circularProgressDrawable.start()
-    Glide
-        .with(view.context)
-        .load(url)
-        .centerCrop()
-        .placeholder(circularProgressDrawable)
-        .into(view);
-}
+//@BindingAdapter("imageUrl")
+//fun setImageUrlDrawable(view: ImageView, url: String?) {
+//    val circularProgressDrawable = CircularProgressDrawable(view.context)
+//    circularProgressDrawable.strokeWidth = 5f
+//    circularProgressDrawable.centerRadius = 30f
+//    circularProgressDrawable.start()
+//    Glide
+//        .with(view.context)
+//        .load(url)
+//        .centerCrop()
+//        .placeholder(circularProgressDrawable)
+//        .into(view);
+//}
 
 @BindingAdapter("imgVector")
 fun setImageSVGDrawable(view: ImageView, url: String?) {

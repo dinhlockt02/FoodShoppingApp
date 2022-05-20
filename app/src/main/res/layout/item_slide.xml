@@ -5,17 +5,17 @@
 
     <data>
         <variable
-            name="carousel"
-            type="xyz.daijoubuteam.foodshoppingapp.model.Carousel" />
+            name="event"
+            type="xyz.daijoubuteam.foodshoppingapp.model.Event" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -29,7 +29,9 @@
                 android:scaleType="centerCrop"
                 android:id="@+id/my_featured_image"
                 android:foregroundGravity="center"
-                android:src="@drawable/img_rectangle12"
+                app:imageUrl="@{event.image}"
+                app:defaultUrl="@{event.image}"
+                tools:src="@drawable/img_rectangle12"
                 android:adjustViewBounds="true" />
         </androidx.cardview.widget.CardView>
 
