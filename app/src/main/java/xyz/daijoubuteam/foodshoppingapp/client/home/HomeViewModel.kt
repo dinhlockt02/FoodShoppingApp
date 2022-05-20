@@ -52,6 +52,8 @@ class HomeViewModel: ViewModel() {
     val currentUser: LiveData<User>
         get() = _currentUser
 
+
+
     init {
         getPopularEateryList()
         getCategoryList()

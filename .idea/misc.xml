@@ -92,12 +92,13 @@
         <entry key="app/src/main/res/drawable/rectangle_bg_indigo_500_radius_6.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/rectangle_bg_white.xml" value="0.177" />
         <entry key="app/src/main/res/drawable/rectangle_bg_white_a700_radius_4 2.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/rounded_corner_card.xml" value="0.2865" />
         <entry key="app/src/main/res/drawable/rounded_edittext.xml" value="0.2055" />
         <entry key="app/src/main/res/drawable/search_button.xml" value="0.147" />
         <entry key="app/src/main/res/layout-v28/fragment_detail_eatery_info.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.13697916666666668" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.13697916666666668" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.13697916666666668" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_request_user_info.xml" value="0.21175231933593752" />
         <entry key="app/src/main/res/layout/activity_verify.xml" value="0.1490036231884058" />
         <entry key="app/src/main/res/layout/card.xml" value="0.20923913043478262" />
