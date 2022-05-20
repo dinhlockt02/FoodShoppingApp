@@ -9,6 +9,7 @@ import android.location.*
 import android.os.*
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
@@ -70,7 +71,7 @@ class MainActivity() : AppCompatActivity() {
         }
         addAuthStateListener()
         setupHomeActionBar()
-
+        addConnectionStateListener()
     }
 
     override fun onStart() {
@@ -97,6 +98,16 @@ class MainActivity() : AppCompatActivity() {
             }
         }
 
+    }
+
+    private fun addConnectionStateListener(){
+        (application as? MainApplication)?.hasConnection?.observe(this){
+            if(it == true) {
+                binding.blockInteractionLayout.visibility = View.GONE
+            }else {
+                binding.blockInteractionLayout.visibility = View.VISIBLE
+            }
+        }
     }
 
     private fun addAuthStateListener() {
