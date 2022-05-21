@@ -37,16 +37,10 @@ class AuthActivity : AppCompatActivity() {
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupWithNavController(binding.authToolbar, navController, appBarConfiguration)
         navController.addOnDestinationChangedListener { controller: NavController?, destination: NavDestination, arguments: Bundle? ->
-            setupActionBarUI()
             binding.authToolbar.setNavigationIcon(R.drawable.img_chevronleft)
         }
     }
 
-    private fun setupActionBarUI(){
-//        supportActionBar?.setDisplayShowTitleEnabled(false)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar?.setHomeAsUpIndicator(R.drawable.img_chevronleft)
-    }
 
     private fun addAuthStateListener() {
         auth.addAuthStateListener { it ->

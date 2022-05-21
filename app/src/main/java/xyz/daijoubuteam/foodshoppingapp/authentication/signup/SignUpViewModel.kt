@@ -46,13 +46,13 @@ class SignUpViewModel: ViewModel() {
             _signUpResult.value = Result.failure(exception)
             return
         }
-        if(confirmPassword.value.isNullOrEmpty() || !password.value.equals(confirmPassword.value)){
+        if(confirmPassword.value.isNullOrEmpty() || !password.value!!.trim().equals(confirmPassword.value!!.trim())){
             val exception = Exception("Confirm password not match")
             _signUpResult.value = Result.failure(exception)
             return
         }
         viewModelScope.launch {
-            _signUpResult.value = authRepository.signupWithEmailAndPassword(email.value!!, password.value!!)
+            _signUpResult.value = authRepository.signupWithEmailAndPassword(email.value!!.trim(), password.value!!.trim())
         }
     }
 

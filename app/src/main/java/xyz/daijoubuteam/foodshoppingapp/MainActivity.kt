@@ -16,7 +16,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.ui.window.Dialog
 import androidx.core.app.ActivityCompat
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
@@ -63,9 +62,6 @@ class MainActivity() : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Thread.sleep(1000)
-        installSplashScreen()
-        //splashScreen.setKeepOnScreenCondition()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         GoogleApiAvailability().makeGooglePlayServicesAvailable(this)
         //set up location
@@ -120,13 +116,8 @@ class MainActivity() : AppCompatActivity() {
                 val intent = Intent(this, AuthActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
-            } else if (!it.currentUser!!.isEmailVerified) {
-                val intent = Intent(this, VerifyActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
             }
         }
-
         isUserRegisterInformation.observe(this) {
             if (it == false) {
                 val intent = Intent(this@MainActivity, RequestUserInfoActivity::class.java)
