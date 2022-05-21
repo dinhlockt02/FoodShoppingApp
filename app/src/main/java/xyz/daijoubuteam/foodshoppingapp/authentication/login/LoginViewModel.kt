@@ -59,7 +59,7 @@ class LoginViewModel: ViewModel() {
         }
 
         viewModelScope.launch {
-            val credential = EmailAuthProvider.getCredential(email.value!!, password.value!!)
+            val credential = EmailAuthProvider.getCredential(email.value!!.trim(), password.value!!.trim())
             _loginResult.value = authRepository.loginWithAuthCredential(credential)
         }
     }
