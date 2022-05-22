@@ -13,10 +13,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
-import xyz.daijoubuteam.foodshoppingapp.model.Notification
-import xyz.daijoubuteam.foodshoppingapp.model.OrderItem
-import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
-import xyz.daijoubuteam.foodshoppingapp.model.User
+import xyz.daijoubuteam.foodshoppingapp.model.*
 
 class UserRepository {
     private val auth = Firebase.auth
@@ -45,6 +42,7 @@ class UserRepository {
             docRef.addSnapshotListener { value, error ->
                 user.value = value?.toObject()
             }
+            Timber.i(user.value.toString())
             Result.success(user)
         } catch (e: Exception) {
             Result.failure(e)
@@ -105,22 +103,165 @@ class UserRepository {
             Result.failure(exception)
         }
     }
-//    fun getListOrderItemByEateryId(): Result<LiveData<List<OrderItem>>>{
-//        return try {
-//            val uid = auth.currentUser?.uid
-//                ?: throw Exception("Current user not found.")
-//            val docRef = db.collection("users").document(uid)
-//            val orderItemList: MutableLiveData<List<OrderItem>> = MutableLiveData()
-//            val user = MutableLiveData<User>()
-//            docRef.addSnapshotListener { value, error ->
-//                user.value = value?.toObject()
+
+    fun getOrderListInBag():Result<LiveData<List<Order>>>{
+        val orderItemList: MutableLiveData<List<Order>> = MutableLiveData()
+        return try {
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid).collection("bag")
+            docRef.addSnapshotListener{value,error ->
+                orderItemList.value  = value?.toObjects(Order::class.java)
+            }
+            Result.success(orderItemList)
+        } catch (exception: Exception){
+            Result.failure(exception)
+        }
+    }
+
+    fun getEateryInBag():Result<LiveData<List<Eatery>>>{
+        val eateryList: MutableLiveData<List<Eatery>> = MutableLiveData()
+        return try {
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid).collection("bag")
+              docRef.addSnapshotListener{value,error ->
+                if(value!=null){
+                    val _eateryList = ArrayList<Eatery>()
+                    for(document in value.documents){
+                        val eateryId:DocumentReference = document.data?.get("eateryId") as DocumentReference
+                        eateryId.addSnapshotListener{value, error ->
+                            val eatery = value?.toObject(Eatery::class.java)
+                            if (eatery != null) {
+                                _eateryList.add(eatery)
+                            }
+                        }
+                        eateryList.value = _eateryList
+                    }
+                    Timber.i(eateryList.value.toString())
+                }
+            }
+            Result.success(eateryList)
+        } catch (exception: Exception){
+            Result.failure(exception)
+        }
+    }
+
+//    suspend fun AddNewOderItem():Result<Boolean>{
+//        return try{
+//            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+//            val documentRef1 = db.document("eateries/c8vy6QVL2ZTLC0uOrdV7")
+//            val docRef = db.collection("users").document(uid).collection("bag").whereEqualTo("eateryId", documentRef1)
+//            val documentSnapShot = docRef.get().await()
+//            if (documentSnapShot.documents.isEmpty()) {
+//                val order = Order(documentRef1)
+//                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
+//                documentRef.addSnapshotListener{value, error ->
+//                    val product = value?.toObject(Product::class.java)
+//                    val price = 4.0 * product?.newPrice!!
+//                    val orderItem = OrderItem(documentRef,4,price)
+//                    order.orderItems.add(orderItem)
+//                    order.totalPrice = price
+//                    db.collection("users").document(uid).collection("bag").add(order)
+//                }
+//
+//            }else {
+//                val order = documentSnapShot.documents[0].toObject(Order::class.java)
+//                val orderId = documentSnapShot.documents[0].id
+//                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
+//                val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
+//                    ?: false }
+//                if( orderItem != null){
+//                    documentRef.addSnapshotListener{value, error ->
+//                        orderItem.quantity = orderItem.quantity?.plus(2)
+//                        val product = value?.toObject(Product::class.java)
+//                        val bonusPrice = 2.toDouble() * product?.newPrice!!
+//                        orderItem.price = orderItem.price?.plus(bonusPrice)
+//                        order.totalPrice = order.totalPrice?.plus(bonusPrice)
+//                        db.collection("users").document(uid).collection("bag").document(orderId).set(order)
+//                    }
+//
+//                }else {
+//                    documentRef.addSnapshotListener{value, error ->
+//                        val product = value?.toObject(Product::class.java)
+//                        val price = 2.toDouble() * product?.newPrice!!
+//                        val newOrderItem = OrderItem(documentRef,2,price)
+//                        order?.orderItems?.add(newOrderItem)
+//                        if (order != null) {
+//                            order.totalPrice = order.totalPrice?.plus(newOrderItem.price!!)
+//                            db.collection("users").document(uid).collection("bag").document(orderId).set(order)
+//                        }
+//                    }
+//                }
 //            }
-//            orderItemList.value =  user.value?.bag
-//            orderItemList.value?.find { orderItem -> orderItem.productId?.contains("c8vy6QVL2ZTLC0uOrdV7") ?: false }
-//            Timber.i(orderItemList.toString())
-//            Result.success(orderItemList)
-//        } catch (exception: Exception){
+//            Result.success(true)
+//        }catch (exception: Exception){
 //            Result.failure(exception)
 //        }
 //    }
+    fun getEatery(df: DocumentReference): Result<LiveData<Eatery>>{
+        return try {
+            val eatery: MutableLiveData<Eatery> = MutableLiveData()
+            df.addSnapshotListener{value, error ->
+                if(value!=null){
+                    eatery.value = value.toObject(Eatery::class.java)
+                    Timber.i(eatery.value.toString())
+                }
+            }
+            Timber.i(eatery.value.toString())
+            Result.success(eatery)
+        }
+        catch (exception: Exception){
+            Result.failure(exception)
+        }
+    }
+
+    suspend fun addNewOderItem(eateryId: String, productId: String, quantity: Int):Result<Boolean>{
+        return try{
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val eateryIdReference = db.document("eateries/$eateryId")
+            val docRef = db.collection("users").document(uid).collection("bag").whereEqualTo("eateryId", eateryIdReference)
+            val documentSnapShot = docRef.get().await()
+            if (documentSnapShot.documents.isEmpty()) {
+                val order = Order(eateryIdReference)
+                val documentRef = db.document("/eateries/$eateryId/products/$productId")
+                documentRef.addSnapshotListener{value, error ->
+                    val product = value?.toObject(Product::class.java)
+                    val price = quantity.toDouble() * product?.newPrice!!
+                    val orderItem = OrderItem(documentRef,quantity,price)
+                    order.orderItems.add(orderItem)
+                    order.totalPrice = price
+                    db.collection("users").document(uid).collection("bag").add(order)
+                }
+            } else {
+                val order = documentSnapShot.documents[0].toObject(Order::class.java)
+                val orderId = documentSnapShot.documents[0].id
+                val documentRef = db.document("/eateries/$eateryId/products/$productId")
+                val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
+                    ?: false }
+                if( orderItem != null){
+                    documentRef.addSnapshotListener{value, error ->
+                        orderItem.quantity = orderItem.quantity?.plus(quantity)
+                        val product = value?.toObject(Product::class.java)
+                        val bonusPrice = quantity.toDouble() * product?.newPrice!!
+                        orderItem.price = orderItem.price?.plus(bonusPrice)
+                        order.totalPrice = order.totalPrice?.plus(bonusPrice)
+                        db.collection("users").document(uid).collection("bag").document(orderId).set(order)
+                    }
+                }else {
+                    documentRef.addSnapshotListener{value, error ->
+                        val product = value?.toObject(Product::class.java)
+                        val price = quantity.toDouble() * product?.newPrice!!
+                        val newOrderItem = OrderItem(documentRef,quantity,price)
+                        order?.orderItems?.add(newOrderItem)
+                        if (order != null) {
+                            order.totalPrice = order.totalPrice?.plus(newOrderItem.price!!)
+                            db.collection("users").document(uid).collection("bag").document(orderId).set(order)
+                        }
+                    }
+                }
+            }
+            Result.success(true)
+        }catch (exception: Exception){
+            Result.failure(exception)
+        }
+    }
 }
