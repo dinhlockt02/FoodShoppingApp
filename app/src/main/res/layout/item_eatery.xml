@@ -33,6 +33,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/constraintGroup4"
             app:imageUrl="@{eatery.photoUrl}"
+            app:defaultUrl="@{eatery.photoUrl}"
             />
 
         <androidx.constraintlayout.widget.ConstraintLayout

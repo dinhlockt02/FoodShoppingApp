@@ -1,10 +1,12 @@
 package xyz.daijoubuteam.foodshoppingapp.model
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
+import com.google.firebase.firestore.DocumentId
 import com.google.firebase.firestore.GeoPoint
 
 @Parcelize
 data class Eatery (
+    @DocumentId
     val id: String?=null,
     val name: String?=null,
     val work_time: String?=null,

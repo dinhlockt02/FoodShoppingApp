@@ -1,10 +1,9 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home
 
-import android.annotation.SuppressLint
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,15 +15,17 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.SCROLL_STATE_DRAGGING
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.MainApplication
 import xyz.daijoubuteam.foodshoppingapp.R
-import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CarouselAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CategoryAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.EateryAdapter
+import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.EventSlideAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentHomeBinding
 import java.lang.reflect.Type
 import java.util.*
@@ -49,19 +50,31 @@ class HomeFragment : Fragment() {
         hideActionBar()
         handleUserLocation()
         setupOnAvatarClickListener()
+        setupNavigateToSearchFragment()
+        setUpEventList()
         setupPopularEateryListViewAdapter()
         setupNearbyEateryListViewAdapter()
         setupCategoryListViewAdapter()
         handleClickEateryItem()
         handleClickBtnViewAllEatery()
+        val handler = Handler()
+        binding.slideHomeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+
+                handler.removeMessages(0)
+
+                val runnable = Runnable { binding.slideHomeViewPager.currentItem = ++binding.slideHomeViewPager.currentItem }
+                if (position < binding.slideHomeViewPager.adapter?.itemCount ?: 0) {
+                    handler.postDelayed(runnable, 1000)
+                } else {
+                    val runnable = Runnable { binding.slideHomeViewPager.currentItem = 0}
+                }
+            }
+        })
         return binding.root
     }
 
-    private fun setupNavigateToSearchFragment() {
-        binding.btnSearch.setOnClickListener {
-            this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment())
-        }
-    }
 
     override fun onStart() {
         super.onStart()
@@ -95,6 +108,18 @@ class HomeFragment : Fragment() {
         binding.userAvatar.setOnClickListener {
             val activity = this.activity as? MainActivity
             activity?.setMenuSelectedItem(R.id.profileFragment)
+        }
+    }
+    private fun setupNavigateToSearchFragment() {
+        binding.btnSearch.setOnClickListener {
+            this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment())
+        }
+    }
+    private fun setUpEventList() {
+        viewModel.eventList.observe(viewLifecycleOwner){
+            if(it!=null) {
+                binding.slideHomeViewPager.adapter = EventSlideAdapter(it)
+            }
         }
     }
     private fun setupPopularEateryListViewAdapter() {
@@ -144,22 +169,4 @@ class HomeFragment : Fragment() {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToVerticalListEateryFragment(TypesViewAll.NEARBY))
         }
     }
-//    private fun setupCarouselListViewAdapter() {
-//        viewModel.carouselEventList.observe(viewLifecycleOwner) {
-//            if (it != null) {
-//                binding.myPager.adapter = SlideAdapter(this.requireContext(), it)
-//            }
-//        }
-//        binding.myTablayout.setupWithViewPager(binding.myPager)
-//    }
-
-//    private fun setupNearbyEateryListViewAdapter() {
-//        binding.recyNearByEatery.adapter = EateryAdapter()
-//        val adapter = binding.recyNearByEatery.adapter as EateryAdapter
-//        viewModel.eateryList.observe(viewLifecycleOwner) {
-//            if (it != null) {
-//                adapter.submitList(it)
-//            }
-//        }
-//    }
 }

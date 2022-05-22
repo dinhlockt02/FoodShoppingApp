@@ -15,12 +15,12 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
-import xyz.daijoubuteam.foodshoppingapp.model.Carousel
 import xyz.daijoubuteam.foodshoppingapp.model.Category
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
+import xyz.daijoubuteam.foodshoppingapp.model.Event
 import xyz.daijoubuteam.foodshoppingapp.model.User
-import xyz.daijoubuteam.foodshoppingapp.repositories.CarouselEventRepository
 import xyz.daijoubuteam.foodshoppingapp.repositories.EateryRepository
+import xyz.daijoubuteam.foodshoppingapp.repositories.EventRepository
 import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 import java.util.*
 
@@ -32,12 +32,12 @@ enum class TypesViewAll {
 
 class HomeViewModel: ViewModel() {
     private val eateryRepository = EateryRepository()
-    private val carouselEventRepository = CarouselEventRepository()
     private val userRepository = UserRepository()
+    private val eventRepository = EventRepository()
     lateinit var eateryList: LiveData<List<Eatery>>
     lateinit var popularEateryList: LiveData<List<Eatery>>
     lateinit var categoryList: LiveData<List<Category>>
-    lateinit var carouselEventList: LiveData<List<Carousel>>
+    private lateinit var _eventList: LiveData<List<Event>>
     private lateinit var _currentUser: LiveData<User>
     private var _location: Location? = null
     private var _notification = MutableLiveData(0)
@@ -51,13 +51,17 @@ class HomeViewModel: ViewModel() {
         get() = _navigateToSelectedEatery
     val currentUser: LiveData<User>
         get() = _currentUser
+    val eventList: LiveData<List<Event>>
+        get()= _eventList
+
 
     init {
-        getPopularEateryList()
-        getCategoryList()
-        getCarouselList()
+        fetchEventList()
+        fetchPopularEateryList()
+        fetchCategoryList()
+        //getCarouselList()
         if(Firebase.auth.currentUser != null) {
-            getCurrentUser()
+            fetchCurrentUser()
         } else {
             _currentUser = MutableLiveData();
         }
@@ -67,7 +71,16 @@ class HomeViewModel: ViewModel() {
         this._errMessage.value = msg
     }
 
-    private fun getEateryList() {
+    private fun fetchEventList() {
+        val eventListResult = eventRepository.fetchListEvent()
+        if(eventListResult.isSuccess && eventListResult.getOrNull() !== null){
+            _eventList = eventListResult.getOrNull()!!
+        }else {
+            onShowError(eventListResult.exceptionOrNull()?.message)
+        }
+    }
+
+    private fun fetchEateryList() {
         val eateryListResult = eateryRepository.getListEatery()
         if(eateryListResult.isSuccess && eateryListResult.getOrNull() !== null){
             eateryList = eateryListResult.getOrNull()!!
@@ -76,14 +89,14 @@ class HomeViewModel: ViewModel() {
         }
     }
 
-    private fun getPopularEateryList() {
-        getEateryList()
+    private fun fetchPopularEateryList() {
+        fetchEateryList()
         popularEateryList = Transformations.map(eateryList, Function {eateryList ->
             eateryList.sortedByDescending { it.average_rating_count }
         })
     }
 
-    private fun getCategoryList() {
+    private fun fetchCategoryList() {
         val categoryListResult = eateryRepository.getListCategory()
         if(categoryListResult.isSuccess && categoryListResult.getOrNull() !== null) {
             categoryList = categoryListResult.getOrNull()!!
@@ -92,16 +105,7 @@ class HomeViewModel: ViewModel() {
         }
     }
 
-    private fun getCarouselList() {
-        val carouselListResult = carouselEventRepository.getListCarousel()
-        if(carouselListResult.isSuccess && carouselListResult.getOrNull() !== null) {
-            carouselEventList = carouselListResult.getOrNull()!!
-        } else {
-            onShowError(carouselListResult.exceptionOrNull()?.message)
-        }
-    }
-
-    private fun getCurrentUser() {
+    private fun fetchCurrentUser() {
         val currentUserDB =  userRepository.getCurrentUserLiveData()
         if(currentUserDB.isSuccess && currentUserDB.getOrNull() != null) {
             _currentUser = currentUserDB.getOrNull()!!

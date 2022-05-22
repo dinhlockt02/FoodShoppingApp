@@ -9,6 +9,7 @@ import android.location.*
 import android.os.*
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
@@ -70,7 +71,7 @@ class MainActivity() : AppCompatActivity() {
         }
         addAuthStateListener()
         setupHomeActionBar()
-
+        addConnectionStateListener()
     }
 
     override fun onStart() {
@@ -99,19 +100,24 @@ class MainActivity() : AppCompatActivity() {
 
     }
 
+    private fun addConnectionStateListener(){
+        (application as? MainApplication)?.hasConnection?.observe(this){
+            if(it == true) {
+                binding.blockInteractionLayout.visibility = View.GONE
+            }else {
+                binding.blockInteractionLayout.visibility = View.VISIBLE
+            }
+        }
+    }
+
     private fun addAuthStateListener() {
         auth.addAuthStateListener {
             if (it.currentUser == null) {
                 val intent = Intent(this, AuthActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
-            } else if (!it.currentUser!!.isEmailVerified) {
-                val intent = Intent(this, VerifyActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                startActivity(intent)
             }
         }
-
         isUserRegisterInformation.observe(this) {
             if (it == false) {
                 val intent = Intent(this@MainActivity, RequestUserInfoActivity::class.java)

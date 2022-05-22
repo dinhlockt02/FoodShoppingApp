@@ -28,6 +28,7 @@
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             app:imageUrl="@{eatery.photoUrl}"
+            app:defaultUrl="@{eatery.photoUrl}"
             app:layout_constraintBottom_toTopOf="@+id/constraintGroup4"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
