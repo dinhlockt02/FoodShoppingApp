@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Order
 
@@ -19,11 +20,11 @@ class OrderApdater : ListAdapter<Order, OrderApdater.OrderViewHolder>(DiffCallBa
 
     companion object DiffCallBack : DiffUtil.ItemCallback<Order>() {
         override fun areItemsTheSame(oldItem: Order, newItem: Order): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id && oldItem.eatery?.id == newItem.eatery?.id
         }
 
         override fun areContentsTheSame(oldItem: Order, newItem: Order): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem == newItem && oldItem.eatery == newItem.eatery
         }
     }
 

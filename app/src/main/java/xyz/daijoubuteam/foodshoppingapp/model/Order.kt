@@ -18,17 +18,8 @@ data class Order (
     val id: String?= null,
 ):Serializable{
 
-    @Exclude
-    private val _eatery: MutableLiveData<Eatery> = MutableLiveData()
-
-    fun init() {
-        eateryId?.addSnapshotListener{value, error ->
-            _eatery.value = value?.toObject(Eatery::class.java)
-            Timber.i(_eatery.value.toString())
-        }
-    }
 
     @get:Exclude
-    val eatery: LiveData<Eatery>
-        get() = _eatery
+    @set:Exclude
+    var eatery: Eatery? = Eatery()
 }

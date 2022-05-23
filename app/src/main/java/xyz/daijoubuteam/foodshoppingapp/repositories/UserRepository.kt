@@ -112,9 +112,17 @@ class UserRepository {
             val docRef = db.collection("users").document(uid).collection("bag")
             docRef.addSnapshotListener{value,error ->
                 orderItemList.value  = value?.toObjects(Order::class.java)
-                orderItemList.value?.forEach {
-                    it.init()
+                if (orderItemList.value != null) {
+                    for(orderItem in orderItemList.value!!){
+                        val eateryId:DocumentReference? = orderItem.eateryId
+                        eateryId?.addSnapshotListener{eateryValue, error ->
+                            val eatery = eateryValue?.toObject(Eatery::class.java)
+                            orderItem.eatery = eatery
+                            orderItemList.value = orderItemList.value?.toMutableList()
+                        }
+                    }
                 }
+
             }
             Result.success(orderItemList)
         } catch (exception: Exception){

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.client.orders.OrderApdater
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentBagBinding
@@ -32,6 +33,7 @@ class BagFragment : Fragment() {
 
         bagViewModel.orderList.observe(viewLifecycleOwner) {
             it?.let{
+                Timber.i(it.first().eatery.toString())
                 adapter.submitList(it)
             }
         }
