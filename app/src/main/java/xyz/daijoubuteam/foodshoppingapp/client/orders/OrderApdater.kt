@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Order
 
-class OrdersApdater : ListAdapter<Order, OrdersApdater.OrdersViewHolder>(DiffCallBack) {
-    class OrdersViewHolder(private var binding: ItemOrderBinding) :
+class OrderApdater : ListAdapter<Order, OrderApdater.OrderViewHolder>(DiffCallBack) {
+    class OrderViewHolder(private var binding: ItemOrderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(order: Order) {
             binding.order = order
@@ -27,12 +27,12 @@ class OrdersApdater : ListAdapter<Order, OrdersApdater.OrdersViewHolder>(DiffCal
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         val binding = ItemOrderBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return OrdersViewHolder(binding)
+        return OrderViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: OrdersViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
         var orderItems = getItem(position)
         holder.bind(orderItems)
     }

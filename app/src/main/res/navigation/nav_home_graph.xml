@@ -29,8 +29,8 @@
             app:destination="@id/searchFragment" />
     </fragment>
     <fragment
-        android:id="@+id/feedsFragment"
-        android:name="xyz.daijoubuteam.foodshoppingapp.client.bag.FeedsFragment"
+        android:id="@+id/bagFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.bag.BagFragment"
         android:label="fragment_feeds"
         tools:layout="@layout/fragment_bag" />
     <fragment

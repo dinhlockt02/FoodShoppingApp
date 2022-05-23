@@ -14,7 +14,7 @@
         android:icon="@drawable/ic_saved"
         android:title="@string/nav_bottom_saved" />
     <item
-        android:id="@+id/feedsFragment"
+        android:id="@+id/bagFragment"
         android:enabled="true"
         android:icon="@drawable/ic_outline_shopping_bag_24"
         android:title="@string/bag" />

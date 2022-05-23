@@ -23,10 +23,11 @@
             android:layout_marginEnd="14dp"
             android:layout_marginVertical="10dp"
             android:scaleType="fitXY"
+            app:imageUrl="@{order.eatery.photoUrl}"
+            app:defaultUrl="@{order.eatery.photoUrl}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/img_rectangle44"
             tools:src="@drawable/img_rectangle44"
             tools:ignore="ContentDescription" />
 
@@ -48,6 +49,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textSize="24sp"
+                android:text="@{order.eatery.name}"
                 android:textColor="@color/bluegray_700"
                 android:fontFamily="@font/avenir_next_lt_pro"
                 android:textFontWeight="500"
@@ -63,6 +65,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:singleLine="true"
+                android:text="@{Integer.toString(order.orderItems.size())}"
                 android:textSize="20sp"
                 android:textColor="@color/bluegray_700"
                 android:fontFamily="@font/avenir_next_lt_pro"
