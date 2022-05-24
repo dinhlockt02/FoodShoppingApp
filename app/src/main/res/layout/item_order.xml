@@ -65,7 +65,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:singleLine="true"
-                android:text="@{Integer.toString(order.orderItems.size())}"
+                android:text="@{@string/number_of_dishes(Integer.toString(order.orderItems.size()))}"
                 android:textSize="20sp"
                 android:textColor="@color/bluegray_700"
                 android:fontFamily="@font/avenir_next_lt_pro"
