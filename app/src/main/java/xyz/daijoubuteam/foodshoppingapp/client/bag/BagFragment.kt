@@ -1,5 +1,6 @@
 package xyz.daijoubuteam.foodshoppingapp.client.bag
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,9 +33,12 @@ class BagFragment : Fragment() {
         binding.orderList.adapter = adapter
 
         bagViewModel.orderList.observe(viewLifecycleOwner) {
-            if(it != null && it.isNotEmpty()){
+            bagViewModel.initOrder()
+            if(it.isNotEmpty() && it != null){
                 Timber.i(it.first().eatery.toString())
                 adapter.submitList(it)
+            }else{
+                binding.orderList.visibility = View.GONE
             }
         }
         return  binding.root

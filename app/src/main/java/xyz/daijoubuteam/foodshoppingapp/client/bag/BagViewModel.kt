@@ -29,4 +29,8 @@ class BagViewModel : ViewModel(){
     private fun onShowError(msg: String?){
         this._errMessage.value = msg
     }
+
+    fun initOrder(){
+        userRepository.initOrderInBag()
+    }
 }
