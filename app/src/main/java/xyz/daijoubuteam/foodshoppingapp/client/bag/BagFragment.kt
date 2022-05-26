@@ -32,7 +32,7 @@ class BagFragment : Fragment() {
         binding.orderList.adapter = adapter
 
         bagViewModel.orderList.observe(viewLifecycleOwner) {
-            it?.let{
+            if(it != null && it.isNotEmpty()){
                 Timber.i(it.first().eatery.toString())
                 adapter.submitList(it)
             }

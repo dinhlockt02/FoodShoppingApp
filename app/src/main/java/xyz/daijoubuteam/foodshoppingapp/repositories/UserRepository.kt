@@ -24,7 +24,7 @@ class UserRepository {
         return try {
             val uid = auth.currentUser?.uid
                 ?: throw Exception("Current user not found.")
-            AddNewOderItem()
+            addNewOderItem()
             val docRef = db.collection("users").document(uid)
             val documentSnapShot = docRef.get().await()
             val users = documentSnapShot.toObject<User>()
@@ -157,22 +157,22 @@ class UserRepository {
         }
     }
 
-    suspend fun AddNewOderItem():Result<Boolean>{
+    private suspend fun addNewOderItem():Result<Boolean>{
         return try{
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
-            val documentRef1 = db.document("eateries/eK0Cct2pOgL4UKfSn0xm")
+            val documentRef1 = db.document("eateries/c8vy6QVL2ZTLC0uOrdV7")
             val docRef = db.collection("users").document(uid).collection("bag").whereEqualTo("eateryId", documentRef1)
             val documentSnapShot = docRef.get().await()
             if (documentSnapShot.documents.isEmpty()) {
                 val order = Order(documentRef1)
-                val documentRef = db.document("/eateries/eK0Cct2pOgL4UKfSn0xm/products/WUMFFbwWZ8zIrsCwibbW")
+                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/ZHVDFdgyYERfmrjZI20w")
                 val orderItem = OrderItem(documentRef,4)
                 order.orderItems.add(orderItem)
                 db.collection("users").document(uid).collection("bag").add(order)
             }else {
                 val order = documentSnapShot.documents[0].toObject(Order::class.java)
                 val orderId = documentSnapShot.documents[0].id
-                val documentRef = db.document("/eateries/eK0Cct2pOgL4UKfSn0xm/products/WUMFFbwWZ8zIrsCwibbW")
+                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/ZHVDFdgyYERfmrjZI20w")
                 val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
                     ?: false }
                 if( orderItem != null){
@@ -191,6 +191,7 @@ class UserRepository {
             Result.failure(exception)
         }
     }
+
     fun getEatery(df: DocumentReference): Result<LiveData<Eatery>>{
         return try {
             val eatery: MutableLiveData<Eatery> = MutableLiveData()
