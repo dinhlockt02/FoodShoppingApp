@@ -17,8 +17,6 @@ data class Order (
     @DocumentId
     val id: String?= null,
 ):Serializable{
-
-
     @get:Exclude
     @set:Exclude
     var eatery: Eatery? = Eatery()

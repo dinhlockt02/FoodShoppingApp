@@ -160,47 +160,29 @@ class UserRepository {
     suspend fun AddNewOderItem():Result<Boolean>{
         return try{
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
-            val documentRef1 = db.document("eateries/c8vy6QVL2ZTLC0uOrdV7")
+            val documentRef1 = db.document("eateries/eK0Cct2pOgL4UKfSn0xm")
             val docRef = db.collection("users").document(uid).collection("bag").whereEqualTo("eateryId", documentRef1)
             val documentSnapShot = docRef.get().await()
             if (documentSnapShot.documents.isEmpty()) {
                 val order = Order(documentRef1)
-                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
-                documentRef.addSnapshotListener{value, error ->
-                    val product = value?.toObject(Product::class.java)
-                    val price = 4.0 * product?.newPrice!!
-                    val orderItem = OrderItem(documentRef,4,price)
-                    order.orderItems.add(orderItem)
-                    order.totalPrice = price
-                    db.collection("users").document(uid).collection("bag").add(order)
-                }
-
+                val documentRef = db.document("/eateries/eK0Cct2pOgL4UKfSn0xm/products/WUMFFbwWZ8zIrsCwibbW")
+                val orderItem = OrderItem(documentRef,4)
+                order.orderItems.add(orderItem)
+                db.collection("users").document(uid).collection("bag").add(order)
             }else {
                 val order = documentSnapShot.documents[0].toObject(Order::class.java)
                 val orderId = documentSnapShot.documents[0].id
-                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
+                val documentRef = db.document("/eateries/eK0Cct2pOgL4UKfSn0xm/products/WUMFFbwWZ8zIrsCwibbW")
                 val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
                     ?: false }
                 if( orderItem != null){
-                    documentRef.addSnapshotListener{value, error ->
-                        orderItem.quantity = orderItem.quantity?.plus(2)
-                        val product = value?.toObject(Product::class.java)
-                        val bonusPrice = 2.toDouble() * product?.newPrice!!
-                        orderItem.price = orderItem.price?.plus(bonusPrice)
-                        order.totalPrice = order.totalPrice?.plus(bonusPrice)
-                        db.collection("users").document(uid).collection("bag").document(orderId).set(order)
-                    }
-
+                    orderItem.quantity = orderItem.quantity?.plus(2)
+                    db.collection("users").document(uid).collection("bag").document(orderId).set(order)
                 }else {
-                    documentRef.addSnapshotListener{value, error ->
-                        val product = value?.toObject(Product::class.java)
-                        val price = 2.toDouble() * product?.newPrice!!
-                        val newOrderItem = OrderItem(documentRef,2,price)
+                        val newOrderItem = OrderItem(documentRef,2)
                         order?.orderItems?.add(newOrderItem)
                         if (order != null) {
-                            order.totalPrice = order.totalPrice?.plus(newOrderItem.price!!)
                             db.collection("users").document(uid).collection("bag").document(orderId).set(order)
-                        }
                     }
                 }
             }

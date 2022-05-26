@@ -24,7 +24,7 @@ class OrderApdater : ListAdapter<Order, OrderApdater.OrderViewHolder>(DiffCallBa
         }
 
         override fun areContentsTheSame(oldItem: Order, newItem: Order): Boolean {
-            return oldItem == newItem && oldItem.eatery == newItem.eatery
+            return false
         }
     }
 
