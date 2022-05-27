@@ -33,12 +33,9 @@ class BagFragment : Fragment() {
         binding.orderList.adapter = adapter
 
         bagViewModel.orderList.observe(viewLifecycleOwner) {
-            bagViewModel.initOrder()
-            if(it.isNotEmpty() && it != null){
+            if(it.isNotEmpty() && it != null) {
                 Timber.i(it.first().eatery.toString())
                 adapter.submitList(it)
-            }else{
-                binding.orderList.visibility = View.GONE
             }
         }
         return  binding.root

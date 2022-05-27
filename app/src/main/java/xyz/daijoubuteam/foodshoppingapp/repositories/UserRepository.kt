@@ -114,15 +114,18 @@ class UserRepository {
                 orderItemList.value  = value?.toObjects(Order::class.java)
                 if (orderItemList.value != null) {
                     for(orderItem in orderItemList.value!!){
+                        if (orderItem.orderItems.isNullOrEmpty()){
+                            orderItem.id?.let { docRef.document(it).delete() }
+                        }else {
                         val eateryId:DocumentReference? = orderItem.eateryId
-                        eateryId?.addSnapshotListener{eateryValue, error ->
+                        eateryId?.addSnapshotListener { eateryValue, error ->
                             val eatery = eateryValue?.toObject(Eatery::class.java)
-                            if(eatery == null)
-                            {
+                            if (eatery == null) {
                                 orderItem.id?.let { docRef.document(it).delete() }
                             }
                             orderItem.eatery = eatery
                             orderItemList.value = orderItemList.value?.toMutableList()
+                        }
                         }
                     }
                 }
@@ -164,19 +167,19 @@ class UserRepository {
     private suspend fun addNewOderItem():Result<Boolean>{
         return try{
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
-            val documentRef1 = db.document("eateries/q7AKyKHmDKUnR2ZXFkly")
+            val documentRef1 = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7")
             val docRef = db.collection("users").document(uid).collection("bag").whereEqualTo("eateryId", documentRef1)
             val documentSnapShot = docRef.get().await()
             if (documentSnapShot.documents.isEmpty()) {
                 val order = Order(documentRef1)
-                val documentRef = db.document("/eateries/q7AKyKHmDKUnR2ZXFkly/products/FB4YhioL61aeGlLPLbhE")
+                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
                 val orderItem = OrderItem(documentRef,4)
                 order.orderItems.add(orderItem)
                 db.collection("users").document(uid).collection("bag").add(order)
             }else {
                 val order = documentSnapShot.documents[0].toObject(Order::class.java)
                 val orderId = documentSnapShot.documents[0].id
-                val documentRef = db.document("/eateries/q7AKyKHmDKUnR2ZXFkly/products/FB4YhioL61aeGlLPLbhE")
+                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
                 val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
                     ?: false }
                 if( orderItem != null){
@@ -193,28 +196,6 @@ class UserRepository {
             Result.success(true)
         }catch (exception: Exception){
             Result.failure(exception)
-        }
-    }
-
-    fun initOrderInBag():Result<Boolean>{
-        return try{
-            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
-            val docRef = db.collection("users").document(uid).collection("bag")
-            docRef.addSnapshotListener{value,error ->
-                if(value != null)
-                {
-                    for(document in value.documents){
-                        val order = document.toObject(Order::class.java)
-                        if(order?.orderItems.isNullOrEmpty())
-                        {
-                            docRef.document(document.id).delete()
-                        }
-                    }
-                }
-            }
-            Result.success(true)
-        }catch (e: Exception) {
-            Result.failure(e)
         }
     }
 

@@ -1,9 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.client.bag
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.view.View
+import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.Order
@@ -30,7 +28,20 @@ class BagViewModel : ViewModel(){
         this._errMessage.value = msg
     }
 
-    fun initOrder(){
-        userRepository.initOrderInBag()
+    val emptyCartImageVisibility = Transformations.map(orderList){
+        if(it.isNullOrEmpty()){
+            View.VISIBLE
+        }else{
+            View.GONE
+        }
     }
+
+    val orderListVisibility = Transformations.map(orderList){
+        if(it.isNullOrEmpty()){
+            View.GONE
+        }else{
+            View.VISIBLE
+        }
+    }
+
 }
