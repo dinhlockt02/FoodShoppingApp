@@ -123,7 +123,8 @@ class UserRepository {
                             if (eatery == null) {
                                 order.id?.let { docRef.document(it).delete() }
                             }
-                            order.eatery = eatery
+                            order.eateryName = eatery?.name
+                            order.eateryImage = eatery?.photoUrl
                             orderList.value = orderList.value?.toMutableList()
                         }
                         }
@@ -172,14 +173,14 @@ class UserRepository {
             val documentSnapShot = docRef.get().await()
             if (documentSnapShot.documents.isEmpty()) {
                 val order = Order(documentRef1)
-                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/FGyom9pKLtyJNDJTQnG6")
+                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
                 val orderItem = OrderItem(documentRef,4)
                 order.orderItems.add(orderItem)
                 db.collection("users").document(uid).collection("bag").add(order)
             }else {
                 val order = documentSnapShot.documents[0].toObject(Order::class.java)
                 val orderId = documentSnapShot.documents[0].id
-                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/FGyom9pKLtyJNDJTQnG6")
+                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
                 val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
                     ?: false }
                 if( orderItem != null){

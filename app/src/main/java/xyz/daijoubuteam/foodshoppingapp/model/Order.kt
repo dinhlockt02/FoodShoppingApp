@@ -19,5 +19,8 @@ data class Order (
 ):Serializable{
     @get:Exclude
     @set:Exclude
-    var eatery: Eatery? = Eatery()
+    var eateryName: String ?= null
+    @get:Exclude
+    @set:Exclude
+    var eateryImage: String ?= null
 }
