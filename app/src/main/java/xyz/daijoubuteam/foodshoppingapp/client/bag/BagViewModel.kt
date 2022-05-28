@@ -13,6 +13,9 @@ class BagViewModel : ViewModel(){
     private lateinit var _orderList: LiveData<List<Order>>
     val orderList: LiveData<List<Order>>
         get() = _orderList
+    private val _navigateToSelectedOrder = MutableLiveData<Order>()
+    val navigateToSelectedOrder: LiveData<Order>
+        get() = _navigateToSelectedOrder
     init {
         viewModelScope.launch {
             val orderListResult = userRepository.getOrderListInBag()
@@ -42,6 +45,14 @@ class BagViewModel : ViewModel(){
         }else{
             View.VISIBLE
         }
+    }
+
+    fun doneNavigateToPlaceOrder(){
+        _navigateToSelectedOrder.value = null
+    }
+
+    fun displayPlaceOrder(orderSelected: Order){
+        _navigateToSelectedOrder.value = orderSelected
     }
 
 }

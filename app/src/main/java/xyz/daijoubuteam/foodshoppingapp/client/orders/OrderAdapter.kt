@@ -2,14 +2,17 @@ package xyz.daijoubuteam.foodshoppingapp.client.orders
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import timber.log.Timber
+import com.google.firebase.firestore.DocumentReference
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderBinding
+import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 import xyz.daijoubuteam.foodshoppingapp.model.Order
 
-class OrderApdater : ListAdapter<Order, OrderApdater.OrderViewHolder>(DiffCallBack) {
+class OrderAdapter(private val onClickListener: OnClickListener) : ListAdapter<Order, OrderAdapter.OrderViewHolder>(DiffCallBack) {
     class OrderViewHolder(private var binding: ItemOrderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(order: Order) {
@@ -34,7 +37,14 @@ class OrderApdater : ListAdapter<Order, OrderApdater.OrderViewHolder>(DiffCallBa
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-        var orderItems = getItem(position)
-        holder.bind(orderItems)
+        val orderItem = getItem(position)
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(orderItem)
+        }
+        holder.bind(orderItem)
+    }
+
+    class OnClickListener(val clickListener: (order: Order) -> Unit) {
+        fun onClick(order: Order) = clickListener(order)
     }
 }

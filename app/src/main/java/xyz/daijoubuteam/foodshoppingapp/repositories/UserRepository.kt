@@ -106,32 +106,32 @@ class UserRepository {
     }
 
     fun getOrderListInBag():Result<LiveData<List<Order>>>{
-        val orderItemList: MutableLiveData<List<Order>> = MutableLiveData()
+        val orderList: MutableLiveData<List<Order>> = MutableLiveData()
         return try {
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
             val docRef = db.collection("users").document(uid).collection("bag")
             docRef.addSnapshotListener{value,error ->
-                orderItemList.value  = value?.toObjects(Order::class.java)
-                if (orderItemList.value != null) {
-                    for(orderItem in orderItemList.value!!){
-                        if (orderItem.orderItems.isNullOrEmpty()){
-                            orderItem.id?.let { docRef.document(it).delete() }
+                orderList.value  = value?.toObjects(Order::class.java)
+                if (orderList.value != null) {
+                    for(order in orderList.value!!){
+                        if (order.orderItems.isNullOrEmpty()){
+                            order.id?.let { docRef.document(it).delete() }
                         }else {
-                        val eateryId:DocumentReference? = orderItem.eateryId
+                        val eateryId:DocumentReference? = order.eateryId
                         eateryId?.addSnapshotListener { eateryValue, error ->
                             val eatery = eateryValue?.toObject(Eatery::class.java)
                             if (eatery == null) {
-                                orderItem.id?.let { docRef.document(it).delete() }
+                                order.id?.let { docRef.document(it).delete() }
                             }
-                            orderItem.eatery = eatery
-                            orderItemList.value = orderItemList.value?.toMutableList()
+                            order.eatery = eatery
+                            orderList.value = orderList.value?.toMutableList()
                         }
                         }
                     }
                 }
 
             }
-            Result.success(orderItemList)
+            Result.success(orderList)
         } catch (exception: Exception){
             Result.failure(exception)
         }
@@ -172,14 +172,14 @@ class UserRepository {
             val documentSnapShot = docRef.get().await()
             if (documentSnapShot.documents.isEmpty()) {
                 val order = Order(documentRef1)
-                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
+                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/FGyom9pKLtyJNDJTQnG6")
                 val orderItem = OrderItem(documentRef,4)
                 order.orderItems.add(orderItem)
                 db.collection("users").document(uid).collection("bag").add(order)
             }else {
                 val order = documentSnapShot.documents[0].toObject(Order::class.java)
                 val orderId = documentSnapShot.documents[0].id
-                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
+                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/FGyom9pKLtyJNDJTQnG6")
                 val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
                     ?: false }
                 if( orderItem != null){
@@ -262,6 +262,33 @@ class UserRepository {
                 }
             }
             Result.success(true)
+        }catch (exception: Exception){
+            Result.failure(exception)
+        }
+    }
+
+     fun placeOrder(order: Order):Result<LiveData<Order>>{
+        val placedOrder = MutableLiveData<Order>()
+        return try {
+            var sum = 0.0
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+                for(orderItem in order.orderItems){
+                    orderItem.productId?.addSnapshotListener{valueProduct, error ->
+                        val product = valueProduct?.toObject(Product::class.java)
+                        if (product == null || orderItem.quantity == 0){
+                            order.orderItems.remove(orderItem)
+                        }else{
+                            orderItem.productImg = product.img
+                            orderItem.productName = product.name
+                            orderItem.price = product.newPrice?.times(orderItem.quantity!!)
+                            sum += orderItem.price!!
+                            order.totalPrice = sum
+                        }
+                        order.id?.let {db.collection("users").document(uid).collection("bag").document(it).set(order) }
+                placedOrder.value  = order
+                }
+            }
+            Result.success(placedOrder)
         }catch (exception: Exception){
             Result.failure(exception)
         }
