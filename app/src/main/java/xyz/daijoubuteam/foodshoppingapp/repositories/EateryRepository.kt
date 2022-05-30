@@ -1,6 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.repositories
 
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.firestore.ktx.firestore
@@ -21,7 +22,9 @@ class EateryRepository {
             val docRef = db.collection("eateries")
             docRef.addSnapshotListener { value, error ->
                 eateries.value = value?.toObjects(Eatery::class.java)
+                Log.i("EateryRepository", eateries.value.toString())
             }
+
             Result.success(eateries)
         }catch (e: Exception){
             Result.failure(e)
