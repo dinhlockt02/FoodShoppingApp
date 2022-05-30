@@ -51,6 +51,44 @@ class BagRepository {
         }
     }
 
+    fun getOrderItemList(orderId: String): Result<LiveData<List<OrderItem>>> {
+        val orderItemList: MutableLiveData<List<OrderItem>> = MutableLiveData()
+        return try {
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid).collection("bag").document(orderId)
+            docRef.addSnapshotListener { value, error ->
+                val order = value?.toObject(Order::class.java)
+                orderItemList.value = order?.orderItems
+                val newOrder = order?.copy()
+                order?.orderItems?.forEach { orderItem ->
+                    orderItem.productId?.addSnapshotListener { productValue, error ->
+                        val product = productValue?.toObject(Product::class.java)
+                        if (product == null || orderItem.quantity == 0) {
+                            newOrder?.orderItems?.remove(orderItem)
+                            if (newOrder != null) {
+                                docRef.set(newOrder)
+                            }
+                        } else {
+                            val newOrderItem = orderItem.copy(
+                                productName = product.name,
+                                productImg = product.img,
+                                price = orderItem.quantity?.let { product.newPrice?.times(it) }
+                            )
+                            orderItemList.value = orderItemList.value?.map {
+                                if (it.productId !== newOrderItem.productId) it
+                                else newOrderItem
+                            }
+
+                        }
+                    }
+                }
+            }
+            Result.success(orderItemList)
+        } catch (exception: Exception) {
+            Result.failure(exception)
+        }
+    }
+
 
     suspend fun addNewOderItem(eateryId: String, productId: String, quantity: Int):Result<Boolean>{
         return try{
@@ -86,4 +124,5 @@ class BagRepository {
             Result.failure(exception)
         }
     }
+
 }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderItemBinding
 import xyz.daijoubuteam.foodshoppingapp.model.OrderItem
 
-class OrderCheckOutAdapter: ListAdapter<OrderItem, OrderCheckOutAdapter.OrderItemViewHolder>(DiffCallBack) {
+class OrderItemAdapter: ListAdapter<OrderItem, OrderItemAdapter.OrderItemViewHolder>(DiffCallBack) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):OrderItemViewHolder{
         return OrderItemViewHolder.from(parent)
     }
@@ -20,11 +20,11 @@ class OrderCheckOutAdapter: ListAdapter<OrderItem, OrderCheckOutAdapter.OrderIte
 
     companion object DiffCallBack: DiffUtil.ItemCallback<OrderItem>(){
         override fun areItemsTheSame(oldItem: OrderItem, newItem: OrderItem): Boolean {
-            return oldItem == newItem
+            return oldItem.productId == newItem.productId
         }
 
         override fun areContentsTheSame(oldItem: OrderItem, newItem: OrderItem): Boolean {
-            return oldItem.productId == newItem.productId
+            return oldItem == newItem
         }
     }
 
