@@ -5,10 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Order
 
-class OrderAdapter(private val onClickListener: OnClickListener) : ListAdapter<Order, OrderAdapter.OrderViewHolder>(DiffCallBack) {
+class OrderApdater : ListAdapter<Order, OrderApdater.OrderViewHolder>(DiffCallBack) {
     class OrderViewHolder(private var binding: ItemOrderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(order: Order) {
@@ -19,11 +20,11 @@ class OrderAdapter(private val onClickListener: OnClickListener) : ListAdapter<O
 
     companion object DiffCallBack : DiffUtil.ItemCallback<Order>() {
         override fun areItemsTheSame(oldItem: Order, newItem: Order): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.id == newItem.id && oldItem.eatery?.id == newItem.eatery?.id
         }
 
         override fun areContentsTheSame(oldItem: Order, newItem: Order): Boolean {
-            return oldItem == newItem
+            return false
         }
     }
 
@@ -33,14 +34,7 @@ class OrderAdapter(private val onClickListener: OnClickListener) : ListAdapter<O
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-        val orderItem = getItem(position)
-        holder.itemView.setOnClickListener{
-            onClickListener.onClick(orderItem)
-        }
-        holder.bind(orderItem)
-    }
-
-    class OnClickListener(val clickListener: (order: Order) -> Unit) {
-        fun onClick(order: Order) = clickListener(order)
+        var orderItems = getItem(position)
+        holder.bind(orderItems)
     }
 }

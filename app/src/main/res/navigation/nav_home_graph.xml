@@ -32,11 +32,7 @@
         android:id="@+id/bagFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.bag.BagFragment"
         android:label="fragment_bag"
-        tools:layout="@layout/fragment_bag" >
-        <action
-            android:id="@+id/action_bagFragment_to_orderCheckOutFragment"
-            app:destination="@id/orderCheckOutFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_bag" />
     <fragment
         android:id="@+id/ordersFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.OrdersFragment"
@@ -70,13 +66,9 @@
     </fragment>
     <fragment
         android:id="@+id/orderCheckOutFragment"
-        android:name="xyz.daijoubuteam.foodshoppingapp.client.ordercheckout.OrderCheckOutFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.ordercheckout.OrderCheckoutFragment"
         android:label="fragment_ordercheckout"
         tools:layout="@layout/fragment_order_checkout">
-        <argument
-            android:name="orderId"
-            app:argType="string">
-        </argument>
     </fragment>
     <navigation android:id="@+id/navigation"
         app:startDestination="@id/profileAddressEditFragment">

@@ -1,5 +1,6 @@
 package xyz.daijoubuteam.foodshoppingapp.client.bag
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,9 +9,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.R
-import xyz.daijoubuteam.foodshoppingapp.client.orders.OrderAdapter
+import xyz.daijoubuteam.foodshoppingapp.client.orders.OrderApdater
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentBagBinding
 
 class BagFragment : Fragment() {
@@ -28,23 +29,18 @@ class BagFragment : Fragment() {
         binding.bagViewModel = bagViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val adapter = OrderAdapter(OrderAdapter.OnClickListener{
-            bagViewModel.navigateToOrderCheckOutFragment(it)
-        })
+        val adapter = OrderApdater()
         binding.orderList.adapter = adapter
 
         bagViewModel.orderList.observe(viewLifecycleOwner) {
-            if(it.isNotEmpty() && it != null) {
+            bagViewModel.initOrder()
+            if(it.isNotEmpty() && it != null){
+                Timber.i(it.first().eatery.toString())
                 adapter.submitList(it)
+            }else{
+                binding.orderList.visibility = View.GONE
             }
         }
-
-        bagViewModel.navigateToOrderCheckOutFragment.observe(viewLifecycleOwner, Observer {
-            if(it!= null){
-                this.findNavController().navigate(BagFragmentDirections.actionBagFragmentToOrderCheckOutFragment(it.id!!))
-                bagViewModel.doneNavigateToOrderCheckOutFragment()
-            }
-        })
         return  binding.root
     }
 

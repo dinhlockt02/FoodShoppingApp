@@ -1,25 +1,23 @@
 package xyz.daijoubuteam.foodshoppingapp.client.bag
 
-import android.view.View
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.Order
-import xyz.daijoubuteam.foodshoppingapp.repositories.BagRepository
 import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 
 class BagViewModel : ViewModel(){
-    private val bagRepository = BagRepository()
+    private val userRepository = UserRepository()
     private val _errMessage = MutableLiveData("")
     private lateinit var _orderList: LiveData<List<Order>>
-    private val _navigateToOrderCheckOutFragment = MutableLiveData<Order>()
-    val navigateToOrderCheckOutFragment: LiveData<Order>
-        get() = _navigateToOrderCheckOutFragment
     val orderList: LiveData<List<Order>>
         get() = _orderList
     init {
         viewModelScope.launch {
-            val orderListResult = bagRepository.getOrderListInBag()
+            val orderListResult = userRepository.getOrderListInBag()
             if(orderListResult.isSuccess && orderListResult.getOrNull() !== null){
                 _orderList = orderListResult.getOrNull()!!
             }else {
@@ -32,28 +30,7 @@ class BagViewModel : ViewModel(){
         this._errMessage.value = msg
     }
 
-    val emptyCartImageVisibility = Transformations.map(orderList){
-        if(it.isNullOrEmpty()){
-            View.VISIBLE
-        }else{
-            View.GONE
-        }
+    fun initOrder(){
+        userRepository.initOrderInBag()
     }
-
-    val orderListVisibility = Transformations.map(orderList){
-        if(it.isNullOrEmpty()){
-            View.GONE
-        }else{
-            View.VISIBLE
-        }
-    }
-
-    fun doneNavigateToOrderCheckOutFragment(){
-        _navigateToOrderCheckOutFragment.value = null
-    }
-
-    fun navigateToOrderCheckOutFragment(orderSelected: Order){
-        _navigateToOrderCheckOutFragment.value = orderSelected
-    }
-
 }
