@@ -105,34 +105,26 @@ class UserRepository {
         }
     }
 
-    fun getOrderListInBag():Result<LiveData<List<Order>>>{
-        val orderItemList: MutableLiveData<List<Order>> = MutableLiveData()
+    fun getOrderListInBag(): Result<LiveData<List<Order>>> {
+        val orderList: MutableLiveData<List<Order>> = MutableLiveData()
         return try {
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
             val docRef = db.collection("users").document(uid).collection("bag")
-            docRef.addSnapshotListener{value,error ->
-                orderItemList.value  = value?.toObjects(Order::class.java)
-                if (orderItemList.value != null) {
-                    for(orderItem in orderItemList.value!!){
-                        if (orderItem.orderItems.isNullOrEmpty()){
-                            orderItem.id?.let { docRef.document(it).delete() }
-                        }else {
-                        val eateryId:DocumentReference? = orderItem.eateryId
-                        eateryId?.addSnapshotListener { eateryValue, error ->
-                            val eatery = eateryValue?.toObject(Eatery::class.java)
-                            if (eatery == null) {
-                                orderItem.id?.let { docRef.document(it).delete() }
-                            }
-                            orderItem.eatery = eatery
-                            orderItemList.value = orderItemList.value?.toMutableList()
-                        }
+            docRef.addSnapshotListener { value, error ->
+                orderList.value = value?.toObjects(Order::class.java)
+                orderList.value?.forEach { order ->
+                    order.eateryId?.addSnapshotListener { eateryValue, error ->
+                        val eatery = eateryValue?.toObject(Eatery::class.java)
+                        val newOrder = order.copy(eateryImage = eatery?.photoUrl, eateryName = eatery?.name)
+                        orderList.value = orderList.value?.map {
+                            if(it.id !== newOrder.id) it
+                            else newOrder
                         }
                     }
                 }
-
             }
-            Result.success(orderItemList)
-        } catch (exception: Exception){
+            Result.success(orderList)
+        } catch (exception: Exception) {
             Result.failure(exception)
         }
     }

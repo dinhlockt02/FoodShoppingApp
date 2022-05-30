@@ -34,7 +34,6 @@ class BagFragment : Fragment() {
 
         bagViewModel.orderList.observe(viewLifecycleOwner) {
             if(it.isNotEmpty() && it != null) {
-                Timber.i(it.first().eatery.toString())
                 adapter.submitList(it)
             }
         }

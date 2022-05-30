@@ -16,8 +16,8 @@ data class Order (
     val orderTime: Timestamp?=null,
     @DocumentId
     val id: String?= null,
-):Serializable{
     @get:Exclude
-    @set:Exclude
-    var eatery: Eatery? = Eatery()
-}
+    val eateryName: String ?= null,
+    @get:Exclude
+    val eateryImage: String ?= null
+)
