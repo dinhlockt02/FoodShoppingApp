@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="xyz.daijoubuteam.foodshoppingapp.client.ordercheckout.OrderCheckOutViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".client.ordercheckout.OrderCheckoutFragment">
+        tools:context=".client.ordercheckout.OrderCheckOutFragment">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollViewScrollOrderCheckout"
@@ -292,7 +294,7 @@
                             app:layout_constraintEnd_toEndOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerViewOrders"
+                        android:id="@+id/list_order_items"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
@@ -307,7 +309,7 @@
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintSubtotal"
                         android:layout_marginTop="10dp"
-                        app:layout_constraintTop_toBottomOf="@id/recyclerViewOrders"
+                        app:layout_constraintTop_toBottomOf="@id/list_order_items"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <TextView
@@ -574,11 +576,6 @@
                     android:background="@drawable/rectangle_bg_deep_orange_a200_radius_6"
                     tools:ignore="UnusedAttribute"/>
             </LinearLayout>
-                
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

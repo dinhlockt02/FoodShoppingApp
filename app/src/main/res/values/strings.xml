@@ -150,4 +150,6 @@
     
     <!-- Order -->
     <string name="number_of_dishes">%1$s dishes</string>
+    <!--OrderItem-->
+    <string name="quantity_of_order_item">x %1$s</string>
 </resources>
