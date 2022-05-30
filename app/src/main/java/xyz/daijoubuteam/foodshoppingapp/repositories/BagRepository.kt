@@ -24,12 +24,23 @@ class BagRepository {
             docRef.addSnapshotListener { value, error ->
                 orderList.value = value?.toObjects(Order::class.java)
                 orderList.value?.forEach { order ->
-                    order.eateryId?.addSnapshotListener { eateryValue, error ->
-                        val eatery = eateryValue?.toObject(Eatery::class.java)
-                        val newOrder = order.copy(eateryImage = eatery?.photoUrl, eateryName = eatery?.name)
-                        orderList.value = orderList.value?.map {
-                            if(it.id !== newOrder.id) it
-                            else newOrder
+                    if (order.orderItems.isNullOrEmpty()){
+                        order.id?.let { docRef.document(it).delete() }
+                    }else {
+                        order.eateryId?.addSnapshotListener { eateryValue, error ->
+                            val eatery = eateryValue?.toObject(Eatery::class.java)
+                            if (eatery == null) {
+                                order.id?.let { docRef.document(it).delete() }
+                            }else {
+                                val newOrder = order.copy(
+                                    eateryImage = eatery.photoUrl,
+                                    eateryName = eatery.name
+                                )
+                                orderList.value = orderList.value?.map {
+                                    if (it.id !== newOrder.id) it
+                                    else newOrder
+                                }
+                            }
                         }
                     }
                 }

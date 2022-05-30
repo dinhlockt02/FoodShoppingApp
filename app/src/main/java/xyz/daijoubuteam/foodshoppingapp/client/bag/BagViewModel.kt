@@ -12,6 +12,9 @@ class BagViewModel : ViewModel(){
     private val bagRepository = BagRepository()
     private val _errMessage = MutableLiveData("")
     private lateinit var _orderList: LiveData<List<Order>>
+    private val _navigateToOrderCheckOutFragment = MutableLiveData<Order>()
+    val navigateToOrderCheckOutFragment: LiveData<Order>
+        get() = _navigateToOrderCheckOutFragment
     val orderList: LiveData<List<Order>>
         get() = _orderList
     init {
@@ -43,6 +46,14 @@ class BagViewModel : ViewModel(){
         }else{
             View.VISIBLE
         }
+    }
+
+    fun doneNavigateToOrderCheckOutFragment(){
+        _navigateToOrderCheckOutFragment.value = null
+    }
+
+    fun navigateToOrderCheckOutFragment(orderSelected: Order){
+        _navigateToOrderCheckOutFragment.value = orderSelected
     }
 
 }
