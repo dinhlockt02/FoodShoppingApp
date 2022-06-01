@@ -52,9 +52,9 @@ class DetailEateryFragment : Fragment() {
             findNavController().navigate(DetailEateryFragmentDirections.actionDetailEateryFragmentToProductToBagFragment(it))
         })
         val adapter = binding.forYouProductRecyclerView.adapter as ProductAdapter
-        viewModel.selectedProperty.observe(viewLifecycleOwner) {
+        viewModel.productList.observe(viewLifecycleOwner) {
             if (it != null) {
-                adapter.submitList(it.products)
+                adapter.submitList(it)
             }
         }
     }
