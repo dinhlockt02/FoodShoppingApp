@@ -26,7 +26,7 @@ class SearchViewModel: ViewModel() {
         job?.cancel("Search text changed")
         job = viewModelScope.launch {
             delay(500)
-            _eatery.value = searchRepository.searchEateries(searchText.value)
+            _eatery.value = searchRepository.searchEateries(searchText.value?.trim())
         }
     }
 
