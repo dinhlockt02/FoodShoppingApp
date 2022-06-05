@@ -133,7 +133,7 @@
         <entry key="app/src/main/res/layout/card.xml" value="0.20923913043478262" />
         <entry key="app/src/main/res/layout/change_email_address.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_add_new_address.xml" value="0.2151268115942029" />
-        <entry key="app/src/main/res/layout/fragment_category_detail.xml" value="0.1734375" />
+        <entry key="app/src/main/res/layout/fragment_bag.xml" value="0.11510416666666666" />
         <entry key="app/src/main/res/layout/fragment_collection_object.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_detail_eatery.xml" value="0.18345323741007194" />
         <entry key="app/src/main/res/layout/fragment_detail_eatery_info.xml" value="0.140625" />
@@ -167,13 +167,14 @@
         <entry key="app/src/main/res/layout/item_category.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_cuisine.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_eatery.xml" value="0.3305613305613306" />
-        <entry key="app/src/main/res/layout/item_eatery2.xml" value="0.19739583333333333" />
+        <entry key="app/src/main/res/layout/item_eatery2.xml" value="0.2787734985351563" />
         <entry key="app/src/main/res/layout/item_gender_exposed_dropdown_menu.xml" value="0.13728470111448834" />
         <entry key="app/src/main/res/layout/item_notification_list.xml" value="0.26591760299625467" />
         <entry key="app/src/main/res/layout/item_order.xml" value="0.34369659423828125" />
-        <entry key="app/src/main/res/layout/item_order_item.xml" value="0.19739583333333333" />
-        <entry key="app/src/main/res/layout/item_product.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/item_product_promotion.xml" value="0.45" />
+        <entry key="app/src/main/res/layout/item_order_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_product.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/layout/item_searched_eatery.xml" value="0.24003623188405798" />
+        <entry key="app/src/main/res/layout/item_searched_product.xml" value="0.24488525390625002" />
         <entry key="app/src/main/res/layout/item_slide.xml" value="0.1956521739130435" />
         <entry key="app/src/main/res/layout/layout_address_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/layout_orders_items.xml" value="0.190625" />

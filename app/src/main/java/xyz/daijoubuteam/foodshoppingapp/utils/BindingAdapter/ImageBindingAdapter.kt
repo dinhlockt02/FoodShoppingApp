@@ -94,6 +94,29 @@ fun setImageUrlAvatarString(view: ImageView, url: String?, gender: Gender?) {
 //        .into(view);
 //}
 
+@BindingAdapter("imageUrl")
+fun setImageUrl(view: ImageView, url: String?) {
+    val circularProgressDrawable = CircularProgressDrawable(view.context)
+    circularProgressDrawable.strokeWidth = 5f
+    circularProgressDrawable.centerRadius = 30f
+    circularProgressDrawable.start()
+
+    val imageLoader = ImageLoader.Builder(view.context)
+        .componentRegistry { add(SvgDecoder(view.context)) }
+        .build()
+
+    val request = ImageRequest.Builder(view.context)
+        .crossfade(true)
+        .crossfade(500)
+        .placeholder(circularProgressDrawable)
+        .error(R.drawable.information_outline)
+        .data(url)
+        .target(view)
+        .build()
+
+    imageLoader.enqueue(request)
+}
+
 @BindingAdapter("imgVector")
 fun setImageSVGDrawable(view: ImageView, url: String?) {
     val circularProgressDrawable = CircularProgressDrawable(view.context)

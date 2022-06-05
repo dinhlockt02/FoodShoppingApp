@@ -25,6 +25,10 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/pop_down" />
         <action
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down"
             android:id="@+id/action_homeFragment_to_searchFragment"
             app:destination="@id/searchFragment" />
         <action
@@ -201,7 +205,17 @@
         android:id="@+id/searchFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.home.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_detailEateryFragment"
+            app:destination="@id/detailEateryFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down"/>
+    </fragment>
     <fragment
         android:id="@+id/verticalListEateryFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.home.vertical_list_eateries.VerticalListEateryFragment"
