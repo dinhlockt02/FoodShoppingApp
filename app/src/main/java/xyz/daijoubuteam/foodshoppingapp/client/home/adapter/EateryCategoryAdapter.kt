@@ -14,7 +14,7 @@ import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 import xyz.daijoubuteam.foodshoppingapp.utils.observeOnce
 import androidx.recyclerview.widget.ListAdapter
 
-class EateryCategoryAdapter: ListAdapter<Eatery, EateryCategoryAdapter.EateryViewHolder>(DiffCallBack) {
+class EateryCategoryAdapter(private val onClickListener: OnClickListener) : ListAdapter<Eatery, EateryCategoryAdapter.EateryViewHolder>(DiffCallBack) {
     class EateryViewHolder(private var binding: ItemProductPromotionBinding) : RecyclerView.ViewHolder(binding.root) {
         private var currentLocation: Location? = null
         private val mainApplication = binding.root.context.applicationContext as MainApplication
@@ -51,11 +51,14 @@ class EateryCategoryAdapter: ListAdapter<Eatery, EateryCategoryAdapter.EateryVie
 
     override fun onBindViewHolder(holder: EateryViewHolder, position: Int) {
         val eateryItem = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(eateryItem)
+        }
         holder.bind(eateryItem)
     }
 
 
-//    class OnClickListener(val clickListener: (eatery: Eatery) -> Unit) {
-//        fun onClick(eatery: Eatery) = clickListener(eatery)
-//    }
+    class OnClickListener(val clickListener: (eatery: Eatery) -> Unit) {
+        fun onClick(eatery: Eatery) = clickListener(eatery)
+    }
 }

@@ -14,11 +14,13 @@ class CategoryDetailViewModel(category: Category,app: Application ): AndroidView
     private val _categorySelected = category
     private lateinit var _eateryList: LiveData<List<Eatery>>
     private val _errMessage = MutableLiveData("")
+    private val _navigateToSelectedEatery = MutableLiveData<Eatery>()
     val errMessage: LiveData<String>
         get() = _errMessage
     val eateryList: LiveData<List<Eatery>>
         get() = _eateryList
-
+    val navigateToSelectedEatery: LiveData<Eatery>
+        get() = _navigateToSelectedEatery
     init {
         getEateryListByCategory()
     }
@@ -36,6 +38,15 @@ class CategoryDetailViewModel(category: Category,app: Application ): AndroidView
             }
         }
         Timber.i(_eateryList.value.toString())
+    }
+
+    //show detail eatery selected
+    fun displayPropertyDetailEatery(eaterySelected: Eatery) {
+        _navigateToSelectedEatery.value = eaterySelected
+    }
+
+    fun onNavigateToSelectedEateryComplete(){
+        _navigateToSelectedEatery.value = null
     }
 
     private fun onShowError(msg: String?){

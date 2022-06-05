@@ -120,7 +120,6 @@ class HomeViewModel: ViewModel() {
 
     //show detail eatery selected
     fun displayPropertyDetailEatery(eaterySelected: Eatery) {
-        Timber.i(eaterySelected.toString())
         _navigateToSelectedEatery.value = eaterySelected
     }
 

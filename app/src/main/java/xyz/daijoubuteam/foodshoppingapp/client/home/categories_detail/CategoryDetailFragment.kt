@@ -7,13 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import timber.log.Timber
-import xyz.daijoubuteam.foodshoppingapp.R
+import androidx.navigation.fragment.findNavController
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.EateryCategoryAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentCategoryDetailBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Category
-import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 
 class CategoryDetailFragment : Fragment() {
     private lateinit var binding: FragmentCategoryDetailBinding
@@ -33,17 +32,29 @@ class CategoryDetailFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
         setupForEateryListAdapter()
+        handleClickEateryItem ()
         setupToolBar()
         return binding.root
     }
     private fun setupForEateryListAdapter() {
-        binding.recyEateryList.adapter = EateryCategoryAdapter()
+        binding.recyEateryList.adapter = EateryCategoryAdapter(EateryCategoryAdapter.OnClickListener{
+            viewModel.displayPropertyDetailEatery(it)
+        })
         val adapter = binding.recyEateryList.adapter as EateryCategoryAdapter
         viewModel.eateryList.observe(viewLifecycleOwner) {
             if (it != null) {
                 adapter.submitList(it)
             }
         }
+    }
+
+    private fun handleClickEateryItem () {
+        viewModel.navigateToSelectedEatery.observe(viewLifecycleOwner, Observer {
+            if(it != null) {
+                findNavController().navigate(CategoryDetailFragmentDirections.actionCategoryDetailToDetailEateryFragment(it))
+                viewModel.onNavigateToSelectedEateryComplete()
+            }
+        })
     }
 
     @SuppressLint("RestrictedApi")
