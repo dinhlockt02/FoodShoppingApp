@@ -5,18 +5,17 @@ import android.location.LocationManager
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.google.protobuf.DescriptorProtos
-import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.MainApplication
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemEateryBinding
+import xyz.daijoubuteam.foodshoppingapp.databinding.ItemProductBinding
+import xyz.daijoubuteam.foodshoppingapp.databinding.ItemProductPromotionBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
-import androidx.lifecycle.Observer
 import xyz.daijoubuteam.foodshoppingapp.utils.observeOnce
+import androidx.recyclerview.widget.ListAdapter
 
-class EateryAdapter(private val onClickListener:OnClickListener) : ListAdapter<Eatery, EateryAdapter.EateryViewHolder>(DiffCallBack) {
-    class EateryViewHolder(private var binding: ItemEateryBinding) : RecyclerView.ViewHolder(binding.root) {
+class EateryCategoryAdapter: ListAdapter<Eatery, EateryCategoryAdapter.EateryViewHolder>(DiffCallBack) {
+    class EateryViewHolder(private var binding: ItemProductPromotionBinding) : RecyclerView.ViewHolder(binding.root) {
         private var currentLocation: Location? = null
         private val mainApplication = binding.root.context.applicationContext as MainApplication
 
@@ -46,17 +45,17 @@ class EateryAdapter(private val onClickListener:OnClickListener) : ListAdapter<E
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EateryViewHolder {
-        val binding = ItemEateryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = ItemProductPromotionBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return EateryViewHolder(binding)
     }
+
     override fun onBindViewHolder(holder: EateryViewHolder, position: Int) {
         val eateryItem = getItem(position)
-        holder.itemView.setOnClickListener{
-            onClickListener.onClick(eateryItem)
-        }
         holder.bind(eateryItem)
     }
-    class OnClickListener(val clickListener: (eatery:Eatery) -> Unit) {
-        fun onClick(eatery:Eatery) = clickListener(eatery)
-    }
+
+
+//    class OnClickListener(val clickListener: (eatery: Eatery) -> Unit) {
+//        fun onClick(eatery: Eatery) = clickListener(eatery)
+//    }
 }

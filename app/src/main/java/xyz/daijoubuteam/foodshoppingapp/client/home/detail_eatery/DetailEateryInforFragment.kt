@@ -39,10 +39,7 @@ class DetailEateryInforFragment : Fragment(), OnMapReadyCallback {
         binding = FragmentDetailEateryInforBinding.inflate(inflater)
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
-
-
         setupToolBar()
-
         return binding.root
     }
 

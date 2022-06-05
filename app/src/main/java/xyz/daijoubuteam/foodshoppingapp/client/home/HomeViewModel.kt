@@ -2,6 +2,7 @@ package xyz.daijoubuteam.foodshoppingapp.client.home
 
 import android.location.Geocoder
 import android.location.Location
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.arch.core.util.Function
 import androidx.lifecycle.LiveData
@@ -43,12 +44,15 @@ class HomeViewModel: ViewModel() {
     private var _notification = MutableLiveData(0)
     private val _errMessage = MutableLiveData("")
     private val _navigateToSelectedEatery = MutableLiveData<Eatery>()
+    private val _navigateToSelectedCategory = MutableLiveData<Category>()
     val notification
         get() = _notification
     val errMessage: LiveData<String>
         get() = _errMessage
     val navigateToSelectedEatery: LiveData<Eatery>
         get() = _navigateToSelectedEatery
+    val navigateToSelectedCategory: LiveData<Category>
+        get() = _navigateToSelectedCategory
     val currentUser: LiveData<User>
         get() = _currentUser
     val eventList: LiveData<List<Event>>
@@ -114,13 +118,23 @@ class HomeViewModel: ViewModel() {
         }
     }
 
+    //show detail eatery selected
+    fun displayPropertyDetailEatery(eaterySelected: Eatery) {
+        Timber.i(eaterySelected.toString())
+        _navigateToSelectedEatery.value = eaterySelected
+    }
+
     fun onNavigateToSelectedEateryComplete(){
         _navigateToSelectedEatery.value = null
     }
 
-    //show detail eatery selected
-    fun displayPropertyDetailEatery(eaterySelected: Eatery) {
-        _navigateToSelectedEatery.value = eaterySelected
+    //show detail category
+    fun displayDetailCategory(categorySelected: Category) {
+        _navigateToSelectedCategory.value = categorySelected
+    }
+
+    fun onNavigateToSelectedCategoryComplete() {
+        _navigateToSelectedCategory.value = null
     }
 
 }

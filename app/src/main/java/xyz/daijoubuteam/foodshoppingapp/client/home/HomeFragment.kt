@@ -27,6 +27,7 @@ import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.CategoryAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.EateryAdapter
 import xyz.daijoubuteam.foodshoppingapp.client.home.adapter.EventSlideAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentHomeBinding
+import xyz.daijoubuteam.foodshoppingapp.utils.observeOnce
 import java.lang.reflect.Type
 import java.util.*
 
@@ -57,6 +58,7 @@ class HomeFragment : Fragment() {
         setupCategoryListViewAdapter()
         handleClickEateryItem()
         handleClickBtnViewAllEatery()
+        handleClickCategoryItem()
         val handler = Handler()
         binding.slideHomeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -74,8 +76,6 @@ class HomeFragment : Fragment() {
         })
         return binding.root
     }
-
-
     override fun onStart() {
         super.onStart()
         (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
@@ -134,7 +134,9 @@ class HomeFragment : Fragment() {
         }
     }
     private fun setupCategoryListViewAdapter() {
-        binding.recyCategories.adapter = CategoryAdapter()
+        binding.recyCategories.adapter = CategoryAdapter(CategoryAdapter.OnClickListener{
+            viewModel.displayDetailCategory(it)
+        })
         val adapter = binding.recyCategories.adapter as CategoryAdapter
         viewModel.categoryList.observe(viewLifecycleOwner) {
             if (it != null) {
@@ -158,6 +160,14 @@ class HomeFragment : Fragment() {
             if(it != null) {
                 this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToDetailEateryFragment(it))
                 viewModel.onNavigateToSelectedEateryComplete()
+            }
+        })
+    }
+    private fun handleClickCategoryItem() {
+        viewModel.navigateToSelectedCategory.observe(viewLifecycleOwner, Observer {
+            if(it != null) {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCategoryDetail(it))
+                viewModel.onNavigateToSelectedCategoryComplete()
             }
         })
     }

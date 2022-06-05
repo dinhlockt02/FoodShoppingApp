@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemCategoryBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Category
+import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 
-class CategoryAdapter: ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(DiffCallBack) {
+class CategoryAdapter(private val onClickListener: OnClickListener): ListAdapter<Category, CategoryAdapter.CategoryViewHolder>(DiffCallBack) {
 
     class CategoryViewHolder(private var binding: ItemCategoryBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(category: Category) {
@@ -35,6 +37,13 @@ class CategoryAdapter: ListAdapter<Category, CategoryAdapter.CategoryViewHolder>
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         val categoryItem = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(categoryItem)
+        }
         holder.bind(categoryItem)
+    }
+
+    class OnClickListener(val clickListener: (category: Category) -> Unit) {
+        fun onClick(category: Category) = clickListener(category)
     }
 }

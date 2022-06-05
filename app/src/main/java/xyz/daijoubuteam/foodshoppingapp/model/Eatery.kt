@@ -16,4 +16,5 @@ data class Eatery (
     val products: ArrayList<Product>?=null,
     val photoUrl: String?=null,
     val addressEatery: EateryAddress? = null,
+    val type: String? = null
 ): Parcelable
