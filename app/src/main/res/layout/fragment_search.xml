@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="xyz.daijoubuteam.foodshoppingapp.client.home.search.SearchViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,6 +44,15 @@
             android:layout_marginEnd="14dp"
             android:background="@drawable/rounded_edittext"
             android:maxLines="1"
+            android:text="@={viewModel.searchText}"
             android:imeOptions="actionSearch"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/searched_eateries"
+            app:layout_constraintTop_toBottomOf="@id/search_edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:paddingHorizontal="16dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
