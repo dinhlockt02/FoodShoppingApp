@@ -6,6 +6,7 @@ import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 import xyz.daijoubuteam.foodshoppingapp.model.Product
+import xyz.daijoubuteam.foodshoppingapp.utils.VNCharacterUtils
 
 
 class SearchRepository {
@@ -19,12 +20,14 @@ class SearchRepository {
     }
 
     suspend fun searchEateries(searchText: String?): List<Eatery> {
+        val removeAccentSearchText = VNCharacterUtils.removeAccent(searchText)
         if(searchText.isNullOrEmpty()) return listOf()
         val eateries = db.collection("eateries").get().await().toObjects(Eatery::class.java).map {
             eatery ->
             if (eatery.id != null) {
                 val products = db.collection("eateries").document(eatery.id).collection("products").get().await().toObjects(Product::class.java).filter {
-                    product -> product.name?.contains(searchText, ignoreCase = true) == true
+                    product ->
+                    VNCharacterUtils.removeAccent(product.name).contains(removeAccentSearchText, ignoreCase = true)
                 }.take(2)
                 return@map eatery.copy(products = ArrayList(products))
             }
@@ -34,7 +37,7 @@ class SearchRepository {
         }.filter {
                 eatery ->
             if(eatery.products?.isNotEmpty() == true) return@filter true
-            return@filter eatery.name?.contains(searchText, ignoreCase = true) == true
+            return@filter VNCharacterUtils.removeAccent(eatery.name).contains(removeAccentSearchText, ignoreCase = true)
         }.toList()
         eateries.forEach {
             Timber.i(it.name)
