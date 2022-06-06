@@ -4,7 +4,7 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Exclude
 import java.io.Serializable
 
-data class OrderItem (
+data class BagOrderItem (
     val productId: DocumentReference ?= null,
     var quantity: Int?=null,
     @get:Exclude

@@ -1,7 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.model
 
 
-import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.OrderItem
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
 
 data class User(
     val uid: String? = null,
@@ -15,6 +15,6 @@ data class User(
     var gender: Gender? = null,
     var nickname: String? = null,
     var photoUrl: String? = null,
-    var bag: ArrayList<OrderItem> = ArrayList()
+    var bag: ArrayList<BagOrderItem> = ArrayList()
 )
 

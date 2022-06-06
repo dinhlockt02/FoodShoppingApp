@@ -6,7 +6,7 @@
     <data>
         <variable
             name="orderItem"
-            type="xyz.daijoubuteam.foodshoppingapp.model.bagmodel.OrderItem" />
+            type="xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="wrap_content"

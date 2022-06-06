@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderItemBinding
-import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.OrderItem
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
 
-class OrderItemAdapter: ListAdapter<OrderItem, OrderItemAdapter.OrderItemViewHolder>(DiffCallBack) {
+class OrderItemAdapter: ListAdapter<BagOrderItem, OrderItemAdapter.OrderItemViewHolder>(DiffCallBack) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):OrderItemViewHolder{
         return OrderItemViewHolder.from(parent)
     }
@@ -18,18 +18,18 @@ class OrderItemAdapter: ListAdapter<OrderItem, OrderItemAdapter.OrderItemViewHol
         holder.bind(oderItem)
     }
 
-    companion object DiffCallBack: DiffUtil.ItemCallback<OrderItem>(){
-        override fun areItemsTheSame(oldItem: OrderItem, newItem: OrderItem): Boolean {
+    companion object DiffCallBack: DiffUtil.ItemCallback<BagOrderItem>(){
+        override fun areItemsTheSame(oldItem: BagOrderItem, newItem: BagOrderItem): Boolean {
             return oldItem.productId == newItem.productId
         }
 
-        override fun areContentsTheSame(oldItem: OrderItem, newItem: OrderItem): Boolean {
+        override fun areContentsTheSame(oldItem: BagOrderItem, newItem: BagOrderItem): Boolean {
             return oldItem == newItem
         }
     }
 
     class OrderItemViewHolder private constructor(val binding: ItemOrderItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(item: OrderItem) {
+        fun bind(item: BagOrderItem) {
             binding.orderItem = item
             binding.executePendingBindings()
         }

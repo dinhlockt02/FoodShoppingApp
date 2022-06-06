@@ -7,21 +7,21 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
-import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.Order
-import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.OrderItem
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrder
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
 import xyz.daijoubuteam.foodshoppingapp.model.Product
 
 class BagRepository {
     private val auth = Firebase.auth
     private val db = Firebase.firestore
 
-    fun getOrderListInBag(): Result<LiveData<List<Order>>> {
-        val orderList: MutableLiveData<List<Order>> = MutableLiveData()
+    fun getOrderListInBag(): Result<LiveData<List<BagOrder>>> {
+        val orderList: MutableLiveData<List<BagOrder>> = MutableLiveData()
         return try {
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
             val docRef = db.collection("users").document(uid).collection("bag")
             docRef.addSnapshotListener { value, error ->
-                orderList.value = value?.toObjects(Order::class.java)
+                orderList.value = value?.toObjects(BagOrder::class.java)
                 orderList.value?.forEach { order ->
                     if (order.orderItems.isNullOrEmpty()){
                         order.id?.let { docRef.document(it).delete() }
@@ -50,13 +50,13 @@ class BagRepository {
         }
     }
 
-    fun getOrderItemList(orderId: String): Result<LiveData<List<OrderItem>>> {
-        val orderItemList: MutableLiveData<List<OrderItem>> = MutableLiveData()
+    fun getOrderItemList(orderId: String): Result<LiveData<List<BagOrderItem>>> {
+        val orderItemList: MutableLiveData<List<BagOrderItem>> = MutableLiveData()
         return try {
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
             val docRef = db.collection("users").document(uid).collection("bag").document(orderId)
             docRef.addSnapshotListener { value, error ->
-                val order = value?.toObject(Order::class.java)
+                val order = value?.toObject(BagOrder::class.java)
                 orderItemList.value = order?.orderItems
                 val newOrder = order?.copy()
                 order?.orderItems?.forEach { orderItem ->
@@ -96,13 +96,13 @@ class BagRepository {
             val docRef = db.collection("users").document(uid).collection("bag").whereEqualTo("eateryId", eateryIdReference)
             val documentSnapShot = docRef.get().await()
             if (documentSnapShot.documents.isEmpty()) {
-                val order = Order(eateryIdReference)
+                val order = BagOrder(eateryIdReference)
                 val documentRef = db.document("/eateries/$eateryId/products/$productId")
-                val orderItem = OrderItem(documentRef,quantity)
+                val orderItem = BagOrderItem(documentRef,quantity)
                 order.orderItems.add(orderItem)
                 db.collection("users").document(uid).collection("bag").add(order)
             } else {
-                val order = documentSnapShot.documents[0].toObject(Order::class.java)
+                val order = documentSnapShot.documents[0].toObject(BagOrder::class.java)
                 val orderId = documentSnapShot.documents[0].id
                 val documentRef = db.document("/eateries/$eateryId/products/$productId")
                 val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
@@ -111,7 +111,7 @@ class BagRepository {
                     orderItem.quantity = orderItem.quantity?.plus(quantity)
                     db.collection("users").document(uid).collection("bag").document(orderId).set(order)
                 }else {
-                    val newOrderItem = OrderItem(documentRef,quantity)
+                    val newOrderItem = BagOrderItem(documentRef,quantity)
                     order?.orderItems?.add(newOrderItem)
                     if (order != null) {
                         db.collection("users").document(uid).collection("bag").document(orderId).set(order)

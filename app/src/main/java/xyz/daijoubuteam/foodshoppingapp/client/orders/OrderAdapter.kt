@@ -6,23 +6,23 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderBinding
-import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.Order
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrder
 
-class OrderAdapter(private val onClickListener: OnClickListener) : ListAdapter<Order, OrderAdapter.OrderViewHolder>(DiffCallBack) {
+class OrderAdapter(private val onClickListener: OnClickListener) : ListAdapter<BagOrder, OrderAdapter.OrderViewHolder>(DiffCallBack) {
     class OrderViewHolder(private var binding: ItemOrderBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(order: Order) {
+        fun bind(order: BagOrder) {
             binding.order = order
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallBack : DiffUtil.ItemCallback<Order>() {
-        override fun areItemsTheSame(oldItem: Order, newItem: Order): Boolean {
+    companion object DiffCallBack : DiffUtil.ItemCallback<BagOrder>() {
+        override fun areItemsTheSame(oldItem: BagOrder, newItem: BagOrder): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Order, newItem: Order): Boolean {
+        override fun areContentsTheSame(oldItem: BagOrder, newItem: BagOrder): Boolean {
             return oldItem == newItem
         }
     }
@@ -40,7 +40,7 @@ class OrderAdapter(private val onClickListener: OnClickListener) : ListAdapter<O
         holder.bind(orderItem)
     }
 
-    class OnClickListener(val clickListener: (order: Order) -> Unit) {
-        fun onClick(order: Order) = clickListener(order)
+    class OnClickListener(val clickListener: (order: BagOrder) -> Unit) {
+        fun onClick(order: BagOrder) = clickListener(order)
     }
 }

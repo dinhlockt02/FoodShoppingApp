@@ -3,17 +3,17 @@ package xyz.daijoubuteam.foodshoppingapp.client.bag
 import android.view.View
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
-import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.Order
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrder
 import xyz.daijoubuteam.foodshoppingapp.repositories.BagRepository
 
 class BagViewModel : ViewModel(){
     private val bagRepository = BagRepository()
     private val _errMessage = MutableLiveData("")
-    private lateinit var _orderList: LiveData<List<Order>>
-    private val _navigateToOrderCheckOutFragment = MutableLiveData<Order>()
-    val navigateToOrderCheckOutFragment: LiveData<Order>
+    private lateinit var _orderList: LiveData<List<BagOrder>>
+    private val _navigateToOrderCheckOutFragment = MutableLiveData<BagOrder>()
+    val navigateToOrderCheckOutFragment: LiveData<BagOrder>
         get() = _navigateToOrderCheckOutFragment
-    val orderList: LiveData<List<Order>>
+    val orderList: LiveData<List<BagOrder>>
         get() = _orderList
     init {
         viewModelScope.launch {
@@ -50,7 +50,7 @@ class BagViewModel : ViewModel(){
         _navigateToOrderCheckOutFragment.value = null
     }
 
-    fun navigateToOrderCheckOutFragment(orderSelected: Order){
+    fun navigateToOrderCheckOutFragment(orderSelected: BagOrder){
         _navigateToOrderCheckOutFragment.value = orderSelected
     }
 
