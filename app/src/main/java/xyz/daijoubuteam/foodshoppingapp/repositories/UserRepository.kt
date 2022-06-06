@@ -5,13 +5,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.*
 
@@ -100,45 +102,156 @@ class UserRepository {
                 notification.id!!
             ).set(notification).await()
             Result.success(true);
-        }catch (exception: Exception){
+        } catch (exception: Exception) {
             Result.failure(exception)
         }
     }
 
-    private suspend fun addNewOderItem():Result<Boolean>{
-        return try{
+    private suspend fun addNewOderItem(): Result<Boolean> {
+        return try {
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
             val documentRef1 = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7")
-            val docRef = db.collection("users").document(uid).collection("bag").whereEqualTo("eateryId", documentRef1)
+            val docRef = db.collection("users").document(uid).collection("bag")
+                .whereEqualTo("eateryId", documentRef1)
             val documentSnapShot = docRef.get().await()
             if (documentSnapShot.documents.isEmpty()) {
                 val order = Order(documentRef1)
-                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
-                val orderItem = OrderItem(documentRef,4)
+                val documentRef =
+                    db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
+                val orderItem = OrderItem(documentRef, 4)
                 order.orderItems.add(orderItem)
                 db.collection("users").document(uid).collection("bag").add(order)
-            }else {
+            } else {
                 val order = documentSnapShot.documents[0].toObject(Order::class.java)
                 val orderId = documentSnapShot.documents[0].id
-                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
-                val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
-                    ?: false }
-                if( orderItem != null){
+                val documentRef =
+                    db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
+                val orderItem = order?.orderItems?.find { orderItem ->
+                    orderItem.productId?.equals(documentRef)
+                        ?: false
+                }
+                if (orderItem != null) {
                     orderItem.quantity = orderItem.quantity?.plus(2)
-                    db.collection("users").document(uid).collection("bag").document(orderId).set(order)
-                }else {
-                        val newOrderItem = OrderItem(documentRef,2)
-                        order?.orderItems?.add(newOrderItem)
-                        if (order != null) {
-                            db.collection("users").document(uid).collection("bag").document(orderId).set(order)
+                    db.collection("users").document(uid).collection("bag").document(orderId)
+                        .set(order)
+                } else {
+                    val newOrderItem = OrderItem(documentRef, 2)
+                    order?.orderItems?.add(newOrderItem)
+                    if (order != null) {
+                        db.collection("users").document(uid).collection("bag").document(orderId)
+                            .set(order)
                     }
                 }
             }
             Result.success(true)
-        }catch (exception: Exception){
+        } catch (exception: Exception) {
             Result.failure(exception)
         }
     }
 
 
+    suspend fun addToFavorite(eatery: Eatery): Result<Unit> {
+        return try {
+            if (eatery.id.isNullOrEmpty()) throw Exception("Eatery not found.")
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val user = db.collection("users").document(uid).get().await().toObject(User::class.java)
+            val eateryDocRef = db.collection("eateries").document(eatery.id)
+            if (user?.favorites.isNullOrEmpty()) {
+                user?.favorites = arrayListOf(eateryDocRef)
+            } else {
+                if(isFavorited(eatery).getOrNull() == true) throw Exception("Eatery already added in favorites")
+                else {
+                    user?.favorites!!.add(eateryDocRef)
+                }
+            }
+            db.collection("users").document(uid).update("favorites", user?.favorites)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun removeFromFavorite(eatery: Eatery): Result<Unit> {
+        return try {
+            if (eatery.id.isNullOrEmpty()) throw Exception("Eatery not found.")
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val user = db.collection("users").document(uid).get().await().toObject(User::class.java)
+            val eateryDocRef = db.collection("eateries").document(eatery.id)
+            if (!user?.favorites.isNullOrEmpty()) {
+                user?.favorites?.remove(eateryDocRef)
+            }
+            db.collection("users").document(uid).update("favorites", user?.favorites)
+            Result.success(Unit)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+
+
+    suspend fun isFavorited(eatery: Eatery): Result<Boolean> {
+        return try {
+            if (eatery.id.isNullOrEmpty()) throw Exception("Eatery not found.")
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val user = db.collection("users").document(uid).get().await().toObject(User::class.java)
+            if (user?.favorites.isNullOrEmpty()) {
+                Result.success(false)
+            } else {
+                if (user?.favorites!!.contains(
+                        db.collection("eateries").document(eatery.id)
+                    )
+                ) Result.success(true)
+                else {
+                    Result.success(false)
+                }
+            }
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    fun isFavoritedLivedata(eatery: Eatery): Result<LiveData<Boolean>> {
+        val isFavorited = MutableLiveData(false)
+        return try {
+            val uid = auth.currentUser?.uid
+                ?: throw Exception("Current user not found.")
+            if (eatery.id.isNullOrEmpty()) throw Exception("Eatery not found.")
+            val eateryDocRef = db.collection("eateries").document(eatery.id)
+            db.collection("users").document(uid).addSnapshotListener { value, error ->
+                if(value != null) {
+                    val user = value.toObject(User::class.java)
+                    isFavorited.value = user?.favorites?.contains(eateryDocRef)
+                }
+            }
+            Result.success(isFavorited)
+        } catch (exception: Exception) {
+            Result.failure(exception)
+        }
+    }
+
+     fun getFavoriteEateries(): Result<LiveData<List<Eatery?>>> {
+        return try {
+            val eateries = MutableLiveData<List<Eatery?>>(listOf())
+            val uid = auth.currentUser?.uid
+                ?: throw Exception("Current user not found.")
+            var eateryListenerRegistration: ListenerRegistration? = null
+            db.collection("users").document(uid).addSnapshotListener { value, error ->
+                val user = value?.toObject(User::class.java)
+                if(user?.favorites == null) return@addSnapshotListener
+                eateryListenerRegistration?.remove()
+                if(user.favorites?.isNullOrEmpty() == true){
+                        eateries.value = listOf()
+                } else {
+                    eateryListenerRegistration = db.collection("eateries").whereIn(FieldPath.documentId(), user.favorites!!).addSnapshotListener eateriesListener@{ eateriesRef, eateriesError ->
+                        if(eateriesRef == null) return@eateriesListener
+                        eateries.value = eateriesRef.toObjects(Eatery::class.java)
+                    }
+                }
+
+            }
+           Result.success(eateries)
+        }catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

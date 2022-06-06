@@ -11,7 +11,7 @@
         android:title="@string/nav_bottom_orders" />
     <item
         android:id="@+id/savedFragment"
-        android:icon="@drawable/ic_saved"
+        android:icon="@drawable/ic_saved_outline"
         android:title="@string/nav_bottom_saved" />
     <item
         android:id="@+id/bagFragment"
