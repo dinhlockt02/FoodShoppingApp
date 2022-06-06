@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderItemBinding
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
 
-class OrderItemAdapter: ListAdapter<BagOrderItem, OrderItemAdapter.OrderItemViewHolder>(DiffCallBack) {
+class BagOrderItemAdapter: ListAdapter<BagOrderItem, BagOrderItemAdapter.OrderItemViewHolder>(DiffCallBack) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):OrderItemViewHolder{
         return OrderItemViewHolder.from(parent)
     }

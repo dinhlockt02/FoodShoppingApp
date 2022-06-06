@@ -25,7 +25,7 @@ class OrderCheckOutFragment : Fragment() {
         val binding: FragmentOrderCheckoutBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_checkout, container, false)
         binding.viewModel = orderCheckOutViewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        val adapter = OrderItemAdapter()
+        val adapter = BagOrderItemAdapter()
         binding.listOrderItems.adapter = adapter
         orderCheckOutViewModel.orderItemList.observe(viewLifecycleOwner){
             if (it != null){

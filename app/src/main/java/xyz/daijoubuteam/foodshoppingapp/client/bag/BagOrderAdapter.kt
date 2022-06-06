@@ -1,4 +1,4 @@
-package xyz.daijoubuteam.foodshoppingapp.client.orders
+package xyz.daijoubuteam.foodshoppingapp.client.bag
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderBinding
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrder
 
-class OrderAdapter(private val onClickListener: OnClickListener) : ListAdapter<BagOrder, OrderAdapter.OrderViewHolder>(DiffCallBack) {
+class BagOrderAdapter(private val onClickListener: OnClickListener) : ListAdapter<BagOrder, BagOrderAdapter.OrderViewHolder>(
+    DiffCallBack
+) {
     class OrderViewHolder(private var binding: ItemOrderBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(order: BagOrder) {
