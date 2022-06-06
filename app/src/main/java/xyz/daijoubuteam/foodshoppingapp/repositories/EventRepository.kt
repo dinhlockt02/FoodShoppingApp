@@ -29,4 +29,17 @@ class EventRepository {
             Result.failure(e)
         }
     }
+
+    fun fetchEateryFollowEvent(id: String): Result<LiveData<List<Eatery>>> {
+        val eateries: MutableLiveData<List<Eatery>> = MutableLiveData()
+        return try {
+            val docRef = db.collection("events").document(id).collection("eateries")
+            docRef.addSnapshotListener{value, error ->
+                eateries.value = value?.toObjects(Eatery::class.java)
+            }
+            Result.success(eateries)
+        } catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }

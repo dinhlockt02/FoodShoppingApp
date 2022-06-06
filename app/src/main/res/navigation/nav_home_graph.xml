@@ -37,6 +37,9 @@
         <action
             android:id="@+id/action_homeFragment_to_itemCarousel"
             app:destination="@id/itemCarousel" />
+        <action
+            android:id="@+id/action_homeFragment_to_carouselDetail"
+            app:destination="@id/carouselDetail" />
     </fragment>
     <fragment
         android:id="@+id/bagFragment"
@@ -268,6 +271,15 @@
         tools:layout="@layout/fragment_item_carousel">
         <action
             android:id="@+id/action_itemCarousel_to_detailEateryFragment"
+            app:destination="@id/detailEateryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/carouselDetail"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.home.carousel_detail.CarouselDetailFragment"
+        android:label="CarouselDetail"
+        tools:layout="@layout/fragment_carousel_detail">
+        <action
+            android:id="@+id/action_carouselDetail_to_detailEateryFragment"
             app:destination="@id/detailEateryFragment" />
     </fragment>
 </navigation>

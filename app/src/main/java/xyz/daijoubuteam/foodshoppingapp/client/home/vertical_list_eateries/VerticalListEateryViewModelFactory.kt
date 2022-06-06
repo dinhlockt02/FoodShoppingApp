@@ -17,5 +17,4 @@ class VerticalListEateryViewModelFactory (
         }
         throw IllegalArgumentException("Unknown SignupViewModel class")
     }
-
 }
