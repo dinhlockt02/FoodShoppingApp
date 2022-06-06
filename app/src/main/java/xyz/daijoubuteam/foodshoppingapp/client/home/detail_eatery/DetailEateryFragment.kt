@@ -47,7 +47,7 @@ class DetailEateryFragment : Fragment() {
     private fun setupFavoriteButton() {
 
         viewModel.isFavorite.observe(viewLifecycleOwner){
-            if(it) {
+            if(it == true) {
                 binding.floatingActionSave.visibility = View.GONE
                 binding.floatingActionSaveFavorited.visibility = View.VISIBLE
             } else {
