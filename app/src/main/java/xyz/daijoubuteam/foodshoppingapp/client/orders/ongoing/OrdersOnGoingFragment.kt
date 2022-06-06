@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import xyz.daijoubuteam.foodshoppingapp.R
-import xyz.daijoubuteam.foodshoppingapp.client.orders.OrderAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentOrdersOnGoingBinding
 
 class OrdersOnGoingFragment : Fragment() {

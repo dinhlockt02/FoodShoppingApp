@@ -1,12 +1,9 @@
 package xyz.daijoubuteam.foodshoppingapp.repositories
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -14,6 +11,8 @@ import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.*
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrder
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
 
 class UserRepository {
     private val auth = Firebase.auth
@@ -108,26 +107,26 @@ class UserRepository {
     private suspend fun addNewOderItem():Result<Boolean>{
         return try{
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
-            val documentRef1 = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7")
+            val documentRef1 = db.document("/eateries/zF5GhL9LMeYkQ2GYWEp8")
             val docRef = db.collection("users").document(uid).collection("bag").whereEqualTo("eateryId", documentRef1)
             val documentSnapShot = docRef.get().await()
             if (documentSnapShot.documents.isEmpty()) {
-                val order = Order(documentRef1)
-                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
-                val orderItem = OrderItem(documentRef,4)
+                val order = BagOrder(documentRef1)
+                val documentRef = db.document("/eateries/zF5GhL9LMeYkQ2GYWEp8/products/RqRPpTjuzmQLO3IzQpTS")
+                val orderItem = BagOrderItem(documentRef,4)
                 order.orderItems.add(orderItem)
                 db.collection("users").document(uid).collection("bag").add(order)
             }else {
-                val order = documentSnapShot.documents[0].toObject(Order::class.java)
+                val order = documentSnapShot.documents[0].toObject(BagOrder::class.java)
                 val orderId = documentSnapShot.documents[0].id
-                val documentRef = db.document("/eateries/c8vy6QVL2ZTLC0uOrdV7/products/NazmZl4kmDOZKgfgpQiD")
+                val documentRef = db.document("/eateries/zF5GhL9LMeYkQ2GYWEp8/products/RqRPpTjuzmQLO3IzQpTS")
                 val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
                     ?: false }
                 if( orderItem != null){
                     orderItem.quantity = orderItem.quantity?.plus(2)
                     db.collection("users").document(uid).collection("bag").document(orderId).set(order)
                 }else {
-                        val newOrderItem = OrderItem(documentRef,2)
+                        val newOrderItem = BagOrderItem(documentRef,2)
                         order?.orderItems?.add(newOrderItem)
                         if (order != null) {
                             db.collection("users").document(uid).collection("bag").document(orderId).set(order)

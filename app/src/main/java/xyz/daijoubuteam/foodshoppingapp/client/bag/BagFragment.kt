@@ -10,7 +10,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import xyz.daijoubuteam.foodshoppingapp.R
-import xyz.daijoubuteam.foodshoppingapp.client.orders.OrderAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentBagBinding
 
 class BagFragment : Fragment() {
@@ -28,7 +27,7 @@ class BagFragment : Fragment() {
         binding.bagViewModel = bagViewModel
         binding.lifecycleOwner = viewLifecycleOwner
 
-        val adapter = OrderAdapter(OrderAdapter.OnClickListener{
+        val adapter = BagOrderAdapter(BagOrderAdapter.OnClickListener{
             bagViewModel.navigateToOrderCheckOutFragment(it)
         })
         binding.orderList.adapter = adapter

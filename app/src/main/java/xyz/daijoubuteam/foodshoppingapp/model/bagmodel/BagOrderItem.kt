@@ -1,13 +1,14 @@
-package xyz.daijoubuteam.foodshoppingapp.model
+package xyz.daijoubuteam.foodshoppingapp.model.bagmodel
 
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.Exclude
 import java.io.Serializable
 
-data class OrderItem (
+data class BagOrderItem (
     val productId: DocumentReference ?= null,
     var quantity: Int?=null,
-    var price: Double?=null,
+    @get:Exclude
+    val price: Double?=null,
     @get:Exclude
     val productName: String?=null,
     @get:Exclude
