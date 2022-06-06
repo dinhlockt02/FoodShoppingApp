@@ -40,7 +40,28 @@ class DetailEateryFragment : Fragment() {
         setupForYouProductListViewAdapter()
         handleClickButtonHome()
         handleClickButtonInfo()
+        setupFavoriteButton()
         return binding.root
+    }
+
+    private fun setupFavoriteButton() {
+
+        viewModel.isFavorite.observe(viewLifecycleOwner){
+            if(it) {
+                binding.floatingActionSave.visibility = View.GONE
+                binding.floatingActionSaveFavorited.visibility = View.VISIBLE
+            } else {
+                binding.floatingActionSave.visibility = View.VISIBLE
+                binding.floatingActionSaveFavorited.visibility = View.GONE
+            }
+        }
+
+        binding.floatingActionSave.setOnClickListener {
+            viewModel.triggerFavorited()
+        }
+        binding.floatingActionSaveFavorited.setOnClickListener {
+            viewModel.triggerFavorited()
+        }
     }
 
     override fun onStart() {

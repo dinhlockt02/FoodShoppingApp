@@ -1,6 +1,8 @@
 package xyz.daijoubuteam.foodshoppingapp.client.profile.profile_address
 
-import android.content.Context
+import android.R
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,7 @@ import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.adapter.AddressAdapter
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProfileAddressEditBinding
 import xyz.daijoubuteam.foodshoppingapp.utils.hideKeyboard
+
 
 class ProfileAddressEditFragment : Fragment() {
 
@@ -75,11 +78,17 @@ class ProfileAddressEditFragment : Fragment() {
                 findNavController().navigate(action)
                 customHideActionbar()
 
+            }, AddressAdapter.OnLongClickListener {
+                AlertDialog.Builder(context).setTitle("What you want to do with this address?").setNegativeButton("DELETE", DialogInterface.OnClickListener { dialog, which ->
+                    viewmodel.deleteAddress(it)
+                }).setPositiveButton("SET DEFAULT", DialogInterface.OnClickListener { dialog, which ->
+                    viewmodel.setDefaultAddress(it)
+                }).create().show()
             })
         val adapter = binding.profileEditAddressRecyclerView.adapter as AddressAdapter
         viewmodel.user.observe(viewLifecycleOwner) {
             if (it !== null) {
-                adapter.submitList(it.shippingAddresses)
+                adapter.submitList(it.shippingAddresses.toList())
             }
         }
     }
