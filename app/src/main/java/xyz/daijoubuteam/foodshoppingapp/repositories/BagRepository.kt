@@ -6,10 +6,9 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import xyz.daijoubuteam.foodshoppingapp.model.Eatery
+import xyz.daijoubuteam.foodshoppingapp.model.*
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrder
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
-import xyz.daijoubuteam.foodshoppingapp.model.Product
 
 class BagRepository {
     private val auth = Firebase.auth
@@ -71,6 +70,7 @@ class BagRepository {
                             val newOrderItem = orderItem.copy(
                                 productName = product.name,
                                 productImg = product.img,
+                                productPrice = product.newPrice,
                                 price = orderItem.quantity?.let { product.newPrice?.times(it) }
                             )
                             orderItemList.value = orderItemList.value?.map {
@@ -120,6 +120,34 @@ class BagRepository {
             }
             Result.success(true)
         }catch (exception: Exception){
+            Result.failure(exception)
+        }
+    }
+
+    fun getOrderAddress():Result<LiveData<ShippingAddress?>>{
+        val shippingAddress: MutableLiveData<ShippingAddress?> = MutableLiveData()
+        return try{
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid)
+            docRef.addSnapshotListener{value, error ->
+                val userInfo = value?.toObject(User::class.java)
+                if(userInfo?.shippingAddresses.isNullOrEmpty()){
+                    shippingAddress.value = null
+                }else{
+//                    shippingAddress.value = userInfo?.shippingAddresses?.find {shippingAddress -> shippingAddress.  }
+                }
+            }
+            Result.success(shippingAddress)
+        }catch (exception: Exception){
+            Result.failure(exception)
+        }
+    }
+
+    suspend fun placeOrder(order: BagOrderItem):Result<Boolean>{
+        return try {
+
+            Result.success(true)
+        }catch (exception:Exception){
             Result.failure(exception)
         }
     }
