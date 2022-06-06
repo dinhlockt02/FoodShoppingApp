@@ -6,12 +6,15 @@ import android.location.LocationManager
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.MainApplication
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 import xyz.daijoubuteam.foodshoppingapp.model.Event
 import xyz.daijoubuteam.foodshoppingapp.model.Product
 import xyz.daijoubuteam.foodshoppingapp.repositories.EateryRepository
+import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 import xyz.daijoubuteam.foodshoppingapp.utils.observeOnce
 
 class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidViewModel(app) {
@@ -19,7 +22,9 @@ class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidVi
     private var _distance : String = ""
     private val mainApplication = app.applicationContext as MainApplication
     private val eateryRepository = EateryRepository()
+    private val userRepository = UserRepository()
     private lateinit var _productList: LiveData<List<Product>>
+    lateinit var isFavorite: LiveData<Boolean>
 
     val selectedProperty: LiveData<Eatery>
         get() = _selectedProperty
@@ -32,7 +37,17 @@ class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidVi
         _selectedProperty.value = eateryProperty
         getDistanceToEatery()
         fetchProductEatery()
+        getIsFavorite()
     }
+
+    private fun getIsFavorite() {
+        if(_selectedProperty.value == null) return
+        val result = userRepository.isFavoritedLivedata(_selectedProperty.value!!)
+        if(result.isSuccess && result.getOrNull() != null) {
+            isFavorite = result.getOrNull()!!
+        }
+    }
+
 
     private fun getDistanceToEatery() {
         mainApplication.location.observeOnce { lct ->
@@ -64,7 +79,16 @@ class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidVi
         else {
             return
         }
+    }
 
-
+    fun triggerFavorited(){
+        viewModelScope.launch {
+            if(_selectedProperty.value == null) return@launch
+            if(isFavorite.value == true) {
+                userRepository.removeFromFavorite(_selectedProperty.value!!)
+            } else {
+                userRepository.addToFavorite(_selectedProperty.value!!)
+            }
+        }
     }
 }

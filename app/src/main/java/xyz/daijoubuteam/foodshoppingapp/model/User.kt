@@ -1,6 +1,9 @@
 package xyz.daijoubuteam.foodshoppingapp.model
 
 
+import android.net.Uri
+import com.google.android.gms.maps.model.LatLng
+import com.google.firebase.firestore.DocumentReference
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
 
 data class User(
@@ -15,6 +18,7 @@ data class User(
     var gender: Gender? = null,
     var nickname: String? = null,
     var photoUrl: String? = null,
+    var favorites: ArrayList<DocumentReference>? = null
     var bag: ArrayList<BagOrderItem> = ArrayList()
 )
 
