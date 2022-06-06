@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderItemBinding
-import xyz.daijoubuteam.foodshoppingapp.model.OrderItem
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.OrderItem
 
 class OrderItemAdapter: ListAdapter<OrderItem, OrderItemAdapter.OrderItemViewHolder>(DiffCallBack) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):OrderItemViewHolder{

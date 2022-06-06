@@ -3,13 +3,12 @@ package xyz.daijoubuteam.foodshoppingapp.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
-import xyz.daijoubuteam.foodshoppingapp.model.Order
-import xyz.daijoubuteam.foodshoppingapp.model.OrderItem
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.Order
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.OrderItem
 import xyz.daijoubuteam.foodshoppingapp.model.Product
 
 class BagRepository {

@@ -1,8 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.model
 
 
-import android.net.Uri
-import com.google.android.gms.maps.model.LatLng
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.OrderItem
 
 data class User(
     val uid: String? = null,

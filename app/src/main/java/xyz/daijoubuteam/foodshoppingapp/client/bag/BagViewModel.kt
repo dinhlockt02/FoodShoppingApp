@@ -3,10 +3,8 @@ package xyz.daijoubuteam.foodshoppingapp.client.bag
 import android.view.View
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
-import xyz.daijoubuteam.foodshoppingapp.model.Order
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.Order
 import xyz.daijoubuteam.foodshoppingapp.repositories.BagRepository
-import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 
 class BagViewModel : ViewModel(){
     private val bagRepository = BagRepository()

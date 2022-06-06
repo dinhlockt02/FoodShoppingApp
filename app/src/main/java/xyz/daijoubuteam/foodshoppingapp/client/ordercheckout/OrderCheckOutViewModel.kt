@@ -5,8 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import xyz.daijoubuteam.foodshoppingapp.model.Order
-import xyz.daijoubuteam.foodshoppingapp.model.OrderItem
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.OrderItem
 import xyz.daijoubuteam.foodshoppingapp.repositories.BagRepository
 
 class OrderCheckOutViewModel(orderId: String): ViewModel(){
@@ -15,6 +14,9 @@ class OrderCheckOutViewModel(orderId: String): ViewModel(){
     private lateinit var _orderItemList: LiveData<List<OrderItem>>
     val orderItemList: LiveData<List<OrderItem>>
         get() = _orderItemList
+    private var _totalPrice = MutableLiveData<Double>()
+    val totalPrice: LiveData<Double>
+        get() = _totalPrice
 
     init {
         viewModelScope.launch {
@@ -26,7 +28,19 @@ class OrderCheckOutViewModel(orderId: String): ViewModel(){
             }
         }
     }
+
     private fun onShowError(msg: String?){
         this._errMessage.value = msg
     }
+
+    fun totalPriceCounting(listOrder: List<OrderItem>){
+        var sum = 0.0
+        for (orderItem in listOrder){
+            if(orderItem.price != null){
+                sum += orderItem.price!!
+            }
+        }
+        _totalPrice.value = sum
+    }
+
 }

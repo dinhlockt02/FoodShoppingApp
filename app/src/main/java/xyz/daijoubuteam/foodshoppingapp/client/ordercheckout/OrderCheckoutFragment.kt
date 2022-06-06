@@ -9,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentOrderCheckoutBinding
-import xyz.daijoubuteam.foodshoppingapp.model.Order
 
 
 class OrderCheckOutFragment : Fragment() {
@@ -31,6 +30,7 @@ class OrderCheckOutFragment : Fragment() {
         orderCheckOutViewModel.orderItemList.observe(viewLifecycleOwner){
             if (it != null){
                 adapter.submitList(it)
+                orderCheckOutViewModel.totalPriceCounting(it)
             }
         }
         return binding.root

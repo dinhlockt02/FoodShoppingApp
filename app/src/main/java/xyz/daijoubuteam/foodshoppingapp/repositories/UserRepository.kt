@@ -1,12 +1,9 @@
 package xyz.daijoubuteam.foodshoppingapp.repositories
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.firestore.Query
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -14,6 +11,8 @@ import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.*
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.Order
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.OrderItem
 
 class UserRepository {
     private val auth = Firebase.auth

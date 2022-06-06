@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderBinding
-import xyz.daijoubuteam.foodshoppingapp.model.Order
+import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.Order
 
 class OrderAdapter(private val onClickListener: OnClickListener) : ListAdapter<Order, OrderAdapter.OrderViewHolder>(DiffCallBack) {
     class OrderViewHolder(private var binding: ItemOrderBinding) :
