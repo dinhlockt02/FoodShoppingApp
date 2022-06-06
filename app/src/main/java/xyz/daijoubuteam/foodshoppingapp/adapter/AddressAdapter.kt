@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.LayoutAddressItemBinding
 import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
 
-class AddressAdapter(private val onClickListener: OnClickListener): ListAdapter<ShippingAddress, AddressAdapter.AddressViewHolder>(AddressAdapter.DiffCallback) {
+class AddressAdapter(private val onClickListener: OnClickListener, private val onLongClickListener: OnLongClickListener): ListAdapter<ShippingAddress, AddressAdapter.AddressViewHolder>(AddressAdapter.DiffCallback) {
     class AddressViewHolder(private var binding: LayoutAddressItemBinding): RecyclerView.ViewHolder(binding.root){
         fun bind(shippingAddress: ShippingAddress){
             binding.shippingAddress = shippingAddress
@@ -40,9 +40,17 @@ class AddressAdapter(private val onClickListener: OnClickListener): ListAdapter<
         holder.itemView.setOnClickListener {
             onClickListener.clickListener(items)
         }
+        holder.itemView.setOnLongClickListener {
+            onLongClickListener.longClickListener(items)
+            true
+        }
     }
 
     class OnClickListener(val clickListener: (shippingAddress: ShippingAddress) -> Unit) {
         fun onClick(shippingAddress: ShippingAddress) = clickListener(shippingAddress)
+    }
+
+    class OnLongClickListener(val longClickListener: (shippingAddress: ShippingAddress) -> Unit) {
+        fun onLongClick(shippingAddress: ShippingAddress) = longClickListener(shippingAddress)
     }
 }

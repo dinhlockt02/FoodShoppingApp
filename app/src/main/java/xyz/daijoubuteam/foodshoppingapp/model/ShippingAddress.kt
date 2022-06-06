@@ -14,7 +14,8 @@ data class ShippingAddress(
     var gender: Gender? = Gender.MALE,
     var phoneNumber: String? = "",
     var address: String? = "",
-    var geoPointLocation: GeoPoint? = null
+    var geoPointLocation: GeoPoint? = null,
+    val defaultAddress: Boolean = false
 ): Serializable {
     @get:Exclude
     @set:Exclude

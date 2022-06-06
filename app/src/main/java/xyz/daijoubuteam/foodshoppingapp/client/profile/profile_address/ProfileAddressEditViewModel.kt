@@ -14,17 +14,15 @@ import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 
 class ProfileAddressEditViewModel : ViewModel() {
     private val userRepository = UserRepository()
-    var user = MutableLiveData<User>(null)
+    lateinit var user: LiveData<User>
 
     init {
-        viewModelScope.launch {
-            val userResult = userRepository.getCurrentUser()
-            if (userResult.isSuccess) {
-                user.value = userResult.getOrNull()
+            val userResult = userRepository.getCurrentUserLiveData()
+            if (userResult.isSuccess && userResult.getOrNull()!= null) {
+                user = userResult.getOrNull()!!
             } else {
                 onShowMessage(userResult.exceptionOrNull()?.localizedMessage)
             }
-        }
     }
 
     private val _message = MutableLiveData("")
@@ -55,7 +53,6 @@ class ProfileAddressEditViewModel : ViewModel() {
                         throw Exception("Save failed")
                     }
                 } else if (updateResult.isSuccess) {
-                    user.value = user.value
                     onShowMessage("Save successful")
                 }
             } catch (exception: Exception) {
@@ -84,6 +81,24 @@ class ProfileAddressEditViewModel : ViewModel() {
                 }
             } catch (e: Exception) {
                 onShowMessage(e.message)
+            }
+        }
+    }
+
+    fun deleteAddress(address: ShippingAddress) {
+        viewModelScope.launch {
+            val result = userRepository.deleteAddress(address)
+            if(result.isFailure) {
+                onShowMessage(result.exceptionOrNull()?.message.toString())
+            }
+        }
+    }
+
+    fun setDefaultAddress(address: ShippingAddress) {
+        viewModelScope.launch {
+            val result = userRepository.setDefaultAddress(address)
+            if(result.isFailure) {
+                onShowMessage(result.exceptionOrNull()?.message.toString())
             }
         }
     }

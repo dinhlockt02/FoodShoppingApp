@@ -248,4 +248,40 @@ class UserRepository {
             Result.failure(e)
         }
     }
+
+    suspend fun deleteAddress(address: ShippingAddress): Result<Unit> {
+        return try {
+            if(address.defaultAddress) throw Exception("Can\'t not delete default address")
+            val uid = auth.currentUser?.uid
+                ?: throw Exception("Current user not found.")
+            val user = db.collection("users").document(uid).get().await().toObject(User::class.java)
+            val updatedAddresses = user?.shippingAddresses?.filter {
+                it.id != address.id
+            }
+            db.collection("users").document(uid).update("shippingAddresses", updatedAddresses).await()
+            Result.success(Unit)
+        }catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
+
+    suspend fun setDefaultAddress(address: ShippingAddress): Result<Unit> {
+        return try {
+            val uid = auth.currentUser?.uid
+                ?: throw Exception("Current user not found.")
+            val user = db.collection("users").document(uid).get().await().toObject(User::class.java)
+            val updatedAddresses = user?.shippingAddresses?.map {
+                if(address.id == it.id) {
+                    it.copy(defaultAddress = true)
+                }
+                else {
+                    it.copy(defaultAddress = false)
+                }
+            }
+            db.collection("users").document(uid).update("shippingAddresses", updatedAddresses).await()
+            Result.success(Unit)
+        }catch (e: Exception) {
+            Result.failure(e)
+        }
+    }
 }
