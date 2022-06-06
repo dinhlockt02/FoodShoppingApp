@@ -6,6 +6,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
+import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.*
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrder
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
@@ -134,7 +135,8 @@ class BagRepository {
                 if(userInfo?.shippingAddresses.isNullOrEmpty()){
                     shippingAddress.value = null
                 }else{
-//                    shippingAddress.value = userInfo?.shippingAddresses?.find {shippingAddress -> shippingAddress.  }
+                    shippingAddress.value = userInfo?.shippingAddresses?.find {shippingAddress -> shippingAddress.defaultAddress  }
+                    Timber.i(shippingAddress.value.toString())
                 }
             }
             Result.success(shippingAddress)
