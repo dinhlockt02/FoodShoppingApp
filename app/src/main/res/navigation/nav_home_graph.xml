@@ -146,7 +146,9 @@
                 app:enterAnim="@anim/pop_up"
                 app:exitAnim="@anim/fade_out"
                 app:popEnterAnim="@anim/fade_in"
-                app:popExitAnim="@anim/pop_down" />
+                app:popExitAnim="@anim/pop_down"
+                app:popUpTo="@id/profileAddressEditFragment"
+                app:popUpToInclusive="true" />
         </fragment>
         <fragment
             android:id="@+id/selectLocationFragment"
