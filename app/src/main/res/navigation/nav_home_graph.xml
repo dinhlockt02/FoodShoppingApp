@@ -278,6 +278,10 @@
         android:name="xyz.daijoubuteam.foodshoppingapp.client.home.carousel_detail.CarouselDetailFragment"
         android:label="CarouselDetail"
         tools:layout="@layout/fragment_carousel_detail">
+        <argument
+            android:name="event"
+            app:argType="xyz.daijoubuteam.foodshoppingapp.model.Event">
+        </argument>
         <action
             android:id="@+id/action_carouselDetail_to_detailEateryFragment"
             app:destination="@id/detailEateryFragment" />

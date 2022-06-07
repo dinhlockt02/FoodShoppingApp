@@ -24,7 +24,7 @@
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imgEatery"
             android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_height="160dp"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
             app:imageUrl="@{eatery.photoUrl}"

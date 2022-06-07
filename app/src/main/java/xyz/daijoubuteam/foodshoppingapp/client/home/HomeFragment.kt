@@ -59,6 +59,7 @@ class HomeFragment : Fragment() {
         handleClickEateryItem()
         handleClickBtnViewAllEatery()
         handleClickCategoryItem()
+        handleClickEventItem()
         val handler = Handler()
         binding.slideHomeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
@@ -118,7 +119,9 @@ class HomeFragment : Fragment() {
     private fun setUpEventList() {
         viewModel.eventList.observe(viewLifecycleOwner){
             if(it!=null) {
-                binding.slideHomeViewPager.adapter = EventSlideAdapter(it)
+                binding.slideHomeViewPager.adapter = EventSlideAdapter(it, EventSlideAdapter.OnClickListener{
+                    viewModel.displayDetailEventCarousel(it)
+                })
             }
         }
     }
@@ -163,6 +166,14 @@ class HomeFragment : Fragment() {
             }
         })
     }
+    private fun handleClickEventItem() {
+        viewModel.navigateToSelectedEvent.observe(viewLifecycleOwner, Observer {
+            if(it != null) {
+                this.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToCarouselDetail(it))
+                viewModel.onNavigateToSelectedEventComplete()
+            }
+        })
+    }
     private fun handleClickCategoryItem() {
         viewModel.navigateToSelectedCategory.observe(viewLifecycleOwner, Observer {
             if(it != null) {
@@ -171,6 +182,7 @@ class HomeFragment : Fragment() {
             }
         })
     }
+
     private fun handleClickBtnViewAllEatery() {
         binding.btnPopularEateries.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToVerticalListEateryFragment(TypesViewAll.POPULAR))

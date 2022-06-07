@@ -45,6 +45,7 @@ class HomeViewModel: ViewModel() {
     private val _errMessage = MutableLiveData("")
     private val _navigateToSelectedEatery = MutableLiveData<Eatery>()
     private val _navigateToSelectedCategory = MutableLiveData<Category>()
+    private val _navigateToSelectedEvent = MutableLiveData<Event>()
     val notification
         get() = _notification
     val errMessage: LiveData<String>
@@ -53,6 +54,8 @@ class HomeViewModel: ViewModel() {
         get() = _navigateToSelectedEatery
     val navigateToSelectedCategory: LiveData<Category>
         get() = _navigateToSelectedCategory
+    val navigateToSelectedEvent: LiveData<Event>
+        get() = _navigateToSelectedEvent
     val currentUser: LiveData<User>
         get() = _currentUser
     val eventList: LiveData<List<Event>>
@@ -134,6 +137,15 @@ class HomeViewModel: ViewModel() {
 
     fun onNavigateToSelectedCategoryComplete() {
         _navigateToSelectedCategory.value = null
+    }
+
+    //show detail event carousel
+    fun displayDetailEventCarousel(eventSelected: Event) {
+        _navigateToSelectedEvent.value = eventSelected
+    }
+
+    fun onNavigateToSelectedEventComplete() {
+        _navigateToSelectedEvent.value = null
     }
 
 }
