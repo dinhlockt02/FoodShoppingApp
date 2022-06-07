@@ -87,6 +87,7 @@
                         android:textColor="@color/bluegray_700"
                         android:textFontWeight="500"
                         android:textSize="18sp"
+                        android:text="@{viewModel.shippingAddress.address}"
                         app:layout_constraintTop_toBottomOf="@+id/constraintDeliverTo"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -213,37 +214,12 @@
                             android:fontFamily="@font/avenir_next_lt_pro"
                             android:textColor="@color/bluegray_700"
                             android:textFontWeight="500"
+                            android:text="@{@string/shipping_info(viewModel.shippingAddress.name, viewModel.shippingAddress.phoneNumber)}"
                             android:textSize="16sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
                             tools:text="Nguyen Nguyen Nguyen Nguyen"/>
-                        <TextView
-                            android:id="@+id/textViewContactComma"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/avenir_next_lt_pro"
-                            android:textColor="@color/bluegray_700"
-                            android:text=", "
-                            android:textFontWeight="500"
-                            android:textSize="16sp"
-                            app:layout_constraintStart_toEndOf="@id/textViewContactName"
-                            app:layout_constraintBottom_toBottomOf="@id/textViewContactName"
-                            app:layout_constraintTop_toTopOf="@id/textViewContactName"/>
-
-                        <TextView
-                            android:id="@+id/textViewPhoneNumber"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/avenir_next_lt_pro"
-                            android:textColor="@color/bluegray_700"
-                            android:textFontWeight="500"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="@id/textViewContactName"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@id/textViewContactComma"
-                            app:layout_constraintTop_toTopOf="@id/textViewContactName"
-                            tools:text="1234567890" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -449,11 +425,11 @@
                     android:text="PLACE ORDER"
                     android:textAllCaps="true"
                     android:enabled="@{viewModel.placeOrderButtonVisible}"
+                    android:onClick="@{() -> viewModel.placeOrder()}"
                     android:textSize="16sp"
                     android:textFontWeight="400"
                     android:fontFamily="@font/avenir_next_lt_pro"
                     android:textColor="@color/white_A700"
-                    android:background="@drawable/rectangle_bg_deep_orange_a200_radius_6"
                     tools:ignore="UnusedAttribute"/>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>

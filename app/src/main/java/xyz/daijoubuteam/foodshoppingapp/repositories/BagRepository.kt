@@ -2,6 +2,7 @@ package xyz.daijoubuteam.foodshoppingapp.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -10,6 +11,7 @@ import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.*
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrder
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
+import java.util.ArrayList
 
 class BagRepository {
     private val auth = Firebase.auth
@@ -145,9 +147,25 @@ class BagRepository {
         }
     }
 
-    suspend fun placeOrder(order: BagOrderItem):Result<Boolean>{
+    suspend fun placeOrder(orderItems: List<BagOrderItem>, orderId: String):Result<Boolean>{
         return try {
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid).collection("bag").document(orderId)
+            docRef.addSnapshotListener { value, error ->
+                val bagOrder = value?.toObject(BagOrder::class.java)
+                bagOrder?.eateryId?.addSnapshotListener{eateryValue, error->
+                    val eatery = eateryValue?.toObject(Eatery::class.java)
+                    val newOrder = Order(
+                        eateryId = bagOrder.eateryId,
+                        eateryName = eatery?.name,
+                        eateryImage = eatery?.photoUrl,
+                        orderItems = ArrayList(orderItems.map { orderItem -> orderItem.toOrderItem() }),
+                        orderTime = Timestamp(System.currentTimeMillis()/1000, 0),
+                    )
+                    db.collection("users").document(uid).collection("order").document(orderId).set(newOrder)
+                }
 
+            }
             Result.success(true)
         }catch (exception:Exception){
             Result.failure(exception)
