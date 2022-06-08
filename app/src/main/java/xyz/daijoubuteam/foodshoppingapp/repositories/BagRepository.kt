@@ -169,7 +169,10 @@ class BagRepository {
                         totalPrice = totalPrice,
                         shippingAddress = shippingAddress
                     )
-                    db.collection("users").document(uid).collection("order").document(orderId).set(newOrder)
+                    val orderRef = db.collection("users").document(uid).collection("order").document(orderId)
+                    orderRef.set(newOrder)
+                    db.collection("eateries").document("${eatery?.id}").collection("orders").add(hashMapOf("orderId" to orderRef))
+                    docRef.delete()
                 }
 
             }

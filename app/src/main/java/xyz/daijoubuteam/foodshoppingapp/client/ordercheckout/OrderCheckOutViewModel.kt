@@ -27,6 +27,9 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
 //    private var _time = MutableLiveData<Timestamp>()
 //    val time: LiveData<Timestamp>
 //        get() = _time
+    private val _navigateToOrderFragment = MutableLiveData<Boolean>()
+    val navigateToOrderFragment: LiveData<Boolean>
+        get() = _navigateToOrderFragment
 
     init {
         viewModelScope.launch {
@@ -43,8 +46,7 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
                 onShowError(shippingAddressResult.exceptionOrNull()?.message)
             }
         }
-        val a = Timestamp(System.currentTimeMillis()/1000, 0)
-        Timber.i(a.toDate().toString())
+        _navigateToOrderFragment.value = false
     }
 
     private fun onShowError(msg: String?){
@@ -69,8 +71,13 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
         viewModelScope.launch{
             if(!orderItemList.value.isNullOrEmpty() && shippingAddress.value != null){
                 bagRepository.placeOrder(orderItemList.value!!, orderId, shippingAddress.value!!)
+                _navigateToOrderFragment.value = true
             }
         }
+    }
+
+    fun doneNavigateToOrderFragment(){
+        _navigateToOrderFragment.value = false
     }
 
 }

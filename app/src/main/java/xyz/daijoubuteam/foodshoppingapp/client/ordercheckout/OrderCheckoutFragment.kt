@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentOrderCheckoutBinding
 
@@ -33,6 +35,12 @@ class OrderCheckOutFragment : Fragment() {
                 orderCheckOutViewModel.totalPriceCounting(it)
             }
         }
+        orderCheckOutViewModel.navigateToOrderFragment.observe(viewLifecycleOwner, Observer {
+            if(it == true){
+                this.findNavController().navigate(OrderCheckOutFragmentDirections.actionOrderCheckOutFragmentToOrdersFragment())
+                orderCheckOutViewModel.doneNavigateToOrderFragment()
+            }
+        })
         return binding.root
     }
 
