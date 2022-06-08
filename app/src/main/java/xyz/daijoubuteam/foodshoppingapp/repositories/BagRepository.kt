@@ -2,14 +2,16 @@ package xyz.daijoubuteam.foodshoppingapp.repositories
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
-import xyz.daijoubuteam.foodshoppingapp.model.Eatery
+import timber.log.Timber
+import xyz.daijoubuteam.foodshoppingapp.model.*
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrder
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
-import xyz.daijoubuteam.foodshoppingapp.model.Product
+import java.util.ArrayList
 
 class BagRepository {
     private val auth = Firebase.auth
@@ -71,6 +73,7 @@ class BagRepository {
                             val newOrderItem = orderItem.copy(
                                 productName = product.name,
                                 productImg = product.img,
+                                productPrice = product.newPrice,
                                 price = orderItem.quantity?.let { product.newPrice?.times(it) }
                             )
                             orderItemList.value = orderItemList.value?.map {
@@ -120,6 +123,58 @@ class BagRepository {
             }
             Result.success(true)
         }catch (exception: Exception){
+            Result.failure(exception)
+        }
+    }
+
+    fun getOrderAddress():Result<LiveData<ShippingAddress?>>{
+        val shippingAddress: MutableLiveData<ShippingAddress?> = MutableLiveData()
+        return try{
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid)
+            docRef.addSnapshotListener{value, error ->
+                val userInfo = value?.toObject(User::class.java)
+                if(userInfo?.shippingAddresses.isNullOrEmpty()){
+                    shippingAddress.value = null
+                }else{
+                    shippingAddress.value = userInfo?.shippingAddresses?.find {shippingAddress -> shippingAddress.defaultAddress  }
+                    Timber.i(shippingAddress.value.toString())
+                }
+            }
+            Result.success(shippingAddress)
+        }catch (exception: Exception){
+            Result.failure(exception)
+        }
+    }
+
+    suspend fun placeOrder(orderItems: List<BagOrderItem>, orderId: String, shippingAddress: ShippingAddress):Result<Boolean>{
+        return try {
+            var totalPrice = 0.0
+            for (orderItem in orderItems){
+                totalPrice += orderItem.price!!
+            }
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid).collection("bag").document(orderId)
+            docRef.addSnapshotListener { value, error ->
+                val bagOrder = value?.toObject(BagOrder::class.java)
+                bagOrder?.eateryId?.addSnapshotListener{eateryValue, error->
+                    val eatery = eateryValue?.toObject(Eatery::class.java)
+
+                    val newOrder = Order(
+                        eateryId = bagOrder.eateryId,
+                        eateryName = eatery?.name,
+                        eateryImage = eatery?.photoUrl,
+                        orderItems = ArrayList(orderItems.map { orderItem -> orderItem.toOrderItem() }),
+                        orderTime = Timestamp(System.currentTimeMillis()/1000, 0),
+                        totalPrice = totalPrice,
+                        shippingAddress = shippingAddress
+                    )
+                    db.collection("users").document(uid).collection("order").document(orderId).set(newOrder)
+                }
+
+            }
+            Result.success(true)
+        }catch (exception:Exception){
             Result.failure(exception)
         }
     }
