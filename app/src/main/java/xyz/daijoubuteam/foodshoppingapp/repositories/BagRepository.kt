@@ -147,20 +147,27 @@ class BagRepository {
         }
     }
 
-    suspend fun placeOrder(orderItems: List<BagOrderItem>, orderId: String):Result<Boolean>{
+    suspend fun placeOrder(orderItems: List<BagOrderItem>, orderId: String, shippingAddress: ShippingAddress):Result<Boolean>{
         return try {
+            var totalPrice = 0.0
+            for (orderItem in orderItems){
+                totalPrice += orderItem.price!!
+            }
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
             val docRef = db.collection("users").document(uid).collection("bag").document(orderId)
             docRef.addSnapshotListener { value, error ->
                 val bagOrder = value?.toObject(BagOrder::class.java)
                 bagOrder?.eateryId?.addSnapshotListener{eateryValue, error->
                     val eatery = eateryValue?.toObject(Eatery::class.java)
+
                     val newOrder = Order(
                         eateryId = bagOrder.eateryId,
                         eateryName = eatery?.name,
                         eateryImage = eatery?.photoUrl,
                         orderItems = ArrayList(orderItems.map { orderItem -> orderItem.toOrderItem() }),
                         orderTime = Timestamp(System.currentTimeMillis()/1000, 0),
+                        totalPrice = totalPrice,
+                        shippingAddress = shippingAddress
                     )
                     db.collection("users").document(uid).collection("order").document(orderId).set(newOrder)
                 }

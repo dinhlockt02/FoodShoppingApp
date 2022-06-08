@@ -116,14 +116,14 @@ class UserRepository {
             val documentSnapShot = docRef.get().await()
             if (documentSnapShot.documents.isEmpty()) {
                 val order = BagOrder(documentRef1)
-                val documentRef = db.document("/eateries/zF5GhL9LMeYkQ2GYWEp8/products/RqRPpTjuzmQLO3IzQpTS")
+                val documentRef = db.document("/eateries/zF5GhL9LMeYkQ2GYWEp8/products/Lccbrrr4K5zhPOumneMF")
                 val orderItem = BagOrderItem(documentRef,4)
                 order.orderItems.add(orderItem)
                 db.collection("users").document(uid).collection("bag").add(order)
             }else {
                 val order = documentSnapShot.documents[0].toObject(BagOrder::class.java)
                 val orderId = documentSnapShot.documents[0].id
-                val documentRef = db.document("/eateries/zF5GhL9LMeYkQ2GYWEp8/products/RqRPpTjuzmQLO3IzQpTS")
+                val documentRef = db.document("/eateries/zF5GhL9LMeYkQ2GYWEp8/products/Lccbrrr4K5zhPOumneMF")
                 val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
                     ?: false }
                 if( orderItem != null){

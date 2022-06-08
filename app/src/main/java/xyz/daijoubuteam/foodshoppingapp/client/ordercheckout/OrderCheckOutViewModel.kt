@@ -67,8 +67,8 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
 
     fun placeOrder(){
         viewModelScope.launch{
-            if(!orderItemList.value.isNullOrEmpty()){
-                bagRepository.placeOrder(orderItemList.value!!, orderId)
+            if(!orderItemList.value.isNullOrEmpty() && shippingAddress.value != null){
+                bagRepository.placeOrder(orderItemList.value!!, orderId, shippingAddress.value!!)
             }
         }
     }
