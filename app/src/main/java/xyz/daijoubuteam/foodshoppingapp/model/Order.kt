@@ -13,8 +13,8 @@ data class Order (
     val eateryImage: String ?= null,
     val totalPrice: Double ?= null,
     val shippingAddress: ShippingAddress ?= null,
-    val status: String = "Pending",
-    val orderTime: Timestamp,
+    val status: String ?= null,
+    val orderTime: Timestamp ?= null,
 )
 
 

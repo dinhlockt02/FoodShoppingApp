@@ -101,7 +101,8 @@
         <action
             android:id="@+id/action_orderCheckOutFragment_to_ordersFragment"
             app:destination="@id/ordersFragment"
-            app:popUpTo="@id/bagFragment" />
+            app:popUpTo="@id/bagFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <navigation android:id="@+id/navigation"
         app:startDestination="@id/profileAddressEditFragment">

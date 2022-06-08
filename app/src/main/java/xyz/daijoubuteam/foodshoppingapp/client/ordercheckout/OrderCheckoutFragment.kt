@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import timber.log.Timber
+import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentOrderCheckoutBinding
 
@@ -38,6 +40,9 @@ class OrderCheckOutFragment : Fragment() {
         orderCheckOutViewModel.navigateToOrderFragment.observe(viewLifecycleOwner, Observer {
             if(it == true){
                 this.findNavController().navigate(OrderCheckOutFragmentDirections.actionOrderCheckOutFragmentToOrdersFragment())
+//                this.findNavController().navigateUp()
+//                val activity = requireActivity() as? MainActivity
+//                activity?.setMenuSelectedItem(R.id.ordersFragment)
                 orderCheckOutViewModel.doneNavigateToOrderFragment()
             }
         })

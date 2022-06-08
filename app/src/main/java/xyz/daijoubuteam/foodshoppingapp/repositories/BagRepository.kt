@@ -165,11 +165,12 @@ class BagRepository {
                         eateryName = eatery?.name,
                         eateryImage = eatery?.photoUrl,
                         orderItems = ArrayList(orderItems.map { orderItem -> orderItem.toOrderItem() }),
+                        status = "Pending",
                         orderTime = Timestamp(System.currentTimeMillis()/1000, 0),
                         totalPrice = totalPrice,
                         shippingAddress = shippingAddress
                     )
-                    val orderRef = db.collection("users").document(uid).collection("order").document(orderId)
+                    val orderRef = db.collection("users").document(uid).collection("orders").document(orderId)
                     orderRef.set(newOrder)
                     db.collection("eateries").document("${eatery?.id}").collection("orders").add(hashMapOf("orderId" to orderRef))
                     docRef.delete()
