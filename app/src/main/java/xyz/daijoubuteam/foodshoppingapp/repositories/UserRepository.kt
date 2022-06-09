@@ -27,7 +27,6 @@ class UserRepository {
         return try {
             val uid = auth.currentUser?.uid
                 ?: throw Exception("Current user not found.")
-            addNewOderItem()
             val docRef = db.collection("users").document(uid)
             val documentSnapShot = docRef.get().await()
             val users = documentSnapShot.toObject<User>()
@@ -107,42 +106,6 @@ class UserRepository {
             Result.failure(exception)
         }
     }
-
-    private suspend fun addNewOderItem(): Result<Boolean> {
-        return try {
-            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
-            val documentRef1 = db.document("/eateries/zF5GhL9LMeYkQ2GYWEp8")
-            val docRef = db.collection("users").document(uid).collection("bag").whereEqualTo("eateryId", documentRef1)
-            val documentSnapShot = docRef.get().await()
-            if (documentSnapShot.documents.isEmpty()) {
-                val order = BagOrder(documentRef1)
-                val documentRef = db.document("/eateries/zF5GhL9LMeYkQ2GYWEp8/products/Lccbrrr4K5zhPOumneMF")
-                val orderItem = BagOrderItem(documentRef,4)
-                order.orderItems.add(orderItem)
-                db.collection("users").document(uid).collection("bag").add(order)
-            }else {
-                val order = documentSnapShot.documents[0].toObject(BagOrder::class.java)
-                val orderId = documentSnapShot.documents[0].id
-                val documentRef = db.document("/eateries/zF5GhL9LMeYkQ2GYWEp8/products/Lccbrrr4K5zhPOumneMF")
-                val orderItem = order?.orderItems?.find{ orderItem -> orderItem.productId?.equals(documentRef)
-                    ?: false }
-                if( orderItem != null){
-                    orderItem.quantity = orderItem.quantity?.plus(2)
-                    db.collection("users").document(uid).collection("bag").document(orderId).set(order)
-                }else {
-                        val newOrderItem = BagOrderItem(documentRef,2)
-                        order?.orderItems?.add(newOrderItem)
-                        if (order != null) {
-                            db.collection("users").document(uid).collection("bag").document(orderId).set(order)
-                    }
-                }
-            }
-            Result.success(true)
-        } catch (exception: Exception) {
-            Result.failure(exception)
-        }
-    }
-
 
     suspend fun addToFavorite(eatery: Eatery): Result<Unit> {
         return try {
