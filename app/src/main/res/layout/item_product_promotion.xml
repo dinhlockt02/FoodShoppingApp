@@ -63,7 +63,7 @@
             <ImageView android:id="@+id/imageItem"
                 android:layout_height="80dp"
                 android:layout_width="80dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitXY"
                 app:imageUrl="@{eatery.photoUrl}"
                 app:defaultUrl="@{eatery.photoUrl}"/>
         </androidx.cardview.widget.CardView>

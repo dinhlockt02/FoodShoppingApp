@@ -103,12 +103,12 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginStart="20dp"
-                        android:layout_marginEnd="150dp"
+                        android:layout_marginEnd="80dp"
                         android:ellipsize="end"
                         android:fontFamily="@font/avenir_next_lt_pro"
                         android:gravity="start"
-                        android:singleLine="true"
-                        app:flow_wrapMode="chain2"
+                        android:singleLine="false"
+                        app:flow_wrapMode="aligned"
                         android:textColor="@color/gray_500"
                         android:textFontWeight="500"
                         android:textSize="15sp"
@@ -116,21 +116,6 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         tools:ignore="UnusedAttribute" />
-                    <com.google.android.material.button.MaterialButton
-                        android:id="@+id/btnLocation"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:insetLeft="0dp"
-                        android:insetTop="0dp"
-                        android:insetRight="0dp"
-                        android:insetBottom="0dp"
-                        app:icon="@drawable/img_chevronright"
-                        app:iconTint="@color/primaryColor"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/txtUserAddress"
-                        style="@style/Widget.AppCompat.Button.Borderless"
-                        app:iconGravity="textStart"
-                        app:iconPadding="0dp" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <!--                Search-->
                 <com.google.android.material.button.MaterialButton
