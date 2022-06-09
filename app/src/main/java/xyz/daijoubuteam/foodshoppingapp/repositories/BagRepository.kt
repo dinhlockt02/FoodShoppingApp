@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
@@ -90,6 +91,12 @@ class BagRepository {
             Result.failure(exception)
         }
     }
+
+//    suspend fun addNewOderItem(productId: String, quantity: Int):Result<Boolean>{
+//        val doc = db.collection("eateries")
+//        Timber.i(doc.toString())
+//        return Result.success(false)
+//    }
 
 
     suspend fun addNewOderItem(eateryId: String, productId: String, quantity: Int):Result<Boolean>{

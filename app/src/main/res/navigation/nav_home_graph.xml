@@ -212,6 +212,10 @@
         android:label="ProductToBagFragment"
         tools:layout="@layout/fragment_product_to_bag">
         <argument
+            android:name="eateryId"
+            app:argType="string">
+        </argument>
+        <argument
             android:name="product"
             app:argType="xyz.daijoubuteam.foodshoppingapp.model.Product">
         </argument>

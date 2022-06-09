@@ -70,7 +70,8 @@ class DetailEateryFragment : Fragment() {
     }
     private fun setupForYouProductListViewAdapter() {
         binding.forYouProductRecyclerView.adapter = ProductAdapter(ProductAdapter.OnClickListener{
-            findNavController().navigate(DetailEateryFragmentDirections.actionDetailEateryFragmentToProductToBagFragment(it))
+            if(eateryProperty.id != null)
+                findNavController().navigate(DetailEateryFragmentDirections.actionDetailEateryFragmentToProductToBagFragment(eateryProperty.id!!,it))
         })
         val adapter = binding.forYouProductRecyclerView.adapter as ProductAdapter
         viewModel.productList.observe(viewLifecycleOwner) {

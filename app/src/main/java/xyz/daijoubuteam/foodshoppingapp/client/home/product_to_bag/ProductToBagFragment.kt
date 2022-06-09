@@ -7,19 +7,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProductToBagBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Product
 
 class ProductToBagFragment : Fragment() {
     private lateinit var binding: FragmentProductToBagBinding
     private lateinit var productProperty: Product
-    private var quantityItem: Int = 0
-    private var totalPrice: Number = 0
-
+    private lateinit var eateryId:String
     private val viewModel: ProductToBagViewModel by lazy {
         val application = requireNotNull(activity).application
         productProperty = ProductToBagFragmentArgs.fromBundle(requireArguments()).product
-        val viewModelFactory = ProductToBagViewModelFactory(productProperty,application)
+        eateryId = ProductToBagFragmentArgs.fromBundle(requireArguments()).eateryId
+        val viewModelFactory = ProductToBagViewModelFactory(eateryId,productProperty,application)
         ViewModelProvider(this, viewModelFactory)[ProductToBagViewModel::class.java]
     }
     override fun onCreateView(
@@ -32,12 +32,14 @@ class ProductToBagFragment : Fragment() {
         setTextViews()
         handleClickButtonHome()
         handleClickQuantity()
+        handleSubmitOrder()
+        messageObserver()
         return binding.root
     }
 
     private fun setTextViews() {
-        binding.tvQuatityProduct.text = quantityItem.toString()
-        binding.tvTotalMoney.text = totalPrice.toString()
+        binding.tvQuatityProduct.text = viewModel.quantityItem.toString()
+        binding.tvTotalMoney.text = viewModel.totalPrice.toString()
     }
 
     private fun handleClickButtonHome() {
@@ -48,15 +50,27 @@ class ProductToBagFragment : Fragment() {
 
     private fun handleClickQuantity() {
         binding.btnPlus.setOnClickListener {
-            quantityItem += 1
-            totalPrice = quantityItem * productProperty.price!!
-            setTextViews()
+            viewModel.handleRaiseQuantityItem()
         }
         binding.btnSub.setOnClickListener {
-            quantityItem -= 1
-            totalPrice = quantityItem * productProperty.price!!
-            setTextViews()
+            viewModel.handleMinusQuantityItem()
         }
     }
 
+    private fun handleSubmitOrder() {
+        binding.btnAddToCard.setOnClickListener {
+            viewModel.handleBtnAddToBag()
+        }
+    }
+
+
+    private fun messageObserver() {
+        viewModel.message.observe(viewLifecycleOwner) {
+            if(!it.isNullOrEmpty() ){
+                Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                this.findNavController().navigateUp()
+                viewModel.onShowMessageComplete()
+            }
+        }
+    }
 }
