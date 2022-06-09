@@ -60,21 +60,7 @@ class HomeFragment : Fragment() {
         handleClickBtnViewAllEatery()
         handleClickCategoryItem()
         handleClickEventItem()
-        val handler = Handler()
-        binding.slideHomeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-
-                handler.removeMessages(0)
-
-                val runnable = Runnable { binding.slideHomeViewPager.currentItem = ++binding.slideHomeViewPager.currentItem }
-                if (position < binding.slideHomeViewPager.adapter?.itemCount ?: 0) {
-                    handler.postDelayed(runnable, 1000)
-                } else {
-                    val runnable = Runnable { binding.slideHomeViewPager.currentItem = 0}
-                }
-            }
-        })
+        handleAnimationSlide()
         return binding.root
     }
     override fun onStart() {
@@ -182,7 +168,6 @@ class HomeFragment : Fragment() {
             }
         })
     }
-
     private fun handleClickBtnViewAllEatery() {
         binding.btnPopularEateries.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToVerticalListEateryFragment(TypesViewAll.POPULAR))
@@ -190,5 +175,22 @@ class HomeFragment : Fragment() {
         binding.btnNearbyEateries.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToVerticalListEateryFragment(TypesViewAll.NEARBY))
         }
+    }
+    private fun handleAnimationSlide() {
+        val handler = Handler()
+        binding.slideHomeViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                handler.removeMessages(0)
+                val runnable = Runnable {
+                    if(binding.slideHomeViewPager.currentItem + 1 < binding.slideHomeViewPager.adapter?.itemCount ?: 0) {
+                        binding.slideHomeViewPager.currentItem = ++binding.slideHomeViewPager.currentItem
+                    } else {
+                        binding.slideHomeViewPager.currentItem = 0
+                    }
+                }
+                handler.postDelayed(runnable, 2000)
+            }
+        })
     }
 }
