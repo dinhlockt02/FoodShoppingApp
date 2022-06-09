@@ -45,22 +45,15 @@ class OrdersFragment : Fragment() {
 
     class CustomOrdersFragementAdapter(fragment: Fragment): FragmentStateAdapter(fragment){
         var tabTitle = listOf<String>("UpComing","OnGoing","History")
-        private val arrayList: ArrayList<Fragment> = ArrayList()
-        init {
-            arrayList.add(OrdersUpComingFragment())
-            arrayList.add(OrdersOnGoingFragment())
-            arrayList.add(OrdersHistoryFragment())
-        }
 
         override fun getItemCount() = 3
 
         override fun createFragment(position: Int): Fragment {
-//            return when(position){
-//                0 -> OrdersUpComingFragment()
-//                1 -> OrdersOnGoingFragment()
-//                else -> OrdersHistoryFragment()
-//            }
-            return arrayList[position]
+            return when(position){
+                0 -> OrdersUpComingFragment()
+                1 -> OrdersOnGoingFragment()
+                else -> OrdersHistoryFragment()
+            }
         }
 
     }
