@@ -52,4 +52,18 @@ class OrderRepository {
             Result.failure(exception)
         }
     }
+
+    fun getOderById(orderId: String):Result<LiveData<Order>>{
+        val order: MutableLiveData<Order> = MutableLiveData()
+        return try{
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid).collection("orders").document(orderId)
+            docRef.addSnapshotListener { value, error ->
+                order.value = value?.toObject(Order::class.java)
+            }
+            Result.success(order)
+        }catch (exception: Exception) {
+        Result.failure(exception)
+        }
+    }
 }

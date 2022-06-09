@@ -8,14 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import xyz.daijoubuteam.foodshoppingapp.databinding.ItemOrderInfoBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Order
 
-class OrderAdapter: ListAdapter<Order, OrderAdapter.OrderViewHolder>(DiffCallBack) {
+class OrderAdapter(private val onClickListener: OnClickListener): ListAdapter<Order, OrderAdapter.OrderViewHolder>(DiffCallBack) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrderViewHolder {
         return OrderViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: OrderViewHolder, position: Int) {
-        val oderItem = getItem(position)
-        holder.bind(oderItem)
+        val orderItem = getItem(position)
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(orderItem)
+        }
+        holder.bind(orderItem)
     }
 
     companion object DiffCallBack: DiffUtil.ItemCallback<Order>(){
@@ -40,5 +43,9 @@ class OrderAdapter: ListAdapter<Order, OrderAdapter.OrderViewHolder>(DiffCallBac
                 return OrderViewHolder(binding)
             }
         }
+    }
+
+    class OnClickListener(val clickListener: (order: Order) -> Unit){
+        fun onClick(order: Order) = clickListener(order)
     }
 }

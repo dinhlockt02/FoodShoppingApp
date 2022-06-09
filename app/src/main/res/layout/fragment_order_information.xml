@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="order"
-            type="xyz.daijoubuteam.foodshoppingapp.model.Order" />
+            name="viewModel"
+            type="xyz.daijoubuteam.foodshoppingapp.client.orders.orderInfo.OrderInformationViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/bluegray_51">
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintStatus"
+                    android:id="@+id/constraintOrderId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -38,7 +38,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintDeliverTo1"
+                        android:id="@+id/orderIdConstraint"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -46,36 +46,144 @@
                         app:layout_constraintTop_toTopOf="parent">
 
                         <TextView
-                            android:id="@+id/textViewDeliverTo1"
+                            android:id="@+id/textViewOrderId"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginVertical="10dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:text="Order Id"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="22sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/orderId"
+                            android:gravity="end"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:singleLine="true"
+                            android:textColor="@color/bluegray_500"
+                            android:text="@{viewModel.order.id}"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            tools:text="Pending"
+                            app:layout_constraintTop_toTopOf="@id/textViewOrderId"
+                            app:layout_constraintBottom_toBottomOf="@id/textViewOrderId"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/textViewOrderId"/>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="6dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraintOrderId">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/orderStatusConstraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textViewOrderStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="10dp"
                             android:layout_marginStart="24dp"
                             android:fontFamily="@font/avenir_next_lt_pro"
                             android:text="Order Status"
                             android:textColor="@color/bluegray_700"
                             android:textFontWeight="500"
                             android:textSize="22sp"
-                            app:layout_constraintBottom_toBottomOf="@id/textViewDeliverChange"
-                            app:layout_constraintEnd_toStartOf="@id/textViewDeliverChange"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@id/textViewDeliverChange" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <TextView
-                            android:id="@+id/textViewDeliverChange"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/orderStatus"
+                            android:layout_width="0dp"
+                            android:gravity="end"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="24dp"
-                            android:layout_marginBottom="10dp"
                             android:fontFamily="@font/avenir_next_lt_pro"
                             android:singleLine="true"
-                            android:text="@{order.status}"
-                            app:statusString="@{order.status}"
+                            app:statusString="@{viewModel.order.status}"
+                            android:text="@{viewModel.order.status}"
                             android:textFontWeight="500"
-                            android:textSize="18sp"
+                            android:textSize="16sp"
                             tools:text="Pending"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/textViewOrderStatus"
+                            app:layout_constraintBottom_toBottomOf="@id/textViewOrderStatus"
+                            app:layout_constraintStart_toEndOf="@id/textViewOrderStatus"
                             app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintOrderTime"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraintStatus">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/orderTimeConstraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textViewOrderTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginVertical="10dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:text="Order time"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="22sp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:id="@+id/orderTime"
+                            android:gravity="end"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:singleLine="true"
+                            android:text="@{viewModel.order.orderTime.toDate().toLocaleString()}"
+                            android:textFontWeight="500"
+                            android:textSize="16sp"
+                            app:layout_constraintBottom_toBottomOf="@id/textViewOrderTime"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/textViewOrderTime"
+                            app:layout_constraintTop_toTopOf="@id/textViewOrderTime"
+                            tools:text="11111" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -88,7 +196,7 @@
                     android:background="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/constraintStatus">
+                    app:layout_constraintTop_toBottomOf="@id/constraintOrderTime">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintDeliverTo"
@@ -100,10 +208,10 @@
 
                         <TextView
                             android:id="@+id/textViewDeliverTo"
-                            android:layout_marginTop="10dp"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="24dp"
+                            android:layout_marginTop="10dp"
                             android:layout_marginEnd="24dp"
                             android:fontFamily="@font/avenir_next_lt_pro"
                             android:text="Deliver to"
@@ -128,7 +236,7 @@
                         android:textColor="@color/bluegray_500"
                         android:textFontWeight="500"
                         android:textSize="16sp"
-                        android:text="@{order.shippingAddress.address}"
+                        android:text="@{viewModel.order.shippingAddress.address}"
                         app:layout_constraintTop_toBottomOf="@+id/constraintDeliverTo"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -185,7 +293,7 @@
                             android:fontFamily="@font/avenir_next_lt_pro"
                             android:textColor="@color/bluegray_500"
                             android:textFontWeight="500"
-                            android:text="@{@string/shipping_info(order.shippingAddress.name, order.shippingAddress.phoneNumber)}"
+                            android:text="@{@string/shipping_info(viewModel.order.shippingAddress.name, viewModel.order.shippingAddress.phoneNumber)}"
                             android:textSize="16sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -292,7 +400,7 @@
                         android:fontFamily="@font/avenir_next_lt_pro"
                         android:singleLine="true"
                         android:textColor="@color/deep_orange_A200"
-                        android:text="@{Double.toString(order.totalPrice)}"
+                        android:text="@{Double.toString(viewModel.order.totalPrice)}"
                         android:textFontWeight="500"
                         android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="parent"

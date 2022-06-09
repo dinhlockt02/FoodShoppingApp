@@ -55,7 +55,11 @@
         android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.OrdersFragment"
         android:label="fragment_orders"
         tools:layout="@layout/fragment_orders"
-        />
+        >
+        <action
+            android:id="@+id/action_ordersFragment_to_orderInformation"
+            app:destination="@id/orderInformation" />
+    </fragment>
     <fragment
         android:id="@+id/savedFragment"
         android:name="xyz.daijoubuteam.foodshoppingapp.client.saved.SavedFragment"
@@ -307,7 +311,12 @@
         tools:layout="@layout/fragment_orders_up_coming" />
     <fragment
         android:id="@+id/orderInformation"
-        android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.orderInfo.OrderInformation"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.orderInfo.OrderInformationFragment"
         android:label="OrderInformation"
-        tools:layout="@layout/fragment_order_information"/>
+        tools:layout="@layout/fragment_order_information">
+        <argument
+            android:name="orderId"
+            app:argType="string">
+        </argument>
+    </fragment>
 </navigation>

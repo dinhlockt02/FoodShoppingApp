@@ -141,12 +141,3 @@ fun setImageSVGDrawable(view: ImageView, url: String?) {
     imageLoader.enqueue(request)
 }
 
-@BindingAdapter("statusString")
-fun TextView.setStatusColor(status: String){
-    setTextColor(when(status){
-        "Pending" -> R.color.bluegray_500
-        "Preparing" -> com.google.android.libraries.places.R.color.quantum_orange400
-        "Shipping" -> com.google.android.libraries.places.R.color.quantum_googblue400
-        else -> R.color.green_500
-    })
-}
