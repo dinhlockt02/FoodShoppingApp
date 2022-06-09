@@ -37,7 +37,7 @@ class OrdersUpComingFragment : Fragment() {
         binding.ordersUpComingRecycleView.adapter = adapter
 
         upComingViewModel.orderList.observe(viewLifecycleOwner){
-            if(!it.isNullOrEmpty()){
+            if(it!= null){
                 adapter.submitList(it)
             }
         }

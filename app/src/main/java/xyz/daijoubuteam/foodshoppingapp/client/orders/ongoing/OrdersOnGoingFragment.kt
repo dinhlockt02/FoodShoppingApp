@@ -39,7 +39,7 @@ class OrdersOnGoingFragment : Fragment() {
         binding.ordersOnGoingRecycleView.adapter = adapter
 
         onGoingViewModel.orderList.observe(viewLifecycleOwner){
-            if(it.isNotEmpty() && it != null) {
+            if(it!= null) {
                 adapter.submitList(it)
             }
         }
