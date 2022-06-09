@@ -59,26 +59,19 @@
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/fragment_notification_list.xml" value="0.25" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/fragment_notification_list_tab.xml" value="0.25" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/fragment_order_checkout.xml" value="0.1490036231884058" />
-        <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/fragment_order_information.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/fragment_orders.xml" value="0.15760869565217392" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/fragment_orders_on_going.xml" value="0.176" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/fragment_product_to_bag.xml" value="0.25" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/fragment_profile_address_edit.xml" value="0.15760869565217392" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/fragment_search.xml" value="0.23867753623188406" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/fragment_vertical_list_eatery.xml" value="0.23867753623188406" />
-        <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_bag_order.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_card_eatery.xml" value="0.23867753623188406" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_category.xml" value="0.1490036231884058" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_cuisine.xml" value="0.23867753623188406" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_eatery.xml" value="0.1490036231884058" />
-        <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_eatery2.xml" value="0.1480978260869565" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_gender_exposed_dropdown_menu.xml" value="0.23867753623188406" />
-        <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_notification_list.xml" value="0.2368659420289855" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_order.xml" value="0.1490036231884058" />
-        <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_order_info.xml" value="0.2368659420289855" />
-        <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_order_item.xml" value="0.536" />
-        <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_order_item_info.xml" value="0.2368659420289855" />
-        <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_product.xml" value="0.1480978260869565" />
+        <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_order_item.xml" value="0.1490036231884058" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_product_promotion.xml" value="0.1490036231884058" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/item_slide.xml" value="0.23867753623188406" />
         <entry key="..\:/Users/Admin/Documents/DoAnAndroid/FoodShoppingApp/app/src/main/res/layout/layout_address_item.xml" value="0.15760869565217392" />
@@ -148,7 +141,7 @@
         <entry key="app/src/main/res/layout/fragment_detail_eatery_infor.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_feeds.xml" value="0.2151268115942029" />
         <entry key="app/src/main/res/layout/fragment_forget_password.xml" value="0.13958333333333334" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_item_carousel.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_item_time_activity_eatery.xml" value="0.23620045979817716" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25161590576171877" />
