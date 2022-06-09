@@ -418,6 +418,7 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="16dp"
                     android:singleLine="true"
+                    android:onClick="@{() -> viewModel.navigateUpToOrderFragment()}"
                     android:text="CLOSE"
                     android:textAllCaps="true"
                     android:textSize="16sp"

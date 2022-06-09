@@ -14,6 +14,9 @@ class OrderInformationViewModel(orderId: String): ViewModel() {
     private lateinit var _order: LiveData<Order>
     val order: LiveData<Order>
         get() = _order
+    private val _navigateUpToOrderFragment = MutableLiveData<Boolean>()
+    val navigateUpToOrderFragment: LiveData<Boolean>
+        get() = _navigateUpToOrderFragment
     init {
         viewModelScope.launch {
             val orderResult = orderRepository.getOderById(orderId)
@@ -23,8 +26,17 @@ class OrderInformationViewModel(orderId: String): ViewModel() {
                 onShowError(orderResult.exceptionOrNull()?.message)
             }
         }
+        _navigateUpToOrderFragment.value = false
     }
     private fun onShowError(msg: String?){
         this._errMessage.value = msg
+    }
+
+    fun navigateUpToOrderFragment(){
+        _navigateUpToOrderFragment.value = true
+    }
+
+    fun doneNavigateUpToOrderFragment(){
+        _navigateUpToOrderFragment.value = false
     }
 }

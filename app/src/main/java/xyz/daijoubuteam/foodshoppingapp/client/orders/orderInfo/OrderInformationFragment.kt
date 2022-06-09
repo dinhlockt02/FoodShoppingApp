@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.client.ordercheckout.OrderCheckOutFragmentArgs
 import xyz.daijoubuteam.foodshoppingapp.client.ordercheckout.OrderCheckOutViewModel
@@ -36,6 +37,12 @@ class OrderInformationFragment : Fragment() {
                 adapter.submitList(it.orderItems)
             }
         })
+        orderInformationViewModel.navigateUpToOrderFragment.observe(viewLifecycleOwner, Observer {
+            if(it == true){
+                this.findNavController().navigateUp()
+            }
+        })
+
         return binding.root
     }
 
