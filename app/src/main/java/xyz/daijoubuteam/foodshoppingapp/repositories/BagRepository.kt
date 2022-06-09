@@ -73,8 +73,8 @@ class BagRepository {
                             val newOrderItem = orderItem.copy(
                                 productName = product.name,
                                 productImg = product.img,
-                                productPrice = product.newPrice,
-                                price = orderItem.quantity?.let { product.newPrice?.times(it) }
+                                productPrice = product.price,
+                                price = orderItem.quantity?.let { product.price?.times(it) }
                             )
                             orderItemList.value = orderItemList.value?.map {
                                 if (it.productId !== newOrderItem.productId) it

@@ -7,10 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import xyz.daijoubuteam.foodshoppingapp.R
-import xyz.daijoubuteam.foodshoppingapp.client.home.detail_eatery.DetailEateryFragmentArgs
-import xyz.daijoubuteam.foodshoppingapp.client.home.detail_eatery.DetailEateryViewModel
-import xyz.daijoubuteam.foodshoppingapp.client.home.detail_eatery.DetailEateryViewModelFactory
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentProductToBagBinding
 import xyz.daijoubuteam.foodshoppingapp.model.Product
 
@@ -53,12 +49,12 @@ class ProductToBagFragment : Fragment() {
     private fun handleClickQuantity() {
         binding.btnPlus.setOnClickListener {
             quantityItem += 1
-            totalPrice = quantityItem * productProperty.newPrice!!
+            totalPrice = quantityItem * productProperty.price!!
             setTextViews()
         }
         binding.btnSub.setOnClickListener {
             quantityItem -= 1
-            totalPrice = quantityItem * productProperty.newPrice!!
+            totalPrice = quantityItem * productProperty.price!!
             setTextViews()
         }
     }

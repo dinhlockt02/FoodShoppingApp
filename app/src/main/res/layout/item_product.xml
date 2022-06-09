@@ -87,46 +87,12 @@
                 android:textFontWeight="500"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/viewLine"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText,UnusedAttribute"
-                android:text="@{Double.toString(product.newPrice)}"
+                android:text="@{Double.toString(product.price)}"
                 tools:text="$ 12.00" />
-            <TextView
-                android:id="@+id/tvOldPrice"
-                android:ellipsize="end"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="1dp"
-                android:layout_marginStart="1dp"
-                android:layout_width="wrap_content"
-                android:singleLine="true"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/viewLine"
-                app:layout_constraintHorizontal_bias="0.33"
-                app:layout_constraintStart_toStartOf="@+id/viewLine"
-                app:layout_constraintTop_toTopOf="@+id/tvNewPrice"
-                android:textColor="@color/gray_500"
-                android:textSize="12sp"
-                android:fontFamily="@font/avenir_next_lt_pro"
-                android:textFontWeight="500"
-                android:text="@{Double.toString(product.oldPrice)}"
-                tools:text="$ 20.00"
-                tools:ignore="HardcodedText,UnusedAttribute" />
-            <View
-                android:background="@drawable/rectangle_border_gray_500"
-                android:id="@+id/viewLine"
-                android:layout_height="1dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="106dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="8dp"
-                android:layout_width="44dp"
-                app:layout_constraintBottom_toBottomOf="@+id/tvNewPrice"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.09"
-                app:layout_constraintStart_toEndOf="@+id/tvNewPrice"
-                app:layout_constraintTop_toTopOf="@+id/tvOldPrice"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
