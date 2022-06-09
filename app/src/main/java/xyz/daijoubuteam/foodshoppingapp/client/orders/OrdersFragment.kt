@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.client.orders.history.OrdersHistoryFragment
@@ -47,16 +44,23 @@ class OrdersFragment : Fragment() {
     }
 
     class CustomOrdersFragementAdapter(fragment: Fragment): FragmentStateAdapter(fragment){
-
         var tabTitle = listOf<String>("UpComing","OnGoing","History")
+        private val arrayList: ArrayList<Fragment> = ArrayList()
+        init {
+            arrayList.add(OrdersUpComingFragment())
+            arrayList.add(OrdersOnGoingFragment())
+            arrayList.add(OrdersHistoryFragment())
+        }
+
         override fun getItemCount() = 3
 
         override fun createFragment(position: Int): Fragment {
-            return when(position){
-                0 -> OrdersUpComingFragment()
-                1 -> OrdersOnGoingFragment()
-                else -> OrdersHistoryFragment()
-            }
+//            return when(position){
+//                0 -> OrdersUpComingFragment()
+//                1 -> OrdersOnGoingFragment()
+//                else -> OrdersHistoryFragment()
+//            }
+            return arrayList[position]
         }
 
     }

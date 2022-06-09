@@ -114,6 +114,8 @@
         <entry key="app/src/main/res/drawable/radio_flat_regular.xml" value="0.2865" />
         <entry key="app/src/main/res/drawable/radio_flat_selected.xml" value="0.2865" />
         <entry key="app/src/main/res/drawable/radio_flat_selector.xml" value="0.1495" />
+        <entry key="app/src/main/res/drawable/rectangle_bg_blue_a200_radius_6.xml" value="0.1415" />
+        <entry key="app/src/main/res/drawable/rectangle_bg_bluegray_700_radius_2.xml" value="0.1415" />
         <entry key="app/src/main/res/drawable/rectangle_bg_deep_orange_a200_radius_6.xml" value="0.177" />
         <entry key="app/src/main/res/drawable/rectangle_bg_eatery_item.xml" value="0.177" />
         <entry key="app/src/main/res/drawable/rectangle_bg_gray_100_border_gray_301_radius_8.xml" value="0.177" />
