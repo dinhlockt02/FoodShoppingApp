@@ -32,9 +32,11 @@ class OrderCheckOutFragment : Fragment() {
         val adapter = BagOrderItemAdapter()
         binding.listOrderItems.adapter = adapter
         orderCheckOutViewModel.orderItemList.observe(viewLifecycleOwner){
-            if (it != null){
+            if (!it.isNullOrEmpty()) {
                 adapter.submitList(it)
                 orderCheckOutViewModel.totalPriceCounting(it)
+            }else if(it.isEmpty()){
+                this.findNavController().navigateUp()
             }
         }
         orderCheckOutViewModel.navigateToOrderFragment.observe(viewLifecycleOwner, Observer {
