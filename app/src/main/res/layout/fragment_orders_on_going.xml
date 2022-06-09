@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="xyz.daijoubuteam.foodshoppingapp.client.orders.ongoing.OrdersOnGoingViewModel" />
     </data>
 
     <FrameLayout
@@ -18,7 +20,7 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="10"
-            tools:listitem="@layout/item_order"
+            tools:listitem="@layout/item_order_info"
             android:paddingVertical="10dp"
             android:orientation="vertical"/>
     </FrameLayout>

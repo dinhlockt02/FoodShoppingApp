@@ -6,4 +6,7 @@
     <style name="rounded_corner">
         <item name="cornerSize">20dp</item>
     </style>
+    <style name="rounded_corner_16dp">
+        <item name="cornerSize">16dp</item>
+    </style>
 </resources>

@@ -47,7 +47,7 @@
                 android:layout_marginEnd="10dp"
                 app:layout_constraintTop_toBottomOf="@id/name_text_view"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@{Double.toString(product.newPrice)}"
+                android:text="@{Double.toString(product.price)}"
                 android:textSize="12sp"
                 android:textColor="@color/bluegray_700"
                 android:fontFamily="@font/avenir_next_lt_pro"

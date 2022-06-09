@@ -73,7 +73,7 @@
                 android:id="@+id/tvProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.selectedProperty.newPrice.toString()}"
+                android:text="@{viewModel.selectedProperty.price.toString()}"
                 android:fontFamily="@font/avenir_next_lt_pro"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

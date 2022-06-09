@@ -73,8 +73,8 @@ class BagRepository {
                             val newOrderItem = orderItem.copy(
                                 productName = product.name,
                                 productImg = product.img,
-                                productPrice = product.newPrice,
-                                price = orderItem.quantity?.let { product.newPrice?.times(it) }
+                                productPrice = product.price,
+                                price = orderItem.quantity?.let { product.price?.times(it) }
                             )
                             orderItemList.value = orderItemList.value?.map {
                                 if (it.productId !== newOrderItem.productId) it
@@ -165,11 +165,12 @@ class BagRepository {
                         eateryName = eatery?.name,
                         eateryImage = eatery?.photoUrl,
                         orderItems = ArrayList(orderItems.map { orderItem -> orderItem.toOrderItem() }),
+                        status = "Pending",
                         orderTime = Timestamp(System.currentTimeMillis()/1000, 0),
                         totalPrice = totalPrice,
                         shippingAddress = shippingAddress
                     )
-                    val orderRef = db.collection("users").document(uid).collection("order").document(orderId)
+                    val orderRef = db.collection("users").document(uid).collection("orders").document(orderId)
                     orderRef.set(newOrder)
                     db.collection("eateries").document("${eatery?.id}").collection("orders").add(hashMapOf("orderId" to orderRef))
                     docRef.delete()

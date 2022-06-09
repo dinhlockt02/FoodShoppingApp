@@ -6,23 +6,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import xyz.daijoubuteam.foodshoppingapp.R
+import xyz.daijoubuteam.foodshoppingapp.client.bag.BagViewModel
+import xyz.daijoubuteam.foodshoppingapp.client.bag.BagViewModelFactory
+import xyz.daijoubuteam.foodshoppingapp.client.orders.OrderAdapter
+import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentBagBinding
 import xyz.daijoubuteam.foodshoppingapp.databinding.FragmentOrdersOnGoingBinding
 
 class OrdersOnGoingFragment : Fragment() {
 
-    private lateinit var binding: FragmentOrdersOnGoingBinding
+    private val onGoingViewModel: OrdersOnGoingViewModel by lazy{
+        val factory = OrdersOnGoingViewModelFactory()
+        ViewModelProvider(this, factory)[OrdersOnGoingViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
 
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_orders_on_going, container, false)
+        val binding: FragmentOrdersOnGoingBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_orders_on_going, container, false)
+        binding.viewModel = onGoingViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
-        //binding.ordersOnGoingRecycleView.adapter = OrderAdapter()
-        //val adapter = binding.ordersOnGoingRecycleView.adapter as OrderAdapter
-        //adapter.submitList(ordersList)
+        val adapter = OrderAdapter()
+        binding.ordersOnGoingRecycleView.adapter = adapter
+
+        onGoingViewModel.orderList.observe(viewLifecycleOwner){
+            if(it.isNotEmpty() && it != null) {
+                adapter.submitList(it)
+            }
+        }
 
         return binding.root
     }

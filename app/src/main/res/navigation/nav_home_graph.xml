@@ -98,7 +98,8 @@
         <action
             android:id="@+id/action_orderCheckOutFragment_to_ordersFragment"
             app:destination="@id/ordersFragment"
-            app:popUpTo="@id/bagFragment" />
+            app:popUpTo="@id/bagFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <navigation android:id="@+id/navigation"
         app:startDestination="@id/profileAddressEditFragment">
@@ -278,4 +279,23 @@
             android:id="@+id/action_carouselDetail_to_detailEateryFragment"
             app:destination="@id/detailEateryFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/ordersOnGoingFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.ongoing.OrdersOnGoingFragment"
+        android:label="OrdersOnGoingFragment" />
+    <fragment
+        android:id="@+id/ordersHistoryFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.history.OrdersHistoryFragment"
+        android:label="fragment_orders_history"
+        tools:layout="@layout/fragment_orders_history" />
+    <fragment
+        android:id="@+id/ordersUpComingFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.upcoming.OrdersUpComingFragment"
+        android:label="fragment_orders_up_coming"
+        tools:layout="@layout/fragment_orders_up_coming" />
+    <fragment
+        android:id="@+id/orderInformation"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.orders.orderInfo.OrderInformation"
+        android:label="OrderInformation"
+        tools:layout="@layout/fragment_order_information"/>
 </navigation>

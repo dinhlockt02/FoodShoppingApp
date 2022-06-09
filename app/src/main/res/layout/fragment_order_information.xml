@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="viewModel"
-            type="xyz.daijoubuteam.foodshoppingapp.client.ordercheckout.OrderCheckOutViewModel" />
+            name="order"
+            type="xyz.daijoubuteam.foodshoppingapp.model.Order" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,15 +29,66 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/bluegray_51">
-
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintDeliver"
+                    android:id="@+id/constraintStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/constraintDeliverTo1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <TextView
+                            android:id="@+id/textViewDeliverTo1"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:text="Order Status"
+                            android:textColor="@color/bluegray_700"
+                            android:textFontWeight="500"
+                            android:textSize="22sp"
+                            app:layout_constraintBottom_toBottomOf="@id/textViewDeliverChange"
+                            app:layout_constraintEnd_toStartOf="@id/textViewDeliverChange"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/textViewDeliverChange" />
+
+                        <TextView
+                            android:id="@+id/textViewDeliverChange"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginBottom="10dp"
+                            android:fontFamily="@font/avenir_next_lt_pro"
+                            android:singleLine="true"
+                            android:text="@{order.status}"
+                            app:statusString="@{order.status}"
+                            android:textFontWeight="500"
+                            android:textSize="18sp"
+                            tools:text="Pending"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintDeliver"
+                    android:layout_marginTop="6dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/constraintStatus">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintDeliverTo"
@@ -49,32 +100,21 @@
 
                         <TextView
                             android:id="@+id/textViewDeliverTo"
+                            android:layout_marginTop="10dp"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
                             android:fontFamily="@font/avenir_next_lt_pro"
                             android:text="Deliver to"
                             android:textColor="@color/bluegray_700"
                             android:textFontWeight="500"
                             android:textSize="22sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/textViewDeliverChange"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/textViewDeliverChange"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="24dp"
-                            android:fontFamily="@font/avenir_next_lt_pro"
-                            android:singleLine="true"
-                            android:text="Change"
-                            android:textColor="@color/deep_orange_A200"
-                            android:textFontWeight="500"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <TextView
                         android:id="@+id/textViewDeliverAddress"
@@ -88,7 +128,7 @@
                         android:textColor="@color/bluegray_500"
                         android:textFontWeight="500"
                         android:textSize="16sp"
-                        android:text="@{viewModel.shippingAddress.address}"
+                        android:text="@{order.shippingAddress.address}"
                         app:layout_constraintTop_toBottomOf="@+id/constraintDeliverTo"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -145,7 +185,7 @@
                             android:fontFamily="@font/avenir_next_lt_pro"
                             android:textColor="@color/bluegray_500"
                             android:textFontWeight="500"
-                            android:text="@{@string/shipping_info(viewModel.shippingAddress.name, viewModel.shippingAddress.phoneNumber)}"
+                            android:text="@{@string/shipping_info(order.shippingAddress.name, order.shippingAddress.phoneNumber)}"
                             android:textSize="16sp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -183,23 +223,10 @@
                             android:textFontWeight="500"
                             android:textSize="22sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@+id/textViewOrderAddMore"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <TextView
-                            android:id="@+id/textViewOrderAddMore"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="24dp"
-                            android:fontFamily="@font/avenir_next_lt_pro"
-                            android:singleLine="true"
-                            android:text="Add more"
-                            android:textColor="@color/deep_orange_A200"
-                            android:textFontWeight="500"
-                            android:textSize="16sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/list_order_items"
@@ -265,7 +292,7 @@
                         android:fontFamily="@font/avenir_next_lt_pro"
                         android:singleLine="true"
                         android:textColor="@color/deep_orange_A200"
-                        android:text="@{Double.toString(viewModel.totalPrice)}"
+                        android:text="@{Double.toString(order.totalPrice)}"
                         android:textFontWeight="500"
                         android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -276,17 +303,15 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btnSignIn"
+                    android:id="@+id/btnClose"
                     android:ellipsize="end"
                     android:gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:layout_marginTop="16dp"
                     android:singleLine="true"
-                    android:text="PLACE ORDER"
+                    android:text="CLOSE"
                     android:textAllCaps="true"
-                    android:enabled="@{viewModel.placeOrderButtonVisible}"
-                    android:onClick="@{() -> viewModel.placeOrder()}"
                     android:textSize="16sp"
                     android:textFontWeight="400"
                     android:fontFamily="@font/avenir_next_lt_pro"
