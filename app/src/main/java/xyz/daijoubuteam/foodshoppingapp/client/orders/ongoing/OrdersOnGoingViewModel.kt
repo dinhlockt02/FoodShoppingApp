@@ -14,9 +14,9 @@ class OrdersOnGoingViewModel: ViewModel() {
     private val orderRepository = OrderRepository()
     private val _errMessage = MutableLiveData("")
     private lateinit var _orderList: LiveData<List<Order>>
-//    private val _navigateToOrderCheckOutFragment = MutableLiveData<Order>()
-//    val navigateToOrderCheckOutFragment: LiveData<Order>
-//        get() = _navigateToOrderCheckOutFragment
+    private val _navigateToOrderInfoFragment = MutableLiveData<Order>()
+    val navigateToOrderInfoFragment: LiveData<Order>
+        get() = _navigateToOrderInfoFragment
     val orderList: LiveData<List<Order>>
         get() = _orderList
 
@@ -33,5 +33,13 @@ class OrdersOnGoingViewModel: ViewModel() {
 
     private fun onShowError(msg: String?){
         this._errMessage.value = msg
+    }
+
+    fun doneNavigateToOrderInfoFragment(){
+        _navigateToOrderInfoFragment.value = null
+    }
+
+    fun navigateToOrderInfoFragment(orderSelected: Order){
+        _navigateToOrderInfoFragment.value = orderSelected
     }
 }
