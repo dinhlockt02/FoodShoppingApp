@@ -6,6 +6,7 @@ import androidx.lifecycle.*
 import com.google.firebase.Timestamp
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
 import xyz.daijoubuteam.foodshoppingapp.repositories.BagRepository
@@ -24,12 +25,23 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
     private lateinit var _shippingAddress: LiveData<ShippingAddress?>
     val shippingAddress: LiveData<ShippingAddress?>
         get() = _shippingAddress
+    private lateinit var _eatery: LiveData<Eatery>
+    val eatery: LiveData<Eatery>
+        get() = _eatery
 //    private var _time = MutableLiveData<Timestamp>()
 //    val time: LiveData<Timestamp>
 //        get() = _time
     private val _navigateToOrderFragment = MutableLiveData<Boolean>()
     val navigateToOrderFragment: LiveData<Boolean>
         get() = _navigateToOrderFragment
+
+    private val _navigateToProfileAddressEditFragment = MutableLiveData<Boolean>()
+    val navigateToProfileAddressEditFragment: LiveData<Boolean>
+        get() = _navigateToProfileAddressEditFragment
+
+    private val _navigateToDetailEateryFragment = MutableLiveData<Boolean>()
+    val navigateToDetailEateryFragment: LiveData<Boolean>
+        get() = _navigateToDetailEateryFragment
 
     init {
         viewModelScope.launch {
@@ -45,8 +57,15 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
             }else {
                 onShowError(shippingAddressResult.exceptionOrNull()?.message)
             }
+            val eateryResult = bagRepository.getEateryById(orderId)
+            if(eateryResult.isSuccess && eateryResult.getOrNull() !== null){
+                _eatery = eateryResult.getOrNull()!!
+            }else {
+                onShowError(eateryResult.exceptionOrNull()?.message)
+            }
         }
         _navigateToOrderFragment.value = false
+        _navigateToProfileAddressEditFragment.value = false
     }
 
     private fun onShowError(msg: String?){
@@ -79,5 +98,22 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
     fun doneNavigateToOrderFragment(){
         _navigateToOrderFragment.value = false
     }
+
+    fun navigateToProfileAddressEditFragment(){
+        _navigateToProfileAddressEditFragment.value = true
+    }
+
+    fun doneNavigateToProfileAddressEditFragment(){
+        _navigateToProfileAddressEditFragment.value = false
+    }
+
+    fun navigateToDetailEateryFragment(){
+        _navigateToDetailEateryFragment.value = true
+    }
+
+    fun doneNavigateToDetailEateryFragment(){
+        _navigateToDetailEateryFragment.value = false
+    }
+
 
 }

@@ -48,6 +48,23 @@ class OrderCheckOutFragment : Fragment() {
                 orderCheckOutViewModel.doneNavigateToOrderFragment()
             }
         })
+
+        orderCheckOutViewModel.navigateToProfileAddressEditFragment.observe(viewLifecycleOwner,
+            Observer {
+                if(it == true){
+                    this.findNavController().navigate(OrderCheckOutFragmentDirections.actionOrderCheckOutFragmentToProfileAddressEditFragment())
+                    orderCheckOutViewModel.doneNavigateToProfileAddressEditFragment()
+                }
+            })
+
+        orderCheckOutViewModel.navigateToDetailEateryFragment.observe(viewLifecycleOwner, Observer {
+            if(it == true){
+                if(orderCheckOutViewModel.eatery.value != null){
+                    this.findNavController().navigate(OrderCheckOutFragmentDirections.actionOrderCheckOutFragmentToDetailEateryFragment(orderCheckOutViewModel.eatery.value!!))
+                }
+                orderCheckOutViewModel.doneNavigateToDetailEateryFragment()
+            }
+        })
         return binding.root
     }
 
