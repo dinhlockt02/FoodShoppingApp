@@ -92,12 +92,30 @@ class BagRepository {
         }
     }
 
-//    suspend fun addNewOderItem(productId: String, quantity: Int):Result<Boolean>{
-//        val doc = db.collection("eateries")
-//        Timber.i(doc.toString())
-//        return Result.success(false)
-//    }
+    fun getEateryById(orderId: String):Result<LiveData<Eatery>> {
+        val eateryLiveData: MutableLiveData<Eatery> = MutableLiveData()
+        return try {
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid).collection("bag").document(orderId)
+            docRef.addSnapshotListener { value, error ->
+                val order = value?.toObject(BagOrder::class.java)
+                if (order != null) {
+                    order.eateryId?.addSnapshotListener { eateryValue, error ->
+                        val eatery = eateryValue?.toObject(Eatery::class.java)
+                        if (eatery == null) {
+                            order.id?.let { docRef.delete() }
+                            }else{
+                                eateryLiveData.value = eatery
+                            }
+                        }
+                    }
 
+                }
+            Result.success(eateryLiveData)
+        } catch (exception: Exception) {
+            Result.failure(exception)
+        }
+    }
 
     suspend fun addNewOderItem(eateryId: String, productId: String, quantity: Int):Result<Boolean>{
         return try{
