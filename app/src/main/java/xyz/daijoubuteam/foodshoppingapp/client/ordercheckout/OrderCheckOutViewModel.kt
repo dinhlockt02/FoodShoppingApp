@@ -7,6 +7,7 @@ import com.google.firebase.Timestamp
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
+import xyz.daijoubuteam.foodshoppingapp.model.Order
 import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
 import xyz.daijoubuteam.foodshoppingapp.repositories.BagRepository
@@ -42,6 +43,10 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
     private val _navigateToDetailEateryFragment = MutableLiveData<Boolean>()
     val navigateToDetailEateryFragment: LiveData<Boolean>
         get() = _navigateToDetailEateryFragment
+
+    private val _navigateToBagOrderItemFragment = MutableLiveData<BagOrderItem>()
+    val navigateToBagOrderItemFragment: LiveData<BagOrderItem>
+        get() = _navigateToBagOrderItemFragment
 
     init {
         viewModelScope.launch {
@@ -115,5 +120,12 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
         _navigateToDetailEateryFragment.value = false
     }
 
+    fun doneNavigateToBagOrderItemFragment(){
+        _navigateToBagOrderItemFragment.value = null
+    }
+
+    fun navigateToBagOrderItemFragment(orderItemSelected: BagOrderItem){
+        _navigateToBagOrderItemFragment.value = orderItemSelected
+    }
 
 }

@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -204,6 +205,32 @@ class BagRepository {
             }
             Result.success(true)
         }catch (exception:Exception){
+            Result.failure(exception)
+        }
+    }
+
+    fun getOrderItemByProductId(orderId: String, productId: String): Result<LiveData<BagOrderItem>> {
+        val orderItemLiveData: MutableLiveData<BagOrderItem> = MutableLiveData()
+        return try {
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid).collection("bag").document(orderId)
+            val productReference = db.document(productId)
+            docRef.addSnapshotListener { value, error ->
+                val order = value?.toObject(BagOrder::class.java)
+                val orderItem = order?.orderItems?.find { BagOrderItem -> BagOrderItem.productId == productReference }
+                orderItem?.productId?.addSnapshotListener { productValue, error ->
+                    val product = productValue?.toObject(Product::class.java)
+                    val newOrderItem = orderItem.copy(
+                        productName = product?.name,
+                        productImg = product?.img,
+                        productPrice = product?.price,
+                        price = orderItem.quantity?.let { product?.price?.times(it) }
+                    )
+                    orderItemLiveData.value = newOrderItem
+                }
+            }
+            Result.success(orderItemLiveData)
+        } catch (exception: Exception) {
             Result.failure(exception)
         }
     }

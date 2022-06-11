@@ -29,7 +29,9 @@ class OrderCheckOutFragment : Fragment() {
         val binding: FragmentOrderCheckoutBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_checkout, container, false)
         binding.viewModel = orderCheckOutViewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        val adapter = BagOrderItemAdapter()
+        val adapter = BagOrderItemAdapter(BagOrderItemAdapter.OnClickListener{
+            orderCheckOutViewModel.navigateToBagOrderItemFragment(it)
+        })
         binding.listOrderItems.adapter = adapter
         orderCheckOutViewModel.orderItemList.observe(viewLifecycleOwner){
             if (!it.isNullOrEmpty()) {
@@ -63,6 +65,13 @@ class OrderCheckOutFragment : Fragment() {
                     this.findNavController().navigate(OrderCheckOutFragmentDirections.actionOrderCheckOutFragmentToDetailEateryFragment(orderCheckOutViewModel.eatery.value!!))
                 }
                 orderCheckOutViewModel.doneNavigateToDetailEateryFragment()
+            }
+        })
+
+        orderCheckOutViewModel.navigateToBagOrderItemFragment.observe(viewLifecycleOwner, Observer {
+            if(it !== null){
+                this.findNavController().navigate(OrderCheckOutFragmentDirections.actionOrderCheckOutFragmentToBagOrderItemFragment(orderCheckOutViewModel.orderId, it.productId!!.path))
+                orderCheckOutViewModel.doneNavigateToBagOrderItemFragment()
             }
         })
         return binding.root
