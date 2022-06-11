@@ -154,4 +154,7 @@
     <string name="quantity_of_order_item">x %1$s</string>
     <!--Shipping Info -->
     <string name="shipping_info">%1$s, %2$s</string>
+    <string name="for_you">For you</string>
+    <string name="product">Product</string>
+    <string name="work_time">Work Time</string>
 </resources>

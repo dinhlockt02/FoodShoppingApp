@@ -1,5 +1,6 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home.vertical_list_eateries
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -42,6 +43,12 @@ class VerticalListEateryFragment : Fragment() {
         handleClickEateryItem()
         return binding.root
     }
+
+    override fun onStart() {
+        super.onStart()
+        setupToolBar()
+    }
+
     private fun setupToolBar() {
         (requireActivity() as? AppCompatActivity)?.supportActionBar?.show()
         (requireActivity() as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)

@@ -55,7 +55,7 @@ class ProductToBagViewModel(eateryId: String, product: Product, app: Application
 
     fun handleBtnAddToBag() {
         viewModelScope.launch {
-            if(_selectedProperty.value?.id != null && quantityItem.value != null) {
+            if(_selectedProperty.value?.id != null && quantityItem.value != null && quantityItem.value!! > 0) {
                 val res = bagRepository.addNewOderItem(_eateryId.value!!,_selectedProperty.value!!.id!!, _quantityItem.value!!)
                 if(res.isFailure) {
                     onShowMessage("Failed")
