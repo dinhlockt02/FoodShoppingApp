@@ -64,7 +64,7 @@ class DetailEateryInforFragment : Fragment(), OnMapReadyCallback {
     private fun setupMap() {
         if (isLocationPermissionGranted()) {
             map.isMyLocationEnabled = true
-            map.uiSettings.setAllGesturesEnabled(false)
+            map.uiSettings.setAllGesturesEnabled(true)
             map.uiSettings.isMapToolbarEnabled = false
             val location = viewModel?.selectedProperty?.value?.addressEatery?.location
             if(location !== null){

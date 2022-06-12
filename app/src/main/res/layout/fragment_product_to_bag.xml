@@ -39,6 +39,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:pressedTranslationZ="0dp"
                     app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24"
+                    app:tint="@color/white_A700"
                     app:fabSize="mini"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.appcompat.widget.Toolbar>
@@ -47,7 +48,8 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/img"
+            app:defaultUrl="@{viewModel.selectedProperty.img}"
+            app:imageUrl="@{viewModel.selectedProperty.img}"
             android:scaleType="fitXY"
             android:contentDescription="@string/image_product"/>
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,12 +61,14 @@
                 android:id="@+id/tvProductName"
                 android:layout_height="wrap_content"
                 android:layout_width="250dp"
-                android:layout_margin="16dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/tvProductPrice"
-                android:textSize="20sp"
+                android:textSize="24sp"
                 android:textColor="@color/bluegray_700"
                 android:fontFamily="@font/avenir_next_lt_pro"
                 android:textFontWeight="600"
@@ -100,59 +104,35 @@
                 android:id="@+id/tvAttentionForEatery"
                 android:layout_height="wrap_content"
                 android:layout_width="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_margin="12dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textColor="@color/bluegray_700"
                 android:fontFamily="@font/avenir_next_lt_pro"
                 android:textFontWeight="600"
-                android:text="Thêm lưu ý cho quán"/>
+                android:text="Ingredients"/>
             <TextView
-                android:id="@+id/tvNoConstraint"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvIngredientList"
                 android:layout_height="wrap_content"
-                android:text="Không bắt buộc"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBaseline_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tvAttentionForEatery"
-                android:layout_marginLeft="8dp"
-                android:textSize="12sp"
+                android:layout_width="wrap_content"
+                android:layout_marginVertical="16dp"
+                android:layout_marginStart="12dp"
+                app:layout_constraintTop_toBottomOf="@id/tvAttentionForEatery"
                 app:layout_constraintBottom_toBottomOf="parent"
-                />
+                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="12sp"
+                android:textColor="@color/bluegray_700"
+                android:fontFamily="@font/avenir_next_lt_pro"
+                android:textFontWeight="400"
+                android:text="@{viewModel.selectedProperty.ingredients.toString().substring(1,viewModel.selectedProperty.ingredients.toString().length()-1)}"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestScrollMessForEatery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintHeight_max="80dp"
-            app:layout_constraintTop_toBottomOf="@id/csAttetionForEatery">
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:id="@+id/btnMessageForEatery"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:textColor="@color/gray_400"-->
-<!--                android:textSize="12sp"-->
-<!--                android:fontFamily="@font/avenir_next_lt_pro"-->
-<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">-->
-
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:inputType="textMultiLine"-->
-<!--                    android:hint="Việc thực hiện yêu cầu còn tuỳ thuộc vào khả năng của quán."-->
-<!--                    android:lines="2"-->
-<!--                    android:maxLines="4"-->
-<!--                    />-->
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
-        </androidx.core.widget.NestedScrollView>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/csQuantityProduct"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/nestScrollMessForEatery"
             app:layout_constraintBottom_toTopOf="@id/cardAddToBag"
+            android:layout_marginBottom="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
             <com.google.android.material.button.MaterialButton

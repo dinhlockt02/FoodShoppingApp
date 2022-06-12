@@ -89,6 +89,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/pop_down" />
+        <action
+            android:id="@+id/action_profileFragment_to_aboutUsFragment"
+            app:destination="@id/aboutUsFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderCheckOutFragment"
@@ -336,5 +339,11 @@
         <argument
             android:name="quantity"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="xyz.daijoubuteam.foodshoppingapp.client.profile.about_us.AboutUsFragment"
+        android:label="AboutUsFragment"
+        tools:layout="@layout/fragment_about_us">
     </fragment>
 </navigation>

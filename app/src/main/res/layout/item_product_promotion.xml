@@ -20,32 +20,6 @@
         android:elevation="6dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="8dp">
-
-<!--        <androidx.appcompat.widget.AppCompatButton-->
-<!--            android:id="@+id/btnDeal"-->
-<!--            android:layout_width="56dp"-->
-<!--            android:layout_height="25dp"-->
-<!--            android:layout_marginEnd="40dp"-->
-<!--            android:background="@drawable/rectangle_bg_green_500_radius_tl_8_br_8"-->
-<!--            android:ellipsize="end"-->
-<!--            android:fontFamily="@font/avenir_next_lt_pro"-->
-<!--            android:gravity="center"-->
-<!--            android:paddingStart="12dp"-->
-<!--            android:paddingTop="4dp"-->
-<!--            android:paddingEnd="13dp"-->
-<!--            android:paddingBottom="3dp"-->
-<!--            android:singleLine="true"-->
-<!--            android:text="20%"-->
-<!--            android:textAllCaps="false"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:textFontWeight="500"-->
-<!--            android:textSize="15sp"-->
-<!--            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--            app:layout_constraintEnd_toEndOf="@+id/cardImage"-->
-<!--            app:layout_constraintHorizontal_bias="0.07"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toTopOf="parent"-->
-<!--            app:layout_constraintVertical_bias="0.0"/>-->
         <androidx.cardview.widget.CardView
             android:id="@+id/cardImage"
             android:layout_width="wrap_content"

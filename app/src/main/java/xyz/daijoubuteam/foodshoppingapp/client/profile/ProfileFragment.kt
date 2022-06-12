@@ -33,6 +33,7 @@ class ProfileFragment : Fragment() {
         setupNavigateToProfileAndAddressFragment()
         setupMessageSnackbar()
         setupNotificationLayoutClickListener()
+        setupNavigateToAboutUsAFragment()
         return binding.root
     }
 
@@ -55,6 +56,14 @@ class ProfileFragment : Fragment() {
         binding.btnProfileAndAddress.setOnClickListener {
             val action =
                 ProfileFragmentDirections.actionProfileFragmentToProfileAddressEditFragment()
+            findNavController().navigate(action)
+        }
+    }
+
+    private fun setupNavigateToAboutUsAFragment() {
+        binding.btnAboutUs.setOnClickListener {
+            val action =
+                ProfileFragmentDirections.actionProfileFragmentToAboutUsFragment()
             findNavController().navigate(action)
         }
     }

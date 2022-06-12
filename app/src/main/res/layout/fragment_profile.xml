@@ -126,26 +126,13 @@
                 android:layout_height="0.5dp"
                 android:background="@android:color/darker_gray" />
 
-            <com.google.android.material.button.MaterialButton
-                app:icon="@drawable/ic_tag_sales"
-                app:iconSize="24dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="My voucher"
-                android:textAlignment="textStart"
-                android:textAllCaps="false"
-                app:iconTint="@color/black"
-                android:textColor="@color/black"
-                android:fontFamily="@font/avenir_next_lt_pro"
-                app:backgroundTint="@null"
-                android:background="@drawable/button_chevron" />
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
                 android:background="@android:color/darker_gray" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAboutUs"
                 app:icon="@drawable/information_outline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

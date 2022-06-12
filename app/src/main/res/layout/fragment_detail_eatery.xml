@@ -44,6 +44,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:pressedTranslationZ="0dp"
                     app:srcCompat="@drawable/ic_baseline_arrow_back_ios_new_24"
+                    app:tint="@color/white_A700"
                     app:fabSize="mini"/>
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/floating_action_save"
@@ -69,7 +70,7 @@
                     app:backgroundTint="#4DFFFFFF"
                     app:borderWidth="0dp"
                     app:elevation="0dp"
-                    app:tint="@color/primaryColor"
+                    app:tint="@color/white_A700"
                     app:pressedTranslationZ="0dp"
                     android:visibility="gone"
                     app:srcCompat="@drawable/ic_baseline_favorite_24"
@@ -128,7 +129,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="24dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="24dp"
                 android:layout_width="0dp"
                 android:singleLine="true"
                 app:layout_constraintTop_toTopOf="parent"
@@ -146,11 +147,14 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
                 android:layout_width="0dp"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvProductName">
+                app:layout_constraintTop_toBottomOf="@id/tvProductName"
+                android:shadowRadius="200"
+                app:layout_constraintBottom_toBottomOf="parent">
                 <TextView
                     android:id="@+id/txtDistance"
                     android:ellipsize="end"
@@ -196,71 +200,35 @@
                     tools:text="1.1"
                     android:text="@{Double.toString(viewModel.selectedProperty.average_rating_count)}"
                     tools:ignore="UnusedAttribute" />
-                <TextView android:ellipsize="end"
-                    android:id="@+id/txt200Rated"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/txtRating"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:layout_width="wrap_content"
-                    android:singleLine="true"
-                    app:layout_constraintHorizontal_bias="0.07"
-                    android:textColor="@color/gray_500"
-                    android:textSize="12sp"
-                    android:fontFamily="@font/avenir_next_lt_pro"
-                    android:textFontWeight="500"
-                    android:text="(200+ rated)"
-                    tools:ignore="UnusedAttribute" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-            <View android:background="@color/bluegray_50"
-                android:id="@+id/viewDivider4"
-                android:layout_height="1dp"
-                android:layout_width="0dp"
-                android:layout_marginTop="17dp"
-                app:layout_constraintEnd_toEndOf="@+id/constraintInfo"
-                app:layout_constraintStart_toStartOf="@+id/constraintInfo"
-                app:layout_constraintTop_toBottomOf="@+id/constraintInfo"
-                app:layout_constraintBottom_toTopOf="@id/constraintDiscount"/>
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintDiscount"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="24dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:layout_width="0dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/viewDivider4">
-                <TextView android:ellipsize="end"
-                    android:gravity="start"
-                    android:id="@+id/tvDiscount"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_width="0dp"
-                    android:singleLine="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/imageDiscount"
-                    app:layout_constraintBaseline_toTopOf="parent"
-                    android:textSize="14sp"
-                    android:textFontWeight="500"
-                    android:textColor="@color/bluegray_700"
-                    android:fontFamily="@font/avenir_next_lt_pro"
-                    android:text="Discount 40% pizza"/>
-                <ImageView android:id="@+id/imageDiscount"
-                    android:layout_height="18dp"
-                    android:layout_width="18dp"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/img_discount"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/tvDiscount"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/viewDivider1"
+            android:layout_width="0dp"
+            android:layout_height="5dp"
+            android:background="@color/bluegray_51"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/constraintBackgroundRadius" />
+        <TextView
+            android:id="@+id/tvNewProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="20dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/avenir_next_lt_pro"
+            android:gravity="start"
+            android:singleLine="true"
+            android:text="@string/product"
+            android:textColor="@color/bluegray_500"
+            android:textFontWeight="500"
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/viewDivider1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
         <androidx.core.widget.NestedScrollView
             android:id="@+id/svProduct"
             android:layout_width="match_parent"
@@ -270,95 +238,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintBackgroundRadius">
+            app:layout_constraintTop_toBottomOf="@id/tvNewProduct">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <View
-                    android:id="@+id/viewDivider1"
-                    android:layout_width="0dp"
-                    android:layout_height="5dp"
-                    android:background="@color/bluegray_51"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tvNewProduct"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/avenir_next_lt_pro"
-                    android:gravity="start"
-                    android:singleLine="true"
-                    android:text="For you"
-                    android:textColor="@color/bluegray_500"
-                    android:textFontWeight="500"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/forYouProductRecyclerView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/viewDivider1"
-                    tools:ignore="HardcodedText,UnusedAttribute" />
-
+                android:layout_height="match_parent">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/forYouProductRecyclerView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:nestedScrollingEnabled="false"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toTopOf="@+id/tvSpecialDelivery"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvNewProduct"
-                    tools:itemCount="2"
-                    tools:listitem="@layout/item_product" />
-                <View
-                    android:id="@+id/viewDivider2"
-                    android:layout_width="0dp"
-                    android:layout_height="5dp"
-                    android:background="@color/bluegray_51"
-                    app:layout_constraintBottom_toTopOf="@id/tvSpecialDelivery"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/forYouProductRecyclerView" />
-
-                <TextView
-                    android:id="@+id/tvSpecialDelivery"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginEnd="24dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/avenir_next_lt_pro"
-                    android:gravity="start"
-                    android:singleLine="true"
-                    android:text="Special Delivery"
-                    android:textColor="@color/bluegray_500"
-                    android:textFontWeight="500"
-                    android:textSize="20sp"
-                    app:layout_constraintBottom_toTopOf="@+id/specialDeliveryRecyclerView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewDivider2"
-                    tools:ignore="HardcodedText,UnusedAttribute" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/specialDeliveryRecyclerView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="10dp"
                     android:nestedScrollingEnabled="false"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvSpecialDelivery"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:itemCount="2"
                     tools:listitem="@layout/item_product" />
             </androidx.constraintlayout.widget.ConstraintLayout>

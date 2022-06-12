@@ -84,6 +84,7 @@
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_indigo_500_radius_6 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-v24/rectangle_bg_white_a700_radius_4 2.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/bell_outline.xml" value="0.147" />
+        <entry key="app/src/main/res/drawable/bg_shadow.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/border_edit_text.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/button_chevron.xml" value="0.1965" />
         <entry key="app/src/main/res/drawable/camera_outline.xml" value="0.1405" />
@@ -134,6 +135,7 @@
         <entry key="app/src/main/res/layout/activity_verify.xml" value="0.1490036231884058" />
         <entry key="app/src/main/res/layout/card.xml" value="0.20923913043478262" />
         <entry key="app/src/main/res/layout/change_email_address.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_about_us.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/fragment_add_new_address.xml" value="0.2151268115942029" />
         <entry key="app/src/main/res/layout/fragment_carousel_detail.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_category_detail.xml" value="0.1734375" />
@@ -149,6 +151,7 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25161590576171877" />
         <entry key="app/src/main/res/layout/fragment_notification_list.xml" value="0.128125" />
         <entry key="app/src/main/res/layout/fragment_notification_list_tab.xml" value="0.128125" />
+        <entry key="app/src/main/res/layout/fragment_order_information.xml" value="0.266304347826087" />
         <entry key="app/src/main/res/layout/fragment_orders.xml" value="0.13958333333333334" />
         <entry key="app/src/main/res/layout/fragment_orders_bag 2.xml" value="0.140625" />
         <entry key="app/src/main/res/layout/fragment_orders_bag.xml" value="0.1" />
