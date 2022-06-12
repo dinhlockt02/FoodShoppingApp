@@ -45,7 +45,7 @@ class OrderRepository {
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
             val docRef = db.collection("users").document(uid).collection("orders")
             docRef.addSnapshotListener { value, error ->
-                orderList.value = value?.toObjects(Order::class.java)?.filter {order -> order.status == "Completed"}
+                orderList.value = value?.toObjects(Order::class.java)?.filter {order -> order.status == "Completed" || order.status == "Cancelled"}
             }
             Result.success(orderList)
         }catch (exception: Exception) {
