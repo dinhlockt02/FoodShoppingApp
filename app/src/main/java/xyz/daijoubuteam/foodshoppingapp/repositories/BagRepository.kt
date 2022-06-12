@@ -7,6 +7,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import timber.log.Timber
@@ -221,5 +222,24 @@ class BagRepository {
             Result.failure(exception)
         }
     }
+
+    suspend fun saveOrderItemChange(orderId: String, productId: String, quantity: Int): Result<Boolean> {
+        return try {
+            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
+            val docRef = db.collection("users").document(uid).collection("bag").document(orderId)
+            val documentSnapShot = docRef.get().await()
+            val productReference = db.document(productId)
+            val order = documentSnapShot.toObject<BagOrder>()
+            val orderItem = order?.orderItems?.find { BagOrderItem -> BagOrderItem.productId == productReference }
+            if (order != null && orderItem!= null) {
+                orderItem.quantity = quantity
+                docRef.set(order).await()
+            }
+            Result.success(true)
+        } catch (exception: Exception) {
+            Result.failure(exception)
+        }
+    }
+
 
 }

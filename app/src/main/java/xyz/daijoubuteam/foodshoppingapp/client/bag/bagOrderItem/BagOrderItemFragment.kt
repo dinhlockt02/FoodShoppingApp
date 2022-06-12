@@ -35,6 +35,9 @@ class BagOrderItemFragment : Fragment() {
         bagOrderItemViewModel.product.observe(viewLifecycleOwner){
             bagOrderItemViewModel.setTotalPrice()
         }
+        bagOrderItemViewModel.orderQuantity.observe(viewLifecycleOwner){
+            bagOrderItemViewModel.setTotalPrice()
+        }
         return binding.root
     }
 

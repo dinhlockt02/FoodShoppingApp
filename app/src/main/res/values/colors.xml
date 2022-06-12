@@ -58,4 +58,5 @@
     <color name="primaryVariantColor">#FB6D3B</color>
     <color name="lightOrange">#f76707</color>
     <color name="background_gray">#E5E5E5</color>
+    <color name="deep_red">#E9E33C3C</color>
 </resources>

@@ -14,3 +14,14 @@ fun setStatusColor(view: TextView, status: String?){
         else -> ColorStateList.valueOf(view.context.getColor(R.color.green_500))
     })
 }
+
+@BindingAdapter("saveOrderChange")
+fun setOrderText(view: TextView, quantity: Int?){
+    if(quantity == 0){
+        view.setBackgroundColor(view.context.getColor(R.color.deep_red))
+        view.text = "Delete"
+    }else{
+        view.setBackgroundColor(view.context.getColor(R.color.deep_orange_A200))
+        view.text = "Save"
+    }
+}

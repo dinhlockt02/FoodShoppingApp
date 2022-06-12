@@ -34,10 +34,10 @@ class OrderCheckOutFragment : Fragment() {
         })
         binding.listOrderItems.adapter = adapter
         orderCheckOutViewModel.orderItemList.observe(viewLifecycleOwner){
-            if (!it.isNullOrEmpty()) {
+            if (it != null) {
                 adapter.submitList(it)
                 orderCheckOutViewModel.totalPriceCounting(it)
-            }else if(it.isEmpty()){
+            }else{
                 this.findNavController().navigateUp()
             }
         }
