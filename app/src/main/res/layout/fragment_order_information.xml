@@ -336,19 +336,21 @@
                             app:layout_constraintTop_toTopOf="parent" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/list_order_items"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
                         android:layout_marginBottom="10dp"
                         android:nestedScrollingEnabled="false"
                         android:orientation="vertical"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/constraintOrderSum"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
                         tools:itemCount="3"
                         tools:listitem="@layout/item_order_item" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -400,7 +402,7 @@
                         android:fontFamily="@font/avenir_next_lt_pro"
                         android:singleLine="true"
                         android:textColor="@color/deep_orange_A200"
-                        android:text="@{Double.toString(viewModel.order.totalPrice)}"
+                        android:text="@{@string/product_price(Double.toString(viewModel.order.totalPrice))}"
                         android:textFontWeight="500"
                         android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="parent"

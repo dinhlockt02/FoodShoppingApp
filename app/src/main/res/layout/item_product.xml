@@ -114,7 +114,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="HardcodedText,UnusedAttribute"
-                android:text="@{Double.toString(product.price)}"
+                android:text="@{@string/product_price(Double.toString(product.price))}"
                 tools:text="$ 12.00" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -79,7 +79,7 @@
                 android:singleLine="true"
                 android:layout_marginStart="5dp"
                 android:textColor="@color/deep_orange_A200"
-                android:text="@{Double.toString(orderItem.price)}"
+                android:text="@{@string/product_price(Double.toString(orderItem.price))}"
                 android:textFontWeight="500"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@id/quantity_text_view"
