@@ -11,7 +11,7 @@ fun setStatusColor(view: TextView, status: String?){
         "Pending" -> ColorStateList.valueOf(view.context.getColor(R.color.bluegray_500))
         "Preparing" -> ColorStateList.valueOf(view.context.getColor(R.color.orange_400))
         "Shipping" -> ColorStateList.valueOf(view.context.getColor(R.color.blue_A200))
-        "Cancelled " -> ColorStateList.valueOf(view.context.getColor(R.color.deep_red))
+        "Cancelled" -> ColorStateList.valueOf(view.context.getColor(R.color.deep_red))
         else -> ColorStateList.valueOf(view.context.getColor(R.color.green_500))
     })
 }
