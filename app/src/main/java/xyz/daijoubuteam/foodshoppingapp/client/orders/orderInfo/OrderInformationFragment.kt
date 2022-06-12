@@ -9,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.client.ordercheckout.OrderCheckOutFragmentArgs
 import xyz.daijoubuteam.foodshoppingapp.client.ordercheckout.OrderCheckOutViewModel
@@ -40,8 +41,26 @@ class OrderInformationFragment : Fragment() {
         orderInformationViewModel.navigateUpToOrderFragment.observe(viewLifecycleOwner, Observer {
             if(it == true){
                 this.findNavController().navigateUp()
+                orderInformationViewModel.doneNavigateUpToOrderFragment()
             }
         })
+        orderInformationViewModel.navigateToEateryDetailFragment.observe(viewLifecycleOwner, Observer {
+            if(it == true){
+                if(orderInformationViewModel.eatery.value != null){
+                    this.findNavController().navigate(OrderInformationFragmentDirections.actionOrderInformationToDetailEateryFragment(orderInformationViewModel.eatery.value!!))
+                }else{
+                    orderInformationViewModel.messageCantFindEatery()
+                }
+                orderInformationViewModel.doneNavigateToEateryDetailFragment()
+            }
+        })
+
+        orderInformationViewModel.message.observe(viewLifecycleOwner){
+            if(!it.isNullOrEmpty() ){
+                Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                orderInformationViewModel.onShowMessageComplete()
+            }
+        }
 
         return binding.root
     }

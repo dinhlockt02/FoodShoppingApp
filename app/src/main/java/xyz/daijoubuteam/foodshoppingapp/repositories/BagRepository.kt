@@ -186,11 +186,11 @@ class BagRepository {
                 val bagOrder = value?.toObject(BagOrder::class.java)
                 bagOrder?.eateryId?.addSnapshotListener{eateryValue, error->
                     val eatery = eateryValue?.toObject(Eatery::class.java)
-
+                    if(eatery != null){
                     val newOrder = Order(
                         eateryId = bagOrder.eateryId,
-                        eateryName = eatery?.name,
-                        eateryImage = eatery?.photoUrl,
+                        eateryName = eatery.name,
+                        eateryImage = eatery.photoUrl,
                         orderItems = ArrayList(orderItems.map { orderItem -> orderItem.toOrderItem() }),
                         status = "Pending",
                         orderTime = Timestamp(System.currentTimeMillis()/1000, 0),
@@ -199,8 +199,9 @@ class BagRepository {
                     )
                     val orderRef = db.collection("users").document(uid).collection("orders").document(orderId)
                     orderRef.set(newOrder)
-                    db.collection("eateries").document("${eatery?.id}").collection("orders").add(hashMapOf("orderId" to orderRef))
+                    db.collection("eateries").document("${eatery.id}").collection("orders").add(hashMapOf("orderId" to orderRef))
                     docRef.delete()
+                    }
                 }
 
             }

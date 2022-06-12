@@ -322,6 +322,9 @@
             android:name="orderId"
             app:argType="string">
         </argument>
+        <action
+            android:id="@+id/action_orderInformation_to_detailEateryFragment"
+            app:destination="@id/detailEateryFragment" />
     </fragment>
     <fragment
         android:id="@+id/bagOrderItemFragment"
