@@ -2,14 +2,14 @@ package xyz.daijoubuteam.foodshoppingapp.client.bag.bagOrderItem
 
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.Product
-import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
 import xyz.daijoubuteam.foodshoppingapp.repositories.BagRepository
 
 class BagOrderItemViewModel(orderId: String, productId: String, quantity: Int): ViewModel() {
     private val bagRepository = BagRepository()
-    private val _errMessage = MutableLiveData("")
+    private val _message = MutableLiveData("")
+    val message: LiveData<String>
+        get() = _message
     private lateinit var _product: LiveData<Product>
     val product: LiveData<Product>
         get() = _product
@@ -35,7 +35,7 @@ class BagOrderItemViewModel(orderId: String, productId: String, quantity: Int): 
             if (orderItemResult.isSuccess) {
                 _product = orderItemResult.getOrNull()!!
             } else {
-                onShowError(orderItemResult.exceptionOrNull()?.message)
+                onShowMessage(orderItemResult.exceptionOrNull()?.message)
             }
         }
         _orderQuantity.value = quantity
@@ -44,8 +44,8 @@ class BagOrderItemViewModel(orderId: String, productId: String, quantity: Int): 
         _navigateUpToOrderCheckOutFragment.value = false
         setTotalPrice()
     }
-    private fun onShowError(msg: String?){
-        this._errMessage.value = msg
+    private fun onShowMessage(msg: String?){
+        this._message.value = msg
     }
 
     fun setTotalPrice() {
@@ -68,6 +68,13 @@ class BagOrderItemViewModel(orderId: String, productId: String, quantity: Int): 
         viewModelScope.launch {
             if(_orderQuantity.value != null && _bagOrderId.value != null && _productIdRef.value != null){
                 val res = bagRepository.saveOrderItemChange(_bagOrderId.value!!, _productIdRef.value!!, _orderQuantity.value!!)
+                if(res.isFailure) {
+                    onShowMessage("Failed")
+                } else if (_orderQuantity.value == 0){
+                    onShowMessage("This order item has been deleted")
+                }else{
+                    onShowMessage("This order item has been changed")
+                }
                 navigateUpToOrderCheckOutFragment()
             }
         }
@@ -79,5 +86,13 @@ class BagOrderItemViewModel(orderId: String, productId: String, quantity: Int): 
 
     fun doneNavigateUpToOrderCheckOutFragment(){
         _navigateUpToOrderCheckOutFragment.value = false
+    }
+
+    fun showMessageForNullProduct(){
+        _message.value = "This product is no longer exist"
+    }
+
+    fun onShowMessageComplete() {
+        _message.value = ""
     }
 }
