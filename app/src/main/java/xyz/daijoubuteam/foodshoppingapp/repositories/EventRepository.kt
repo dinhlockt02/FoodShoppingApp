@@ -3,6 +3,9 @@ package xyz.daijoubuteam.foodshoppingapp.repositories
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FieldPath
+import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
@@ -30,12 +33,24 @@ class EventRepository {
         }
     }
 
-    fun fetchEateryFollowEvent(id: String): Result<LiveData<List<Eatery>>> {
-        val eateries: MutableLiveData<List<Eatery>> = MutableLiveData()
+    fun fetchEateryFollowEvent(id: String): Result<LiveData<List<Eatery?>>> {
         return try {
-            val docRef = db.collection("events").document(id).collection("eateries")
-            docRef.addSnapshotListener{value, error ->
-                eateries.value = value?.toObjects(Eatery::class.java)
+            val eateries = MutableLiveData<List<Eatery?>>(listOf())
+            var eateryListenerRegistration: ListenerRegistration? = null
+            db.collection("events").document(id).addSnapshotListener {value, error ->
+                val eventEateries = value?.get("idEateryList") as? ArrayList<DocumentReference>
+                if(eventEateries == null) return@addSnapshotListener
+                eateryListenerRegistration?.remove()
+                if(eventEateries.isNullOrEmpty() == true) {
+                    eateries.value = listOf()
+                }
+                else {
+                    eateryListenerRegistration = db.collection("eateries").whereIn(FieldPath.documentId(), eventEateries).addSnapshotListener{ eateryRef, eateryError ->
+                        if(eateryRef == null) return@addSnapshotListener
+                        eateries.value = eateryRef.toObjects(Eatery::class.java)
+
+                    }
+                }
             }
             Result.success(eateries)
         } catch (e: Exception) {

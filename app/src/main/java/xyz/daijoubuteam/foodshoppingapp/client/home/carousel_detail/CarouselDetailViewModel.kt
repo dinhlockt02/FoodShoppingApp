@@ -14,10 +14,10 @@ class CarouselDetailViewModel(event: Event, app: Application): AndroidViewModel(
     private val eventRepository = EventRepository()
     private val _eventSelected = MutableLiveData<Event>()
 
-    private lateinit var _eateryList: LiveData<List<Eatery>>
+    private lateinit var _eateryList: LiveData<List<Eatery?>>
     private val _navigateToSelectedEatery = MutableLiveData<Eatery>()
     private val _errMessage = MutableLiveData("")
-    val eateryList: LiveData<List<Eatery>>
+    val eateryList: LiveData<List<Eatery?>>
         get() = _eateryList
     val navigateToSelectedEatery: LiveData<Eatery>
         get() = _navigateToSelectedEatery
