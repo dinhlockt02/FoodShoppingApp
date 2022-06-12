@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -31,11 +32,17 @@ class SearchFragment : Fragment() {
     ): View {
         binding = FragmentSearchBinding.inflate(inflater, container, false);
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         setSearchTextObserver()
         setOnNavigateUpButtonClickListener()
         setupSoftKeyboardUI()
         setupAdapter()
         return binding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
     }
 
     private fun setupAdapter() {

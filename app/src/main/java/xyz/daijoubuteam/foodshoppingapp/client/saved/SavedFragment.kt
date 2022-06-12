@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import timber.log.Timber
@@ -39,6 +40,11 @@ class SavedFragment : Fragment() {
             Timber.i("CHANGED ${it.toString()}")
             adapter.submitList(it)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
     }
 
 }
