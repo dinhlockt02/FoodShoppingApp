@@ -25,3 +25,14 @@ fun setOrderText(view: TextView, quantity: Int?){
         view.text = "Save"
     }
 }
+
+@BindingAdapter("dishesQuantity")
+fun setDishesText(view: TextView, quantity: Int?){
+    if(quantity == 1){
+        view.text = "${quantity} dish"
+    }else if (quantity != null) {
+        if (quantity > 1){
+            view.text = "${quantity} dishes"
+        }
+    }
+}

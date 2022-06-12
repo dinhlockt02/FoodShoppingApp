@@ -19,6 +19,5 @@ data class User(
     var nickname: String? = null,
     var photoUrl: String? = null,
     var favorites: ArrayList<DocumentReference>? = null,
-    var bag: ArrayList<BagOrderItem> = ArrayList()
 )
 
