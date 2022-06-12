@@ -1,22 +1,17 @@
 package xyz.daijoubuteam.foodshoppingapp.client.ordercheckout
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.*
-import com.google.firebase.Timestamp
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
-import xyz.daijoubuteam.foodshoppingapp.model.Order
 import xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress
 import xyz.daijoubuteam.foodshoppingapp.model.bagmodel.BagOrderItem
 import xyz.daijoubuteam.foodshoppingapp.repositories.BagRepository
-import java.time.Instant
-import java.time.format.DateTimeFormatter
 
 class OrderCheckOutViewModel(val orderId: String): ViewModel(){
     private val bagRepository = BagRepository()
-    private val _errMessage = MutableLiveData("")
+    private val _message = MutableLiveData("")
+    val message: LiveData<String>
+        get() = _message
     private lateinit var _orderItemList: LiveData<List<BagOrderItem>>
     val orderItemList: LiveData<List<BagOrderItem>>
         get() = _orderItemList
@@ -54,27 +49,27 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
             if(orderItemResult.isSuccess && orderItemResult.getOrNull() !== null){
                 _orderItemList = orderItemResult.getOrNull()!!
             }else {
-                onShowError(orderItemResult.exceptionOrNull()?.message)
+                onShowMessage(orderItemResult.exceptionOrNull()?.message)
             }
             val shippingAddressResult = bagRepository.getOrderAddress()
             if(shippingAddressResult.isSuccess){
                 _shippingAddress = shippingAddressResult.getOrNull()!!
             }else {
-                onShowError(shippingAddressResult.exceptionOrNull()?.message)
+                onShowMessage(shippingAddressResult.exceptionOrNull()?.message)
             }
             val eateryResult = bagRepository.getEateryById(orderId)
             if(eateryResult.isSuccess && eateryResult.getOrNull() !== null){
                 _eatery = eateryResult.getOrNull()!!
             }else {
-                onShowError(eateryResult.exceptionOrNull()?.message)
+                onShowMessage(eateryResult.exceptionOrNull()?.message)
             }
         }
         _navigateToOrderFragment.value = false
         _navigateToProfileAddressEditFragment.value = false
     }
 
-    private fun onShowError(msg: String?){
-        this._errMessage.value = msg
+    private fun onShowMessage(msg: String?){
+        this._message.value = msg
     }
 
     fun totalPriceCounting(listOrder: List<BagOrderItem>){
@@ -94,8 +89,14 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
     fun placeOrder(){
         viewModelScope.launch{
             if(!orderItemList.value.isNullOrEmpty() && shippingAddress.value != null){
-                bagRepository.placeOrder(orderItemList.value!!, orderId, shippingAddress.value!!)
-                _navigateToOrderFragment.value = true
+                val res = bagRepository.placeOrder(orderItemList.value!!, orderId, shippingAddress.value!!)
+                if(res.isFailure) {
+                    onShowMessage("Failed")
+                } else {
+                    onShowMessage("Your order has been placed")
+                    _navigateToOrderFragment.value = true
+                }
+
             }
         }
     }
@@ -128,4 +129,7 @@ class OrderCheckOutViewModel(val orderId: String): ViewModel(){
         _navigateToBagOrderItemFragment.value = orderItemSelected
     }
 
+    fun onShowMessageComplete(){
+        _message.value = ""
+    }
 }

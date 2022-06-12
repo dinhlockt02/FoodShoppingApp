@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.MainActivity
 import xyz.daijoubuteam.foodshoppingapp.R
@@ -75,6 +76,13 @@ class OrderCheckOutFragment : Fragment() {
                 orderCheckOutViewModel.doneNavigateToBagOrderItemFragment()
             }
         })
+
+        orderCheckOutViewModel.message.observe(viewLifecycleOwner){
+            if(!it.isNullOrEmpty() ){
+                Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                orderCheckOutViewModel.onShowMessageComplete()
+            }
+        }
         return binding.root
     }
 
