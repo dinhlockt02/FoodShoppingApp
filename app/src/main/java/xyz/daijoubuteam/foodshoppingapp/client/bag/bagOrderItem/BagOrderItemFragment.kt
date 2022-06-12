@@ -7,8 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.fragment.findNavController
 import timber.log.Timber
 import xyz.daijoubuteam.foodshoppingapp.R
 import xyz.daijoubuteam.foodshoppingapp.client.ordercheckout.OrderCheckOutViewModel
@@ -34,10 +36,21 @@ class BagOrderItemFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         bagOrderItemViewModel.product.observe(viewLifecycleOwner){
             bagOrderItemViewModel.setTotalPrice()
+            if(it == null){
+                bagOrderItemViewModel.navigateUpToOrderCheckOutFragment()
+            }
         }
         bagOrderItemViewModel.orderQuantity.observe(viewLifecycleOwner){
             bagOrderItemViewModel.setTotalPrice()
         }
+
+        bagOrderItemViewModel.navigateUpToOrderCheckOutFragment.observe(viewLifecycleOwner, Observer {
+            if(it == true){
+                this.findNavController().navigateUp()
+                bagOrderItemViewModel.doneNavigateUpToOrderCheckOutFragment()
+            }
+        })
+
         return binding.root
     }
 

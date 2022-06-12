@@ -35,6 +35,7 @@
                     app:backgroundTint="#4DFFFFFF"
                     app:borderWidth="0dp"
                     app:elevation="0dp"
+                    android:onClick="@{()->viewModel.navigateUpToOrderCheckOutFragment()}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:pressedTranslationZ="0dp"

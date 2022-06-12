@@ -25,6 +25,10 @@ class BagOrderItemViewModel(orderId: String, productId: String, quantity: Int): 
     private val _totalPrice=  MutableLiveData<Double>(0.0)
     val totalPrice: LiveData<Double>
         get() = _totalPrice
+    private val _navigateUpToOrderCheckOutFragment = MutableLiveData<Boolean>()
+    val navigateUpToOrderCheckOutFragment: LiveData<Boolean>
+        get() = _navigateUpToOrderCheckOutFragment
+
     init {
         viewModelScope.launch {
             val orderItemResult = bagRepository.getProductByProductId(productId)
@@ -37,6 +41,7 @@ class BagOrderItemViewModel(orderId: String, productId: String, quantity: Int): 
         _orderQuantity.value = quantity
         _bagOrderId.value = orderId
         _productIdRef.value = productId
+        _navigateUpToOrderCheckOutFragment.value = false
         setTotalPrice()
     }
     private fun onShowError(msg: String?){
@@ -63,7 +68,16 @@ class BagOrderItemViewModel(orderId: String, productId: String, quantity: Int): 
         viewModelScope.launch {
             if(_orderQuantity.value != null && _bagOrderId.value != null && _productIdRef.value != null){
                 val res = bagRepository.saveOrderItemChange(_bagOrderId.value!!, _productIdRef.value!!, _orderQuantity.value!!)
+                navigateUpToOrderCheckOutFragment()
             }
         }
+    }
+
+    fun navigateUpToOrderCheckOutFragment(){
+        _navigateUpToOrderCheckOutFragment.value = true
+    }
+
+    fun doneNavigateUpToOrderCheckOutFragment(){
+        _navigateUpToOrderCheckOutFragment.value = false
     }
 }
