@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
     var location: Location? = null
 
     private val viewModel: HomeViewModel by lazy {
-        val factory = HomeViewModelFactory()
+        val factory = HomeViewModelFactory(requireActivity().application)
         ViewModelProvider(this, factory)[HomeViewModel::class.java]
     }
 

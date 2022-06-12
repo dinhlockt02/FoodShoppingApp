@@ -13,7 +13,9 @@ import xyz.daijoubuteam.foodshoppingapp.MainApplication
 import xyz.daijoubuteam.foodshoppingapp.model.Eatery
 import xyz.daijoubuteam.foodshoppingapp.model.Event
 import xyz.daijoubuteam.foodshoppingapp.model.Product
+import xyz.daijoubuteam.foodshoppingapp.model.Review
 import xyz.daijoubuteam.foodshoppingapp.repositories.EateryRepository
+import xyz.daijoubuteam.foodshoppingapp.repositories.ReviewRepository
 import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 import xyz.daijoubuteam.foodshoppingapp.utils.observeOnce
 
@@ -23,7 +25,10 @@ class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidVi
     private val mainApplication = app.applicationContext as MainApplication
     private val eateryRepository = EateryRepository()
     private val userRepository = UserRepository()
+    private val rateRepository = ReviewRepository()
+    private lateinit var _rateEatery : LiveData<Double>
     private lateinit var _productList: LiveData<List<Product>>
+    private lateinit var _isRate:LiveData<Boolean>
     lateinit var isFavorite: LiveData<Boolean>
 
     val selectedProperty: LiveData<Eatery>
@@ -32,12 +37,21 @@ class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidVi
         get() = _distance
     val productList: LiveData<List<Product>>
         get() = _productList
+    val isRate: LiveData<Boolean>
+        get() = _isRate
+    var rateEatery : LiveData<Double>
+        get() = _rateEatery
+        set(value) {
+            updateRating(value.value)
+        }
 
     init {
         _selectedProperty.value = eateryProperty
         getDistanceToEatery()
         fetchProductEatery()
         getIsFavorite()
+        getRate()
+        checkRateEatery()
     }
 
     private fun getIsFavorite() {
@@ -48,6 +62,36 @@ class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidVi
         }
     }
 
+    private fun updateRating(newValue: Double?) {
+        val eateryId = _selectedProperty.value?.id
+        if(eateryId == null || newValue == null) {
+            return
+        }
+        else {
+            viewModelScope.launch {
+                rateRepository.updateRatingEatery(eateryId, newValue)
+            }
+
+        }
+    }
+
+    private fun getRate() {
+        val result = _selectedProperty.value?.id?.let { rateRepository.getRateEateryFollowUser(it) }
+        if (result != null) {
+            if(result.isSuccess && result.getOrNull() != null) {
+                _rateEatery = result.getOrNull()!!
+            }
+        }
+    }
+
+    private fun checkRateEatery() {
+        val result = _selectedProperty.value?.id?.let { rateRepository.checkAllowRateEatery(it)}
+        if (result != null) {
+            if(result.isSuccess && result.getOrNull() != null) {
+                _isRate = result.getOrNull()!!
+            }
+        }
+    }
 
     private fun getDistanceToEatery() {
         mainApplication.location.observeOnce { lct ->
@@ -61,8 +105,8 @@ class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidVi
         }
     }
 
+
     private fun fetchProductEatery() {
-        Timber.i(_selectedProperty.value?.id)
         val id = _selectedProperty.value?.id
         if(id != null) {
             val productListResult = eateryRepository.getProductEatery(id)
