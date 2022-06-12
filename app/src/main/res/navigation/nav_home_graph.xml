@@ -333,5 +333,8 @@
             android:name="productId"
             app:argType="string">
         </argument>
+        <argument
+            android:name="quantity"
+            app:argType="integer" />
     </fragment>
 </navigation>

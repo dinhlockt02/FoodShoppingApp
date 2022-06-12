@@ -209,27 +209,14 @@ class BagRepository {
         }
     }
 
-    fun getOrderItemByProductId(orderId: String, productId: String): Result<LiveData<BagOrderItem>> {
-        val orderItemLiveData: MutableLiveData<BagOrderItem> = MutableLiveData()
+    fun getProductByProductId(productId: String): Result<LiveData<Product>> {
+        val productLiveData: MutableLiveData<Product> = MutableLiveData()
         return try {
-            val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
-            val docRef = db.collection("users").document(uid).collection("bag").document(orderId)
-            val productReference = db.document(productId)
+            val docRef = db.document(productId)
             docRef.addSnapshotListener { value, error ->
-                val order = value?.toObject(BagOrder::class.java)
-                val orderItem = order?.orderItems?.find { BagOrderItem -> BagOrderItem.productId == productReference }
-                orderItem?.productId?.addSnapshotListener { productValue, error ->
-                    val product = productValue?.toObject(Product::class.java)
-                    val newOrderItem = orderItem.copy(
-                        productName = product?.name,
-                        productImg = product?.img,
-                        productPrice = product?.price,
-                        price = orderItem.quantity?.let { product?.price?.times(it) }
-                    )
-                    orderItemLiveData.value = newOrderItem
-                }
+                productLiveData.value = value?.toObject(Product::class.java)
             }
-            Result.success(orderItemLiveData)
+            Result.success(productLiveData)
         } catch (exception: Exception) {
             Result.failure(exception)
         }

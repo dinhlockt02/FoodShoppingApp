@@ -70,7 +70,7 @@ class OrderCheckOutFragment : Fragment() {
 
         orderCheckOutViewModel.navigateToBagOrderItemFragment.observe(viewLifecycleOwner, Observer {
             if(it !== null){
-                this.findNavController().navigate(OrderCheckOutFragmentDirections.actionOrderCheckOutFragmentToBagOrderItemFragment(orderCheckOutViewModel.orderId, it.productId!!.path))
+                this.findNavController().navigate(OrderCheckOutFragmentDirections.actionOrderCheckOutFragmentToBagOrderItemFragment(orderCheckOutViewModel.orderId, it.productId!!.path, it.quantity!!))
                 orderCheckOutViewModel.doneNavigateToBagOrderItemFragment()
             }
         })

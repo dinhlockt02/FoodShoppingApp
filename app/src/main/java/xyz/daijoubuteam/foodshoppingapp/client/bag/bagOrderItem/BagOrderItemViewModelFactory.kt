@@ -7,11 +7,12 @@ import xyz.daijoubuteam.foodshoppingapp.client.home.product_to_bag.ProductToBagV
 class BagOrderItemViewModelFactory(
     private val orderId: String,
     private val productId: String,
+    private val quantity: Int,
 ): ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(BagOrderItemViewModel::class.java)){
-            return BagOrderItemViewModel(orderId,productId) as T
+            return BagOrderItemViewModel(orderId,productId,quantity) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

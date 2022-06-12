@@ -19,7 +19,8 @@ class BagOrderItemFragment : Fragment() {
     private val bagOrderItemViewModel: BagOrderItemViewModel by lazy {
         val orderId = BagOrderItemFragmentArgs.fromBundle(requireArguments()).orderId
         val productId = BagOrderItemFragmentArgs.fromBundle(requireArguments()).productId
-        val factory = BagOrderItemViewModelFactory(orderId,productId)
+        val quantity = BagOrderItemFragmentArgs.fromBundle(requireArguments()).quantity
+        val factory = BagOrderItemViewModelFactory(orderId,productId,quantity)
         ViewModelProvider(this, factory)[BagOrderItemViewModel::class.java]
     }
 
@@ -31,6 +32,9 @@ class BagOrderItemFragment : Fragment() {
         val binding: FragmentBagOrderItemBinding =  DataBindingUtil.inflate(inflater, R.layout.fragment_bag_order_item, container, false)
         binding.viewModel = bagOrderItemViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        bagOrderItemViewModel.product.observe(viewLifecycleOwner){
+            bagOrderItemViewModel.setTotalPrice()
+        }
         return binding.root
     }
 
