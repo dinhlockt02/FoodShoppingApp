@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FieldPath
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -204,6 +205,19 @@ class BagRepository {
             }
             Result.success(true)
         }catch (exception:Exception){
+            Result.failure(exception)
+        }
+    }
+
+    fun getProductByProductId(productId: String): Result<LiveData<Product>> {
+        val productLiveData: MutableLiveData<Product> = MutableLiveData()
+        return try {
+            val docRef = db.document(productId)
+            docRef.addSnapshotListener { value, error ->
+                productLiveData.value = value?.toObject(Product::class.java)
+            }
+            Result.success(productLiveData)
+        } catch (exception: Exception) {
             Result.failure(exception)
         }
     }
