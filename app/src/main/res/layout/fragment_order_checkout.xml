@@ -267,7 +267,7 @@
                         android:fontFamily="@font/avenir_next_lt_pro"
                         android:singleLine="true"
                         android:textColor="@color/deep_orange_A200"
-                        android:text="@{Double.toString(viewModel.totalPrice)}"
+                        android:text="@{@string/product_price(Double.toString(viewModel.totalPrice))}"
                         android:textFontWeight="500"
                         android:textSize="22sp"
                         app:layout_constraintBottom_toBottomOf="parent"

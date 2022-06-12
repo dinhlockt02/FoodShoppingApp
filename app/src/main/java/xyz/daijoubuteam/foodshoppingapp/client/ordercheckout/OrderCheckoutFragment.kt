@@ -31,6 +31,7 @@ class OrderCheckOutFragment : Fragment() {
         val binding: FragmentOrderCheckoutBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_checkout, container, false)
         binding.viewModel = orderCheckOutViewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        setupToolBar()
         val adapter = BagOrderItemAdapter(BagOrderItemAdapter.OnClickListener{
             orderCheckOutViewModel.navigateToBagOrderItemFragment(it)
         })
@@ -88,6 +89,12 @@ class OrderCheckOutFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        (requireActivity() as? AppCompatActivity)?.supportActionBar?.hide()
+        setupToolBar()
+    }
+
+    private fun setupToolBar() {
+        (requireActivity() as? AppCompatActivity)?.supportActionBar?.show()
+        (requireActivity() as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (requireActivity() as? AppCompatActivity)?.supportActionBar?.title = "Order Information"
     }
 }

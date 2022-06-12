@@ -12,7 +12,7 @@ class ProductToBagViewModel(eateryId: String, product: Product, app: Application
     private val _selectedProperty = MutableLiveData<Product>()
     private val _eateryId = MutableLiveData<String>()
     private val _quantityItem = MutableLiveData<Int>(0)
-    private val _totalPrice=  MutableLiveData<Number>(0)
+    private val _totalPrice=  MutableLiveData<Double>(0.0)
     private val bagRepository = BagRepository()
     private val _message = MutableLiveData("")
 
@@ -21,7 +21,7 @@ class ProductToBagViewModel(eateryId: String, product: Product, app: Application
 
     val quantityItem: LiveData<Int>
         get() = _quantityItem
-    val totalPrice: LiveData<Number>
+    val totalPrice: LiveData<Double>
         get() = _totalPrice
 
     val message: LiveData<String>

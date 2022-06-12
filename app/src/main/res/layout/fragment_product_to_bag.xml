@@ -68,6 +68,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                android:singleLine="false"
+                app:flow_wrapMode="chain"
                 android:textSize="24sp"
                 android:textColor="@color/bluegray_700"
                 android:fontFamily="@font/avenir_next_lt_pro"
@@ -77,7 +79,7 @@
                 android:id="@+id/tvProductPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.selectedProperty.price.toString()}"
+                android:text="@{@string/product_price(Double.toString(viewModel.selectedProperty.price))}"
                 android:fontFamily="@font/avenir_next_lt_pro"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -121,7 +123,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tvAttentionForEatery"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:textColor="@color/bluegray_700"
                 android:fontFamily="@font/avenir_next_lt_pro"
                 android:textFontWeight="400"
@@ -211,7 +213,7 @@
                         android:layout_marginBottom="16dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.totalPrice.toString()}"
+                        android:text="@{@string/product_price(Double.toString(viewModel.totalPrice))}"
                         android:fontFamily="@font/avenir_next_lt_pro"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <com.google.android.material.button.MaterialButton
