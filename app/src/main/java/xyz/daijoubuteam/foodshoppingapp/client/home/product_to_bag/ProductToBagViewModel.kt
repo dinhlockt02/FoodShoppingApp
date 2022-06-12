@@ -1,10 +1,8 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home.product_to_bag
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import android.view.View
+import androidx.lifecycle.*
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.model.Product
@@ -51,6 +49,10 @@ class ProductToBagViewModel(eateryId: String, product: Product, app: Application
 
     fun onShowMessage(msg: String?) {
         this._message.value  = msg
+    }
+
+    val buttonVisibility = Transformations.map(quantityItem) {
+        _selectedProperty.value?.id != null && quantityItem.value != null && quantityItem.value!! > 0
     }
 
     fun handleBtnAddToBag() {

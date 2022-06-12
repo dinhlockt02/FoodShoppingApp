@@ -1,9 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.client.home.search
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.view.View
+import androidx.lifecycle.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
@@ -21,6 +19,22 @@ class SearchViewModel: ViewModel() {
 
     val eatery: LiveData<List<Eatery>>
         get() = _eatery
+
+    val emptyCartImageVisibility: LiveData<Int> = Transformations.map(_eatery){
+        if(it.isNullOrEmpty()){
+            View.VISIBLE
+        }else{
+            View.GONE
+        }
+    }
+
+    val eateryListVisibility: LiveData<Int> = Transformations.map(_eatery){
+        if(it.isNullOrEmpty()){
+            View.GONE
+        }else{
+            View.VISIBLE
+        }
+    }
 
     fun search() {
         job?.cancel("Search text changed")
