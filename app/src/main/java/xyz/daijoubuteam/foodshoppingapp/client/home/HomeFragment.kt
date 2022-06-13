@@ -138,7 +138,7 @@ class HomeFragment : Fragment() {
             viewModel.displayPropertyDetailEatery(it)
         })
         val adapter = binding.recyNearByEatery.adapter as EateryAdapter
-        viewModel.eateryList.observe(viewLifecycleOwner) {
+        viewModel.bestNearbyEateryList.observe(viewLifecycleOwner) {
             if (it != null) {
                 adapter.submitList(it)
             }
