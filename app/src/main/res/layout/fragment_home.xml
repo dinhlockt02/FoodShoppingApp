@@ -79,7 +79,7 @@
                         tools:src="@drawable/default_avatar_male"
                         tools:background="@color/orange_50"
                         app:imageUrl="@{viewmodel.currentUser.photoUrl}"
-                        app:defaultUrl="@{viewmodel.currentUser.photoUrl}"
+                        app:gender="@{viewmodel.currentUser.gender}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

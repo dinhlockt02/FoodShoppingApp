@@ -30,6 +30,7 @@ class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidVi
     private lateinit var _productList: LiveData<List<Product>>
     private lateinit var _isRate:LiveData<Boolean>
     lateinit var isFavorite: LiveData<Boolean>
+    private val _message = MutableLiveData("")
 
     val selectedProperty: LiveData<Eatery>
         get() = _selectedProperty
@@ -44,6 +45,8 @@ class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidVi
         set(value) {
             updateRating(value.value)
         }
+    val message: LiveData<String>
+        get() = _message
 
     init {
         _selectedProperty.value = eateryProperty
@@ -113,11 +116,7 @@ class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidVi
             if (productListResult != null) {
                 if(productListResult.isSuccess && productListResult.getOrNull() !== null) {
                     _productList = productListResult.getOrNull()!!
-                    Timber.i(_productList.toString())
-                } else {
-
                 }
-
             }
         }
         else {
@@ -134,5 +133,13 @@ class DetailEateryViewModel(eateryProperty: Eatery, app: Application): AndroidVi
                 userRepository.addToFavorite(_selectedProperty.value!!)
             }
         }
+    }
+
+    fun onShowMessage(msg: String?) {
+        this._message.value  = msg
+    }
+
+    fun onShowMessageComplete() {
+        _message.value = ""
     }
 }

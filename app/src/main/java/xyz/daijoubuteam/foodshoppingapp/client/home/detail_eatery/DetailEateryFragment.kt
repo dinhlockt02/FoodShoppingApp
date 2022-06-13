@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.maxkeppeler.sheets.core.ButtonStyle
 import com.maxkeppeler.sheets.info.InfoSheet
 import xyz.daijoubuteam.foodshoppingapp.MainApplication

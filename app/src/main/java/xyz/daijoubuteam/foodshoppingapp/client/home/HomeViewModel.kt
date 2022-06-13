@@ -38,7 +38,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
     private val eventRepository = EventRepository()
     lateinit var eateryList: LiveData<List<Eatery>>
     lateinit var popularEateryList: LiveData<List<Eatery>>
-    lateinit var bestSallerEateryList: LiveData<List<Eatery>>
+    private val _bestNearbyEateryList =  MediatorLiveData<List<Eatery>>()
     lateinit var categoryList: LiveData<List<Category>>
     private lateinit var _eventList: LiveData<List<Event>>
     private lateinit var _currentUser: LiveData<User>
@@ -64,12 +64,15 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         get() = _currentUser
     val eventList: LiveData<List<Event>>
         get()= _eventList
+    val bestNearbyEateryList: LiveData<List<Eatery>>
+        get() = _bestNearbyEateryList
 
 
     init {
         fetchEventList()
         fetchPopularEateryList()
         fetchCategoryList()
+        fetchBestNearbyEateryList()
         //getCarouselList()
         if(Firebase.auth.currentUser != null) {
             fetchCurrentUser()
@@ -107,11 +110,35 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
         })
     }
 
-//    private fun fetchBestSallerEateryList() {
-//        fetchEateryList()
-//       bestSallerEateryList = Transformations.map(eateryList, Function {eateryList ->
-//       })
-//    }
+    private fun fetchBestNearbyEateryList() {
+        _bestNearbyEateryList.postValue(listOf())
+        fetchEateryList()
+        val mainApplication = getApplication<MainApplication>()
+        _bestNearbyEateryList.addSource(mainApplication.location) {
+            updateListNearby()
+        }
+        _bestNearbyEateryList.addSource(eateryList) {
+            updateListNearby()
+        }
+    }
+
+    private fun updateListNearby(){
+        val mainApplication = getApplication<MainApplication>()
+        if(mainApplication.location.value != null && !eateryList.value.isNullOrEmpty()) {
+            _bestNearbyEateryList.value = eateryList.value!!.map {
+                val location: Location = Location(LocationManager.GPS_PROVIDER)
+                it.addressEatery?.location?.let { latlng ->
+                }
+                if(it.addressEatery?.location != null) {
+                    location.latitude = it.addressEatery.location!!.latitude
+                    location.longitude = it.addressEatery.location!!.longitude
+                    val distance = mainApplication.location.value!!.distanceTo(location)
+                    return@map it.copy(distance = distance)
+                }
+                return@map it
+            }.sortedBy { it.distance }.take(7)
+        }
+    }
 
     private fun fetchCategoryList() {
         val categoryListResult = eateryRepository.getListCategory()

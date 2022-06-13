@@ -2,6 +2,7 @@ package xyz.daijoubuteam.foodshoppingapp.model
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.google.firebase.firestore.DocumentId
+import com.google.firebase.firestore.Exclude
 import com.google.firebase.firestore.GeoPoint
 
 @Parcelize
@@ -16,5 +17,7 @@ data class Eatery (
     val products: ArrayList<Product>?=null,
     val photoUrl: String?=null,
     val addressEatery: EateryAddress? = null,
-    val type: String? = null
+    val type: String? = null,
+    @Exclude
+    val distance: Float = Float.MAX_VALUE
 ): Parcelable
