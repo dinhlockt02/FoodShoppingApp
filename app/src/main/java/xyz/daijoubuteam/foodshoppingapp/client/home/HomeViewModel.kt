@@ -136,7 +136,7 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
                     return@map it.copy(distance = distance)
                 }
                 return@map it
-            }.sortedBy { it.distance }.take(10)
+            }.sortedBy { it.distance }.take(7)
         }
     }
 

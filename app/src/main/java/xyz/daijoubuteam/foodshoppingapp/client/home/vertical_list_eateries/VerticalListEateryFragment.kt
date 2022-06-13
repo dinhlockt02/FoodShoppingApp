@@ -70,7 +70,7 @@ class VerticalListEateryFragment : Fragment() {
             viewModel.displayPropertyDetailEatery(it)
         })
         val adapter = binding.recyVerticalPopularEatery.adapter as VerticalCardEateryAdapter
-        viewModel.nearlyEateryList.observe(viewLifecycleOwner) {
+        viewModel.bestNearbyEateryList.observe(viewLifecycleOwner) {
             if (it != null) {
                 adapter.submitList(it)
             }
