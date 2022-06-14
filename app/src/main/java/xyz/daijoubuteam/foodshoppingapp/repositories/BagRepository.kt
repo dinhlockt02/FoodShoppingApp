@@ -182,28 +182,25 @@ class BagRepository {
             }
             val uid = auth.currentUser?.uid ?: throw Exception("Current user not found.")
             val docRef = db.collection("users").document(uid).collection("bag").document(orderId)
-            docRef.addSnapshotListener { value, error ->
-                val bagOrder = value?.toObject(BagOrder::class.java)
-                bagOrder?.eateryId?.addSnapshotListener{eateryValue, error->
-                    val eatery = eateryValue?.toObject(Eatery::class.java)
-                    if(eatery != null){
-                    val newOrder = Order(
-                        eateryId = bagOrder.eateryId,
-                        eateryName = eatery.name,
-                        eateryImage = eatery.photoUrl,
-                        orderItems = ArrayList(orderItems.map { orderItem -> orderItem.toOrderItem() }),
-                        status = "Pending",
-                        orderTime = Timestamp(System.currentTimeMillis()/1000, 0),
-                        totalPrice = totalPrice,
-                        shippingAddress = shippingAddress
-                    )
-                    val orderRef = db.collection("users").document(uid).collection("orders").document(orderId)
-                    orderRef.set(newOrder)
-                    db.collection("eateries").document("${eatery.id}").collection("orders").add(hashMapOf("orderId" to orderRef))
-                    docRef.delete()
-                    }
-                }
-
+            val bagOrderSnapShot = docRef.get().await()
+            val bagOrder = bagOrderSnapShot.toObject(BagOrder::class.java)
+            val eaterySnapShot = bagOrder?.eateryId?.get()?.await()
+            val eatery = eaterySnapShot?.toObject(Eatery::class.java)
+            if(eatery != null){
+                val newOrder = Order(
+                    eateryId = bagOrder.eateryId,
+                    eateryName = eatery.name,
+                    eateryImage = eatery.photoUrl,
+                    orderItems = ArrayList(orderItems.map { orderItem -> orderItem.toOrderItem() }),
+                    status = "Pending",
+                    orderTime = Timestamp(System.currentTimeMillis()/1000, 0),
+                    totalPrice = totalPrice,
+                    shippingAddress = shippingAddress
+                )
+                val orderRef = db.collection("users").document(uid).collection("orders").document(orderId)
+                orderRef.set(newOrder).await()
+                db.collection("eateries").document("${eatery.id}").collection("orders").add(hashMapOf("orderId" to orderRef)).await()
+                docRef.delete()
             }
             Result.success(true)
         }catch (exception:Exception){
