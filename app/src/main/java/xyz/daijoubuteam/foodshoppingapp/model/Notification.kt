@@ -16,7 +16,5 @@ data class Notification(
     @ServerTimestamp
     val timestampFirebase: Date? = null,
     val notificationRead: Boolean = false,
-    val senderImageUrl: String? = "",
-    val senderId: String? = null
 ) {
 }

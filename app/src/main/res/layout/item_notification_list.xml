@@ -29,12 +29,11 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/notification_sender_image_url"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:contentDescription="@string/user_profile_avatar"
-            tools:src="@drawable/default_avatar_male"
-            app:imageUrl="@{notification.senderImageUrl}"
-            app:defaultUrl="@{notification.senderImageUrl}"
+            android:src="@drawable/bell_outline"
+
             android:scaleType="centerCrop"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

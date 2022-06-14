@@ -60,13 +60,12 @@ class AppFirebaseMessagingService : FirebaseMessagingService() {
 
                 val notification = xyz.daijoubuteam.foodshoppingapp.model.Notification(
                     null,
-                    message.data["title"] ?: "",
-                    message.data["body"] ?: "",
+                    message.notification?.title ?: "",
+                    message.notification?.body ?: "",
                     null,
                     false,
-                    message.data["sender_image_url"],
-                    message.data["senderId"]
                 )
+                Timber.i("notification")
 
                 db.runBatch {
                     batch ->
