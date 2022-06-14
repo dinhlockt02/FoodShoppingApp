@@ -9,11 +9,7 @@ import xyz.daijoubuteam.foodshoppingapp.repositories.UserRepository
 
 class SavedViewModel : ViewModel() {
     private val userRepository = UserRepository()
-
-
     lateinit var favoriteEateries: LiveData<List<Eatery?>>
-
-
     init {
         val result = userRepository.getFavoriteEateries()
         if (result.isFailure) {
