@@ -65,5 +65,9 @@
 ## Sơ đồ kiến trúc
  - <img src=https://github.com/dinhlockt02/FoodShoppingApp/blob/main/readmeImg/Picture1.gif width=600 height=466 />
 
+
+## App dành cho cửa hàng
+ - [FoodShoppingApp](https://github.com/phuquang147/FoodShoppingAppAdmin)
+
 ## License
 Licensed under the [MIT License](LICENSE)
