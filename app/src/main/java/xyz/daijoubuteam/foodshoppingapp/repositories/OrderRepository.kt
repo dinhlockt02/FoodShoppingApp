@@ -22,6 +22,7 @@ class OrderRepository {
             val docRef = db.collection("users").document(uid).collection("orders")
             docRef.addSnapshotListener { value, error ->
                 orderList.value = value?.toObjects(Order::class.java)?.filter {order -> order.status == "Pending"}
+                orderList.value = (orderList.value as MutableList<Order>).sortedByDescending { it.orderTime }
             }
             Result.success(orderList)
         }catch (exception: Exception) {
@@ -36,6 +37,7 @@ class OrderRepository {
             val docRef = db.collection("users").document(uid).collection("orders")
             docRef.addSnapshotListener { value, error ->
                 orderList.value = value?.toObjects(Order::class.java)?.filter {order -> order.status == "Preparing" || order.status == "Shipping"}
+                orderList.value = (orderList.value as MutableList<Order>).sortedByDescending { it.orderTime }
             }
             Result.success(orderList)
         }catch (exception: Exception) {
@@ -50,6 +52,7 @@ class OrderRepository {
             val docRef = db.collection("users").document(uid).collection("orders")
             docRef.addSnapshotListener { value, error ->
                 orderList.value = value?.toObjects(Order::class.java)?.filter {order -> order.status == "Completed" || order.status == "Cancelled"}
+                orderList.value = (orderList.value as MutableList<Order>).sortedByDescending { it.orderTime }
             }
             Result.success(orderList)
         }catch (exception: Exception) {
