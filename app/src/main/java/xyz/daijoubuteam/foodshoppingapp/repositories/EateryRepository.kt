@@ -27,6 +27,20 @@ class EateryRepository {
         }
     }
 
+//    fun getListSellerEatery(): Result<LiveData<List<Eatery>>> {
+//        val eateries : MutableLiveData<List<Eatery>> = MutableLiveData()
+//        return try {
+//            val docRef = db.collection("eateries")?.
+//            docRef.addSnapshotListener { value, error ->
+//                eateries.value = value?.toObjects(Eatery::class.java)
+//            }
+//
+//            Result.success(eateries)
+//        }catch (e: Exception){
+//            Result.failure(e)
+//        }
+//    }
+
     fun getListCategory(): Result<LiveData<List<Category>>> {
         val categories: MutableLiveData<List<Category>> = MutableLiveData()
         return try {

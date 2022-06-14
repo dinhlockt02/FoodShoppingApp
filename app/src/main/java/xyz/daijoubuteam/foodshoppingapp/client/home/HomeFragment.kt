@@ -36,7 +36,7 @@ class HomeFragment : Fragment() {
     var location: Location? = null
 
     private val viewModel: HomeViewModel by lazy {
-        val factory = HomeViewModelFactory()
+        val factory = HomeViewModelFactory(requireActivity().application)
         ViewModelProvider(this, factory)[HomeViewModel::class.java]
     }
 
@@ -138,7 +138,7 @@ class HomeFragment : Fragment() {
             viewModel.displayPropertyDetailEatery(it)
         })
         val adapter = binding.recyNearByEatery.adapter as EateryAdapter
-        viewModel.eateryList.observe(viewLifecycleOwner) {
+        viewModel.bestNearbyEateryList.observe(viewLifecycleOwner) {
             if (it != null) {
                 adapter.submitList(it)
             }

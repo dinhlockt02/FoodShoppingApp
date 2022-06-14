@@ -73,7 +73,7 @@ class ProductToBagFragment : Fragment() {
     private fun messageObserver() {
         viewModel.message.observe(viewLifecycleOwner) {
             if(!it.isNullOrEmpty() ){
-                Snackbar.make(requireView(), it, Snackbar.LENGTH_SHORT).show()
+                Snackbar.make(requireView(), it, 1000).show()
                 this.findNavController().navigateUp()
                 viewModel.onShowMessageComplete()
             }

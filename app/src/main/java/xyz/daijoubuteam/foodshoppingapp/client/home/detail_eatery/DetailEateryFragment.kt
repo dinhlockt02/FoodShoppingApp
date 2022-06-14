@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import com.maxkeppeler.sheets.core.ButtonStyle
 import com.maxkeppeler.sheets.info.InfoSheet
 import xyz.daijoubuteam.foodshoppingapp.MainApplication
@@ -41,6 +43,7 @@ class DetailEateryFragment : Fragment() {
         handleClickButtonHome()
         handleClickButtonInfo()
         setupFavoriteButton()
+        ratingBarChange()
         return binding.root
     }
 
@@ -88,6 +91,12 @@ class DetailEateryFragment : Fragment() {
     private fun handleClickButtonInfo() {
         binding.floatingActionInfo.setOnClickListener {
             findNavController().navigate(DetailEateryFragmentDirections.actionDetailEateryFragmentToDetailEateryInforFragment(eateryProperty))
+        }
+    }
+
+    private fun ratingBarChange() {
+        binding.ratingBar.setOnRatingBarChangeListener{ _,value, _ ->
+            viewModel.rateEatery = MutableLiveData(value.toDouble())
         }
     }
 }
