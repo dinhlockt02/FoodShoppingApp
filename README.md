@@ -46,26 +46,18 @@
  - <img src=https://github.com/dinhlockt02/FoodShoppingApp/blob/main/readmeImg/aboutUs.png width=300 height=580 />
 ## Yêu cầu thiết bị
 - Android
-  - minSdkVersion: 21.0
-  - targetSdkVersion: 29.0
+  - minSdkVersion: 23.0
+  - targetSdkVersion: 32.0
   - Gradle: 3.5.3
 
 ## Công nghệ và thư viện
 - Công nghệ
   - Ngôn ngữ: Kotlin
-  - Database: [Firebase](https://www.mongodb.com/cloud/atlas) và [Expo SQLite](https://docs.expo.io/versions/latest/sdk/sqlite/)
+  - Database: [Firebase](https://www.mongodb.com/cloud/atlas) 
 - Thư viện
-  - [Expo](https://github.com/expo/expo)
-  - [React Navigation](https://reactnavigation.org/)
-  - [react-native-swiper](https://github.com/leecade/react-native-swiper)
-  - [Redux](https://github.com/reduxjs/redux-toolkit)
-  - [react-native-progress](https://github.com/react-native-progress-view/progress-bar-android)
-  - [react-native-modals](https://github.com/jacklam718/react-native-modals)
-  - [react-countdown-circle-timer](https://github.com/vydimitrov/react-countdown-circle-timer/tree/master/packages/mobile)
-  - [react-native-indicators](https://github.com/n4kz/react-native-indicators)
-  - [react-native-fast-toast](https://github.com/arnnis/react-native-fast-toast)
-  - [sharingan-rn-modal-dropdown](https://github.com/srk-sharingan/sharingan-rn-modal-dropdown)
-  - [react-native-admob](https://github.com/sbugert/react-native-admob)
+  - [Material](https://material.io/components/snackbars/android)
+  - [Android Image Crop](https://github.com/CanHub/Android-Image-Cropper)
+  - [Timber](https://github.com/JakeWharton/timber)
 
 ## Database
 <img src=https://github.com/ShShee/thiBangLai-A1/blob/main/giaoDienThucHien/database.PNG width=927 height=258 />
