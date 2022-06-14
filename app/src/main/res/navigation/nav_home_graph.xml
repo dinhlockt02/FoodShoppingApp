@@ -21,8 +21,6 @@
             android:id="@+id/action_homeFragment_to_verticalListEateryFragment"
             app:destination="@id/verticalListEateryFragment"
             app:enterAnim="@anim/pop_up"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/pop_down" />
         <action
             app:enterAnim="@anim/pop_up"
@@ -33,10 +31,16 @@
             app:destination="@id/searchFragment" />
         <action
             android:id="@+id/action_homeFragment_to_categoryDetail"
-            app:destination="@id/categoryDetail" />
+            app:destination="@id/categoryDetail"
+            app:enterAnim="@anim/pop_up"
+            app:popExitAnim="@anim/pop_down"
+            />
         <action
             android:id="@+id/action_homeFragment_to_carouselDetail"
-            app:destination="@id/carouselDetail" />
+            app:destination="@id/carouselDetail"
+            app:enterAnim="@anim/pop_up"
+            app:popExitAnim="@anim/pop_down"
+            />
     </fragment>
     <fragment
         android:id="@+id/bagFragment"
@@ -45,7 +49,11 @@
         tools:layout="@layout/fragment_bag" >
         <action
             android:id="@+id/action_bagFragment_to_orderCheckOutFragment"
-            app:destination="@id/orderCheckOutFragment" />
+            app:destination="@id/orderCheckOutFragment"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
@@ -55,7 +63,11 @@
         >
         <action
             android:id="@+id/action_ordersFragment_to_orderInformation"
-            app:destination="@id/orderInformation" />
+            app:destination="@id/orderInformation"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
     </fragment>
     <fragment
         android:id="@+id/savedFragment"
@@ -91,7 +103,11 @@
             app:popExitAnim="@anim/pop_down" />
         <action
             android:id="@+id/action_profileFragment_to_aboutUsFragment"
-            app:destination="@id/aboutUsFragment" />
+            app:destination="@id/aboutUsFragment"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
     </fragment>
     <fragment
         android:id="@+id/orderCheckOutFragment"
@@ -106,16 +122,32 @@
             android:id="@+id/action_orderCheckOutFragment_to_ordersFragment"
             app:destination="@id/ordersFragment"
             app:popUpTo="@id/bagFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
         <action
             android:id="@+id/action_orderCheckOutFragment_to_profileAddressEditFragment"
-            app:destination="@id/navigation" />
+            app:destination="@id/navigation"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
         <action
             android:id="@+id/action_orderCheckOutFragment_to_detailEateryFragment"
-            app:destination="@id/detailEateryFragment" />
+            app:destination="@id/detailEateryFragment"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
         <action
             android:id="@+id/action_orderCheckOutFragment_to_bagOrderItemFragment"
-            app:destination="@id/bagOrderItemFragment" />
+            app:destination="@id/bagOrderItemFragment"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
     </fragment>
     <navigation android:id="@+id/navigation"
         app:startDestination="@id/profileAddressEditFragment">
@@ -180,7 +212,11 @@
                 android:name="editAddress"
                 android:defaultValue="@null"
                 app:argType="xyz.daijoubuteam.foodshoppingapp.model.ShippingAddress"
-                app:nullable="true" />
+                app:nullable="true"
+                app:enterAnim="@anim/pop_up"
+                app:exitAnim="@anim/fade_out"
+                app:popEnterAnim="@anim/fade_in"
+                app:popExitAnim="@anim/pop_down" />
             <action
                 android:id="@+id/action_selectLocationFragment_to_addNewAddressFragment"
                 app:destination="@id/addNewAddressFragment"
@@ -284,7 +320,11 @@
         </argument>
         <action
             android:id="@+id/action_categoryDetail_to_detailEateryFragment"
-            app:destination="@id/detailEateryFragment" />
+            app:destination="@id/detailEateryFragment"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
     </fragment>
     <fragment
         android:id="@+id/carouselDetail"
@@ -297,7 +337,11 @@
         </argument>
         <action
             android:id="@+id/action_carouselDetail_to_detailEateryFragment"
-            app:destination="@id/detailEateryFragment" />
+            app:destination="@id/detailEateryFragment"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
     </fragment>
     <fragment
         android:id="@+id/ordersOnGoingFragment"
@@ -324,7 +368,11 @@
         </argument>
         <action
             android:id="@+id/action_orderInformation_to_detailEateryFragment"
-            app:destination="@id/detailEateryFragment" />
+            app:destination="@id/detailEateryFragment"
+            app:enterAnim="@anim/pop_up"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/pop_down" />
     </fragment>
     <fragment
         android:id="@+id/bagOrderItemFragment"

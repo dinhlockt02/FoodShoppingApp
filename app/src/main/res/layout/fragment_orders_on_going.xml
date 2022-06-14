@@ -9,7 +9,7 @@
             type="xyz.daijoubuteam.foodshoppingapp.client.orders.ongoing.OrdersOnGoingViewModel" />
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".client.orders.ongoing.OrdersOnGoingFragment">
@@ -22,6 +22,21 @@
             tools:itemCount="10"
             tools:listitem="@layout/item_order_info"
             android:paddingVertical="10dp"
-            android:orientation="vertical"/>
-    </FrameLayout>
+            android:orientation="vertical"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <ImageView
+            android:id="@+id/empty_cart_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/food_delivery"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{viewModel.emptyImageVisibility}"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,9 +1,7 @@
 package xyz.daijoubuteam.foodshoppingapp.client.orders.history
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.view.View
+import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import xyz.daijoubuteam.foodshoppingapp.model.Order
 import xyz.daijoubuteam.foodshoppingapp.repositories.OrderRepository
@@ -27,6 +25,14 @@ class OrdersHistoryViewModel: ViewModel() {
             }else {
                 onShowError(orderListResult.exceptionOrNull()?.message)
             }
+        }
+    }
+
+    val emptyImageVisibility: LiveData<Int> = Transformations.map(orderList){
+        if(it.isNullOrEmpty()){
+            View.VISIBLE
+        }else{
+            View.GONE
         }
     }
 

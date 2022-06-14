@@ -26,6 +26,7 @@ class SavedFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentSavedBinding.inflate(inflater,container, false)
+        binding.viewModel = viewModel
         setupFavoriteEateryAdapter()
         return binding.root
     }

@@ -1,5 +1,6 @@
 package xyz.daijoubuteam.foodshoppingapp.client.saved
 
+import android.view.View
 import androidx.lifecycle.*
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -18,6 +19,14 @@ class SavedViewModel : ViewModel() {
         if (result.isFailure) {
         } else if (result.getOrNull() != null) {
             favoriteEateries = result.getOrNull()!!
+        }
+    }
+
+    val emptyImageVisibility: LiveData<Int> = Transformations.map(favoriteEateries){
+        if(it.isNullOrEmpty()){
+            View.VISIBLE
+        }else{
+            View.GONE
         }
     }
 

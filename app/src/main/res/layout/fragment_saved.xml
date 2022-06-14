@@ -4,7 +4,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="xyz.daijoubuteam.foodshoppingapp.client.saved.SavedViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,6 +22,8 @@
             android:textSize="20sp"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toTopOf="@id/divider"
+            android:fontFamily="@font/avenir_next_lt_pro"
+            android:textFontWeight="600"
             android:layout_marginTop="14dp"
             android:layout_marginBottom="12dp"/>
         <com.google.android.material.divider.MaterialDivider
@@ -38,5 +42,16 @@
             tools:listitem="@layout/item_saved_eatery"
             tools:itemCount="3"
             />
+        <ImageView
+            android:id="@+id/empty_cart_image"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/pizza"
+            android:scaleType="fitXY"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="@{viewModel.emptyImageVisibility}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
