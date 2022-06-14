@@ -27,6 +27,7 @@ class SavedFragment : Fragment() {
     ): View {
         binding = FragmentSavedBinding.inflate(inflater,container, false)
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         setupFavoriteEateryAdapter()
         return binding.root
     }
