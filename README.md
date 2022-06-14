@@ -60,10 +60,10 @@
   - [Timber](https://github.com/JakeWharton/timber)
 
 ## Database
-<img src=https://github.com/ShShee/thiBangLai-A1/blob/main/giaoDienThucHien/database.PNG width=927 height=258 />
+<img src=https://github.com/dinhlockt02/FoodShoppingApp/blob/main/readmeImg/Screen%20Shot%202022-06-14%20at%2021.38.29.png width=580 height=316 />
 
 ## Sơ đồ kiến trúc
-<img src=https://github.com/ShShee/thiBangLai-A1/blob/main/giaoDienThucHien/Untitled%20Diagram.png width=608 height=287 />
+<img src=https://github.com/dinhlockt02/FoodShoppingApp/blob/main/readmeImg/Picture1.gif width=600 height=466 />
 
 ## License
 Licensed under the [MIT License](LICENSE)
