@@ -9,6 +9,11 @@
             type="xyz.daijoubuteam.foodshoppingapp.client.profile.address.AddNewAddressViewModel" />
     </data>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -160,6 +165,9 @@
             android:textColor="@color/white_A700"
             android:onClick="@{() -> viewmodel.onSaveAddress()}"
             android:background="@drawable/rectangle_bg_deep_orange_a200_radius_6"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@id/add_address_text_field"
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

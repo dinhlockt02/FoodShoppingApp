@@ -55,7 +55,7 @@ class AddNewAddressViewModel : ViewModel() {
                     if(existShippingAddressIndex == -1)
                         user!!.shippingAddresses.add(currentShippingAddress.copy(defaultAddress = shouldBeSetAtDefault))
                     else
-                        user!!.shippingAddresses[existShippingAddressIndex] = currentShippingAddress.copy(defaultAddress = shouldBeSetAtDefault)
+                        user!!.shippingAddresses[existShippingAddressIndex] = currentShippingAddress
                 }
                 val updateResult = userRepository.updateCurrentUserInfo(user!!)
                 if(updateResult.isSuccess){
