@@ -13,7 +13,6 @@ data class Eatery (
     val work_time: String?=null,
     val average_rating_count: Double?=null,
     val description: String?=null,
-    val reviews: ArrayList<String>?=null,
     val products: ArrayList<Product>?=null,
     val photoUrl: String?=null,
     val addressEatery: EateryAddress? = null,
