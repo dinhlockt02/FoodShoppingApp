@@ -7,34 +7,37 @@
 - <img src=https://github.com/ShShee/thiBangLai-A1/blob/main/giaoDienThucHien/trangChu.jpg width=300 height=580 />
 ### Đăng ký
 ### Quên mật khẩu
-### Màn hình chính
-- Home
+### Màn hình trang chủ
   - <img src=https://github.com/ShShee/thiBangLai-A1/blob/main/giaoDienThucHien/traCuu.jpg width=300 height=580 />
-- Orders
-  - <img src=https://github.com/ShShee/thiBangLai-A1/blob/main/giaoDienThucHien/bienBao.png width=601 height=580 />
-- Saved
-  - <img src=https://github.com/ShShee/thiBangLai-A1/blob/main/giaoDienThucHien/sahinh.png width=300 height=580 />
-- Bag
-  - <img src=https://github.com/ShShee/thiBangLai-A1/blob/main/giaoDienThucHien/phapluat.png width=300 height=580 />
 ### Tìm kiếm cửa hàng
-### Danh sách cửa hàng theo sự kiện hiện có
-### Danh sách danh mục sản phẩm
-### Danh sách cửa hàng theo bộ lọc
-
+### Hiển thị danh sách cửa hàng theo các tiêu chí
+- Danh mục sản phẩm
+- Bộ lọc
+### Hiển thị chi tiết thông tin cửa hàng
+### Thêm sản phẩm vào giỏ hàng
+### Hiển thị danh sách đơn hàng theo trạng thái
+- Upcoming
+- Ongoing
+- History
+- Chi tiết đơn hàng
+### Hiển thị danh sách nhà hàng người dùng đã lưu
+### Hiển thị giỏ hàng cửa người dùng
+-
+- Chi tiết giỏ hàng
+### Giao diện cài đặt chung
+-
+- Thông tin chi tiết người dùng
+- Thông tin ứng dụng
 ## Yêu cầu thiết bị
 - Android
   - minSdkVersion: 21.0
   - targetSdkVersion: 29.0
   - Gradle: 3.5.3
-- IOS
-  - ios: 11.0
+
 ## Công nghệ và thư viện
 - Công nghệ
-  - Ngôn ngữ: Javascript
-  - Framework Frontend: [React Native](https://github.com/facebook/react-native)
-  - Framework UI: [UI Kittens](https://akveo.github.io/react-native-ui-kitten/docs/guides/getting-started#getting-started)
-  - Backend Platform: [Node.js](https://nodejs.org/en/)
-  - Database: [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) và [Expo SQLite](https://docs.expo.io/versions/latest/sdk/sqlite/)
+  - Ngôn ngữ: Kotlin
+  - Database: [Firebase](https://www.mongodb.com/cloud/atlas) và [Expo SQLite](https://docs.expo.io/versions/latest/sdk/sqlite/)
 - Thư viện
   - [Expo](https://github.com/expo/expo)
   - [React Navigation](https://reactnavigation.org/)
@@ -47,8 +50,7 @@
   - [react-native-fast-toast](https://github.com/arnnis/react-native-fast-toast)
   - [sharingan-rn-modal-dropdown](https://github.com/srk-sharingan/sharingan-rn-modal-dropdown)
   - [react-native-admob](https://github.com/sbugert/react-native-admob)
-## Backend
-Source code: [ThiGPLX-Backend](https://github.com/ShShee/ThiGPLX-Backend)
+
 ## Database
 <img src=https://github.com/ShShee/thiBangLai-A1/blob/main/giaoDienThucHien/database.PNG width=927 height=258 />
 
